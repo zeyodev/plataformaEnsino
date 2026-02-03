@@ -1,0 +1,32 @@
+.container {
+    background-color: rgba(0, 0, 0, 0.199);
+    position: fixed;
+    /* z-index: 1; */
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    z-index: 1002;
+}
+
+.modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    width: 90vw;
+    height: 80vh;
+    background-color: var(--background-100);
+    color: var(--text);
+    overflow: auto;
+}
+
+.modal.botton {
+    top: unset;
+    bottom: 1rem;
+    transform: translate(-50%);
+    height: min-content;
+    max-height: 80vh;
+    grid-template-rows: 100%;
+}

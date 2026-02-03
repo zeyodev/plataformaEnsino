@@ -1,0 +1,21 @@
+/* .itens {
+    grid-template-columns: 85% 10%;
+    justify-content: space-between;
+    text-align: center;
+} */
+
+.itens > * {
+    display: flex;
+    padding: .5rem;
+    gap: 1rem;
+}
+
+.item > * {
+    display: flex;
+    gap: 1rem;
+}
+
+.item svg {
+    width: 30px;
+    height: 30px;
+}

@@ -1,0 +1,10 @@
+.object {
+    width: min(35vw, 200px);
+    
+}
+.object img {
+    height: min(35vw, 200px);
+    width: inherit;
+    object-fit: cover;
+    border-radius: 0.5em;
+}

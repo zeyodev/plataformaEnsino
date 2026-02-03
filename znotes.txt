@@ -1,0 +1,192 @@
+Tem que fazer o webpack funcionar de forma developer para ser mais facil de fazer o debug
+Tem que fazer o webpack funcionar com CSS
+
+Propriedades novas para CSS
+    clamp()
+    min()
+    max()
+    Utopia Fluid Type Scale: https://utopia.fyi
+    SmolCSS - minimal snippets for modern CSS layouts and components: https://smolcss.dev
+    Modern CSS: https://moderncss.dev
+    svh
+
+TALVEZ NO FUTURO TENHA PROBLEMA COM O "REACT/Proxy" 
+    pois o create(), em alguns casos, retorna o this.element e nao Z("tag") que cria um novo elemento.
+    Com isso, pode retornar o mesmo elemento sem mudar nada.
+    Tenho que melhorar para quando é um lista e tem que inserir um valor ele esta inserindo tudo do zero novamente
+
+/u/evandro/es/e/lanxis/a/...
+/u/evandro/c/
+/u/evandro/c/
+/state/parametro/next
+
+
+Options do State servira para armazenar as opcoes para o menu sidebar navigation
+
+Interessante em pensar:
+    posso colocar os features dentre dos states e os childrens em uma pasta dai fica mais organizado
+
+
+Inventário:
+    Possui intes que podem ser:
+        ingrediente, que seria a menor representacao do item, como alface, farinha e etc...
+        insumo, tbm seria a menor representacao do item, mas representa produtos que já vem pronto, como pão, bombom, refrigerante etc...
+        condimento, que pode possuir ingredientes, que podem já vir pronto, como maionese, ketchup e etc...
+        item, que possui os anteriores ou não, exemplo copo de refri possui insumo de refrigerante dai o cliente pode escolher
+        prato, possui os anteriores, mas para facilitar pode nao possuir
+        conjunto, obrigatoriamente possui alguns dos anteriores
+        categoria, possui qualquer dos anteriores, mas pode ser para algo específico. relacionamento pai <-- filho
+
+    
+
+A fazer: 
+    [] CreateComponente aqui vai ter que chamar um usecase para cada componente
+    [] para criar um componente precisa escolher template -> Item -> fazer Adapter -> depois mostrar resultado
+
++++++++++++++++++
+preciso fazer forma para o watch do componente nao ficar só recriando componente quando atualiza e sim de fato atualizar componente
+caso de uso: quando cria elemento que tem uma lista assincrona para mostrar depois, executa create nos componentes que já estao na lista ate chegar no ultimo
+teria que so adicionar o novo na ordem
+*****************
+
+fazer os horarios com os dias da semana
+tenho que fazer forma com que as opcoes herdem da anterior caso não tenham options
+
+
+TODO:
+    [] adicionar opcao no item para adicionar sabores Sabor
+    [] implementar conjunto onde 
+        possue um ou mais itens e no relacionameto tem o limite de sabores por item
+        //no updateconjunto ainda falta fazer para selecionar e depois voltar e abrir para editar os limites de sabores
+
+        conjunto tem uma o mais Regras que tem um ou mais Itens
+
+    [] adicionar Backend no mqtt para quando atualizar ele enviar para o os listeners o update
+        no futuro é bom que os dados sejam otimizados para mostrar o que tera na tela inicial
+        e dpois ele ir pegando as demais informações e armazenando no dispositivo do usuario
+    [] no aplicativo tem que conectar no mqtt e ficar ouvindo por atualização
+        quando iniciar tem que pedir as atualizações e guardar na memoria
+        quando atualiza tem sobreescrever o arquivo e o que tem na memoria
+
+    !![] Cambam de pedidos 
+            fazer layout tipo cambam para mostrar pedidos e seus status
+    ![] Layout tipo whatsapp
+            State Chats tem que funcionar tipo whats, com uma coluna de chats na esquerda e o chat na direita
+
+
+
+
+
+
+Objetivo: 
+    fazer layout tipo crm para client princiapalmente com activits,
+    para mostrar as atividades, eventos, e com whatsapp para mostrar as ultimas mensagens anexos
+
+[x] Criar tabela Clientes
+    name
+    email
+    number
+    type
+[] criar formulario para criar clientes
+[] 
+Client type 
+
+
+preciso criar um componente hash para controlar um sub estatado, como no modal só que dai posso voltar e ir como se estivesse no navigation
+
+
+Posso usar o padrao observer para atualizar o option futuramente 
+
+
+++++++++++++++++
+
+[x] tenho que fazer o template do painel no estilo do alasmenu
+[] obejtivo de hoje é criar um nicho do tipo etapas / kambam com um objeto que muda o estado de acordo com a etapa/secao
+    criar nicho
+    [] fazer template para cada nicho
+    [] cada nicho tem uma option que sera mostrada no navigation
+    [x] fazer um componente para mostrar todos os nichos
+    [] fazer um componente para mostrar um nicho
+    [] fazer um componente para editar um nicho
+    [] fazer um componente para adicionar um nicho
+    [] fazer um componente para remover um nicho
+    [] fazer um componente para listar todos os nichos
+    [] fazer um componente para listar um nicho
+    [] fazer um componente para editar um nicho
+    [] fazer um componente para adicionar um nicho
+    [] fazer um componente para remover um nicho
+    [] fazer um componente para listar todos os nichos
+[x] deixar os dados persistentes
+[x] nicho
+    [x] quando criar nicho tem que criar o objeto do nicho
+
+
+[x] criar formulario que cria formulario para criar o objeto do nicho
+[x] trocar objeto para interface
+[x] deixar o modal com abas que nem no lembrar lo ei, cada aba tem que ser adicionada no objeto do nicho pois sera um relacionamento de habilidade
+    [x] Fazer o componente de cada caracteristica
+    [x] Fazer o relacionamento com o alvo
+        cria um objeto relacionametoItemAlvo dada a caracteristica. Basicamente a caracteristica cria esse objeto na aba dentro do item
+!!! [] tenho que criar uma caracteristica alvo para servir de destino para o apotamento do item inicial 
+            quando cria tipo caracteristica tipo item ou nicho tem que criar uma do tipo alvo no item alvo
+[] fazer um campo select que pega do repository as informacoes
+[] gerenciar as secoes do nicho dentro do modal do nicho, pois depois posso acrescentar mais configurações
+[] nicho é interessante possuir um relacionamento many to many com o ambiente, pois posso aproveitar um nicho em varios ambientes
+++++++++++++++++
+
+Semana
+    - [ ] Fazer implementacao da Rotina
+            rotina pertence a uma secao
+            rotina possui acoes
+            a rotina tem um escopo
+            as acoes podem interagir com o escopo da rotina
+
+[] adicionar secoes em uma aba nicho e adicionar propriedade fase
+Ideias
+
+    Para fazer um bom pesquisador posso transformar as propriedades do objeto em string e verificar se na string existe o termo desejado.
+        Assim usar o cursor para varrer os objetos do repositorio e comparar, caso encontre o termo então adiciona na lista para mostrar
+    
+#### URGENTE ######
+[] Tenho que focar no desenvolvimento do para festival de delivery
+[x] tenho que fazer criar o database para cada organizacao
+[-] fazer o sinc dos dados
+[x] fazer o upload dos videos
+[] criação dos aplicativo
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+============================ 2026 =====================
+31/01
+[x] precisa verificar geracao do _id pq primeiro gera um numero aleatorio e nao esta indo o _id para o servidor que esta gerando ObjectId para cada novo documento
+[x] precisa fazer com que o estado envie entrarOrganizacao quando desconecta e volta quando cliente esta na Organizacao
+[x] persistir logs no indexeddb
+
+02/02
+[] implementação igual ao zapCrm para criar options 
+    [x] incluir dadabase no options
+    [x] seria interessante incluir um config que é um ambiente de configuração
+    [] permitir criação de options igual ao zapCrm nos widgets
+[] implementacao do caracteristica de um documento
+
+
+
+Nome completo: JB STUDIO DE BELEZA LTDA (studio Jefferson braz)
+CPF / CNPJ: 47233316/0001-97
+Ins Estatual: 465136860111
+Email: financeirostudiojeffersonbraz@gmail.com
+Endereço: av Luiz Gonzaga do Nascimento 1081 jd alvorada 
+CEP: 13198516
+Cidade: monte mor sp 

@@ -1,0 +1,31 @@
+.modal-container {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #0000004a;
+}
+
+.modal {
+    background-color: var(--neutral);
+    padding: .8em;
+    border-radius: 1em;
+    width: calc(100vw - 3.6em);
+    min-height: 50vh;
+    position: absolute;
+    bottom: 1em;
+    color: var(--text);
+}
+
+.modal, .modal form {
+    max-height: 90vh;
+}
+
+.modal.center {
+    align-items: center;
+    align-content: center;
+}

@@ -1,0 +1,337 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    outline: none;
+}
+
+.o-scroll {
+    overflow: scroll;
+}
+
+.o-auto {
+    overflow: auto;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.d-grid {
+    display: grid;
+}
+
+.grid-2-col {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.gap-g {
+    gap: 1em;
+}
+
+.gap-m {
+    gap: .5em;
+}
+
+.gap-p {
+    gap: .2em;
+}
+
+.a-center,
+.centro {
+    align-items: center;
+}
+
+.a-end {
+    align-items: end;
+}
+
+.ac-center {
+    align-content: center;
+}
+
+.ac-between {
+    align-content: space-between;
+}
+
+.ac-start {
+    align-content: start;
+}
+
+.jc-center {
+    justify-content: center;
+}
+
+.jc-evenly {
+    justify-content: space-evenly;
+}
+
+.jc-between {
+    justify-content: space-between;
+}
+
+.row-mc {
+    grid-template-rows: min-content;
+}
+
+.ta-center {
+    text-align: center;
+}
+
+.ta-right {
+    text-align: right;
+}
+
+.w-80 {
+    width: 80%;
+}
+
+.h-100 {
+    height: 100%;
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.max-h-80 {
+    max-height: 80vh;
+}
+
+.icon-size {
+    width: 25px;
+    height: 25px;
+}
+
+.of-auto {
+    overflow: auto;
+}
+
+.bottom-fixed {
+    position: fixed;
+    bottom: 0;
+}
+
+button,
+.p-10 {
+    padding: 10px;
+}
+
+.p-l {
+    padding: 1em;
+}
+
+.p-m {
+    padding: .5em;
+}
+
+.p-s {
+    padding: .2em;
+}
+
+.pl-1 {
+    padding-left: 1em;
+}
+
+.card {
+    background-color: #f0eded;
+    border-radius: .7em;
+    min-width: 30vw;
+    align-content: baseline;
+}
+
+button {
+    background-color: var(--accent);
+    color: var(--accent-50);
+    font-size: 16px;
+    border: none;
+    border-radius: .5em;
+    cursor: pointer;
+}
+
+button.inner {
+    background: #9990a4 !important;
+    color: inherit;
+    padding: .3rem;
+    display: grid;
+    border-radius: .3em;
+}
+
+button.inner svg {
+    width: 25px;
+}
+
+input,
+select {
+    border: solid 2px lightgray;
+    padding: 10px 0 10px 5px;
+    font-size: 14px;
+    border-radius: .5em;
+    transition: .2s;
+}
+
+input.error,
+select.error {
+    border-color: red;
+    background-color: #ffc4c4;
+}
+
+.icon {
+    width: 100%;
+    height: 100%;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.map {
+    height: 100%;
+    width: 100%;
+    border-radius: 1em;
+}
+
+.main {
+    height: calc(100vh - 2em);
+    padding: 1em;
+    grid-template-rows: min-content;
+    background: var(--screen-background);
+    color: var(--screen-color);
+}
+
+.add {
+    position: absolute;
+    bottom: 2em;
+    transform: translate(-50%, 0);
+    left: 50%;
+    border-radius: 50%;
+    height: 80px;
+    width: 80px;
+    padding: 15px;
+}
+
+.menu-icon {
+    width: 40px;
+    display: grid;
+    align-content: center;
+}
+
+@media (max-width: 992px) {
+    .add {
+        height: 17vw;
+        width: 17vw;
+    }
+}
+
+.menu-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 1em;
+    height: calc(100vh - 2em);
+    width: calc(100vw - 2em);
+    background-color: #0000004a;
+    z-index: -1;
+    transition: .2s;
+    opacity: 0;
+}
+
+.menu-background.show {
+    z-index: 1;
+    opacity: 1;
+}
+
+.menu {
+    background-color: var(--color-primary);
+    border-radius: 1em;
+    padding: .8em;
+    height: calc(80% - 1.6em);
+    transition: .5s;
+    transform: translate(0, -100%);
+}
+
+.show .menu {
+    transform: translate(0, 0);
+}
+
+.day {
+    background-color: var(--color-primary);
+    color: var(--color-primary-contrast);
+    padding: .5em;
+}
+
+.week {
+    grid-template-columns: repeat(7, 1fr);
+}
+
+.object-list div,
+.object-list label {
+    background-color: var(--neutral-100);
+    padding: .5em;
+    color: #1e1926;
+    border-radius: .5em;
+    cursor: pointer;
+}
+
+.object-list div.checked,
+.object-list label.checked {
+    background-color: var(--color-primary-contrast);
+}
+
+.object-list div.mainadapter {
+    background-color: #b0a8ba82;
+    color: black;
+}
+
+.object-list p {
+    padding: .5em 0 .5em .5em;
+}
+
+button.aux {
+    background-color: #351b8a !important;
+}
+
+.modal .footer {
+    display: flex;
+    gap: 1em;
+}
+
+form .footer button {
+    width: 100%;
+}
+
+.card {
+    background-color: #dac3ff;
+    padding: 1em;
+    border-radius: .5em;
+}
+
+main {
+    background-color: #ebc5f7;
+}
+
+.show {
+    color: var(--color-primary-contrast);
+    padding-left: 10px;
+}
+
+.state-component {
+    position: absolute;
+    /* O position absolute é o que garante a altura para os subelementos */
+    padding: 1em;
+    width: calc(100% - 2em);
+    display: grid;
+    height: calc(100% - 2em);
+    overflow: auto;
+}
+
+.flex-state-component {
+    display: flex;
+    overflow: hidden;
+    flex-direction: column;
+    position: absolute;
+    /* O position absolute é o que garante a altura para os subelementos */
+    padding: 1em;
+    width: calc(100% - 2em);
+    height: calc(100% - 2em);
+}

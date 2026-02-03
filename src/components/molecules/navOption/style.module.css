@@ -1,0 +1,24 @@
+.nav-option {
+    --icon-size: 20px;
+    padding: .7rem;
+    border-radius: .5rem;
+    align-items: flex-end;
+}
+
+.nav-option:hover {
+    background: var(--background-200);
+}
+
+.nav-option.selected {
+    background: var(--background);
+    color: var(--text);
+}
+
+.nav-option i {
+    height: var(--icon-size);
+}
+
+.nav-option i>svg {
+    width: var(--icon-size);
+    height: var(--icon-size);
+}

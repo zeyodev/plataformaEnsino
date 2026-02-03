@@ -1,0 +1,14 @@
+.chat {
+    display: flex;
+    gap: .5rem;
+    padding: .5rem;
+    border-radius: .5rem;
+    background-color: var(--background-default-active);
+    cursor: pointer;
+}
+
+.image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}

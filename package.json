@@ -1,0 +1,44 @@
+{
+  "name": "blank",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "dev": "./run 'node server.js' 'npx webpack -w'",
+    "build": "export NODE_ENV=production && export SERVER_URL='https://backend.metaorg.app' && npx webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zeyodev/blank.git"
+  },
+  "author": "zeyo (https://zeyo.org)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zeyodev/blank/issues"
+  },
+  "homepage": "https://github.com/zeyodev/blank#readme",
+  "dependencies": {
+    "axios": "^1.7.7",
+    "chart.js": "^4.4.1",
+    "dotenv": "^16.4.4",
+    "express": "^4.18.2",
+    "icons": "github:zeyodev/icons",
+    "leaflet": "^1.9.4",
+    "socket.io-client": "^4.6.1",
+    "ulid": "^2.3.0",
+    "zeyo": "github:zeyodev/zeyo"
+  },
+  "type": "module",
+  "devDependencies": {
+    "@types/leaflet": "^1.9.12",
+    "css-loader": "^6.7.3",
+    "style-loader": "^3.3.2",
+    "ts-loader": "^9.4.2",
+    "typescript": "^4.9.5",
+    "typescript-plugin-css-modules": "^5.0.0",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1"
+  }
+}

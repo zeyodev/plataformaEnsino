@@ -1,0 +1,63 @@
+.button {
+    background-color: var(--accent);
+    color: var(--text);
+    border: none;
+    border-radius: 1rem;
+    cursor: pointer;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+}
+
+.button.accent {
+    background-color: var(--accent);
+    color: var(--accent-900);
+    font-weight: bold;
+}
+
+.button.no-bg {
+    background: none;
+    font-weight: bold;
+    color: var(--text);
+}
+
+.button.no-p {
+    padding: 0;
+}
+
+.button.p-s {
+    padding: .5rem 1rem;
+}
+
+.button.secondary {
+    background-color: var(--secondary);
+    color: var(--secondary-50);
+    font-weight: bold;
+}
+
+.button.p-p {
+    padding: .2rem;
+}
+
+.button.p-m {
+    padding: .5rem;
+}
+
+.button.p-g {
+    padding: 1rem;
+}
+
+.button.icon {
+    display: flex;
+    align-items: flex-end;
+    gap: .5rem;
+}
+
+.button.icon > i {
+    display: flex;
+    height: min-content;
+}
+
+.button.icon svg {
+    width: 20px;
+    height: 20px;
+}

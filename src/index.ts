@@ -1,0 +1,99 @@
+import { ulid } from "ulid";
+import App from "./app";
+import Root from "./states/_root";
+import Context from "./states/context";
+const app = new App()
+const context = new Context(app, new Root())
+//const idb = new IndexedDB("metaorg")
+//idb.checkIfUpdated(app)
+app.setRepository()
+    .setContext(context)
+
+class Queue {
+    isdequeuing = false;
+    queue: [database: string, action: string, collection: string, data: any][] = [];
+    constructor(private app: App) {
+        this.queue = [];
+    }
+
+    // Enqueue a new message to the queue
+    enqueue(...params: [database: string, action: string, collection: string, data: any]) {
+        this.queue.push(params);
+    }
+
+    // Dequeue and process messages from the queue
+    async dequeue() {
+        if (this.isdequeuing === true) return;
+        this.isdequeuing = true;
+        while (this.queue.length > 0) {
+            const next = this.queue.shift();
+            if (!next) break;
+            const [database, action, collection, data] = next;
+            console.log(database, action, collection, data);
+            if(this.app.repository.idb.name === database)
+                app.setRepo(this.app.repository)
+            else
+                app.setDB(database);
+            await this.app.dbs[database].methodsMap[action](collection, data, "repositorysync");
+        }
+        this.isdequeuing = false;
+    }
+}
+
+const queue = new Queue(app);
+window.addEventListener("load", async () => {
+
+    
+
+    console.log("load", document.querySelector("main"))
+    const lastSync = localStorage.getItem("lastSync");
+    const time = lastSync ? Number(lastSync) : 0;
+
+    app.repository.createTriggerTo("all", (collection, value, type, ti, origin) => {
+        if (origin === "repositorysync") return
+        console.log("Enviando ao servidor 👉", collection, value, type, ti)
+        const datas = { collection, value, type }
+        app.socket.emit(`db/${app.repository.idb.name}/${ulid()}`, datas)
+    }, "create", "update", "delete")
+
+    await app.waitSocket()
+
+    app.onTokenSet(() => {
+        const [accessToken, refreshToken] = app.getTokens();
+        (app.socket.auth as any).accessToken = accessToken;
+        (app.socket.auth as any).refreshToken = refreshToken;
+    })
+
+    app.socket.onAny((event, data) => {
+        console.log(event, data)
+
+        if (event === "repositorysync") {
+            const actions = data.action.split("/");
+            localStorage.setItem("lastSync", data.time);
+            if (actions[0] === "many") {
+                data.document.forEach((d: any) => {
+                    queue.enqueue(data.database, actions[1], data.collection, d);
+                    queue.dequeue()
+                })
+                return;
+            }
+            queue.enqueue(data.database, actions[0], data.collection, data.document);
+            queue.dequeue();
+            return;
+        }
+
+        if (event === "repositoryinit") {
+            
+            data.documents.forEach((d: any) => {
+                const action = "create"
+                queue.enqueue(data.database, action, data.collection, d);
+                queue.dequeue();
+            })
+            localStorage.setItem("lastSync", new Date().getTime().toString());
+            return;
+        }
+
+    })
+
+    //app.socket.emit("uc/repositorysync", { time })
+})

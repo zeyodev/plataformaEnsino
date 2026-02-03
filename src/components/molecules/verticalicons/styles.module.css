@@ -1,0 +1,14 @@
+.vertical-icons {
+    display: grid;
+    justify-items: center;
+}
+
+.vertical-icons img {
+    width: 30px;
+    margin: .5rem;
+    margin-bottom: 1rem;
+}
+
+.vertical-icons svg {
+    width: 25px;
+}

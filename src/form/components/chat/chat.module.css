@@ -1,0 +1,5 @@
+.pagina {
+    display: grid;
+    height: inherit;
+    grid-template-rows: min-content;
+}

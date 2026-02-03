@@ -1,0 +1,11 @@
+.itens {
+    grid-template-columns: auto;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.itens > * {
+    display: grid;
+    grid-column: 1 / span 3;
+    grid-template-columns: subgrid;
+}

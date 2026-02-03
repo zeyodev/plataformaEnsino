@@ -1,0 +1,13 @@
+.round {
+    border-radius: 50%;
+}
+.back {
+    cursor: pointer;
+}
+.back svg {
+    height: 20px;
+}
+
+.back b {
+    text-decoration: underline;
+}

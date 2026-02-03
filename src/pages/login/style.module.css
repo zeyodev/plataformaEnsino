@@ -1,0 +1,15 @@
+.layout {
+    background-color: var(--background-100);
+    color: var(--text);
+    height: 100vh;
+    height: 100svh;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.layout > div {
+    position: absolute;
+    width: min(80vw, 500px);
+}

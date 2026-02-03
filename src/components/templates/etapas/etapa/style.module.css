@@ -1,0 +1,9 @@
+.etapa {
+    grid-template-rows: min-content;
+}
+
+.lista {
+    align-content: start;
+    overflow: hidden;
+    overflow-y: auto;
+}

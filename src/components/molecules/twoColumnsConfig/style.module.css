@@ -1,0 +1,6 @@
+@media (min-width: 992px) {
+    .container > *:nth-child(2){
+        width: 40%;
+        padding: .5rem;
+    }
+}

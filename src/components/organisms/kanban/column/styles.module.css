@@ -1,0 +1,24 @@
+.column {
+    display: grid;
+    grid-template-rows: min-content auto;
+    gap: 1rem;
+    width: 18vw;
+    padding: 1rem;
+    border-radius: .5rem;
+}
+
+.column:nth-child(odd) {
+  background-color: var(--navbar-item-active-background);
+}
+
+.column > header {
+    display: flex;
+    gap: .5rem;
+    align-items: center;
+}
+
+.column > div {
+    display: grid;
+    gap: .5rem;
+    align-content: start;
+}

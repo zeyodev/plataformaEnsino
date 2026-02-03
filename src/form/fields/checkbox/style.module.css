@@ -1,0 +1,13 @@
+.label {
+    padding: 1rem;
+    background-color: var(--background);
+    border-radius: 1rem;
+}
+
+.label:has(> input:checked) {
+    background-color: var(--accent);
+}
+
+.label > span {
+    width: 100%;
+}
