@@ -1,6 +1,6 @@
 import Secao from "..";
 import App from "../../../app";
-import Button from "../../../component1.1/atoms/buttons";
+import button from "../../../components/atoms/button";
 import Form from "../../../form";
 import FieldInput from "../../../form/fields/input";
 import FieldSelect from "../../../form/fields/select";
@@ -23,7 +23,7 @@ export default class FormUpdateSecao extends Form {
             ).setValue(secao.componente),
         )
         this.footer.children(
-            new Button("Atualizar").set("type", "submit")
+            button("Atualizar").set("type", "submit")
         )
     }
     async onSubmit() {

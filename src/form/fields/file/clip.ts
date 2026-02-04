@@ -1,6 +1,5 @@
 import Z, { ZeyoAs } from "zeyo";
 import Field from "../field";
-import Snackbar from "../../../component/snackbar";
 import App from "../../../app";
 import { ulid } from "ulid";
 import Form from "../..";
@@ -44,7 +43,7 @@ export default class FieldFileClip extends Field {
         if (input.files && input.files[0].size > 104857600) {
             return console.error("tamanho invalido");
         }
-        Snackbar(this.app, Z("p").text("Enviando Clip ⏳"));
+        //Snackbar(this.app, Z("p").text("Enviando Clip ⏳"));
         const organizacao = this.app.repository.idb.name;
 
         const file = input.files[0]
@@ -65,7 +64,7 @@ export default class FieldFileClip extends Field {
 
                 const command = event.split("/")[1];
                 if (args.msg)
-                    Snackbar(this.app, Z("p").text(args.msg))
+                    //Snackbar(this.app, Z("p").text(args.msg))
 
                 console.log(command, args);
                 if (command === "end")

@@ -1,10 +1,10 @@
 import Z, { ZeyoAs } from "zeyo";
 import App from "../../../app";
-import Button from "../../../component1.1/atoms/buttons";
 import Form from "../../../form"
 import Ambiente from "../../ambiente";
-import Icon from "../../../component1.1/icons";
 import FieldKeyValue from "../../../form/fields/keyValue";
+import button from "../../../components/atoms/button";
+import iconPlus from "icons/src/business_and_online_icons/iconPlus";
 
 export default class FormUpdateInterface extends Form {
     properties: ZeyoAs<"div">;
@@ -21,7 +21,7 @@ export default class FormUpdateInterface extends Form {
             this.properties = Z("div").children(
                 ...propriedades.map(p => new FieldKeyValue(p).setValue(p))
             ),
-            new Button("Propriedade").set("type", "button").style("no-bg").icon(new Icon("plus")).click(() => {
+            button("Propriedade").set("type", "button").style("no-bg").icon(iconPlus()).click(() => {
                 this.counter++;
                 this.properties.children(
                     new FieldKeyValue(`propriedade${this.counter}`, true)
@@ -29,7 +29,7 @@ export default class FormUpdateInterface extends Form {
             }),
         )
         this.footer.children(
-            new Button("Criar").set("type", "submit")
+            button("Criar").set("type", "submit")
         )
     }
     async onSubmit() {

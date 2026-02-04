@@ -1,5 +1,5 @@
 import App from "../../../app";
-import Button from "../../../component1.1/atoms/buttons";
+import button from "../../../components/atoms/button";
 import Form from "../../../form"
 import FieldInput from "../../../form/fields/input";
 import Organizacao from "../../organizacao";
@@ -12,7 +12,7 @@ export default class FormCreateAmbiente extends Form {
             new FieldInput("nome", true).label("Nome do Ambiente"),
         )
         this.footer.children(
-            new Button().text("Criar").set("type", "submit")
+            button().text("Criar").set("type", "submit")
         )
     }
     async onSubmit() {

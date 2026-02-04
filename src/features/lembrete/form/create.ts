@@ -1,12 +1,11 @@
 import App from "../../../app";
-import ButtonAccent from "../../../component1.1/atoms/buttons/accent";
+import button from "../../../components/atoms/button";
 import Form from "../../../form";
 import FieldDateTime from "../../../form/fields/datetime";
 import FieldInput from "../../../form/fields/input";
 import FieldInputMask from "../../../form/fields/inputMask";
 import FieldSelect from "../../../form/fields/select";
 import FieldTextarea from "../../../form/fields/textarea";
-import Modal from "../../../modal";
 
 /* 
 reminder_type VARCHAR(10) NOT NULL,
@@ -42,7 +41,7 @@ export default class FormCreateLembrete extends Form {
             new FieldTextarea("message", true).label("Mensagem").setValue(evento.message),
         )
         this.footer.children(
-            new ButtonAccent("Criar")
+            button("Criar")
         )
         this.onChangeType();
     }
@@ -61,6 +60,6 @@ export default class FormCreateLembrete extends Form {
         console.log(data);
         const result = await this.app.repository.create("Reminders", data)
         console.log(result);
-        Modal.back();
+        //Modal.back();
     }
 }

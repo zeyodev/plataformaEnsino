@@ -1,6 +1,5 @@
 
 import Z, { Zeyo } from "zeyo"
-import Modal from "../../modal"
 import FormElement from "./_element"
 import Form from ".."
 

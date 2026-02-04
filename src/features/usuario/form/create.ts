@@ -1,5 +1,5 @@
 import App from "../../../app";
-import Button from "../../../component1.1/atoms/buttons";
+import button from "../../../components/atoms/button";
 import Form from "../../../form";
 import FieldInput from "../../../form/fields/input";
 import FieldInputMask from "../../../form/fields/inputMask";
@@ -30,7 +30,7 @@ export default class FormCreateUsuario extends Form {
         )
 
         this.footer.children(
-            new Button("Criar").set("type", "submit").style("primary"),
+            button("Criar").set("type", "submit").style("primary"),
         )
     }
 

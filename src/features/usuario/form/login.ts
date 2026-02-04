@@ -1,5 +1,5 @@
 import App from "../../../app";
-import Button from "../../../component1.1/atoms/buttons";
+import button from "../../../components/atoms/button";
 import Form from "../../../form";
 import FieldInput from "../../../form/fields/input";
 import Usuario from "../../../states/usuario";
@@ -15,7 +15,7 @@ export default class FormLogin extends Form {
         )
 
         this.footer.children(
-            new Button("Entrar").style("primary")
+            button("Entrar").style("primary")
         )
     }
 

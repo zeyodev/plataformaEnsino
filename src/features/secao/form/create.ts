@@ -1,5 +1,5 @@
 import App from "../../../app";
-import Button from "../../../component1.1/atoms/buttons";
+import button from "../../../components/atoms/button";
 import Form from "../../../form";
 import FieldInput from "../../../form/fields/input";
 import Nicho from "../../nicho";
@@ -12,7 +12,7 @@ export default class FormCreateSecao extends Form {
             new FieldInput("nome", true).label("Nome do Nicho"),
         )
         this.footer.children(
-            new Button("Criar").set("type", "submit")
+            button("Criar").set("type", "submit")
         )
     }
     async onSubmit() {

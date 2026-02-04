@@ -1,6 +1,5 @@
 import Z, { ZeyoAs } from "zeyo";
 import Field from "../field";
-import Snackbar from "../../../component/snackbar";
 import App from "../../../app";
 import { ulid } from "ulid";
 
@@ -46,7 +45,7 @@ export default class FieldFileImage extends Field {
         if (input.files && input.files[0].size > 104857600) {
             return console.error("tamanho invalido");
         }
-        Snackbar(this.app, Z("p").text("Enviando imagem ⏳"))
+        //Snackbar(this.app, Z("p").text("Enviando imagem ⏳"))
         const organizacao = this.app.repository.idb.name;
 
         const file = input.files[0]
@@ -61,7 +60,7 @@ export default class FieldFileImage extends Field {
             }
         });
         const result = (await this.app.socket.wait("upload/end") as any)
-        Snackbar(this.app, Z("p").text(`Imagem enviada ✅`))
+        //Snackbar(this.app, Z("p").text(`Imagem enviada ✅`))
         this.setValue(`https://image.zeyo.org/${result.response.src.replace("../", "")}`)
         /* const data = new FormData()
         const organizacao = this.app.repository.idb.name

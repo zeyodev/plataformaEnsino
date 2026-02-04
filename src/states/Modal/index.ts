@@ -1,5 +1,5 @@
 import State from "..";
-import modal from "../../component1.1/molecules/modal";
+import modal from "../../components/molecules/modal";
 import Context from "../context";
 
 export default (name: string, zmodal: ReturnType<typeof modal>) => (new class extends State {

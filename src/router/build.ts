@@ -10,7 +10,7 @@ export default class Build {
         this.app.root.innerHTML = ""
         const params: { [key: string]: string } = {}
         console.log(this.app)
-        const page = this.app.pages?.find(p => {
+        /* const page = this.app.pages?.find(p => {
             if (p.route === path) return true
             else {
                 const route = p.route.split("/")
@@ -23,10 +23,10 @@ export default class Build {
                 }
                 return true
             }
-        })
+        }) */
 
 
-        if (page)
+        /* if (page)
             this.app.root.appendChild((await page!.create()).element)
         else this.app.root.appendChild((await {
             route: "/404",
@@ -35,7 +35,7 @@ export default class Build {
                     e.element.innerText = "Pagina nao encontrada"
                 })
             }
-        }.create()).element)
+        }.create()).element) */
 
     }
 }

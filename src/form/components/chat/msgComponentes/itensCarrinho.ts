@@ -2,7 +2,6 @@ import Z, { Div, Zeyo, ZeyoAs } from "zeyo";
 import App from "../../../../app";
 import style from "./itensCarrinho.module.css"
 //import ConfirmPedido from "../usecases/confirmPedido";
-import Snackbar from "../../../../component/snackbar";
 export default class ComponentMsgItensCarrinho extends Div {
     app: App
     zList: Zeyo
