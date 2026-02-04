@@ -49,51 +49,7 @@ window.addEventListener("load", async () => {
     const lastSync = localStorage.getItem("lastSync");
     const time = lastSync ? Number(lastSync) : 0;
 
-    app.repository.createTriggerTo("all", (collection, value, type, ti, origin) => {
-        if (origin === "repositorysync") return
-        console.log("Enviando ao servidor 👉", collection, value, type, ti)
-        const datas = { collection, value, type }
-        app.socket.emit(`db/${app.repository.idb.name}/${ulid()}`, datas)
-    }, "create", "update", "delete")
-
-    await app.waitSocket()
-
-    app.onTokenSet(() => {
-        const [accessToken, refreshToken] = app.getTokens();
-        (app.socket.auth as any).accessToken = accessToken;
-        (app.socket.auth as any).refreshToken = refreshToken;
-    })
-
-    app.socket.onAny((event, data) => {
-        console.log(event, data)
-
-        if (event === "repositorysync") {
-            const actions = data.action.split("/");
-            localStorage.setItem("lastSync", data.time);
-            if (actions[0] === "many") {
-                data.document.forEach((d: any) => {
-                    queue.enqueue(data.database, actions[1], data.collection, d);
-                    queue.dequeue()
-                })
-                return;
-            }
-            queue.enqueue(data.database, actions[0], data.collection, data.document);
-            queue.dequeue();
-            return;
-        }
-
-        if (event === "repositoryinit") {
-            
-            data.documents.forEach((d: any) => {
-                const action = "create"
-                queue.enqueue(data.database, action, data.collection, d);
-                queue.dequeue();
-            })
-            localStorage.setItem("lastSync", new Date().getTime().toString());
-            return;
-        }
-
-    })
+    
 
     //app.socket.emit("uc/repositorysync", { time })
 })

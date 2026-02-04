@@ -1,10 +1,8 @@
 import State from ".."
 import Context from "../context"
-import Z from "zeyo"
+import Z, { div } from "zeyo"
 import Option from "../../options"
 import Organizacao from "../../features/organizacao"
-import App from "../../app"
-import { ulid } from "ulid"
 import SideNav from "../../components/organisms/sideNav"
 import TemplatePainel from "../../components/molecules/painel"
 import menubar from "../../components/atoms/menubar"
@@ -20,9 +18,10 @@ export default class Usuario extends State {
     slot = Z("div")
     title = Z("h1")
     subhandle(option: Option) {
-        this.title.text(option.title)
         this.slot.HTML("");
-        this.slot.children(option.component.class("state-component"))
+        this.slot.children(
+            option.component.class("state-component")
+        )
     }
 
     handle(context: Context): void {
@@ -42,8 +41,7 @@ export default class Usuario extends State {
                                 menubar().click((m) => {
                                     o.element.classList.toggle(o.style.open)
                                     m.toggle()
-                                }),
-                                this.title,
+                                })
                             ),
                             this.slot.class(o.style.dash)
                         )
@@ -58,16 +56,16 @@ export default class Usuario extends State {
         (async () => {
             // TODO: Refresh Token não está funcionando quando a sessao passa para o dia seguinte ao religar computador
             const { accessToken, refreshToken } = await context.app.refreshToken()
-            context.app.setSocket(accessToken, refreshToken)
-            context.setOnconnect();
             this.sideNav.setInfo([
                 new OptionPilares(context.app),
             ], (option) => {
                 //option.handle(context)
                 this.subhandle(option)
             }, 0)
+            /* context.app.setSocket(accessToken, refreshToken)
+            context.setOnconnect();
             await context.app.socket.waitSocket()
-            context.app.setSyncronizer(context.app.repository, context.app.socket)
+            context.app.setSyncronizer(context.app.repository, context.app.socket) */
         })();
         context.app.socket.emit(`sairOrganizacao/${context.app.msgId()}`)
         context.entrouOrganizacao = false
