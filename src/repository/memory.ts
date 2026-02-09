@@ -20,7 +20,7 @@ let data: { [key: string]: any[] } = {
             type: "adaptador",
             component: "CardAula",
             map: "aosdfjw2d",
-            documents: { type: "repository", method: "findMany", params: ["Aulas", {modulo: "$modulo._id"}] },
+            documents: { type: "repository", method: "findManyToMany", params: ["ModuloAulas/aula:Aulas", {modulo: "$modulo._id"}] },
 
         },
         {
@@ -64,38 +64,55 @@ let data: { [key: string]: any[] } = {
         { _id: "lskjfof3", pilar: "lskdjfo3", titulo: "Gestão de Equipes de Alta Performance e Delegação" },
         { _id: "lskjfof4", pilar: "lskdjfo4", titulo: "Liderança Estratégica e Gestão de Mudanças" },
     ],
+    ModuloAulas: [
+        {aula: "clskdjffksd0", modulo: "lskjfof2"},
+        {aula: "clskdjffksd1", modulo: "lskjfof2"},
+        {aula: "clskdjffksd2", modulo: "lskjfof1"},
+        {aula: "clskdjffksd3", modulo: "lskjfof1"},
+        {aula: "clskdjffksd4", modulo: "lskjfof1"},
+        {aula: "clskdjffksd5", modulo: "lskjfof3"},
+        {aula: "clskdjffksd6", modulo: "lskjfof4"},
+        {aula: "clskdjffksd6", modulo: "lskjfof1"},
+    ],
     Aulas: [
         {
+            _id: "clskdjffksd0",
             modulo: "lskjfof2",
             "titulo": "A Jornada do Autoconhecimento",
             "capa": "https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=1200&q=80"
         },
         {
+            _id: "clskdjffksd1",
             modulo: "lskjfof2",
             "titulo": "Pilares da Inteligência Emocional",
             "capa": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1200&q=80"
         },
         {
+            _id: "clskdjffksd2",
             modulo: "lskjfof1",
             "titulo": "Liderança e Empatia na Prática",
             "capa": "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1200&q=80"
         },
         {
+            _id: "clskdjffksd3",
             modulo: "lskjfof1",
             "titulo": "Gestão de Emoções sob Pressão",
             "capa": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80"
         },
         {
+            _id: "clskdjffksd4",
             modulo: "lskjfof1",
             "titulo": "Comunicação Consciente e Feedback",
             "capa": "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=80"
         },
         {
+            _id: "clskdjffksd5",
             modulo: "lskjfof3",
             "titulo": "Vulnerabilidade como Força Estratégica",
             "capa": "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1200&q=80"
         },
         {
+            _id: "clskdjffksd6",
             modulo: "lskjfof4",
             "titulo": "O Líder como Facilitador de Talentos",
             "capa": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80"
@@ -170,6 +187,24 @@ export default class RepositoryMemory extends Trigger implements Repository {
         }
         return [list, false]
     }
+
+    async findManyToMany(collection: string, query: { [index: string]: any; }): Promise<[any[], boolean]> {
+        const [mainCollection, keyCollection] = collection.split("/")
+        const [key, targetCollection] = keyCollection.split(":")
+        if (!Object.prototype.hasOwnProperty.call(data, mainCollection))
+            return [["colecao invalida"], true]
+
+        const list: any[] = []
+        for (const item of data[mainCollection]) {
+            if (this.check(item, query)) {
+                const [full] = await this.findOne(targetCollection, {_id: item[key]})
+                Object.assign(item, full)
+                list.push(item)
+            }
+        }
+        return [list, false]
+    }
+
     async findOne(collection: string, query: { [index: string]: any; }): Promise<[any, boolean]> {
         if (!Object.prototype.hasOwnProperty.call(data, collection))
             return ["colecao invalida", true]
