@@ -30,9 +30,9 @@ class Queue {
             if (!next) break;
             const [database, action, collection, data] = next;
             console.log(database, action, collection, data);
-            if(this.app.repository.idb.name === database)
+            /* if(this.app.repository.idb.name === database)
                 app.setRepo(this.app.repository)
-            else
+            else */
                 app.setDB(database);
             await this.app.dbs[database].methodsMap[action](collection, data, "repositorysync");
         }

@@ -26,8 +26,8 @@ export default class Usuario extends State {
 
     handle(context: Context): void {
         context.app.root.innerHTML = ""
-        if (context.app.repository.idb.name !== "metaorg")
-            context.app.repository.setDatabase("metaorg")
+        /* if (context.app.repository.idb.name !== "metaorg")
+            context.app.repository.setDatabase("metaorg") */
         context.app.root.appendChild(
             new TemplatePainel().object(o => {
                 o.children(

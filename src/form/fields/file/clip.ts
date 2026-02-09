@@ -44,7 +44,7 @@ export default class FieldFileClip extends Field {
             return console.error("tamanho invalido");
         }
         //Snackbar(this.app, Z("p").text("Enviando Clip ⏳"));
-        const organizacao = this.app.repository.idb.name;
+        const organizacao = "" /* this.app.repository.idb.name */;
 
         const file = input.files[0]
         console.log(file)
