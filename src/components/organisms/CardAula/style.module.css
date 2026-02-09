@@ -1,0 +1,5 @@
+.aula img {
+    width: min(35vw, 360px);
+    aspect-ratio: 16 / 9; /* Forces a 16:9 ratio (width to height) */
+    object-fit: cover;
+} 
