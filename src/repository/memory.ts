@@ -1,41 +1,102 @@
 import Repository from ".";
 import Trigger from "./Trigger";
 let data: { [key: string]: any[] } = {
+    AdaptadorMapeamento: [
+        {
+            _id: "gfdodjfg",
+            setTitulo: "string:titulo",
+            setLista: "component:sdfwefsdfwe"
+        },
+        {
+            _id: "aosdfjw2d",
+            setImg: "string:capa",
+            setTitulo: "string:titulo",
+            //onclick: ""
+        }
+    ],
+    Componentes: [
+        {
+            _id: "sdfwefsdfwe",
+            type: "adaptador",
+            component: "CardAula",
+            map: "aosdfjw2d",
+            documents: { type: "repository", method: "findMany", params: ["Aulas", {modulo: "$modulo._id"}] },
+
+        },
+        {
+            _id: "sdfwefsdfwe2",
+                        type: "adaptador",
+                        component: "ListaComTitulo",
+                        map: "gfdodjfg",
+                        documents: { type: "repository", method: "findMany", params: ["Modulos", { pilar: "$pilar._id" }] },
+                        context: "modulo",
+                    }
+    ],
     Pilares: [
         {
-            value: "lideranca", 
-            titulo: "Liderança", 
-            icon: "iconUsers"}
+            _id: "lskdjfo1",
+            value: "lideranca",
+            titulo: "Liderança",
+            icon: "iconUsers"
+        },
+        {
+            _id: "lskdjfo2",
+            value: "recepcao",
+            titulo: "Recepção",
+            icon: "iconBell"
+        },
+        {
+            _id: "lskdjfo3",
+            value: "comercial",
+            titulo: "Comercial",
+            icon: "iconMessageCircle"
+        },
+        {
+            _id: "lskdjfo4",
+            value: "financeiro",
+            titulo: "Financeiro",
+            icon: "iconDollarSign"
+        }
     ],
     Modulos: [
-        { titulo: "O Líder Consciente Autoconhecimento e Inteligência Emocional" }
+        { _id: "lskjfof1", pilar: "lskdjfo1", titulo: "O Líder Consciente Autoconhecimento e Inteligência Emocional" },
+        { _id: "lskjfof2", pilar: "lskdjfo2", titulo: "Comunicação de Impacto e Cultura de Confiança" },
+        { _id: "lskjfof3", pilar: "lskdjfo3", titulo: "Gestão de Equipes de Alta Performance e Delegação" },
+        { _id: "lskjfof4", pilar: "lskdjfo4", titulo: "Liderança Estratégica e Gestão de Mudanças" },
     ],
     Aulas: [
         {
+            modulo: "lskjfof2",
             "titulo": "A Jornada do Autoconhecimento",
             "capa": "https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=1200&q=80"
         },
         {
+            modulo: "lskjfof2",
             "titulo": "Pilares da Inteligência Emocional",
-            "capa": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=1200&q=80"
+            "capa": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1200&q=80"
         },
         {
+            modulo: "lskjfof1",
             "titulo": "Liderança e Empatia na Prática",
-            "capa": "https://images.unsplash.com/photo-1521791136064-7986c2923216?auto=format&fit=crop&w=1200&q=80"
+            "capa": "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1200&q=80"
         },
         {
+            modulo: "lskjfof1",
             "titulo": "Gestão de Emoções sob Pressão",
-            "capa": "https://images.unsplash.com/photo-1518072719234-a50369e601bb?auto=format&fit=crop&w=1200&q=80"
+            "capa": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80"
         },
         {
+            modulo: "lskjfof1",
             "titulo": "Comunicação Consciente e Feedback",
             "capa": "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=80"
         },
         {
+            modulo: "lskjfof3",
             "titulo": "Vulnerabilidade como Força Estratégica",
             "capa": "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1200&q=80"
         },
         {
+            modulo: "lskjfof4",
             "titulo": "O Líder como Facilitador de Talentos",
             "capa": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80"
         }
