@@ -20,17 +20,17 @@ let data: { [key: string]: any[] } = {
             type: "adaptador",
             component: "CardAula",
             map: "aosdfjw2d",
-            documents: { type: "repository", method: "findManyToMany", params: ["ModuloAulas/aula:Aulas", {modulo: "$modulo._id"}] },
+            documents: { type: "repository", method: "findManyToMany", params: ["ModuloAulas/aula:Aulas", { modulo: "$modulo._id" }] },
 
         },
         {
             _id: "sdfwefsdfwe2",
-                        type: "adaptador",
-                        component: "ListaComTitulo",
-                        map: "gfdodjfg",
-                        documents: { type: "repository", method: "findMany", params: ["Modulos", { pilar: "$pilar._id" }] },
-                        context: "modulo",
-                    }
+            type: "adaptador",
+            component: "ListaComTitulo",
+            map: "gfdodjfg",
+            documents: { type: "repository", method: "findMany", params: ["Modulos", { pilar: "$pilar._id" }] },
+            context: "modulo",
+        }
     ],
     Pilares: [
         {
@@ -66,16 +66,16 @@ let data: { [key: string]: any[] } = {
         { _id: "lskjfof5", pilar: "lskdjfo1", titulo: "Liderança Estratégica e Gestão de Mudanças" },
     ],
     ModuloAulas: [
-        {aula: "clskdjffksd0", modulo: "lskjfof2"},
-        {aula: "clskdjffksd1", modulo: "lskjfof2"},
-        {aula: "clskdjffksd2", modulo: "lskjfof1"},
-        {aula: "clskdjffksd3", modulo: "lskjfof1"},
-        {aula: "clskdjffksd4", modulo: "lskjfof1"},
-        {aula: "clskdjffksd5", modulo: "lskjfof3"},
-        {aula: "clskdjffksd6", modulo: "lskjfof4"},
-        {aula: "clskdjffksd6", modulo: "lskjfof5"},
-        {aula: "clskdjffksd3", modulo: "lskjfof5"},
-        {aula: "clskdjffksd5", modulo: "lskjfof5"},
+        { aula: "clskdjffksd0", modulo: "lskjfof2" },
+        { aula: "clskdjffksd1", modulo: "lskjfof2" },
+        { aula: "clskdjffksd2", modulo: "lskjfof1" },
+        { aula: "clskdjffksd3", modulo: "lskjfof1" },
+        { aula: "clskdjffksd4", modulo: "lskjfof1" },
+        { aula: "clskdjffksd5", modulo: "lskjfof3" },
+        { aula: "clskdjffksd6", modulo: "lskjfof4" },
+        { aula: "clskdjffksd6", modulo: "lskjfof5" },
+        { aula: "clskdjffksd3", modulo: "lskjfof5" },
+        { aula: "clskdjffksd5", modulo: "lskjfof5" },
     ],
     Aulas: [
         {
@@ -193,7 +193,7 @@ export default class RepositoryMemory extends Trigger implements Repository {
         const list: any[] = []
         for (const item of data[mainCollection]) {
             if (this.check(item, query)) {
-                const [full] = await this.findOne(targetCollection, {_id: item[key]})
+                const [full] = await this.findOne(targetCollection, { _id: item[key] })
                 Object.assign(item, full)
                 list.push(item)
             }
