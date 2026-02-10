@@ -1,0 +1,51 @@
+.Recommendations_section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.Recommendations_chipBar {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+    overflow-x: auto;
+    padding-bottom: 8px;
+    scrollbar-width: none;
+}
+
+.Recommendations_chipBar::-webkit-scrollbar {
+    display: none;
+}
+
+.Recommendations_chip {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: var(--text-primary);
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.Recommendations_chip:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.Recommendations_chip.active {
+    background-color: var(--text-primary);
+    color: black;
+}
+
+@media (max-width: 1000px) {
+    .Recommendations_section {
+        margin-top: 24px;
+    }
+}
+
+@media (max-width: 600px) {
+    .Recommendations_section {
+        padding: 12px;
+    }
+}

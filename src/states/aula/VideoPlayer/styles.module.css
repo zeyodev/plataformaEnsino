@@ -1,0 +1,138 @@
+.VideoPlayer_section {
+    display: flex;
+    flex-direction: column;
+}
+
+.VideoPlayer_wrapper {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background-color: black;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.VideoPlayer_iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.VideoPlayer_info {
+    margin-top: 12px;
+}
+
+.VideoPlayer_title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+
+.VideoPlayer_metaRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.VideoPlayer_channelInfo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.VideoPlayer_channelAvatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #555;
+    object-fit: cover;
+}
+
+.VideoPlayer_channelText h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 2px;
+}
+
+.VideoPlayer_channelText span {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.VideoPlayer_subscribeBtn {
+    background-color: var(--text-primary);
+    color: black;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-left: 12px;
+    transition: background 0.2s;
+}
+
+.VideoPlayer_subscribeBtn:hover {
+    background-color: #d9d9d9;
+}
+
+.VideoPlayer_actions {
+    display: flex;
+    gap: 8px;
+}
+
+.VideoPlayer_actionBtn {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: var(--text-primary);
+    padding: 8px 16px;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.VideoPlayer_actionBtn:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.VideoPlayer_descriptionBox {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 12px;
+    margin-top: 16px;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    cursor: pointer;
+}
+
+.VideoPlayer_descriptionBox:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+.VideoPlayer_descriptionBox strong {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 0.9rem;
+}
+
+@media (max-width: 600px) {
+    .VideoPlayer_wrapper {
+        border-radius: 0;
+    }
+
+    .VideoPlayer_info,
+    .VideoPlayer_descriptionBox {
+        padding: 12px;
+    }
+
+    .VideoPlayer_title {
+        font-size: 1.1rem;
+    }
+}

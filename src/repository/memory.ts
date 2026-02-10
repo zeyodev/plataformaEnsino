@@ -11,6 +11,7 @@ let data: { [key: string]: any[] } = {
             _id: "aosdfjw2d",
             setImg: "string:capa",
             setTitulo: "string:titulo",
+            setAula: "root:object"
             //onclick: ""
         },
         {
@@ -123,7 +124,7 @@ let data: { [key: string]: any[] } = {
     Mostradores: [
         {
             _id: "123",
-            titulo: "Mes",
+            titulo: "Mes de Janeiro",
             valor: 0
         }
     ]

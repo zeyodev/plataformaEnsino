@@ -6,11 +6,16 @@ import Organizacao from "../../features/organizacao"
 import SideNav from "../../components/organisms/sideNav"
 import TemplatePainel from "../../components/molecules/painel"
 import menubar from "../../components/atoms/menubar"
-import OptionPilares from "../../options/pilares"
-import Aula from "../aula"
+import VideoPlayer from "./VideoPlayer"
+import Recommendations from "./Recommendations"
+import cssStyles from "./styles.module.css"
 
-export default class Usuario extends State {
-    name = "u"
+const styles = {
+    container: cssStyles["App_container"],
+    mainLayout: cssStyles["App_mainLayout"]
+};
+export default class Aula extends State {
+    name = "aula"
     children: { [key: string]: new () => State } = {}
     options = {
         /* organizacoes: OptionOrganizacoes, */
@@ -23,6 +28,10 @@ export default class Usuario extends State {
         this.slot.children(
             option.component.class("state-component")
         )
+    }
+
+    constructor(private aula: any) {
+        super()
     }
 
     handle(context: Context): void {
@@ -44,7 +53,12 @@ export default class Usuario extends State {
                                     m.toggle()
                                 })
                             ),
-                            this.slot.class(o.style.dash)
+                            this.slot.class(o.style.dash).children(
+                                div().class(styles.mainLayout).children(
+                                    VideoPlayer(),
+                                    Recommendations()
+                                )
+                            )
                         )
                     }),
                 )
@@ -57,29 +71,21 @@ export default class Usuario extends State {
         (async () => {
             // TODO: Refresh Token não está funcionando quando a sessao passa para o dia seguinte ao religar computador
             const { accessToken, refreshToken } = await context.app.refreshToken()
-            this.sideNav.setInfo([
+            /* this.sideNav.setInfo([
                 new OptionPilares(context.app),
             ], (option) => {
                 //option.handle(context)
                 this.subhandle(option)
-            }, 0)
-            /* context.app.setSocket(accessToken, refreshToken)
-            context.setOnconnect();
-            await context.app.socket.waitSocket()
-            context.app.setSyncronizer(context.app.repository, context.app.socket) */
+            }, 0) */
         })();
         context.app.socket.emit(`sairOrganizacao/${context.app.msgId()}`)
         context.entrouOrganizacao = false
     }
-    
-    commands = {
-        "organizacao": async (context: Context, organizacao: Organizacao) => {
-            
-        },
 
+    commands = {
         "assistir": async (context: Context, aula: any) => {
             console.log("abrindo aula", aula)
-            context.setState(new Aula(aula)).handle()
+            //aqui tem que trocar o player 
         }
     }
 

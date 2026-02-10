@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZeyoTube Player</title>
+    <!-- Ícones Lucide -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* -----------------------------------------------------------------
+           ARQUIVO: styles/global.css
+           ----------------------------------------------------------------- */
+        :root {
+            --bg-dark: #0f0f0f;
+            --bg-secondary: #272727;
+            --text-primary: #f1f1f1;
+            --text-secondary: #aaaaaa;
+            --accent-color: #3ea6ff;
+            --border-color: #3f3f3f;
+            --hover-color: #3f3f3f;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            overflow-x: hidden;
+        }
+
+        /* -----------------------------------------------------------------
+           ARQUIVO: components/App.module.css
+           ----------------------------------------------------------------- */
+        .App_container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .App_mainLayout {
+            display: grid;
+            grid-template-columns: 1fr 400px; /* Video Area | Recommendations */
+            gap: 24px;
+            padding: 24px 24px;
+            max-width: 1800px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        @media (max-width: 1000px) {
+            .App_mainLayout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .App_mainLayout {
+                padding: 0; 
+                gap: 0; 
+            }
+        }
+
+        /* -----------------------------------------------------------------
+           ARQUIVO: components/Header.module.css
+           ----------------------------------------------------------------- */
+        .Header_container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 16px;
+            height: 56px;
+            background-color: var(--bg-dark);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .Header_logoArea {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            letter-spacing: -1px;
+            cursor: pointer;
+        }
+
+        .Header_searchBar {
+            display: flex;
+            align-items: center;
+            background-color: #121212;
+            border: 1px solid #303030;
+            border-radius: 40px;
+            overflow: hidden;
+            width: 40%;
+            max-width: 600px;
+        }
+
+        .Header_input {
+            background: transparent;
+            border: none;
+            color: white;
+            padding: 10px 16px;
+            width: 100%;
+            outline: none;
+            font-size: 16px;
+        }
+
+        .Header_searchBtn {
+            background-color: #222;
+            border: none;
+            border-left: 1px solid #303030;
+            padding: 8px 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .Header_searchBtn svg { stroke: var(--text-primary); width: 20px; height: 20px; }
+
+        .Header_userArea {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .Header_iconBtn {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+        }
+        .Header_iconBtn:hover { background-color: #272727; }
+
+        .Header_avatar {
+            width: 32px;
+            height: 32px;
+            background-color: purple;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        @media (max-width: 600px) {
+            .Header_searchBar { display: none; }
+        }
+
+        /* -----------------------------------------------------------------
+           ARQUIVO: components/VideoPlayer.module.css
+           ----------------------------------------------------------------- */
+        .VideoPlayer_section {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .VideoPlayer_wrapper {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background-color: black;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+
+        .VideoPlayer_iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .VideoPlayer_info {
+            margin-top: 12px;
+        }
+
+        .VideoPlayer_title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .VideoPlayer_metaRow {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .VideoPlayer_channelInfo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .VideoPlayer_channelAvatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #555;
+            object-fit: cover;
+        }
+
+        .VideoPlayer_channelText h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .VideoPlayer_channelText span {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .VideoPlayer_subscribeBtn {
+            background-color: var(--text-primary);
+            color: black;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-left: 12px;
+            transition: background 0.2s;
+        }
+        .VideoPlayer_subscribeBtn:hover { background-color: #d9d9d9; }
+
+        .VideoPlayer_actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .VideoPlayer_actionBtn {
+            background-color: rgba(255,255,255,0.1);
+            border: none;
+            color: var(--text-primary);
+            padding: 8px 16px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .VideoPlayer_actionBtn:hover { background-color: rgba(255,255,255,0.2); }
+
+        .VideoPlayer_descriptionBox {
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 12px;
+            margin-top: 16px;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            cursor: pointer;
+        }
+        .VideoPlayer_descriptionBox:hover { background-color: rgba(255,255,255,0.15); }
+        .VideoPlayer_descriptionBox strong { display: block; margin-bottom: 4px; font-size: 0.9rem; }
+
+        @media (max-width: 600px) {
+            .VideoPlayer_wrapper { border-radius: 0; }
+            .VideoPlayer_info, .VideoPlayer_descriptionBox { padding: 12px; }
+            .VideoPlayer_title { font-size: 1.1rem; }
+        }
+
+        /* -----------------------------------------------------------------
+           ARQUIVO: components/Recommendations.module.css
+           ----------------------------------------------------------------- */
+        .Recommendations_section {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .Recommendations_chipBar {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+            overflow-x: auto;
+            padding-bottom: 8px;
+            scrollbar-width: none;
+        }
+        .Recommendations_chipBar::-webkit-scrollbar { display: none; }
+
+        .Recommendations_chip {
+            background-color: rgba(255,255,255,0.1);
+            border: none;
+            color: var(--text-primary);
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .Recommendations_chip:hover { background-color: rgba(255,255,255,0.2); }
+        .Recommendations_chip.active { background-color: var(--text-primary); color: black; }
+
+        @media (max-width: 1000px) {
+            .Recommendations_section { margin-top: 24px; }
+        }
+        @media (max-width: 600px) {
+            .Recommendations_section { padding: 12px; }
+        }
+
+        /* -----------------------------------------------------------------
+           ARQUIVO: components/VideoCard.module.css
+           ----------------------------------------------------------------- */
+        .VideoCard_container {
+            display: flex;
+            gap: 8px;
+            cursor: pointer;
+            margin-bottom: 8px;
+        }
+        .VideoCard_container:hover .VideoCard_thumbImg { opacity: 0.8; }
+
+        .VideoCard_thumb {
+            position: relative;
+            flex-shrink: 0;
+            width: 168px;
+            height: 94px;
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        .VideoCard_thumbImg {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.2s;
+        }
+
+        .VideoCard_duration {
+            position: absolute;
+            bottom: 4px;
+            right: 4px;
+            background-color: rgba(0,0,0,0.8);
+            color: white;
+            font-size: 0.75rem;
+            padding: 2px 4px;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+
+        .VideoCard_info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .VideoCard_title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            line-height: 1.2;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            color: var(--text-primary);
+        }
+
+        .VideoCard_meta {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+    </style>
+</head>
+<body>
+
+    <div id="app"></div>
+
+    <script>
+        // IIFE para isolar escopo
+        (() => {
+            /**
+             * ------------------------------------------------------------------
+             * ARQUIVO: lib/zeyo.ts (Framework Core)
+             * ------------------------------------------------------------------
+             */
+            class Zeyo {
+                constructor(tagName) {
+                    this.element = document.createElement(tagName);
+                }
+                text(content) {
+                    this.element.innerText = content;
+                    return this;
+                }
+                html(content) {
+                    this.element.innerHTML = content;
+                    return this;
+                }
+                class(...classNames) {
+                    if (classNames.length > 0) {
+                        this.element.classList.add(...classNames.filter(c => c));
+                    }
+                    return this;
+                }
+                attribute(key, value) {
+                    this.element.setAttribute(key, value);
+                    return this;
+                }
+                attributes(obj) {
+                    for (const key in obj) {
+                        this.element.setAttribute(key, obj[key]);
+                    }
+                    return this;
+                }
+                children(...nodes) {
+                    nodes.forEach(node => {
+                        if (typeof node === 'string') {
+                            this.element.appendChild(document.createTextNode(node));
+                        } else if (node instanceof Zeyo) {
+                            this.element.appendChild(node.element);
+                        } else if (node instanceof HTMLElement) {
+                            this.element.appendChild(node);
+                        }
+                    });
+                    return this;
+                }
+                click(callback) {
+                    this.element.addEventListener('click', (e) => callback(this, e));
+                    return this;
+                }
+                on(event, callback) {
+                    this.element.addEventListener(event, (e) => callback(this, e));
+                    return this;
+                }
+                set(prop, value) {
+                    this.element[prop] = value;
+                    return this;
+                }
+                object(callback) {
+                    callback(this);
+                    return this;
+                }
+            }
+
+            // Exported Factory functions (simulated export)
+            const z = (tag) => new Zeyo(tag);
+            const div = () => z('div');
+            const header = () => z('header');
+            const nav = () => z('nav');
+            const h1 = () => z('h1');
+            const h3 = () => z('h3');
+            const p = () => z('p');
+            const a = () => z('a');
+            const button = () => z('button');
+            const span = () => z('span');
+            const img = () => z('img');
+            const input = () => z('input');
+            const iframe = () => z('iframe');
+            const i = () => z('i');
+
+            /**
+             * ------------------------------------------------------------------
+             * ARQUIVO: components/Icon.ts
+             * ------------------------------------------------------------------
+             */
+            const Icon = (name) => i().attribute("data-lucide", name);
+
+            /**
+             * ------------------------------------------------------------------
+             * ARQUIVO: components/Header.ts
+             * ------------------------------------------------------------------
+             */
+            const Header = () => {
+                // Em um ambiente real, importaríamos: import styles from './Header.module.css'
+                const styles = {
+                    container: "Header_container",
+                    logoArea: "Header_logoArea",
+                    searchBar: "Header_searchBar",
+                    input: "Header_input",
+                    searchBtn: "Header_searchBtn",
+                    userArea: "Header_userArea",
+                    iconBtn: "Header_iconBtn",
+                    avatar: "Header_avatar"
+                };
+
+                return header().class(styles.container).children(
+                    // Logo Area
+                    div().class(styles.logoArea).children(
+                        Icon("play-circle").attribute("fill", "red").attribute("color", "red"),
+                        span().text("ZeyoTube").class("text-white")
+                    ),
+                    // Search Bar
+                    div().class(styles.searchBar).children(
+                        input().class(styles.input).attribute("type", "text").attribute("placeholder", "Pesquisar"),
+                        button().class(styles.searchBtn).children(
+                            Icon("search")
+                        )
+                    ),
+                    // User Area
+                    div().class(styles.userArea).children(
+                        button().class(styles.iconBtn).children(Icon("video")),
+                        button().class(styles.iconBtn).children(Icon("bell")),
+                        div().class(styles.avatar).text("Z")
+                    )
+                );
+            };
+
+            /**
+             * ------------------------------------------------------------------
+             * ARQUIVO: components/VideoPlayer.ts
+             * ------------------------------------------------------------------
+             */
+            const VideoPlayer = () => {
+                const styles = {
+                    section: "VideoPlayer_section",
+                    wrapper: "VideoPlayer_wrapper",
+                    iframe: "VideoPlayer_iframe",
+                    info: "VideoPlayer_info",
+                    title: "VideoPlayer_title",
+                    metaRow: "VideoPlayer_metaRow",
+                    channelInfo: "VideoPlayer_channelInfo",
+                    channelAvatar: "VideoPlayer_channelAvatar",
+                    channelText: "VideoPlayer_channelText",
+                    subscribeBtn: "VideoPlayer_subscribeBtn",
+                    actions: "VideoPlayer_actions",
+                    actionBtn: "VideoPlayer_actionBtn",
+                    descBox: "VideoPlayer_descriptionBox"
+                };
+
+                return div().class(styles.section).children(
+                    // Player Wrapper
+                    div().class(styles.wrapper).children(
+                        iframe()
+                            .class(styles.iframe)
+                            .attribute("src", "https://www.youtube.com/embed/LXb3EKWsInQ?autoplay=1&mute=1") 
+                            .attribute("allow", "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture")
+                            .attribute("allowfullscreen", "true")
+                    ),
+                    // Info Wrapper
+                    div().class(styles.info).children(
+                        h1().class(styles.title).text("Costa Rica em 4K - Natureza Relaxante e Vida Selvagem"),
+                        
+                        // Meta Row
+                        div().class(styles.metaRow).children(
+                            // Channel Info
+                            div().class(styles.channelInfo).children(
+                                img().class(styles.channelAvatar).attribute("src", "https://picsum.photos/seed/nat/100/100"),
+                                div().class(styles.channelText).children(
+                                    h3().text("Mundo Selvagem"),
+                                    span().text("1.2M inscritos")
+                                ),
+                                button().class(styles.subscribeBtn).text("Inscrever-se")
+                            ),
+                            // Action Buttons
+                            div().class(styles.actions).children(
+                                button().class(styles.actionBtn).children(Icon("thumbs-up"), span().text("12K")),
+                                button().class(styles.actionBtn).children(Icon("thumbs-down")),
+                                button().class(styles.actionBtn).children(Icon("share-2"), span().text("Compartilhar")),
+                                button().class(styles.actionBtn).children(Icon("more-horizontal"))
+                            )
+                        ),
+
+                        // Description Box
+                        div().class(styles.descBox).children(
+                            span().html("<strong>543 mil visualizações • há 4 horas</strong>"),
+                            p().text("Experimente a beleza da natureza neste vídeo 4K de tirar o fôlego. Imagens capturadas na Costa Rica mostrando a incrível biodiversidade...")
+                        )
+                    )
+                );
+            };
+
+            /**
+             * ------------------------------------------------------------------
+             * ARQUIVO: components/VideoCard.ts
+             * ------------------------------------------------------------------
+             */
+            const VideoCard = (props) => {
+                const styles = {
+                    container: "VideoCard_container",
+                    thumb: "VideoCard_thumb",
+                    thumbImg: "VideoCard_thumbImg",
+                    duration: "VideoCard_duration",
+                    info: "VideoCard_info",
+                    title: "VideoCard_title",
+                    meta: "VideoCard_meta"
+                };
+
+                return div().class(styles.container).children(
+                    // Thumbnail
+                    div().class(styles.thumb).children(
+                        img().class(styles.thumbImg).attribute("src", `https://picsum.photos/seed/${props.imageSeed}/320/180`),
+                        span().class(styles.duration).text(props.duration)
+                    ),
+                    // Info
+                    div().class(styles.info).children(
+                        h3().class(styles.title).text(props.title),
+                        span().class(styles.meta).text(props.channel),
+                        span().class(styles.meta).text(`${props.views} • ${props.time}`)
+                    )
+                );
+            };
+
+            /**
+             * ------------------------------------------------------------------
+             * ARQUIVO: components/Recommendations.ts
+             * ------------------------------------------------------------------
+             */
+            const Recommendations = () => {
+                const styles = {
+                    section: "Recommendations_section",
+                    chipBar: "Recommendations_chipBar",
+                    chip: "Recommendations_chip"
+                };
+
+                return div().class(styles.section).children(
+                    // Chips
+                    div().class(styles.chipBar).children(
+                        button().class(styles.chip, "active").text("Tudo"),
+                        button().class(styles.chip).text("Para você"),
+                        button().class(styles.chip).text("Ao vivo"),
+                        button().class(styles.chip).text("Natureza"),
+                        button().class(styles.chip).text("Tecnologia")
+                    ),
+                    // Lista de vídeos (Reutilizando VideoCard)
+                    VideoCard({ title: "Tutorial de JavaScript Avançado 2024", channel: "DevMaster", views: "15K visualizações", time: "há 2 dias", imageSeed: "js", duration: "12:40" }),
+                    VideoCard({ title: "As melhores praias do Brasil", channel: "Viagem Hoje", views: "230K visualizações", time: "há 1 semana", imageSeed: "brazil", duration: "08:15" }),
+                    VideoCard({ title: "Review: Novo Smartphone X", channel: "TechReview", views: "1M visualizações", time: "há 3 horas", imageSeed: "phone", duration: "15:20" }),
+                    VideoCard({ title: "Música Lofi para programar", channel: "Lofi Girl", views: "50K assistindo", time: "AO VIVO", imageSeed: "lofi", duration: "🔴" }),
+                    VideoCard({ title: "Construindo uma casa do zero", channel: "Arquitetura Viva", views: "89K visualizações", time: "há 5 dias", imageSeed: "house", duration: "24:10" }),
+                    VideoCard({ title: "Receita de Carbonara Original", channel: "Chef Mario", views: "45K visualizações", time: "há 1 ano", imageSeed: "food", duration: "06:30" }),
+                    VideoCard({ title: "Documentário: Espaço Sideral", channel: "Cosmos", views: "3M visualizações", time: "há 1 mês", imageSeed: "space", duration: "45:00" })
+                );
+            };
+
+            /**
+             * ------------------------------------------------------------------
+             * ARQUIVO: App.ts
+             * ------------------------------------------------------------------
+             */
+            const App = () => {
+                const styles = {
+                    container: "App_container",
+                    mainLayout: "App_mainLayout"
+                };
+
+                return div().class(styles.container).children(
+                    Header(),
+                    div().class(styles.mainLayout).children(
+                        VideoPlayer(),
+                        Recommendations()
+                    )
+                );
+            };
+
+            /**
+             * ------------------------------------------------------------------
+             * ARQUIVO: main.ts (Entry Point)
+             * ------------------------------------------------------------------
+             */
+            const root = document.getElementById('app');
+            root.innerHTML = '';
+            root.appendChild(App().element);
+
+            // Inicializa ícones Lucide
+            if (window.lucide) {
+                window.lucide.createIcons();
+            }
+
+        })();
+    </script>
+</body>
+</html>

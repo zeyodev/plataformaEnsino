@@ -22,12 +22,16 @@ export default class ComponenteEngine {
 
     static async execute(app: App, node: ComponentNode, context?: any) {
         const [documents] = await (app as any)[node.documents.type][node.documents.method](...this.makeParams(context || {}, node.documents.params))
-        console.log(node.component, documents)
         const [map] = await app.repository.findOne("AdaptadorMapeamento", { _id: node.map })
         return documents.map((document: any) => this.componentes[node.component](app).object(async (o: any) => {
             for (const key in map) {
                 if (!o[key]) continue;
                 const [type, documentKey] = map[key].split(":")
+
+                if(type === "root"){
+                    o[key](document)
+                    continue
+                }
 
                 if (type === "string") {
                     o[key](document[documentKey])

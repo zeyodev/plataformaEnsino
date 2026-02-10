@@ -5,9 +5,11 @@ import style from "./style.module.css"
 export default (app: App) => (new class extends Card {
     img = img()
     titulo = h4()
-    setImg(value: string) {this.img.set("src", value)}
-    setTitulo(value: string) {this.titulo.text(value)}
+    aula: any
+    setAula(aula: any) { this.aula = aula }
+    setImg(value: string) { this.img.set("src", value) }
+    setTitulo(value: string) { this.titulo.text(value) }
 }).class("d-grid", "gap-m", style.aula).object(o => o.children(
     o.img,
     o.titulo
-))/* .click(() => app.context.setState()) */
+)).click((o) => app.context.action("assistir", o.aula))
