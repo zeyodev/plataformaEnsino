@@ -2,6 +2,8 @@ import { IZeyo } from "zeyo/src/zeyo";
 import CardAula from "../../../components/organisms/CardAula";
 import ListaComTitulo from "../../../components/organisms/ListaComTitulo";
 import App from "../../../app";
+import CardNomeValor from "../../../components/organisms/CardNomeValor";
+import FormulaEngine from "../../expressoes/engine";
 
 interface ComponentNode {
     type: string
@@ -14,11 +16,13 @@ interface ComponentNode {
 export default class ComponenteEngine {
     static componentes: { [key: string]: (...params: any) => IZeyo<keyof HTMLElementTagNameMap> } = {
         ListaComTitulo,
-        CardAula
+        CardAula,
+        CardNomeValor
     }
 
     static async execute(app: App, node: ComponentNode, context?: any) {
         const [documents] = await (app as any)[node.documents.type][node.documents.method](...this.makeParams(context || {}, node.documents.params))
+        console.log(node.component, documents)
         const [map] = await app.repository.findOne("AdaptadorMapeamento", { _id: node.map })
         return documents.map((document: any) => this.componentes[node.component](app).object(async (o: any) => {
             for (const key in map) {
@@ -34,6 +38,13 @@ export default class ComponenteEngine {
                     o.object(async () => {
                         const [component] = await app.repository.findOne("Componentes", { _id: documentKey })
                         o[key](...(await this.execute(app, component, node.context ? Object.assign({[node.context]: document}, context || {}) : context)))
+                    })
+                    continue
+                }
+
+                if(type === "expression") {
+                    o.object(async () => {
+                        o[key](await FormulaEngine.execute(expressaoMes))
                     })
                 }
             }
@@ -93,3 +104,56 @@ export default class ComponenteEngine {
         return current;
     }
 }
+
+const expressaoRendimentos: FormulaNode = {
+    type: "expressao",
+    nome: "Rendimentos Totais",
+    formula: {
+        type: "sum",
+        param: {
+            type: "find",
+            // Note: mudei $dataRange para $dateRange para bater com a chave variables do pai
+            param: ["Entradas", "valor", "$dateRange"] 
+        }
+    },
+    variables: { dateRange: null } // Placeholder
+};
+
+const expressaoDespesas: FormulaNode = {
+    type: "expressao",
+    nome: "Despesas Totais",
+    formula: {
+        type: "sum",
+        param: {
+            type: "find",
+            param: ["Saidas", "valor", "$dateRange"]
+        }
+    },
+    variables: { dateRange: null }
+};
+
+const expressaoDiferenca: FormulaNode = {
+    type: "expressao",
+    nome: "Cálculo Diferença",
+    formula: {
+        type: "sub",
+        // Subtração: (Rendimentos - Despesas)
+        // O motor vai resolver expressaoRendimentos e expressaoDespesas antes de chamar sub
+        param: [expressaoRendimentos, expressaoDespesas]
+    },
+    variables: { dateRange: null }
+};
+
+// Expressão Raiz
+const expressaoMes: FormulaNode = {
+    type: "expressao",
+    nome: "Fechamento Mês",
+    formula: expressaoDiferenca, // A fórmula é a execução da diferença
+    variables: {
+        // Aqui definimos o valor real que será propagado via $dateRange
+        dateRange: {
+            start: "2026-01-01",
+            end: "2026-01-31"
+        }
+    }
+};

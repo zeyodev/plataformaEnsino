@@ -12,6 +12,12 @@ let data: { [key: string]: any[] } = {
             setImg: "string:capa",
             setTitulo: "string:titulo",
             //onclick: ""
+        },
+        {
+            _id: "aosdfjw3d",
+            setNome: "string:titulo",
+            setValor: "expression:capa",
+            //onclick: ""
         }
     ],
     Componentes: [
@@ -112,6 +118,13 @@ let data: { [key: string]: any[] } = {
             _id: "clskdjffksd6",
             "titulo": "O Líder como Facilitador de Talentos",
             "capa": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80"
+        }
+    ],
+    Mostradores: [
+        {
+            _id: "123",
+            titulo: "Mes",
+            valor: 0
         }
     ]
 };
