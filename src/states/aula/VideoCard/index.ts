@@ -1,7 +1,7 @@
 import { div, h3, img, span } from "zeyo";
 import styles from "./styles.module.css"
 
-export default (...props: any) => {
+export default (props: any) => {
     /* const styles = {
         container: "VideoCard_container",
         thumb: "VideoCard_thumb",
