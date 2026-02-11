@@ -10,9 +10,7 @@
     /* Video Area | Recommendations */
     gap: 24px;
     padding: 24px 24px;
-    max-width: 1800px;
-    margin: 0 auto;
-    width: 100%;
+    width: calc(100% - 48px);
 }
 
 @media (max-width: 1000px) {
