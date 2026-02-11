@@ -55,7 +55,7 @@ export default class Aula extends State {
                             ),
                             this.slot.class(o.style.dash).children(
                                 div().class(styles.mainLayout).children(
-                                    VideoPlayer(),
+                                    VideoPlayer(({} as any)),
                                     Recommendations()
                                 )
                             )

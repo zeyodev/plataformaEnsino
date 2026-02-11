@@ -60,6 +60,7 @@ export default (app: App) => (new class extends Div {
         this.setChannel(props.channel);
         this.setViews(props.views);
         this.setTime(props.time);
+        return this
     }
 
 }).class(styles.VideoCard_container).object(o => o.children(
