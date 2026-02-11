@@ -3,6 +3,7 @@
     padding: 1rem;
     border-radius: 1rem;
     flex-shrink: 0;
+    width: min-content;
 }
 .card.no-bg {
     background: none;

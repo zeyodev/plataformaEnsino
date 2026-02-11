@@ -55,7 +55,10 @@ export default class Aula extends State {
                             ),
                             this.slot.class(o.style.dash).children(
                                 div().class(styles.mainLayout).children(
-                                    VideoPlayer(({} as any)),
+                                    VideoPlayer(({} as any)).object(o => {
+                                        o.setTitulo(this.aula.title)
+                                        o.setVideo(this.aula.video_player)
+                                    }),
                                     Recommendations()
                                 )
                             )

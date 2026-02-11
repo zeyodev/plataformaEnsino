@@ -31,8 +31,8 @@ export default (app: App) => (new class extends Div {
     // 5. Setters com lógicas específicas
     
     // Define a imagem (lógica de atributo src)
-    setImage(seed: string) {
-        this.thumbImg.attribute("src", `https://picsum.photos/seed/${seed}/320/180`);
+    setImage(thumb: string) {
+        this.thumbImg.attribute("src", thumb);
     }
 
     // Define as visualizações (atualiza estado + stats combinados)

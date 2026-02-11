@@ -4,6 +4,7 @@ import ListaComTitulo from "../../../components/organisms/ListaComTitulo";
 import App from "../../../app";
 import CardNomeValor from "../../../components/organisms/CardNomeValor";
 import FormulaEngine from "../../expressoes/engine";
+import VideoCard from "../../../states/aula/VideoCard";
 
 interface ComponentNode {
     type: string
@@ -17,7 +18,8 @@ export default class ComponenteEngine {
     static componentes: { [key: string]: (...params: any) => IZeyo<keyof HTMLElementTagNameMap> } = {
         ListaComTitulo,
         CardAula,
-        CardNomeValor
+        CardNomeValor,
+        VideoCard
     }
 
     static async execute(app: App, node: ComponentNode, context?: any) {
