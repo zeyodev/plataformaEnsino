@@ -41,23 +41,6 @@ export default (app: App) => (new class extends Div {
         this.channelAvatar.attribute("src", avatar);
         this.channelSubs.text(subs);
     }
-
-    constructor() {
-        super();
-        /* // Configurações Iniciais Estáticas
-        this.frame.attribute("allow", "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture")
-                  .attribute("allowfullscreen", "true");
-
-        // Preenchimento dos dados (hardcoded conforme original, mas agora via setters)
-        this.setVideo("https://player-vz-b35d55b6-835.tv.pandavideo.com.br/embed/?v=7021cb17-be90-4e14-8c04-61100e064c1c");
-        this.setMeta(
-            "Costa Rica em 4K - Natureza Relaxante e Vida Selvagem",
-            "543 mil visualizações • há 4 horas",
-            "Experimente a beleza da natureza neste vídeo 4K de tirar o fôlego. Imagens capturadas na Costa Rica mostrando a incrível biodiversidade..."
-        );
-        this.setChannel("Mundo Selvagem", "https://picsum.photos/seed/nat/100/100", "1.2M inscritos"); */
-    }
-
 }).class(style.VideoPlayer_section).object(o => o.children(
     // 3. Composição da Árvore DOM
     o.wrapper.children(
@@ -66,14 +49,14 @@ export default (app: App) => (new class extends Div {
     o.info.children(
         o.titulo,
         o.metaRow.children(
-            o.channelInfo.children(
+           /*  o.channelInfo.children(
                 //o.channelAvatar,
                 o.channelText.children(
                     o.channelName,
                     o.channelSubs
                 ),
                 o.subscribeBtn
-            )
+            ) */
         ),
         o.descBox.children(
             o.viewsInfo,

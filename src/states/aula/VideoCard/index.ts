@@ -18,6 +18,9 @@ export default (app: App) => (new class extends Div {
     private _views: string = "";
     private _time: string = "";
 
+    aula: any
+    setAula(aula: any) { this.aula = aula }
+    
     // 3. Método Genérico para definir texto
     setText(key: string, value: string) {
         (this as any)[key].text(value);
@@ -25,13 +28,13 @@ export default (app: App) => (new class extends Div {
 
     // 4. Setters usando bind para reutilizar setText
     setDuration = this.setText.bind(this, "duration")
-    setTitle = this.setText.bind(this, "titulo")
+    setTitulo = this.setText.bind(this, "titulo")
     setChannel = this.setText.bind(this, "channel")
 
     // 5. Setters com lógicas específicas
     
     // Define a imagem (lógica de atributo src)
-    setImage(thumb: string) {
+    setImg(thumb: string) {
         this.thumbImg.attribute("src", thumb);
     }
 
@@ -54,9 +57,9 @@ export default (app: App) => (new class extends Div {
 
     // Preenchimento em lote
     setData(props: any) {
-        this.setImage(props.imageSeed);
+        this.setImg(props.imageSeed);
         this.setDuration(props.duration);
-        this.setTitle(props.title);
+        this.setTitulo(props.title);
         this.setChannel(props.channel);
         this.setViews(props.views);
         this.setTime(props.time);

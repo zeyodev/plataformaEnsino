@@ -37,7 +37,15 @@ let data: { [key: string]: any[] } = {
             map: "gfdodjfg",
             documents: { type: "repository", method: "findMany", params: ["Modulos", { pilar: "$pilar._id" }] },
             context: "modulo",
-        }
+        },
+        {
+            _id: "lksjbjlkwfo",
+            type: "adaptador",
+            component: "Recommendations",
+            map: "aosdfjw2d",
+            documents: { type: "repository", method: "findManyToMany", params: ["ModuloAulas/aula:Aulas", { modulo: "$modulo._id" }] },
+
+        },
     ],
     Pilares: [
         {

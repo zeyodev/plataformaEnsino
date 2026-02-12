@@ -9,6 +9,8 @@ import menubar from "../../components/atoms/menubar"
 import VideoPlayer from "./VideoPlayer"
 import Recommendations from "./Recommendations"
 import cssStyles from "./styles.module.css"
+import App from "../../app"
+import ComponenteEngine from "../../features/componente/engine"
 
 const styles = {
     container: cssStyles["App_container"],
@@ -31,6 +33,7 @@ export default class Aula extends State {
     }
 
     constructor(private aula: any) {
+        console.log(aula)
         super()
     }
 
@@ -59,7 +62,18 @@ export default class Aula extends State {
                                         o.setTitulo(this.aula.title)
                                         o.setVideo(this.aula.video_player)
                                     }),
-                                    Recommendations()
+                                    // tem que pegar o modulo que veio da aula e listar
+                                    Recommendations(context.app).object(async o => {
+                                        o.children(...(await ComponenteEngine.execute(context.app, {
+                                            type: "adaptador",
+                                            component: "VideoCard",
+                                            map: "aosdfjw2d",
+                                            documents: { type: "repository", method: "findManyToMany", params: ["ModuloAulas/aula:Aulas", { modulo: "$modulo" }] },
+                                        }, {modulo: this.aula.modulo})))
+
+                                        const [modulo] = await context.app.repository.findOne("Modulos", {_id: this.aula.modulo})
+                                        o.setChip(modulo.titulo)
+                                    })
                                 )
                             )
                         )

@@ -5,6 +5,7 @@ import App from "../../../app";
 import CardNomeValor from "../../../components/organisms/CardNomeValor";
 import FormulaEngine from "../../expressoes/engine";
 import VideoCard from "../../../states/aula/VideoCard";
+import Recommendations from "../../../states/aula/Recommendations";
 
 interface ComponentNode {
     type: string
@@ -19,7 +20,8 @@ export default class ComponenteEngine {
         ListaComTitulo,
         CardAula,
         CardNomeValor,
-        VideoCard
+        VideoCard,
+        Recommendations,
     }
 
     static async execute(app: App, node: ComponentNode, context?: any) {

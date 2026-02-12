@@ -1,26 +1,35 @@
-import { button, div } from "zeyo";
+import { button, div, Div } from "zeyo";
+import App from "../../../app";
 import VideoCard from "../VideoCard";
-import cssstyles from "./styles.module.css";
+import styles from "./styles.module.css";
+import { IZeyo } from "zeyo/src/zeyo";
 
-export default () => {
-                const styles = {
-                    section: cssstyles["Recommendations_section"],
-                    chipBar: cssstyles["Recommendations_chipBar"],
-                    chip: cssstyles["Recommendations_chip"]
-                };
+export default (app: App) => (new class extends Div {
 
-                return div().class(styles.section).children(
-                    // Chips
-                    div().class(styles.chipBar).children(
-                        button().class(styles.chip, "active").text("Playlist"),
-                    ),
-                    // Lista de vídeos (Reutilizando VideoCard)
-                    /* VideoCard(({} as any)).setData({ title: "Tutorial de JavaScript Avançado 2024", channel: "DevMaster", views: "15K visualizações", time: "há 2 dias", imageSeed: "js", duration: "12:40" }),
-                    VideoCard(({} as any)).setData({ title: "As melhores praias do Brasil", channel: "Viagem Hoje", views: "230K visualizações", time: "há 1 semana", imageSeed: "brazil", duration: "08:15" }),
-                    VideoCard(({} as any)).setData({ title: "Review: Novo Smartphone X", channel: "TechReview", views: "1M visualizações", time: "há 3 horas", imageSeed: "phone", duration: "15:20" }),
-                    VideoCard(({} as any)).setData({ title: "Música Lofi para programar", channel: "Lofi Girl", views: "50K assistindo", time: "AO VIVO", imageSeed: "lofi", duration: "🔴" }),
-                    VideoCard(({} as any)).setData({ title: "Construindo uma casa do zero", channel: "Arquitetura Viva", views: "89K visualizações", time: "há 5 dias", imageSeed: "house", duration: "24:10" }),
-                    VideoCard(({} as any)).setData({ title: "Receita de Carbonara Original", channel: "Chef Mario", views: "45K visualizações", time: "há 1 ano", imageSeed: "food", duration: "06:30" }),
-                    VideoCard(({} as any)).setData({ title: "Documentário: Espaço Sideral", channel: "Cosmos", views: "3M visualizações", time: "há 1 mês", imageSeed: "space", duration: "45:00" }) */
-                );
-            };
+    // 1. Definição dos Elementos Estruturais
+    chipBar = div().class(styles.Recommendations_chipBar)
+
+    // 2. Helpers para criação de sub-componentes
+    // Cria um botão de chip (filtro)
+    private createChip(text: string, isActive: boolean = false) {
+        const btn = button().class(styles.Recommendations_chip).text(text);
+        if (isActive) btn.class("active"); // Adiciona classe 'active' se necessário
+        return btn;
+    }
+
+    setChip(nome: string) {
+        this.chipBar.children(this.createChip(nome, true))
+    }
+
+    // Cria um VideoCard utilizando a nova interface de classe
+    private createVideo(props: any) {
+        return VideoCard(app).object(card => card.setData(props));
+    }
+
+    setVideos(...child: Array<IZeyo<keyof HTMLElementTagNameMap> | string>) {
+
+    }
+
+}).class(styles.Recommendations_section).object(o => o.children(
+    o.chipBar,
+));
