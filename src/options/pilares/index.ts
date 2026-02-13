@@ -7,7 +7,7 @@ import ComponenteEngine from "../../features/componente/engine";
 
 export default class OptionPilares extends Option {
     constructor(private app: App) {
-        super("pilares", "Pilares Fundamentais", "iconBarChart", "pilares")
+        super("pilares", "Pilares Fundamentais", "iconPlay", "pilares")
     }
 
     gotError = false;
@@ -23,10 +23,5 @@ export default class OptionPilares extends Option {
                 }), i === 0))
             }
         })
-    ).object(async o => o.children(...(await ComponenteEngine.execute(this.app, {
-        type: "adaptador",
-        component: "CardNomeValor",
-        map: "aosdfjw3d",
-        documents: { type: "repository", method: "findMany", params: ["Mostradores", { _id: "123" }] },
-    }))));
+    );
 }

@@ -8,6 +8,7 @@ import TemplatePainel from "../../components/molecules/painel"
 import menubar from "../../components/atoms/menubar"
 import OptionPilares from "../../options/pilares"
 import Aula from "../aula"
+import OptionEncontros from "../../options/encontros"
 
 export default class Usuario extends State {
     name = "u"
@@ -59,6 +60,7 @@ export default class Usuario extends State {
             const { accessToken, refreshToken } = await context.app.refreshToken()
             this.sideNav.setInfo([
                 new OptionPilares(context.app),
+                new OptionEncontros(context.app),
             ], (option) => {
                 //option.handle(context)
                 this.subhandle(option)

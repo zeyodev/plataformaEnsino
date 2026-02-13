@@ -39,6 +39,14 @@ let data: { [key: string]: any[] } = {
             context: "modulo",
         },
         {
+            _id: "sdfwefsdfwe3",
+            type: "adaptador",
+            component: "ListaComTitulo",
+            map: "gfdodjfg",
+            documents: { type: "repository", method: "findMany", params: ["Modulos", { categoriasEncontros: "$categoriasEncontros._id" }] },
+            context: "modulo",
+        },
+        {
             _id: "lksjbjlkwfo",
             type: "adaptador",
             component: "Recommendations",
@@ -73,12 +81,28 @@ let data: { [key: string]: any[] } = {
             icon: "iconDollarSign"
         }
     ],
+    CategoriasEncontros: [
+        {
+            _id: "lskdjfo1",
+            value: "Mentorias",
+            titulo: "Mentorias",
+            icon: "iconUsers"
+        },
+        {
+            _id: "lskdjfo2",
+            value: "Tutorias",
+            titulo: "Tutorias",
+            icon: "iconBell"
+        }
+    ],
     Modulos: [
         { _id: "lskjfof1", pilar: "lskdjfo1", titulo: "O Líder Consciente Autoconhecimento e Inteligência Emocional" },
         { _id: "lskjfof2", pilar: "lskdjfo2", titulo: "Comunicação de Impacto e Cultura de Confiança" },
         { _id: "lskjfof3", pilar: "lskdjfo3", titulo: "Gestão de Equipes de Alta Performance e Delegação" },
         { _id: "lskjfof4", pilar: "lskdjfo4", titulo: "Liderança Estratégica e Gestão de Mudanças" },
         { _id: "lskjfof5", pilar: "lskdjfo1", titulo: "Liderança Estratégica e Gestão de Mudanças" },
+        { _id: "lskjfof6", categoriasEncontros: "lskdjfo1", titulo: "Gravações das Mentorias" },
+        { _id: "lskjfof7", categoriasEncontros: "lskdjfo2", titulo: "Gravações das Tutorias" },
     ],
     ModuloAulas: [
         { aula: "b9c56af1-ccee-4e53-81e9-e93318bab8ba", modulo: "lskjfof2" },
@@ -89,6 +113,8 @@ let data: { [key: string]: any[] } = {
         { aula: "3c215b8d-d309-447e-9c6d-2b038bc097fd", modulo: "lskjfof3" },
         { aula: "cad3cb08-4d92-443d-9dff-d13832a2788b", modulo: "lskjfof5" },
         { aula: "3c215b8d-d309-447e-9c6d-2b038bc097fd", modulo: "lskjfof5" },
+        { aula: "cad3cb08-4d92-443d-9dff-d13832a2788b", modulo: "lskjfof6" },
+        { aula: "549049b2-686b-494e-ae81-305f3d440710", modulo: "lskjfof7" },
     ],
     Aulas: [
         {
