@@ -18,6 +18,7 @@ export default class OptionEncontros extends Option {
             const [encontros] = await this.app.repository.findMany("CategoriasEncontros", {})
             for (const [i, categoriasEncontros] of encontros.entries()) {
                 objectAbas.push(new Aba(categoriasEncontros.value, categoriasEncontros.titulo, categoriasEncontros.icon, div().object(async o => {
+                    // aqui tem q colocar o botão que linka com o google meet
                     const [component] = await this.app.repository.findOne("Componentes", { _id: "sdfwefsdfwe3" })
                     o.children(...(await ComponenteEngine.execute(this.app, component, { categoriasEncontros })))
                 }), i === 0))
