@@ -6,6 +6,7 @@ import Organizacao from "../../features/organizacao"
 import SideNav from "../../components/organisms/sideNav"
 import TemplatePainel from "../../components/molecules/painel"
 import menubar from "../../components/atoms/menubar"
+import OptionJornadas from "../../options/jornadas"
 import OptionPilares from "../../options/pilares"
 import Aula from "../aula"
 import OptionEncontros from "../../options/encontros"
@@ -59,6 +60,7 @@ export default class Usuario extends State {
             // TODO: Refresh Token não está funcionando quando a sessao passa para o dia seguinte ao religar computador
             const { accessToken, refreshToken } = await context.app.refreshToken()
             this.sideNav.setInfo([
+                new OptionJornadas(context.app),
                 new OptionPilares(context.app),
                 new OptionEncontros(context.app),
             ], (option) => {
