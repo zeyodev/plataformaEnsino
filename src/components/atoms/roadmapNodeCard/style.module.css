@@ -1,0 +1,68 @@
+.node {
+    background: rgba(30, 41, 59, 0.7);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    z-index: 10;
+    border-radius: 0.75rem;
+    padding: 1.25rem;
+    cursor: pointer;
+    width: 18rem;
+}
+
+.node:hover {
+    transform: translateY(-5px) scale(1.02);
+    border-color: rgba(96, 165, 250, 0.6);
+    box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.2), 0 8px 10px -6px rgba(59, 130, 246, 0.1);
+}
+
+.highlighted {
+    border-color: #60a5fa !important;
+    box-shadow: 0 0 20px rgba(96, 165, 250, 0.4) !important;
+}
+
+.dimmed {
+    opacity: 0.4;
+    filter: grayscale(80%);
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+}
+
+.iconContainer {
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.titulo {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #f1f5f9;
+    margin: 0;
+}
+
+.descricao {
+    font-size: 0.875rem;
+    color: #94a3b8;
+    margin: 0;
+}
+
+/* Theme color variants */
+.theme-blue { background: rgba(59, 130, 246, 0.2); color: #60a5fa; }
+.theme-purple { background: rgba(168, 85, 247, 0.2); color: #a78bfa; }
+.theme-indigo { background: rgba(99, 102, 241, 0.2); color: #818cf8; }
+.theme-pink { background: rgba(236, 72, 153, 0.2); color: #f472b6; }
+.theme-emerald { background: rgba(16, 185, 129, 0.2); color: #34d399; }
+.theme-orange { background: rgba(249, 115, 22, 0.2); color: #fb923c; }
+.theme-yellow { background: rgba(234, 179, 8, 0.2); color: #facc15; }
+.theme-teal { background: rgba(20, 184, 166, 0.2); color: #2dd4bf; }
+.theme-cyan { background: rgba(6, 182, 212, 0.2); color: #22d3ee; }
+.theme-rose { background: rgba(244, 63, 94, 0.2); color: #fb7185; }

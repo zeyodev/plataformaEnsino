@@ -19,6 +19,14 @@ let data: { [key: string]: any[] } = {
             setNome: "string:titulo",
             setValor: "expression:capa",
             //onclick: ""
+        },
+        {
+            _id: "mapRoadmapNode",
+            setTitulo: "string:titulo",
+            setDescricao: "string:descricao",
+            setIcon: "string:icon",
+            setTheme: "string:theme",
+            setNodeId: "string:_id"
         }
     ],
     Componentes: [
@@ -53,6 +61,13 @@ let data: { [key: string]: any[] } = {
             map: "aosdfjw2d",
             documents: { type: "repository", method: "findManyToMany", params: ["ModuloAulas/aula:Aulas", { modulo: "$modulo._id" }] },
 
+        },
+        {
+            _id: "compRoadmapNode",
+            type: "adaptador",
+            component: "RoadmapNode",
+            map: "mapRoadmapNode",
+            documents: { type: "repository", method: "findMany", params: ["JornadaNodes", { jornada: "$jornada._id" }] },
         },
     ],
     Pilares: [
@@ -339,6 +354,50 @@ let data: { [key: string]: any[] } = {
             titulo: "Mes de Janeiro",
             valor: 0
         }
+    ],
+    Jornadas: [
+        { _id: "business", titulo: "Business Mastery Roadmap", descricao: "An interactive guide to learning business from the ground up. Hover over any topic to see its connections and dependencies.", icon: "iconTrendingUp" },
+        { _id: "leadership", titulo: "Leadership & Management", descricao: "A structured path to becoming an effective leader, from self-management to guiding large organizations.", icon: "iconUsers" }
+    ],
+    JornadaNodes: [
+        // Business nodes
+        { _id: "basics", jornada: "business", tier: 1, titulo: "Fundamentos", descricao: "Micro & Macroeconomia, etica empresarial e estruturas legais.", icon: "iconBookOpen", theme: "blue" },
+        { _id: "research", jornada: "business", tier: 2, titulo: "Pesquisa de Mercado", descricao: "Descoberta de clientes, analise de concorrentes e dimensionamento de mercado.", icon: "iconSearch", theme: "purple" },
+        { _id: "product", jornada: "business", tier: 2, titulo: "Criacao de Valor", descricao: "Desenvolvimento de produto, design de servico e construcao de MVPs.", icon: "iconBox", theme: "indigo" },
+        { _id: "marketing", jornada: "business", tier: 3, titulo: "Marketing", descricao: "Posicionamento de marca, marketing digital e captacao de atencao.", icon: "iconTarget", theme: "pink" },
+        { _id: "sales", jornada: "business", tier: 3, titulo: "Vendas", descricao: "Ciclos de vendas B2B/B2C, negociacao e tecnicas de fechamento.", icon: "iconDollarSign", theme: "emerald" },
+        { _id: "ops", jornada: "business", tier: 3, titulo: "Operacoes", descricao: "Supply chain, otimizacao de processos e entrega de valor.", icon: "iconSettings", theme: "orange" },
+        { _id: "finance", jornada: "business", tier: 4, titulo: "Financas", descricao: "Contabilidade basica, fluxo de caixa, DRE e captacao de recursos.", icon: "iconPieChart", theme: "yellow" },
+        { _id: "hr", jornada: "business", tier: 4, titulo: "Equipe & RH", descricao: "Contratacao, cultura organizacional, gestao e remuneracao.", icon: "iconUsers", theme: "teal" },
+        { _id: "strategy", jornada: "business", tier: 5, titulo: "Estrategia de Negocios", descricao: "Vantagem competitiva, pivots, M&A e planejamento de longo prazo.", icon: "iconCompass", theme: "cyan" },
+        { _id: "leadership_node", jornada: "business", tier: 6, titulo: "Lideranca & Escala", descricao: "Lideranca executiva, sistemas de escala e construcao de imperios.", icon: "iconAward", theme: "rose" },
+        // Leadership nodes
+        { _id: "self-leadership", jornada: "leadership", tier: 1, titulo: "Auto Lideranca", descricao: "Inteligencia emocional, gestao de tempo e autoconhecimento profundo.", icon: "iconUser", theme: "blue" },
+        { _id: "communication", jornada: "leadership", tier: 2, titulo: "Comunicacao", descricao: "Escuta ativa, oratoria e articulacao clara de ideias.", icon: "iconMessageCircle", theme: "purple" },
+        { _id: "conflict", jornada: "leadership", tier: 2, titulo: "Resolucao de Conflitos", descricao: "Navegacao de conversas dificeis e mediacao de disputas na equipe.", icon: "iconShield", theme: "rose" },
+        { _id: "team", jornada: "leadership", tier: 3, titulo: "Formacao de Equipes", descricao: "Motivacao, delegacao e construcao de seguranca psicologica.", icon: "iconUsers", theme: "teal" },
+        { _id: "vision", jornada: "leadership", tier: 4, titulo: "Visao Estrategica", descricao: "Definicao de direcao, alinhamento de objetivos e inspiracao de acao coletiva.", icon: "iconEye", theme: "indigo" }
+    ],
+    JornadaConnections: [
+        // Business connections
+        { _id: "c1", jornada: "business", from: "basics", to: "research" },
+        { _id: "c2", jornada: "business", from: "basics", to: "product" },
+        { _id: "c3", jornada: "business", from: "research", to: "marketing" },
+        { _id: "c4", jornada: "business", from: "product", to: "marketing" },
+        { _id: "c5", jornada: "business", from: "product", to: "ops" },
+        { _id: "c6", jornada: "business", from: "marketing", to: "sales" },
+        { _id: "c7", jornada: "business", from: "sales", to: "finance" },
+        { _id: "c8", jornada: "business", from: "ops", to: "finance" },
+        { _id: "c9", jornada: "business", from: "ops", to: "hr" },
+        { _id: "c10", jornada: "business", from: "finance", to: "strategy" },
+        { _id: "c11", jornada: "business", from: "hr", to: "strategy" },
+        { _id: "c12", jornada: "business", from: "strategy", to: "leadership_node" },
+        // Leadership connections
+        { _id: "c13", jornada: "leadership", from: "self-leadership", to: "communication" },
+        { _id: "c14", jornada: "leadership", from: "self-leadership", to: "conflict" },
+        { _id: "c15", jornada: "leadership", from: "communication", to: "team" },
+        { _id: "c16", jornada: "leadership", from: "conflict", to: "team" },
+        { _id: "c17", jornada: "leadership", from: "team", to: "vision" }
     ]
 };
 
