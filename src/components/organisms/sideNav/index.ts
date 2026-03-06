@@ -3,11 +3,16 @@ import NavOption from "../../molecules/navOption";
 import App from "../../../app";
 import Option from "../../../options";
 import style from "./style.module.css"
+import Logo from "../../atoms/logo";
 
+/**
+ * Componente da barra lateral de ferramentas
+ */
 export default class SideNav extends Div {
     constructor(private app: App, private backoption?: boolean) {
         super();
         this.class("d-grid", "gap-m", style.navigation)
+        this.children(new Logo())
         if(backoption)
         this.children(
             new NavOption(this.app, (new class extends Option {
@@ -36,7 +41,7 @@ export default class SideNav extends Div {
         );
         if (selected === undefined) return this;
 
-        const option = (this.childList as NavOption[])[this.backoption ? selected + 1 :selected];
+        const option = (this.childList as NavOption[])[this.backoption ? selected + 2 :selected + 1];
         option.selected();
         cb(option.option);
 
