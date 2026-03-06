@@ -1,10 +1,7 @@
 import State from ".."
 import Context from "../context"
 import Z, { div } from "zeyo"
-import Option from "../../options"
-import SideNav from "../../components/organisms/sideNav"
-import TemplatePainel from "../../components/molecules/painel"
-import menubar from "../../components/atoms/menubar"
+import PainelNav from "../../components/templates/painelNav"
 import button from "../../components/atoms/button"
 import iconArrowLeft from "icons/src/business_and_online_icons/iconArrowLeft"
 import OptionPlayer from "../../options/player"
@@ -14,15 +11,8 @@ export default class Aula extends State {
     name = "aula"
     children: { [key: string]: new () => State } = {}
     options = {}
-    sideNav: SideNav = ({} as any)
-    slot = Z("div")
+    painel: PainelNav = ({} as any)
     title = Z("h1")
-    subhandle(option: Option) {
-        this.slot.HTML("");
-        this.slot.children(
-            option.component.class("state-component")
-        )
-    }
 
     constructor(private aula: any) {
         console.log(aula)
@@ -31,6 +21,7 @@ export default class Aula extends State {
 
     handle(context: Context): void {
         context.app.root.innerHTML = ""
+        this.painel = new PainelNav(context.app, true)
 
         const btnVoltar = button().style("no-bg").children(
             iconArrowLeft()
@@ -38,39 +29,20 @@ export default class Aula extends State {
             context.backState()
             context.forward()
         })
+        this.painel.toolbar.children(btnVoltar)
 
-        context.app.root.appendChild(
-            new TemplatePainel().object(o => {
-                o.children(
-                    Z("div").class(o.style.menu).children(
-                        this.sideNav = new SideNav(context.app, true).class(o.style.navigation),
-                    ),
-                    Z("div").class(o.style.main).object(main => {
-                        main.children(
-                            Z("div").class("d-flex", "gap-g", "p-10", "ai-center").children(
-                                menubar().click((m) => {
-                                    o.element.classList.toggle(o.style.open)
-                                    m.toggle()
-                                }),
-                                btnVoltar,
-                            ),
-                            this.slot.class(o.style.dash)
-                        )
-                    }),
-                )
-            }).element
-        )
+        context.app.root.appendChild(this.painel.element)
 
         if (context.app.naoEstaAutenticado()) {
             return window.history.back()
         }
         (async () => {
             await context.app.refreshToken()
-            this.sideNav.setInfo([
+            this.painel.sideNav.setInfo([
                 new OptionPlayer(context.app, this.aula),
                 new OptionArquivos(context.app, this.aula),
             ], (option) => {
-                this.subhandle(option)
+                this.painel.subhandle(option)
             }, 0)
         })();
         context.app.socket.emit(`sairOrganizacao/${context.app.msgId()}`)
