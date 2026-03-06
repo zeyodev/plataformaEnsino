@@ -1,27 +1,19 @@
 import State from ".."
 import Context from "../context"
-import Z, { div, h2 } from "zeyo"
+import Z, { div } from "zeyo"
 import Option from "../../options"
-import Organizacao from "../../features/organizacao"
 import SideNav from "../../components/organisms/sideNav"
 import TemplatePainel from "../../components/molecules/painel"
 import menubar from "../../components/atoms/menubar"
-import VideoPlayer from "./VideoPlayer"
-import Recommendations from "./Recommendations"
-import cssStyles from "./styles.module.css"
-import App from "../../app"
-import ComponenteEngine from "../../features/componente/engine"
+import button from "../../components/atoms/button"
+import iconArrowLeft from "icons/src/business_and_online_icons/iconArrowLeft"
+import OptionPlayer from "../../options/player"
+import OptionArquivos from "../../options/arquivos"
 
-const styles = {
-    container: cssStyles["App_container"],
-    mainLayout: cssStyles["App_mainLayout"]
-};
 export default class Aula extends State {
     name = "aula"
     children: { [key: string]: new () => State } = {}
-    options = {
-        /* organizacoes: OptionOrganizacoes, */
-    }
+    options = {}
     sideNav: SideNav = ({} as any)
     slot = Z("div")
     title = Z("h1")
@@ -39,43 +31,30 @@ export default class Aula extends State {
 
     handle(context: Context): void {
         context.app.root.innerHTML = ""
-        /* if (context.app.repository.idb.name !== "metaorg")
-            context.app.repository.setDatabase("metaorg") */
+
+        const btnVoltar = button().style("no-bg").children(
+            iconArrowLeft()
+        ).click(() => {
+            context.backState()
+            context.forward()
+        })
+
         context.app.root.appendChild(
             new TemplatePainel().object(o => {
                 o.children(
                     Z("div").class(o.style.menu).children(
-                        // TODO: sidenav deveria ser criado dinamicamente
-                        this.sideNav = new SideNav(context.app).class(o.style.navigation),
+                        this.sideNav = new SideNav(context.app, true).class(o.style.navigation),
                     ),
                     Z("div").class(o.style.main).object(main => {
                         main.children(
-                            Z("div").class("d-flex", "gap-g", "p-10").children(
+                            Z("div").class("d-flex", "gap-g", "p-10", "ai-center").children(
                                 menubar().click((m) => {
                                     o.element.classList.toggle(o.style.open)
                                     m.toggle()
-                                })
+                                }),
+                                btnVoltar,
                             ),
-                            this.slot.class(o.style.dash).children(
-                                div().class(styles.mainLayout).children(
-                                    VideoPlayer(({} as any)).object(o => {
-                                        o.setTitulo(this.aula.title)
-                                        o.setVideo(this.aula.video_player)
-                                    }),
-                                    // tem que pegar o modulo que veio da aula e listar
-                                    Recommendations(context.app).object(async o => {
-                                        o.children(...(await ComponenteEngine.execute(context.app, {
-                                            type: "adaptador",
-                                            component: "VideoCard",
-                                            map: "aosdfjw2d",
-                                            documents: { type: "repository", method: "findManyToMany", params: ["ModuloAulas/aula:Aulas", { modulo: "$modulo" }] },
-                                        }, {modulo: this.aula.modulo})))
-
-                                        const [modulo] = await context.app.repository.findOne("Modulos", {_id: this.aula.modulo})
-                                        o.setChip(modulo.titulo)
-                                    })
-                                )
-                            )
+                            this.slot.class(o.style.dash)
                         )
                     }),
                 )
@@ -86,14 +65,13 @@ export default class Aula extends State {
             return window.history.back()
         }
         (async () => {
-            // TODO: Refresh Token não está funcionando quando a sessao passa para o dia seguinte ao religar computador
-            const { accessToken, refreshToken } = await context.app.refreshToken()
-            /* this.sideNav.setInfo([
-                new OptionPilares(context.app),
+            await context.app.refreshToken()
+            this.sideNav.setInfo([
+                new OptionPlayer(context.app, this.aula),
+                new OptionArquivos(context.app, this.aula),
             ], (option) => {
-                //option.handle(context)
                 this.subhandle(option)
-            }, 0) */
+            }, 0)
         })();
         context.app.socket.emit(`sairOrganizacao/${context.app.msgId()}`)
         context.entrouOrganizacao = false
@@ -102,7 +80,6 @@ export default class Aula extends State {
     commands = {
         "assistir": async (context: Context, aula: any) => {
             console.log("abrindo aula", aula)
-            //aqui tem que trocar o player 
         }
     }
 

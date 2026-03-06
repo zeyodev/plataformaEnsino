@@ -25,3 +25,42 @@
         gap: 0;
     }
 }
+
+.Aula_optionsBar {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.Aula_optionBtn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 8px;
+    transition: background-color 0.2s;
+    cursor: pointer;
+}
+
+.Aula_optionBtn:hover {
+    background-color: var(--secondary, rgba(255,255,255,0.1));
+}
+
+.Aula_optionBtn--active {
+    background-color: var(--secondary, rgba(255,255,255,0.1));
+}
+
+.Aula_optionBtn svg {
+    width: 20px;
+    height: 20px;
+}
+
+.Aula_contentArea {
+    width: 100%;
+}
+
+.Aula_arquivosContainer {
+    padding: 24px;
+    display: grid;
+    gap: 16px;
+}
