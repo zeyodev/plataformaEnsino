@@ -1,7 +1,7 @@
 import State from ".."
 import Context from "../context"
 import Z, { div } from "zeyo"
-import PainelNav from "../../components/templates/painelNav"
+import painelNav, { PainelNav } from "../../components/templates/painelNav"
 import button from "../../components/atoms/button"
 import iconArrowLeft from "icons/src/business_and_online_icons/iconArrowLeft"
 import OptionPlayer from "../../options/player"
@@ -21,7 +21,7 @@ export default class Aula extends State {
 
     handle(context: Context): void {
         context.app.root.innerHTML = ""
-        this.painel = new PainelNav(context.app, true)
+        this.painel = painelNav(context.app, true)
 
         const btnVoltar = button().style("no-bg").children(
             iconArrowLeft()

@@ -2,7 +2,7 @@ import State from ".."
 import Context from "../context"
 import Z, { div, h2 } from "zeyo"
 import Organizacao from "../../features/organizacao"
-import PainelNav from "../../components/templates/painelNav"
+import painelNav, { PainelNav } from "../../components/templates/painelNav"
 import OptionJornadas from "../../options/jornadas"
 import OptionPilares from "../../options/pilares"
 import Aula from "../aula"
@@ -19,7 +19,7 @@ export default class Usuario extends State {
 
     handle(context: Context): void {
         context.app.root.innerHTML = ""
-        this.painel = new PainelNav(context.app)
+        this.painel = painelNav(context.app)
         context.app.root.appendChild(this.painel.element)
 
         if (context.app.naoEstaAutenticado()) {
