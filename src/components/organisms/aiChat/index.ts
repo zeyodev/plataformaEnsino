@@ -40,17 +40,17 @@ export default (app: App) => (new class AIChat extends Div {
         div().class(style.header).children(
             h3().text("Assistente AI"),
         ),
-        div().class(style.actions).children(
-            ...acoesPredefinidas.map(acao =>
-                (new class extends Div {}).class(style["action-btn"]).text(acao.label)
-                    .click(() => o.send(acao.prompt))
-            ),
-        ),
         o.messages.children(
             div().class(style.welcome).children(
                 iconMessageCircle(),
                 h3().text("Como posso ajudar?"),
                 p().text("Escolha uma acao acima ou escreva sua duvida"),
+            ),
+        ),
+        div().class(style.actions).children(
+            ...acoesPredefinidas.map(acao =>
+                (new class extends Div { }).class(style["action-btn"]).text(acao.label)
+                    .click(() => o.send(acao.prompt))
             ),
         ),
         div().class(style["input-area"]).children(

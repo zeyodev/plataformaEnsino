@@ -1,7 +1,7 @@
 .node {
-    background: rgba(30, 41, 59, 0.7);
+    background: var(--background-100);
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(148, 163, 184, 0.2);
+    border: 1px solid var(--neutral-300);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     z-index: 10;
@@ -13,13 +13,14 @@
 
 .node:hover {
     transform: translateY(-5px) scale(1.02);
-    border-color: rgba(96, 165, 250, 0.6);
-    box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.2), 0 8px 10px -6px rgba(59, 130, 246, 0.1);
+    border-color: var(--primary-500);
+    box-shadow: 0 10px 25px -5px color-mix(in srgb, var(--primary) 20%, transparent),
+                0 8px 10px -6px color-mix(in srgb, var(--primary) 10%, transparent);
 }
 
 .highlighted {
-    border-color: #60a5fa !important;
-    box-shadow: 0 0 20px rgba(96, 165, 250, 0.4) !important;
+    border-color: var(--primary-500) !important;
+    box-shadow: 0 0 20px color-mix(in srgb, var(--primary-500) 40%, transparent) !important;
 }
 
 .dimmed {
@@ -45,24 +46,55 @@
 .titulo {
     font-size: 1.125rem;
     font-weight: 600;
-    color: #f1f5f9;
+    color: var(--text);
     margin: 0;
+    flex: 1;
 }
 
 .descricao {
     font-size: 0.875rem;
-    color: #94a3b8;
+    color: var(--text-400);
     margin: 0;
 }
 
-/* Theme color variants */
-.theme-blue { background: rgba(59, 130, 246, 0.2); color: #60a5fa; }
-.theme-purple { background: rgba(168, 85, 247, 0.2); color: #a78bfa; }
-.theme-indigo { background: rgba(99, 102, 241, 0.2); color: #818cf8; }
-.theme-pink { background: rgba(236, 72, 153, 0.2); color: #f472b6; }
+.aulasBadge {
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--primary-500);
+    background: color-mix(in srgb, var(--primary) 15%, transparent);
+    padding: 0.2rem 0.5rem;
+    border-radius: 1rem;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.aulasPanel {
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+                margin-top 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.3s ease;
+    opacity: 0;
+    margin-top: 0;
+}
+
+.aulasPanelOpen {
+    max-height: 30rem;
+    opacity: 1;
+    margin-top: 0.75rem;
+}
+
+/* Theme color variants - platform palette */
+.theme-blue { background: color-mix(in srgb, var(--primary) 20%, transparent); color: var(--primary-500); }
+.theme-purple { background: color-mix(in srgb, var(--accent) 20%, transparent); color: var(--accent-500); }
+.theme-indigo { background: color-mix(in srgb, var(--primary-700) 20%, transparent); color: var(--primary-400); }
+.theme-pink { background: color-mix(in srgb, var(--secondary) 20%, transparent); color: var(--secondary-500); }
 .theme-emerald { background: rgba(16, 185, 129, 0.2); color: #34d399; }
 .theme-orange { background: rgba(249, 115, 22, 0.2); color: #fb923c; }
 .theme-yellow { background: rgba(234, 179, 8, 0.2); color: #facc15; }
 .theme-teal { background: rgba(20, 184, 166, 0.2); color: #2dd4bf; }
-.theme-cyan { background: rgba(6, 182, 212, 0.2); color: #22d3ee; }
-.theme-rose { background: rgba(244, 63, 94, 0.2); color: #fb7185; }
+.theme-cyan { background: color-mix(in srgb, var(--primary-600) 20%, transparent); color: var(--primary-300); }
+.theme-rose { background: color-mix(in srgb, var(--secondary-700) 20%, transparent); color: var(--secondary-400); }

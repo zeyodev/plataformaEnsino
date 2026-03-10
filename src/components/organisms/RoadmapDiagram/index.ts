@@ -24,7 +24,7 @@ export default class RoadmapDiagram extends Div {
     private svgOverlay: SVGSVGElement
     private nodesContainer = div().class(style.nodesContainer)
     private drawnPaths: SVGPathElement[] = []
-    private drawnDots: SVGCircleElement[] = []
+    private drawnArrows: SVGPolygonElement[] = []
     private nodeElements: Map<string, RoadmapNodeCard> = new Map()
     private connections: ConnectionData[] = []
     private resizeObserver: ResizeObserver | null = null
@@ -58,10 +58,25 @@ export default class RoadmapDiagram extends Div {
                 card.setTheme(node.theme)
                 card.on("mouseenter", () => this.highlightNode(node._id))
                 card.on("mouseleave", () => this.clearHighlight())
+                card.setOnAulaClick((aula: any) => {
+                    this.app.context.action("assistir", aula)
+                })
                 this.nodeElements.set(node._id, card)
                 tierDiv.children(card)
+
+                this.loadNodeAulas(node._id, card)
             }
             this.nodesContainer.children(tierDiv)
+        }
+    }
+
+    private async loadNodeAulas(nodeId: string, card: RoadmapNodeCard) {
+        const [nodeAulas] = await this.app.repository.findManyToMany(
+            "NodeAulas/aula:Aulas",
+            { node: nodeId }
+        )
+        if (nodeAulas && nodeAulas.length > 0) {
+            card.setAulas(nodeAulas)
         }
     }
 
@@ -75,17 +90,18 @@ export default class RoadmapDiagram extends Div {
     private drawConnections() {
         this.svgOverlay.innerHTML = ""
         this.drawnPaths = []
-        this.drawnDots = []
+        this.drawnArrows = []
 
         if (this.connections.length === 0) return
 
         const containerRect = this.element.getBoundingClientRect()
-        // Skip drawing if element is hidden (zero dimensions)
         if (containerRect.width === 0 || containerRect.height === 0) return
 
-        // Update SVG size to match container
         this.svgOverlay.setAttribute("width", String(containerRect.width))
         this.svgOverlay.setAttribute("height", String(containerRect.height))
+
+        const defs = document.createElementNS("http://www.w3.org/2000/svg", "defs")
+        this.svgOverlay.appendChild(defs)
 
         for (const conn of this.connections) {
             const fromCard = this.nodeElements.get(conn.from)
@@ -101,12 +117,23 @@ export default class RoadmapDiagram extends Div {
             const endY = toRect.top - containerRect.top
             const curvature = Math.min(Math.abs(endY - startY) / 2, 80)
 
+            const arrowY = endY
+            const arrowSize = 6
+            const arrow = document.createElementNS("http://www.w3.org/2000/svg", "polygon")
+            arrow.setAttribute("points",
+                `${endX},${arrowY} ${endX - arrowSize},${arrowY - arrowSize * 1.8} ${endX + arrowSize},${arrowY - arrowSize * 1.8}`
+            )
+            arrow.style.fill = "var(--neutral-500)"
+            arrow.dataset.from = conn.from
+            arrow.dataset.to = conn.to
+            arrow.classList.add(style.connectionArrow)
+
             const path = document.createElementNS("http://www.w3.org/2000/svg", "path")
             path.setAttribute("d",
-                `M ${startX} ${startY} C ${startX} ${startY + curvature}, ${endX} ${endY - curvature}, ${endX} ${endY}`
+                `M ${startX} ${startY} C ${startX} ${startY + curvature}, ${endX} ${endY - curvature}, ${endX} ${endY - arrowSize * 1.8}`
             )
             path.setAttribute("fill", "none")
-            path.setAttribute("stroke", "#475569")
+            path.style.stroke = "var(--neutral-500)"
             path.setAttribute("stroke-width", "2")
             path.classList.add(style.connectionPath)
             path.dataset.from = conn.from
@@ -114,46 +141,36 @@ export default class RoadmapDiagram extends Div {
             this.svgOverlay.appendChild(path)
             this.drawnPaths.push(path)
 
-            const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle")
-            circle.setAttribute("cx", String(endX))
-            circle.setAttribute("cy", String(endY - 2))
-            circle.setAttribute("r", "4")
-            circle.setAttribute("fill", "#475569")
-            circle.dataset.from = conn.from
-            circle.dataset.to = conn.to
-            this.svgOverlay.appendChild(circle)
-            this.drawnDots.push(circle)
+            this.svgOverlay.appendChild(arrow)
+            this.drawnArrows.push(arrow)
         }
     }
 
     private highlightNode(nodeId: string) {
-        // Dim all
         this.nodeElements.forEach(card => {
             card.element.classList.add(nodeStyle.dimmed)
         })
         this.drawnPaths.forEach(p => p.classList.add(style.dimmedPath))
-        this.drawnDots.forEach(d => d.style.opacity = "0.1")
+        this.drawnArrows.forEach(a => a.classList.add(style.dimmedPath))
 
-        // Highlight current node
         const current = this.nodeElements.get(nodeId)
         if (current) {
             current.element.classList.remove(nodeStyle.dimmed)
             current.element.classList.add(nodeStyle.highlighted)
         }
 
-        // Highlight connected nodes and paths
         for (let i = 0; i < this.drawnPaths.length; i++) {
             const path = this.drawnPaths[i]
-            const dot = this.drawnDots[i]
+            const arrow = this.drawnArrows[i]
             const isOutgoing = path.dataset.from === nodeId
             const isIncoming = path.dataset.to === nodeId
 
             if (isOutgoing || isIncoming) {
                 path.classList.remove(style.dimmedPath)
                 path.classList.add(style.activePath)
-                if (dot) {
-                    dot.style.opacity = "1"
-                    dot.setAttribute("fill", "#60a5fa")
+                if (arrow) {
+                    arrow.classList.remove(style.dimmedPath)
+                    arrow.classList.add(style.activeArrow)
                 }
 
                 const connectedId = isOutgoing ? path.dataset.to! : path.dataset.from!
@@ -173,9 +190,8 @@ export default class RoadmapDiagram extends Div {
         this.drawnPaths.forEach(p => {
             p.classList.remove(style.dimmedPath, style.activePath)
         })
-        this.drawnDots.forEach(d => {
-            d.style.opacity = ""
-            d.setAttribute("fill", "#475569")
+        this.drawnArrows.forEach(a => {
+            a.classList.remove(style.dimmedPath, style.activeArrow)
         })
     }
 }
