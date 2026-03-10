@@ -1,5 +1,22 @@
+.thumb {
+    position: relative;
+    height: min-content;
+}
+
 .aula img {
     width: min(35vw, 360px);
-    aspect-ratio: 16 / 9; /* Forces a 16:9 ratio (width to height) */
+    aspect-ratio: 16 / 9;
     object-fit: cover;
-} 
+}
+
+.tempo {
+    position: absolute;
+    bottom: 4px;
+    right: 0;
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    font-size: 0.75rem;
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin: 4px;
+}
