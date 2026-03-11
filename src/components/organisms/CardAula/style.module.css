@@ -3,6 +3,10 @@
     height: min-content;
 }
 
+.aula {
+    align-content: start;
+}
+
 .aula img {
     width: min(35vw, 360px);
     aspect-ratio: 16 / 9;

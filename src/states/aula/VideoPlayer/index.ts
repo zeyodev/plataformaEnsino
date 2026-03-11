@@ -1,15 +1,16 @@
 import { button, div, h1, h3, iframe, img, p, span, Div } from "zeyo";
 import App from "../../../app";
+import Rating from "../../../components/atoms/rating";
 import style from "./styles.module.css";
 
 export default (app: App) => (new class extends Div {
     // 1. Definição dos Elementos (Propriedades)
     wrapper = div().class(style.VideoPlayer_wrapper)
     frame = iframe().class(style.VideoPlayer_iframe)
-    
+
     info = div().class(style.VideoPlayer_info)
     titulo = h1().class(style.VideoPlayer_title)
-    
+
     metaRow = div().class(style.VideoPlayer_metaRow)
     channelInfo = div().class(style.VideoPlayer_channelInfo)
     channelAvatar = img().class(style.VideoPlayer_channelAvatar)
@@ -17,16 +18,26 @@ export default (app: App) => (new class extends Div {
     channelName = h3()
     channelSubs = span()
     subscribeBtn = button().class(style.VideoPlayer_subscribeBtn).text("Inscrever-se")
-    
+
     descBox = div().class(style.VideoPlayer_descriptionBox)
     viewsInfo = span()
     descText = p()
+
+    private aulaId = ""
+    ratingComponent = Rating().onRatingChange(async (rating) => {
+        const [existing] = await app.repository.findOne("AulaAvaliacoes", { aulaId: this.aulaId })
+        if (existing && existing._id) {
+            await app.repository.update("AulaAvaliacoes", existing._id, { rating })
+        } else {
+            await app.repository.create("AulaAvaliacoes", { aulaId: this.aulaId, rating })
+        }
+    })
 
     // 2. Setters para Injeção de Dados (Padrão do Exemplo)
     setVideo(url: string) {
         this.frame.attribute("src", url);
     }
-    
+
     setTitulo(titulo: string) {
         this.titulo.text(titulo);
     }
@@ -40,6 +51,12 @@ export default (app: App) => (new class extends Div {
         this.channelName.text(name);
         this.channelAvatar.attribute("src", avatar);
         this.channelSubs.text(subs);
+    }
+
+    async loadRating(aulaId: string) {
+        this.aulaId = aulaId
+        const [avaliacao] = await app.repository.findOne("AulaAvaliacoes", { aulaId })
+        if (avaliacao && avaliacao._id) this.ratingComponent.setRating(avaliacao.rating)
     }
 }).class(style.VideoPlayer_section).object(o => o.children(
     // 3. Composição da Árvore DOM
@@ -58,6 +75,7 @@ export default (app: App) => (new class extends Div {
                 o.subscribeBtn
             ) */
         ),
+        o.ratingComponent,
         o.descBox.children(
             o.viewsInfo,
             o.descText

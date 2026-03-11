@@ -17,9 +17,10 @@ export default class OptionPlayer extends Option {
 
     component = Z("div").class("gap-g", "ac-start").children(
         div().class(styles.mainLayout).children(
-            VideoPlayer(({} as any)).object(o => {
+            VideoPlayer(this.app).object(o => {
                 o.setTitulo(this.aula.title)
                 o.setVideo(this.aula.video_player)
+                o.loadRating(this.aula._id)
             }),
             Recommendations(this.app).object(async o => {
                 o.children(...(await ComponenteEngine.execute(this.app, {
