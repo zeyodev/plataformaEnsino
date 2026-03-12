@@ -2,6 +2,7 @@ import { Div, div, h3, p, span } from "zeyo";
 import style from "./style.module.css";
 import icons from "../icons";
 import CardAulaMini from "../cardAulaMini";
+import App from "../../../app";
 
 const themeClasses: { [key: string]: string } = {
     blue: style["theme-blue"],
@@ -27,8 +28,11 @@ export default class RoadmapNodeCard extends Div {
     private aulaCards: CardAulaMini[] = []
     private onAulaClick: ((aula: any) => void) | null = null
 
-    constructor() {
+    protected app?: App
+
+    constructor(app?: App) {
         super()
+        this.app = app
         this.class(style.node).children(
             div().class(style.header).children(
                 this.iconContainer,
@@ -76,7 +80,7 @@ export default class RoadmapNodeCard extends Div {
         this.aulasBadge.text(`${aulas.length} aulas`)
 
         for (const aula of aulas) {
-            const card = new CardAulaMini()
+            const card = new CardAulaMini(this.app)
             card.setAula(aula)
             card.on("click", (_o, e) => {
                 e.stopPropagation()

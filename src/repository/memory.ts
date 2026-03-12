@@ -4,6 +4,7 @@ let data: { [key: string]: any[] } = {
     AdaptadorMapeamento: [
         {
             _id: "gfdodjfg",
+            setModulo: "root:object",
             setTitulo: "string:titulo",
             setLista: "component:sdfwefsdfwe"
         },

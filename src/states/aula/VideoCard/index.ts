@@ -3,12 +3,13 @@ import App from "../../../app";
 import styles from "./styles.module.css";
 
 export default (app: App) => (new class extends Div {
-    
+
     // 1. Definição dos Elementos (Propriedades Visuais)
     thumb = div().class(styles.VideoCard_thumb)
     thumbImg = img().class(styles.VideoCard_thumbImg)
     duration = span().class(styles.VideoCard_duration)
-    
+    badge = span().class(styles.VideoCard_badge).text("Concluída ✓")
+
     info = div().class(styles.VideoCard_info)
     titulo = h3().class(styles.VideoCard_title)
     channel = span().class(styles.VideoCard_meta)
@@ -19,7 +20,17 @@ export default (app: App) => (new class extends Div {
     private _time: string = "";
 
     aula: any
-    setAula(aula: any) { this.aula = aula }
+    setAula(aula: any) {
+        this.aula = aula
+        if (aula?._id) this.checkConclusao(aula._id)
+    }
+
+    private async checkConclusao(aulaId: string) {
+        const [conclusao] = await app.repository.findOne("AulaConclusoes", { aulaId })
+        if (conclusao && conclusao.concluida) {
+            (this.badge.element as HTMLElement).style.display = "inline-block"
+        }
+    }
     
     // 3. Método Genérico para definir texto
     setText(key: string, value: string) {
@@ -69,7 +80,8 @@ export default (app: App) => (new class extends Div {
 }).class(styles.VideoCard_container).object(o => o.children(
     o.thumb.children(
         o.thumbImg,
-        o.duration
+        o.duration,
+        o.badge
     ),
     o.info.children(
         o.titulo,

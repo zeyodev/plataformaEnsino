@@ -19,7 +19,7 @@ export default class OptionPlayer extends Option {
         div().class(styles.mainLayout).children(
             VideoPlayer(this.app).object(o => {
                 o.setTitulo(this.aula.title)
-                o.setVideo(this.aula.video_player)
+                o.setVideo(this.aula.video_hls)
                 o.loadRating(this.aula._id)
             }),
             Recommendations(this.app).object(async o => {

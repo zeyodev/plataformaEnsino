@@ -1,12 +1,16 @@
-import { button, div, h1, h3, iframe, img, p, span, Div } from "zeyo";
+import { button, div, h1, h3, video, img, p, span, Div } from "zeyo";
+import Hls from "hls.js";
 import App from "../../../app";
 import Rating from "../../../components/atoms/rating";
 import style from "./styles.module.css";
 
+const COMPLETION_THRESHOLD = 0.9;
+const SAVE_INTERVAL = 10;
+
 export default (app: App) => (new class extends Div {
     // 1. Definição dos Elementos (Propriedades)
     wrapper = div().class(style.VideoPlayer_wrapper)
-    frame = iframe().class(style.VideoPlayer_iframe)
+    videoEl = video().class(style.VideoPlayer_video).attribute("controls", "true")
 
     info = div().class(style.VideoPlayer_info)
     titulo = h1().class(style.VideoPlayer_title)
@@ -19,11 +23,20 @@ export default (app: App) => (new class extends Div {
     channelSubs = span()
     subscribeBtn = button().class(style.VideoPlayer_subscribeBtn).text("Inscrever-se")
 
+    progressBar = div().class(style.VideoPlayer_progressBar)
+    progressFill = div().class(style.VideoPlayer_progressFill)
+    progressLabel = span().class(style.VideoPlayer_progressLabel)
+    completionBadge = span().class(style.VideoPlayer_completionBadge).text("Aula concluída ✓")
+
     descBox = div().class(style.VideoPlayer_descriptionBox)
     viewsInfo = span()
     descText = p()
 
     private aulaId = ""
+    private hls: Hls | null = null
+    private completed = false
+    private lastSavedTime = 0
+
     ratingComponent = Rating().onRatingChange(async (rating) => {
         const [existing] = await app.repository.findOne("AulaAvaliacoes", { aulaId: this.aulaId })
         if (existing && existing._id) {
@@ -35,7 +48,21 @@ export default (app: App) => (new class extends Div {
 
     // 2. Setters para Injeção de Dados (Padrão do Exemplo)
     setVideo(url: string) {
-        this.frame.attribute("src", url);
+        const videoElement = this.videoEl.element as HTMLVideoElement;
+        if (this.hls) {
+            this.hls.destroy();
+            this.hls = null;
+        }
+        if (Hls.isSupported()) {
+            this.hls = new Hls();
+            this.hls.loadSource(url);
+            this.hls.attachMedia(videoElement);
+        } else if (videoElement.canPlayType("application/vnd.apple.mpegurl")) {
+            videoElement.src = url;
+        }
+
+        videoElement.addEventListener("timeupdate", () => this.onTimeUpdate(videoElement));
+        videoElement.addEventListener("ended", () => this.onVideoEnded());
     }
 
     setTitulo(titulo: string) {
@@ -57,11 +84,93 @@ export default (app: App) => (new class extends Div {
         this.aulaId = aulaId
         const [avaliacao] = await app.repository.findOne("AulaAvaliacoes", { aulaId })
         if (avaliacao && avaliacao._id) this.ratingComponent.setRating(avaliacao.rating)
+        await this.loadProgress(aulaId)
+    }
+
+    // 3. Controle de progresso e conclusão
+    private async loadProgress(aulaId: string) {
+        const [conclusao] = await app.repository.findOne("AulaConclusoes", { aulaId })
+        if (conclusao && conclusao._id) {
+            this.updateProgressUI(conclusao.progresso)
+            if (conclusao.concluida) {
+                this.completed = true
+                this.showCompletionBadge()
+            }
+            const videoElement = this.videoEl.element as HTMLVideoElement;
+            if (!conclusao.concluida && conclusao.tempoAssistido > 0) {
+                videoElement.addEventListener("loadedmetadata", () => {
+                    videoElement.currentTime = conclusao.tempoAssistido;
+                }, { once: true })
+            }
+        }
+    }
+
+    private onTimeUpdate(videoElement: HTMLVideoElement) {
+        const { currentTime, duration } = videoElement;
+        if (!duration || duration === Infinity) return;
+
+        const progresso = currentTime / duration;
+        this.updateProgressUI(progresso);
+
+        if (!this.completed && progresso >= COMPLETION_THRESHOLD) {
+            this.completed = true;
+            this.markCompleted(currentTime, duration);
+        }
+
+        if (Math.abs(currentTime - this.lastSavedTime) >= SAVE_INTERVAL) {
+            this.lastSavedTime = currentTime;
+            this.saveProgress(currentTime, duration);
+        }
+    }
+
+    private onVideoEnded() {
+        this.updateProgressUI(1);
+        if (!this.completed) {
+            this.completed = true;
+            const videoElement = this.videoEl.element as HTMLVideoElement;
+            this.markCompleted(videoElement.duration, videoElement.duration);
+        }
+    }
+
+    private updateProgressUI(progresso: number) {
+        const pct = Math.min(Math.round(progresso * 100), 100);
+        (this.progressFill.element as HTMLElement).style.width = `${pct}%`;
+        this.progressLabel.text(`${pct}% concluído`);
+    }
+
+    private showCompletionBadge() {
+        (this.completionBadge.element as HTMLElement).style.display = "inline-block";
+    }
+
+    private async saveProgress(tempoAssistido: number, duracao: number) {
+        const aulaId = this.aulaId;
+        const progresso = tempoAssistido / duracao;
+        const [existing] = await app.repository.findOne("AulaConclusoes", { aulaId })
+        if (existing && existing._id) {
+            await app.repository.update("AulaConclusoes", existing._id, { tempoAssistido, progresso })
+        } else {
+            await app.repository.create("AulaConclusoes", { aulaId, tempoAssistido, duracao, progresso, concluida: false })
+        }
+    }
+
+    private async markCompleted(tempoAssistido: number, duracao: number) {
+        const aulaId = this.aulaId;
+        this.showCompletionBadge();
+        const [existing] = await app.repository.findOne("AulaConclusoes", { aulaId })
+        if (existing && existing._id) {
+            await app.repository.update("AulaConclusoes", existing._id, {
+                tempoAssistido, progresso: 1, concluida: true, concluidaEm: Date.now()
+            })
+        } else {
+            await app.repository.create("AulaConclusoes", {
+                aulaId, tempoAssistido, duracao, progresso: 1, concluida: true, concluidaEm: Date.now()
+            })
+        }
     }
 }).class(style.VideoPlayer_section).object(o => o.children(
-    // 3. Composição da Árvore DOM
+    // 4. Composição da Árvore DOM
     o.wrapper.children(
-        o.frame
+        o.videoEl
     ),
     o.info.children(
         o.titulo,
@@ -75,6 +184,11 @@ export default (app: App) => (new class extends Div {
                 o.subscribeBtn
             ) */
         ),
+        o.progressBar.children(
+            o.progressFill
+        ),
+        o.progressLabel,
+        o.completionBadge,
         o.ratingComponent,
         o.descBox.children(
             o.viewsInfo,
