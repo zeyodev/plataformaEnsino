@@ -3,6 +3,9 @@ import style from "./style.module.css";
 import iconSend from "icons/src/business_and_online_icons/iconSend";
 import iconMessageCircle from "icons/src/business_and_online_icons/iconMessageCircle";
 import App from "../../../app";
+import { renderMarkdown } from "./markdown";
+
+const AI_CHAT_URL =  "http://localhost:8000" // process.env.AI_CHAT_URL ||
 
 const acoesPredefinidas = [
     { label: "Precificar servico", prompt: "Me ajude a precificar um servico para meu cliente" },
@@ -13,22 +16,160 @@ const acoesPredefinidas = [
     { label: "Marketing digital", prompt: "Crie uma estrategia de marketing digital para meu negocio" },
 ]
 
+function generateThreadId(): string {
+    return crypto.randomUUID()
+}
+
 export default (app: App) => (new class AIChat extends Div {
     messages = div().class(style.messages)
     input = Z("input")
+    threadId = generateThreadId()
+    sending = false
 
     addMessage(text: string, sender: "user" | "ai") {
-        this.messages.children(
-            div().class(style.message, style[sender]).text(text)
-        )
+        const msg = div().class(style.message, style[sender])
+        if (sender === "ai") {
+            msg.HTML(renderMarkdown(text))
+        } else {
+            msg.text(text)
+        }
+        this.messages.children(msg)
+        this.scrollToBottom()
+        return msg
+    }
+
+    addStreamingMessage(): { element: HTMLElement, update: (text: string) => void } {
+        const msg = div().class(style.message, style.ai)
+        this.messages.children(msg)
+        let fullText = ""
+        return {
+            element: msg.element,
+            update: (chunk: string) => {
+                fullText += chunk
+                msg.HTML(renderMarkdown(fullText))
+                this.scrollToBottom()
+            }
+        }
+    }
+
+    scrollToBottom() {
         this.messages.element.scrollTop = this.messages.element.scrollHeight
+    }
+
+    async sendToServer(text: string) {
+        if (this.sending) return
+        this.sending = true
+
+        const stream = this.addStreamingMessage()
+
+        try {
+            const response = await fetch(`${AI_CHAT_URL}/api/chat`, {
+                method: "POST",
+                headers: {
+                    "Accept": "application/json",
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    message: text,
+                    thread_id: this.threadId,
+                    stream: true,
+                    model: "qwen/qwen3.5-flash-02-23",
+                    temperature: 0.7,
+                }),
+            })
+
+            if (!response.ok) {
+                stream.update("Desculpe, ocorreu um erro ao processar sua solicitacao.")
+                this.sending = false
+                return
+            }
+
+            const reader = response.body?.getReader()
+            if (!reader) {
+                stream.update("Desculpe, ocorreu um erro ao processar sua solicitacao.")
+                this.sending = false
+                return
+            }
+
+            const decoder = new TextDecoder()
+            let buffer = ""
+
+            while (true) {
+                const { done, value } = await reader.read()
+                if (done) break
+
+                buffer += decoder.decode(value, { stream: true })
+
+                const lines = buffer.split("\n")
+                buffer = lines.pop() || ""
+
+                for (const line of lines) {
+                    const trimmed = line.trim()
+                    if (!trimmed) continue
+
+                    if (trimmed.startsWith("data: ")) {
+                        const data = trimmed.slice(6)
+                        if (data === "[DONE]") continue
+                        try {
+                            const parsed = JSON.parse(data)
+                            const content = parsed.choices?.[0]?.delta?.content
+                                || parsed.content
+                                || parsed.text
+                                || parsed.delta
+                                || ""
+                            if (content) stream.update(content)
+                        } catch {
+                            stream.update(data)
+                        }
+                    } else {
+                        try {
+                            const parsed = JSON.parse(trimmed)
+                            const content = parsed.choices?.[0]?.delta?.content
+                                || parsed.content
+                                || parsed.text
+                                || parsed.delta
+                                || ""
+                            if (content) stream.update(content)
+                        } catch {
+                            // ignore unparseable lines
+                        }
+                    }
+                }
+            }
+
+            // process remaining buffer
+            if (buffer.trim()) {
+                const trimmed = buffer.trim()
+                if (trimmed.startsWith("data: ")) {
+                    const data = trimmed.slice(6)
+                    if (data !== "[DONE]") {
+                        try {
+                            const parsed = JSON.parse(data)
+                            const content = parsed.choices?.[0]?.delta?.content || parsed.content || parsed.text || parsed.delta || ""
+                            if (content) stream.update(content)
+                        } catch {
+                            stream.update(data)
+                        }
+                    }
+                }
+            }
+
+            // if nothing was streamed, show fallback
+            if (!stream.element.textContent?.trim()) {
+                stream.update("Nao foi possivel obter uma resposta.")
+            }
+        } catch (err) {
+            stream.update("Erro de conexao. Verifique se o servidor esta disponivel.")
+        }
+
+        this.sending = false
     }
 
     send(text: string) {
         if (!text.trim()) return
         this.addMessage(text, "user");
         (this.input.element as HTMLInputElement).value = ""
-        this.addMessage("Estou processando sua solicitacao...", "ai")
+        this.sendToServer(text)
     }
 
     setInitialQuery(query: string) {

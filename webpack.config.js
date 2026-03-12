@@ -50,5 +50,6 @@ export default {
         'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
         'process.env.SERVER_URL': JSON.stringify(process.env.SERVER_URL),
         'process.env.AUTH_SERVER_URL': JSON.stringify(process.env.AUTH_SERVER_URL),
+        'process.env.AI_CHAT_URL': JSON.stringify(process.env.AI_CHAT_URL),
     })],
 };
