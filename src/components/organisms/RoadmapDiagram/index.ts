@@ -157,15 +157,22 @@ export default class RoadmapDiagram extends Div {
             const toRect = toCard.element.getBoundingClientRect()
 
             if (fromFase && toFase && fromFase !== toFase) {
-                // Entre fases: lateral direita → topo da primeira etapa
+                // Entre fases: lateral direita → curva ampla → lateral esquerda
                 const startX = fromRect.right - containerRect.left
                 const startY = (fromRect.top + fromRect.height / 2) - containerRect.top
-                const endX = (toRect.left + toRect.width / 2) - containerRect.left
-                const endY = toRect.top - containerRect.top
+                const endX = toRect.left - containerRect.left
+                const endY = (toRect.top + toRect.height / 2) - containerRect.top
 
-                const d = `M ${startX} ${startY} C ${startX + 60} ${startY}, ${endX + 60} ${endY - 40}, ${endX} ${endY + arrowSize * 1.8}`
+                const margin = 30
+                const rightEdge = containerRect.width - margin
+                const leftEdge = margin
+                const midY = (startY + endY) / 2
+
+                const d = `M ${startX} ${startY} ` +
+                    `C ${rightEdge} ${startY}, ${rightEdge} ${midY}, ${(rightEdge + leftEdge) / 2} ${midY} ` +
+                    `C ${leftEdge} ${midY}, ${leftEdge} ${endY}, ${endX - arrowSize * 1.8} ${endY}`
                 this.drawPath(d, conn)
-                this.drawArrowDown(endX, endY, arrowSize, conn)
+                this.drawArrowRight(endX, endY, arrowSize, conn)
             } else {
                 // Dentro da fase: alternando baixo/cima
                 const faseEtapas = fromFase ? this.faseEtapaOrder.get(fromFase) : null
@@ -228,6 +235,19 @@ export default class RoadmapDiagram extends Div {
         const arrow = document.createElementNS("http://www.w3.org/2000/svg", "polygon")
         arrow.setAttribute("points",
             `${x},${y} ${x - size},${y + size * 1.8} ${x + size},${y + size * 1.8}`
+        )
+        arrow.style.fill = "var(--neutral-500)"
+        arrow.dataset.from = conn.from
+        arrow.dataset.to = conn.to
+        arrow.classList.add(style.connectionArrow)
+        this.svgOverlay.appendChild(arrow)
+        this.drawnArrows.push(arrow)
+    }
+
+    private drawArrowRight(x: number, y: number, size: number, conn: EtapaConnectionData) {
+        const arrow = document.createElementNS("http://www.w3.org/2000/svg", "polygon")
+        arrow.setAttribute("points",
+            `${x},${y} ${x - size * 1.8},${y - size} ${x - size * 1.8},${y + size}`
         )
         arrow.style.fill = "var(--neutral-500)"
         arrow.dataset.from = conn.from
