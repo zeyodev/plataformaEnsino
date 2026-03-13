@@ -19,20 +19,72 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 3rem;
 }
 
-.tier {
+.fase {
+    border: 1px solid var(--neutral-300);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    /* background: color-mix(in srgb, var(--background-100) 80%, transparent);
+    backdrop-filter: blur(6px); */
+}
+
+.faseHeader {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+}
+
+.faseIconContainer {
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.faseOrdem {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-400);
+}
+
+.faseTitulo {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text);
+    margin: 0;
+}
+
+.faseDescricao {
+    font-size: 0.875rem;
+    color: var(--text-400);
+    margin: 0 0 1.25rem 0;
+    line-height: 1.5;
+}
+
+.etapasContainer {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 2rem;
-    width: 100%;
-    margin-bottom: 4rem;
+    gap: 1.5rem;
 }
 
-.tier:last-child {
-    margin-bottom: 0;
-}
+/* Theme color variants for fase icon */
+.theme-blue { background: color-mix(in srgb, var(--primary) 20%, transparent); color: var(--primary-500); }
+.theme-purple { background: color-mix(in srgb, var(--accent) 20%, transparent); color: var(--accent-500); }
+.theme-indigo { background: color-mix(in srgb, var(--primary-700) 20%, transparent); color: var(--primary-400); }
+.theme-pink { background: color-mix(in srgb, var(--secondary) 20%, transparent); color: var(--secondary-500); }
+.theme-emerald { background: rgba(16, 185, 129, 0.2); color: #34d399; }
+.theme-orange { background: rgba(249, 115, 22, 0.2); color: #fb923c; }
+.theme-yellow { background: rgba(234, 179, 8, 0.2); color: #facc15; }
+.theme-teal { background: rgba(20, 184, 166, 0.2); color: #2dd4bf; }
+.theme-cyan { background: color-mix(in srgb, var(--primary-600) 20%, transparent); color: var(--primary-300); }
+.theme-rose { background: color-mix(in srgb, var(--secondary-700) 20%, transparent); color: var(--secondary-400); }
 
 .connectionPath {
     stroke-dasharray: 8;

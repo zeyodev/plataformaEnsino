@@ -18,11 +18,16 @@ export default class OptionJornadas extends Option {
             const [jornadas] = await this.app.repository.findMany("Jornadas", {})
             for (const [i, jornada] of jornadas.entries()) {
                 objectAbas.push(new Aba(jornada._id, jornada.titulo, jornada.icon, div().object(async o => {
-                    const [nodes] = await this.app.repository.findMany("JornadaNodes", { jornada: jornada._id })
-                    const [connections] = await this.app.repository.findMany("JornadaConnections", { jornada: jornada._id })
+                    const [fases] = await this.app.repository.findMany("Fases", { jornada: jornada._id })
+                    const [etapas] = await this.app.repository.findMany("Etapas", {})
+                    const [connections] = await this.app.repository.findMany("EtapaConnections", { jornada: jornada._id })
+
+                    const jornadaEtapas = etapas.filter((e: any) =>
+                        fases.some((f: any) => f._id === e.fase)
+                    )
 
                     const diagram = new RoadmapDiagram(this.app)
-                    diagram.setNodes(nodes)
+                    diagram.setFases(fases, jornadaEtapas)
                     diagram.setConnections(connections)
                     o.children(diagram)
                 }), i === 0))
