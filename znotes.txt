@@ -195,3 +195,5 @@ Cidade: monte mor sp
 
 De tarde eu tenho que fazer a parte do painel e o backend para pegar dinamicamente os dados 
 vou usar um banco mongodb
+
+criar um state Admin para ser o painel adiministrativo onde ser
