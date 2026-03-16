@@ -8,6 +8,7 @@ import OptionPilares from "../../options/pilares"
 import Aula from "../aula"
 import Admin from "../admin"
 import OptionEncontros from "../../options/encontros"
+import OptionConfiguracoes from "../../options/configuracoes"
 
 export default class Usuario extends State {
     name = "u"
@@ -27,7 +28,7 @@ export default class Usuario extends State {
             return window.history.back()
         }
         (async () => {
-            const { accessToken, refreshToken } = await context.app.refreshToken()
+            const accessToken = context.app.getAccessToken()!
 
             // Verifica com o servidor se o usuário é admin
             try {
@@ -49,6 +50,7 @@ export default class Usuario extends State {
                 new OptionJornadas(context.app),
                 new OptionPilares(context.app),
                 new OptionEncontros(context.app),
+                new OptionConfiguracoes(context.app),
             ], (option) => {
                 this.painel.subhandle(option)
             }, 0)

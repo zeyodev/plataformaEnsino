@@ -6,6 +6,7 @@ import OptionAdminJornadas from "../../options/admin-jornadas"
 import OptionAdminAulas from "../../options/admin-aulas"
 import OptionAdminPilares from "../../options/admin-pilares"
 import OptionAdminUsuarios from "../../options/admin-usuarios"
+import OptionConfiguracoes from "../../options/configuracoes"
 
 export default class Admin extends State {
     name = "admin"
@@ -23,8 +24,8 @@ export default class Admin extends State {
             return window.history.back()
         }
         (async () => {
-            const { accessToken, refreshToken } = await context.app.refreshToken()
-            context.app.setSocket(accessToken, refreshToken)
+            const accessToken = context.app.getAccessToken()!
+            context.app.setSocket(accessToken)
             context.setOnconnect()
             await context.app.socket.waitSocket()
 
@@ -33,6 +34,7 @@ export default class Admin extends State {
                 new OptionAdminAulas(context.app),
                 new OptionAdminPilares(context.app),
                 new OptionAdminUsuarios(context.app),
+                new OptionConfiguracoes(context.app),
             ], (option) => {
                 this.painel.subhandle(option)
             }, 0)

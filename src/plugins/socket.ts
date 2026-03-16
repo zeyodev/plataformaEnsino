@@ -17,12 +17,11 @@ export default function Socketio<Base extends ZeyoAppConstructor>(base: Base) {
             );
         }
 
-        setSocket(accessToken: string, refreshToken: string) {
+        setSocket(accessToken: string) {
             if(this.socket.connected) return console.log("já conectado")
-            this.socket = SocketIO(process.env.SERVER_URL || "https://backend.metaorg.app", {
+            this.socket = SocketIO(window.location.origin, {
                 auth: {
-                    accessToken,
-                    refreshToken
+                    accessToken
                 }
             })
             const socket = this.socket.connect()

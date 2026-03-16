@@ -19,7 +19,7 @@ export class Mongodb {
         /** @type {MongoClient} */
         this.mongoclient = new MongoClient(url, { maxConnecting: 20, maxPoolSize: 20 });
         /** @type {import("mongodb").Db} */
-        this.db = this.mongoclient.db("metaorg");
+        this.db = this.mongoclient.db("duoacademy");
     }
 }
 

@@ -37,7 +37,7 @@ export default class FormCreateUsuario extends Form {
     async onSubmit() {
         const data = this.getDataFromFields();
         await this.app.repository.create("Usuarios", data)
-        fetch("http://localhost:5000/registrar", {
+        fetch(`${window.location.origin}/registrar`, {
             method: 'POST',
             headers:{
                 'Content-Type':  'application/json'

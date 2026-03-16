@@ -13,8 +13,8 @@ export default class Root extends State {
         const page = new this.page(context.app)
         context.app.root.appendChild(page.element)
         if (!context.app.naoEstaAutenticado()){
+            this.login(context)
         }
-        this.login(context)
     }
 
     commands = { "login": this.login }

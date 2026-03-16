@@ -37,7 +37,6 @@ export default class Aula extends State {
             return window.history.back()
         }
         (async () => {
-            await context.app.refreshToken()
             this.painel.sideNav.setInfo([
                 new OptionPlayer(context.app, this.aula),
                 new OptionArquivos(context.app, this.aula),

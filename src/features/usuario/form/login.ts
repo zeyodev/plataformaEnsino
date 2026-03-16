@@ -22,7 +22,7 @@ export default class FormLogin extends Form {
     async onSubmit() {
         const data = this.getDataFromFields();
         console.log(data);
-        const tokens = await this.app.autentica(data)
-        this.app.context.action("login", tokens)
+        const result = await this.app.autentica(data as { email: string; senha: string })
+        this.app.context.action("login", result)
     }
 }
