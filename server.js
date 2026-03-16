@@ -1,8 +1,10 @@
 import express from 'express';
 import path from 'path';
 import http from 'http';
+import crypto from 'crypto';
 import 'dotenv/config';
 import jwt from 'jsonwebtoken';
+import argon2 from 'argon2';
 import { Server } from 'socket.io';
 import { Mongodb } from './backend/repository/mongodb.js';
 import RepositoryMongoDB from './backend/repository/mongodb.js';
@@ -44,19 +46,75 @@ app.get('/admin/verify', (req, res) => {
     });
 });
 
+// --- Helpers LGPD ---
+const pepper = process.env.PEPPER || '';
+
+function hashPII(value) {
+    return crypto.createHmac('sha256', pepper).update(value).digest('hex');
+}
+
+async function hashSenha(senha) {
+    const peppered = senha + pepper;
+    return argon2.hash(peppered, { type: argon2.argon2id });
+}
+
+async function verificarSenha(hash, senha) {
+    const peppered = senha + pepper;
+    return argon2.verify(hash, peppered);
+}
+
 // --- Registro de usuário ---
 app.post('/registrar', async (req, res) => {
     const data = req.body;
     if (!data.email || !data.senha) {
         return res.status(400).json({ error: 'Email e senha são obrigatórios' });
     }
-    const [existing] = await repository.findOne('Usuarios', { email: data.email });
+
+    const emailHash = hashPII(data.email);
+    const [existing] = await repository.findOne('Usuarios', { emailHash });
     if (existing) {
         return res.status(409).json({ error: 'Usuário já existe' });
     }
-    const [result, err] = await repository.create('Usuarios', { ...data, role: 'user' });
+
+    const senhaHash = await hashSenha(data.senha);
+    const { senha, ...resto } = data;
+
+    const usuario = {
+        ...resto,
+        nome: resto.nome ? hashPII(resto.nome) : undefined,
+        email: hashPII(data.email),
+        emailHash,
+        senhaHash,
+        role: 'user',
+    };
+
+    const [result, err] = await repository.create('Usuarios', usuario);
     if (err) return res.status(500).json({ error: 'Erro ao criar usuário' });
-    res.status(201).json(result);
+    res.status(201).json({ _id: result._id, role: result.role });
+});
+
+// --- Login ---
+app.post('/login', async (req, res) => {
+    const { email, senha } = req.body;
+    if (!email || !senha) {
+        return res.status(400).json({ error: 'Email e senha são obrigatórios' });
+    }
+
+    const emailHash = hashPII(email);
+    const [usuario, notFound] = await repository.findOne('Usuarios', { emailHash });
+    if (notFound || !usuario) {
+        return res.status(401).json({ error: 'Credenciais inválidas' });
+    }
+
+    const senhaValida = await verificarSenha(usuario.senhaHash, senha);
+    if (!senhaValida) {
+        return res.status(401).json({ error: 'Credenciais inválidas' });
+    }
+
+    const secret = process.env.ACCESS_TOKEN_SECRET || '';
+    const accessToken = jwt.sign({ _id: usuario._id, role: usuario.role }, secret, { expiresIn: '7d' });
+
+    res.json({ accessToken, usuario: { _id: usuario._id, role: usuario.role } });
 });
 
 // --- SPA fallback ---

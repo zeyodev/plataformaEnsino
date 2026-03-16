@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/zeyodev/blank#readme",
   "dependencies": {
+    "argon2": "^0.44.0",
     "axios": "^1.7.7",
     "chart.js": "^4.4.1",
     "dotenv": "^16.4.4",
