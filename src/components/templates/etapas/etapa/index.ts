@@ -6,7 +6,7 @@ import iconPlus from "icons/src/business_and_online_icons/iconPlus";
 import cardTitleDescription from "../../../molecules/cardTitleDescription";
 import Modal from "../../../../states/Modal";
 import modal from "../../../molecules/modal";
-import FormFactoryCreateForm from "../../../../features/formulario/form/factory/create";
+//import FormFactoryCreateForm from "../../../../features/formulario/form/factory/create";
 
 export default (app: App, etapa: any, componente: any) => (new class extends Div {
     colecao = ""
@@ -53,8 +53,8 @@ export default (app: App, etapa: any, componente: any) => (new class extends Div
                 const [form, err] = await app.repository.findOne("Formularios", {_id: acao.formulario})
                 console.log(form, err)
                 if (err ||!form) return
-                app.context.setState(Modal("criando", modal(app, new FormFactoryCreateForm(app, form, etapa, colecao))))
-                app.context.handle()
+                /* app.context.setState(Modal("criando", modal(app, new FormFactoryCreateForm(app, form, etapa, colecao))))
+                app.context.handle() */
             })
         ),
         div().class("d-grid", "gap-g", style.lista).object(async o => {

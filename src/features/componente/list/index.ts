@@ -1,7 +1,7 @@
 import { Zeyo } from "zeyo";
 import App from "../../../app";
 import FormUpdateComponente from "../form/update";
-import etapas from "../form/updates/etapas";
+//import etapas from "../form/updates/etapas";
 
 interface Componente {
     key: string;
@@ -11,7 +11,7 @@ interface Componente {
 export default class Componentes {
     static list: {[key: string]: Componente} = {
         "agenda": {key: "agenda", name: "Agenda", config: (app, etapa) => new FormUpdateComponente(app, etapa)},
-        "etapas": {key: "etapas", name: "Etapas", config: etapas},
+        //"etapas": {key: "etapas", name: "Etapas", config: etapas},
         "lista": {key: "lista", name: "Lista", config: (app, etapa) => new FormUpdateComponente(app, etapa)},
         "painel": {key: "painel", name: "Painel", config: (app, etapa) => new FormUpdateComponente(app, etapa)},
         "ai": {key: "ai", name: "IA", config: (app, etapa) => new FormUpdateComponente(app, etapa)},

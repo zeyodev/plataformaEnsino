@@ -9,8 +9,9 @@ import Abas from "../../../abas";
 import Aba from "../../../abas/aba";
 import iconMessageCircle from "icons/src/business_and_online_icons/iconMessageCircle";
 import twoColumnsConfig from "../../../../molecules/twoColumnsConfig";
-import FormFactoryCreateForm from "../../../../../features/formulario/form/factory/create";
+/* import FormFactoryCreateForm from "../../../../../features/formulario/form/factory/create";
 import FormFactoryUpdateForm from "../../../../../features/formulario/form/factory/update";
+ */
 import CRUD from "../../../CRUD";
 
 // TODO: mostra no card as informacoes do contato se o contato nao tiver a info entao mostra do chat
@@ -42,14 +43,14 @@ export default (app: App, chat: any) => (new class extends Div {
                         const [formularioCreate] = await app.repository.findOne("Formularios", { colecao: colecao._id, tipo: "create", titulo: "Novo Atendimento Cliente" })
                         const [formularioUpdate] = await app.repository.findOne("Formularios", { colecao: colecao._id, tipo: "update" })
 
-                        a.componente.children(CRUD(app, "Atendimentos", { create: "Novo Agendamento" }, {
+                        /* a.componente.children(CRUD(app, "Atendimentos", { create: "Novo Agendamento" }, {
                             create: new FormFactoryCreateForm(app, formularioCreate, contato, colecao),
                             read: {cliente: contato._id},
                             update: (app, obj) => {
                                 console.log(obj)
                                 return new FormFactoryUpdateForm(app, formularioUpdate, obj, colecao)
                             }
-                        }, {"servico/Servicos.nome": "string", data: "date", "profissional/Profissionais.nome": "string"}))
+                        }, {"servico/Servicos.nome": "string", data: "date", "profissional/Profissionais.nome": "string"})) */
                     }))
                     .push(new Aba("comandas", "Comandas", "iconFileText", div("lista de comandas")))
                     .push(new Aba("lembretes", "Lembretes", "iconBell", div("lista de Lembretes a serem enviados"))),
@@ -71,9 +72,9 @@ export default (app: App, chat: any) => (new class extends Div {
                     const [colecao] = await app.repository.findOne("Colecoes", { nome: "Contatos" })
                     const [formulario] = await app.repository.findOne("Formularios", { colecao: colecao._id, })
                     contato.nome = contato.nome && !(contato.nome as string).startsWith("+") ? contato.nome : chat.formattedTitle.startsWith("+") ? "" : chat.formattedTitle
-                    o.children(
+                    /* o.children(
                         new FormFactoryUpdateForm(app, formulario, contato, colecao)
-                    )
+                    ) */
                 })
             )
             ))).handle()

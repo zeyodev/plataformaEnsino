@@ -6,8 +6,8 @@ import iconPlus from "icons/src/business_and_online_icons/iconPlus";
 import modal from "../../molecules/modal";
 import Modal from "../../../states/Modal";
 import CRUD from "../../organisms/CRUD";
-import FormFactoryCreateForm from "../../../features/formulario/form/factory/create";
-import update from "../../../features/formulario/form/update";
+/* import FormFactoryCreateForm from "../../../features/formulario/form/factory/create";
+import update from "../../../features/formulario/form/update"; */
 
 export default (app: App, componente: any) => (new class extends Div {
     gotError = false;
@@ -33,8 +33,8 @@ export default (app: App, componente: any) => (new class extends Div {
     const [colecao, err] = await app.repository.findOne("Colecoes", { _id: componente.colecao })
     const [formulario] = await app.repository.findOne("Formularios", { colecao: colecao._id })
     // TODO: precisa ter um buscador de documentos na lista 
-    o.children(CRUD(app, colecao.nome, { create: formulario.titulo }, {
+    /* o.children(CRUD(app, colecao.nome, { create: formulario.titulo }, {
         create: new FormFactoryCreateForm(app, formulario, colecao, colecao),
         update: (app, obj) => update(app, obj)
-    }, { nome: "string" }))
+    }, { nome: "string" })) */
 })

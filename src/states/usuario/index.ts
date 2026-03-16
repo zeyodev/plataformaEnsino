@@ -1,11 +1,12 @@
+declare const process: { env: { [key: string]: string } }
 import State from ".."
 import Context from "../context"
 import Z, { div, h2 } from "zeyo"
-import Organizacao from "../../features/organizacao"
 import painelNav, { PainelNav } from "../../components/templates/painelNav"
 import OptionJornadas from "../../options/jornadas"
 import OptionPilares from "../../options/pilares"
 import Aula from "../aula"
+import Admin from "../admin"
 import OptionEncontros from "../../options/encontros"
 
 export default class Usuario extends State {
@@ -26,8 +27,24 @@ export default class Usuario extends State {
             return window.history.back()
         }
         (async () => {
-            // TODO: Refresh Token não está funcionando quando a sessao passa para o dia seguinte ao religar computador
             const { accessToken, refreshToken } = await context.app.refreshToken()
+
+            // Verifica com o servidor se o usuário é admin
+            try {
+                const serverUrl = (process.env.SERVER_URL as string) || window.location.origin
+                const res = await fetch(`${serverUrl}/admin/verify`, {
+                    headers: { 'Authorization': `Bearer ${accessToken}` }
+                })
+                const { isAdmin } = await res.json()
+                if (isAdmin) {
+                    context.setState(new Admin())
+                    context.handle()
+                    return
+                }
+            } catch (err) {
+                console.log("Erro ao verificar admin:", err)
+            }
+
             this.painel.sideNav.setInfo([
                 new OptionJornadas(context.app),
                 new OptionPilares(context.app),
@@ -35,17 +52,10 @@ export default class Usuario extends State {
             ], (option) => {
                 this.painel.subhandle(option)
             }, 0)
-            /* context.app.setSocket(accessToken, refreshToken)
-            context.setOnconnect();
-            await context.app.socket.waitSocket()
-            context.app.setSyncronizer(context.app.repository, context.app.socket) */
         })();
     }
-    
+
     commands = {
-        "organizacao": async (context: Context, organizacao: Organizacao) => {
-            
-        },
 
         "assistir": async (context: Context, aula: any) => {
             console.log("abrindo aula", aula)
@@ -54,7 +64,7 @@ export default class Usuario extends State {
     }
 
     prerequisite(context: Context): boolean {
-        const token = localStorage.getItem("token")
+        const token = localStorage.getItem("accessToken")
         if (!token) return false;
         return true
     }

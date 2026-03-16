@@ -196,4 +196,23 @@ Cidade: monte mor sp
 De tarde eu tenho que fazer a parte do painel e o backend para pegar dinamicamente os dados 
 vou usar um banco mongodb
 
-criar um state Admin para ser o painel adiministrativo onde ser
+
+Faça a implementação do backend para gerenciar a plataform de ensino Duo Academy
+o Backend deve se conectar com o usuario admin via webhook socket.io já com os usuarios normais deve usar http restfull
+os dados vão ficar armazenados no mongodb a variavel de ambinente é DB_URL
+a conexao via Socket.io só deve ser feita no State Admin 
+Transforme os arquivos do backend para javascript pois peguei esses arquivos de outro projeto, use jsDoc
+
+criar um state Admin para ser o painel adiministrativo ele deve sequir o pradrão de options do Aulas
+o usuario só deverá ser redirecionado para o state Admin quando o servidor confirmar que o usuario é admin
+o state usuario deve fazer essa verificação com o servidor
+o servidor é o proprio @server.js então ele deve lidar com isso 
+
+baseado nos documentos no @src/states/memory.ts crie uma feature na pasta features para cada coleção
+a forma basica das features tem que ser organizadas como 
+features/
+    my-feature/
+        form/
+            create.ts
+            update.ts
+        featureInterface.ts

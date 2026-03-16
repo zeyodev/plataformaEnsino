@@ -3,7 +3,7 @@ import App from "../../../app";
 import TemplatePainel from "../../molecules/painel";
 //import SideNavDinamico from "../sideNav/dinamico";
 import dinamico from "../sideNav/dinamico";
-import database from "../../../options/database";
+//import database from "../../../options/database";
 import headerBetween from "../../molecules/headerBetween";
 import Option from "../../../options";
 import menubar from "../../atoms/menubar";
@@ -20,7 +20,7 @@ export default (app: App) => (new class extends TemplatePainel {
 }).object(o => o.children(
     div(
         dinamico(app, [
-            database(app, ({} as any))
+            //database(app, ({} as any))
         ], (option) => {
             o.subhandle(option)
         }).class(o.style.navigation)
