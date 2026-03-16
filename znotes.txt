@@ -190,3 +190,8 @@ Email: financeirostudiojeffersonbraz@gmail.com
 Endereço: av Luiz Gonzaga do Nascimento 1081 jd alvorada 
 CEP: 13198516
 Cidade: monte mor sp 
+
+
+
+De tarde eu tenho que fazer a parte do painel e o backend para pegar dinamicamente os dados 
+vou usar um banco mongodb

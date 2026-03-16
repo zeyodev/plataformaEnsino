@@ -4,8 +4,7 @@ import Trigger from "./Trigger";
 export default class RepositoryApiSQL extends Trigger implements Repository {
     methodsMap: { [key: string]: any; } = {};
     
-    url: string = "https://lembrarloei.automalu.com/api"
-    //url: string = "http://localhost:41062/www/api"
+    url: string = `${window.location.origin}/api`
     
     msgId() {
         return new Array(25).join("0").replace(/[018]/g, (c: any) =>

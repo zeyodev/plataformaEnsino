@@ -9334,7 +9334,19 @@ let data: { [key: string]: any[] } = {
     ],
     Jornadas: [
         { _id: "business", titulo: "Business Mastery Roadmap", descricao: "An interactive guide to learning business from the ground up. Hover over any topic to see its connections and dependencies.", icon: "iconTrendingUp" },
-        { _id: "leadership", titulo: "Leadership & Management", descricao: "A structured path to becoming an effective leader, from self-management to guiding large organizations.", icon: "iconUsers" }
+        { _id: "leadership", titulo: "Leadership & Management", descricao: "A structured path to becoming an effective leader, from self-management to guiding large organizations.", icon: "iconUsers" },
+        {
+    "_id": "jornada-gestao-salao-distancia",
+    "titulo": "Gestão Eficaz do Salão de Beleza à Distância",
+    "descricao": "Uma jornada para proprietários de salões de beleza que precisam gerenciar seus negócios remotamente, garantindo lucratividade e controle, mesmo com afastamento médico.",
+    "icon": "iconBriefcase"
+  },
+        {
+            _id: "transformacao-salao-lucrativo",
+            titulo: "Transformação do Salão Lucrativo",
+            descricao: "Jornada completa para dobrar o faturamento, melhorar a precificação, otimizar a gestão administrativa e criar uma cultura de vendas de alta performance no seu salão de beleza.",
+            icon: "iconTrendingUp"
+        }
     ],
     JornadaNodes: [
         // Business nodes
@@ -9433,6 +9445,58 @@ let data: { [key: string]: any[] } = {
         { _id: "fase-autoconhecimento", jornada: "leadership", ordem: 1, titulo: "Autoconhecimento e Fundamentos", descricao: "Desenvolver inteligência emocional, gestão de tempo e autoconhecimento profundo como base da liderança.", icon: "iconUser", theme: "blue" },
         { _id: "fase-comunicacao", jornada: "leadership", ordem: 2, titulo: "Comunicação e Relacionamento", descricao: "Dominar escuta ativa, oratória e resolução de conflitos para liderar com eficácia.", icon: "iconMessageCircle", theme: "purple" },
         { _id: "fase-equipe", jornada: "leadership", ordem: 3, titulo: "Formação e Gestão de Equipes", descricao: "Motivar, delegar e construir segurança psicológica para equipes de alto desempenho.", icon: "iconUsers", theme: "teal" },
+        //
+        {
+      "_id": "fase-1-desafios-e-prioridades",
+      "jornada": "jornada-gestao-salao-distancia",
+      "ordem": 1,
+      "titulo": "Entendendo os Desafios e Definindo Prioridades",
+      "descricao": "Mapear as principais dificuldades na gestão remota e estabelecer as prioridades para garantir a continuidade e o sucesso do salão.",
+      "icon": "iconShield",
+      "theme": "rose"
+    },
+    {
+      "_id": "fase-2-legalidade-e-contabilidade",
+      "jornada": "jornada-gestao-salao-distancia",
+      "ordem": 2,
+      "titulo": "Legalidade e Contabilidade: Protegendo seu Negócio",
+      "descricao": "Compreender a Lei do Salão Parceiro e garantir a conformidade legal e contábil, minimizando riscos trabalhistas e de tributação.",
+      "icon": "iconDollarSign",
+      "theme": "amber"
+    },
+    {
+      "_id": "fase-3-financas-e-planejamento",
+      "jornada": "jornada-gestao-salao-distancia",
+      "ordem": 3,
+      "titulo": "Planejamento Financeiro e Controle de Custos",
+      "descricao": "Estabelecer um plano financeiro sólido, controlar os custos operacionais e garantir a rentabilidade do salão, mesmo à distância.",
+      "icon": "iconTarget",
+      "theme": "emerald"
+    },
+    {
+      "_id": "fase-4-marketing-digital-e-atendimento",
+      "jornada": "jornada-gestao-salao-distancia",
+      "ordem": 4,
+      "titulo": "Marketing Digital e Atendimento ao Cliente Remoto",
+      "descricao": "Implementar estratégias de marketing digital para atrair e fidelizar clientes, e otimizar o atendimento ao cliente à distância.",
+      "icon": "iconHeart",
+      "theme": "cyan"
+    },
+    {
+      "_id": "fase-5-equipe-e-gestao-remota",
+      "jornada": "jornada-gestao-salao-distancia",
+      "ordem": 5,
+      "titulo": "Gestão de Equipe Remota e Produtividade",
+      "descricao": "Gerenciar a equipe à distância, promover a comunicação, o engajamento e a produtividade, garantindo um ambiente de trabalho positivo.",
+      "icon": "iconUsers",
+      "theme": "blue"
+    },
+        // Transformação do Salão Lucrativo
+        { _id: "fundacao-financeira", jornada: "transformacao-salao-lucrativo", ordem: 1, titulo: "Fundação Financeira e Precificação", descricao: "Entenda a estrutura financeira, custos e precificação para garantir margem de lucro saudável e capital de giro suficiente.", icon: "iconShield", theme: "rose" },
+        { _id: "estrategia-comercial", jornada: "transformacao-salao-lucrativo", ordem: 2, titulo: "Estratégia Comercial e Captação de Clientes", descricao: "Desenvolva técnicas de vendas, marketing e estratégias de atração para aumentar a agenda e reduzir a volatilidade de faturamento.", icon: "iconTarget", theme: "blue" },
+        { _id: "operacoes-ferramentas", jornada: "transformacao-salao-lucrativo", ordem: 3, titulo: "Operações e Ferramentas de Controle", descricao: "Implemente rotinas administrativas, controle de estoque e ferramentas de suporte para ganhar eficiência e liberar tempo para a estratégia.", icon: "iconTool", theme: "emerald" },
+        { _id: "gestao-pessoas-cultura", jornada: "transformacao-salao-lucrativo", ordem: 4, titulo: "Gestão de Pessoas e Cultura de Vendas", descricao: "Alinhe a equipe, crie plano de carreira, metas e indicadores, e desenvolva uma cultura de vendas e engajamento.", icon: "iconUsers", theme: "purple" },
+        { _id: "planejamento-expansao", jornada: "transformacao-salao-lucrativo", ordem: 5, titulo: "Planejamento Estratégico e Expansão", descricao: "Estruture o plano de negócios, análise de viabilidade e passos para expansão física com segurança financeira.", icon: "iconFlag", theme: "amber" }
     ],
     Etapas: [
         // Fase 1 - Blindagem Jurídica e Tributária
@@ -9463,6 +9527,128 @@ let data: { [key: string]: any[] } = {
         { _id: "etapa-motivacao", fase: "fase-equipe", ordem: 1, aula: "aula-team-1", titulo: "Motivação e Engajamento", motivo: "Como motivar e engajar sua equipe para alto desempenho." },
         { _id: "etapa-delegacao", fase: "fase-equipe", ordem: 2, aula: "aula-team-2", titulo: "Delegação Eficaz", motivo: "Delegando tarefas sem perder qualidade e construindo segurança psicológica." },
         { _id: "etapa-visao", fase: "fase-equipe", ordem: 3, aula: "aula-vis-1", titulo: "Visão Estratégica", motivo: "Definição de direção, alinhamento de objetivos e inspiração de ação coletiva." },
+        //
+        //
+        {
+      "_id": "etapa-1-desafios-e-prioridades-1",
+      "fase": "fase-1-desafios-e-prioridades",
+      "ordem": 1,
+      "aula": "Aula - Apresentação.md",
+      "titulo": "Entendendo a Situação Atual",
+      "motivo": "Apresentação inicial para contextualizar a jornada e identificar os principais desafios da gestão remota."
+    },
+    {
+      "_id": "etapa-1-desafios-e-prioridades-2",
+      "fase": "fase-1-desafios-e-prioridades",
+      "ordem": 2,
+      "aula": "Aula 01 - Definição de propósito e planejamento estratétic método Canva.md",
+      "titulo": "Definindo o Propósito do Salão",
+      "motivo": "Estabelecer o propósito do salão como base para tomada de decisões e estratégias de gestão."
+    },
+    {
+      "_id": "etapa-2-legalidade-e-contabilidade-1",
+      "fase": "fase-2-legalidade-e-contabilidade",
+      "ordem": 1,
+      "aula": "Aula 01 - Introdução.md",
+      "titulo": "Fundamentos da Lei do Salão Parceiro",
+      "motivo": "Introdução aos conceitos básicos da Lei do Salão Parceiro e seus impactos na gestão do salão."
+    },
+    {
+      "_id": "etapa-2-legalidade-e-contabilidade-2",
+      "fase": "fase-2-legalidade-e-contabilidade",
+      "ordem": 2,
+      "aula": "Aula 01 - Recrutamento e Seleção de Pessoas.md",
+      "titulo": "Contratação e Aspectos Legais",
+      "motivo": "Garantir a conformidade legal na contratação de profissionais e evitar riscos trabalhistas."
+    },
+    {
+      "_id": "etapa-3-financas-e-planejamento-1",
+      "fase": "fase-3-financas-e-planejamento",
+      "ordem": 1,
+      "aula": "Aula 02 - Pilar de Vendas.md",
+      "titulo": "Análise de Custos e Precificação",
+      "motivo": "Entender os custos operacionais e definir a precificação dos serviços para garantir a rentabilidade do salão."
+    },
+    {
+      "_id": "etapa-3-financas-e-planejamento-2",
+      "fase": "fase-3-financas-e-planejamento",
+      "ordem": 2,
+      "aula": "Aula 02 - Primeiro contato.md",
+      "titulo": "Planejamento Financeiro Estratégico",
+      "motivo": "Criar um plano financeiro estratégico para o salão, incluindo projeções de receita, despesas e fluxo de caixa."
+    },
+    {
+      "_id": "etapa-4-marketing-digital-e-atendimento-1",
+      "fase": "fase-4-marketing-digital-e-atendimento",
+      "ordem": 1,
+      "aula": "Aula 02 - Pilar de Vendas.md",
+      "titulo": "Estratégias de Marketing Digital",
+      "motivo": "Implementar estratégias de marketing digital para atrair e fidelizar clientes, como redes sociais e e-mail marketing."
+    },
+    {
+      "_id": "etapa-4-marketing-digital-e-atendimento-2",
+      "fase": "fase-4-marketing-digital-e-atendimento",
+      "ordem": 2,
+      "aula": "Aula 02 - Tutoria - Recrutamento e seleção de pessoas 15042024.md",
+      "titulo": "Atendimento ao Cliente Remoto",
+      "motivo": "Otimizar o atendimento ao cliente à distância, utilizando ferramentas de comunicação online e oferecendo um atendimento personalizado."
+    },
+    {
+      "_id": "etapa-5-equipe-e-gestao-remota-1",
+      "fase": "fase-5-equipe-e-gestao-remota",
+      "ordem": 1,
+      "aula": "Aula 02 - Pilar de Vendas.md",
+      "titulo": "Gestão de Equipe Remota",
+      "motivo": "Implementar estratégias de gestão de equipe remota, como comunicação eficaz, feedback e reconhecimento."
+    },
+    {
+      "_id": "etapa-5-equipe-e-gestao-remota-2",
+      "fase": "fase-5-equipe-e-gestao-remota",
+      "ordem": 2,
+      "aula": "Aula 02 - Tutoria - Vendas 29042024.md",
+      "titulo": "Cultura de Confiança e Colaboração",
+      "motivo": "Promover uma cultura de confiança e colaboração entre os membros da equipe, mesmo à distância."
+    },
+        // Transformação do Salão Lucrativo - Fase: Fundação Financeira
+        { _id: "etapa-estrutura-financeira", fase: "fundacao-financeira", ordem: 1, aula: "Aula 4 - Estrutura Financeira.md", titulo: "Entendendo a Estrutura Financeira do Salão", motivo: "Fornece os fundamentos para saber se o salão gera lucro, qual a margem atual e quais são os indicadores financeiros essenciais." },
+        { _id: "etapa-ponto-equilibrio", fase: "fundacao-financeira", ordem: 2, aula: "Aula 5 - Estrutura Financeira Parte 2.md", titulo: "Ponto de Equilíbrio e Capital de Giro", motivo: "Ensina a calcular o ponto de equilíbrio e a importância de manter capital de giro para evitar a volatilidade de caixa." },
+        { _id: "etapa-custo-produtos", fase: "fundacao-financeira", ordem: 3, aula: "Aula 9 - Custo de Produtos.md", titulo: "Mapeamento dos Custos de Produtos", motivo: "Ajuda a detalhar custos fixos e variáveis dos serviços, essencial para precificação correta." },
+        { _id: "etapa-precificacao-parte-1", fase: "fundacao-financeira", ordem: 4, aula: "Aula 10 - Precificação Parte 1.md", titulo: "Fundamentos da Precificação", motivo: "Apresenta a lógica de formação de preço baseada em custos e valor percebido, corrigindo preços subestimados." },
+        { _id: "etapa-precificacao-parte-2", fase: "fundacao-financeira", ordem: 5, aula: "Aula 11 - Precificação Parte 2.md", titulo: "Montagem da Tabela de Preços", motivo: "Ensina a montar a tabela de preços alinhada ao custo real e à margem desejada, aumentando a lucratividade." },
+        { _id: "etapa-capital-giro", fase: "fundacao-financeira", ordem: 6, aula: "Aula 7 - Capital de Giro.md", titulo: "Construindo e Gerindo o Capital de Giro", motivo: "Mostra como planejar recursos financeiros para cobrir despesas mensais e evitar a necessidade de injetar capital emergencialmente." },
+        // Transformação do Salão Lucrativo - Fase: Estratégia Comercial
+        { _id: "etapa-estrategias-captar-clientes", fase: "estrategia-comercial", ordem: 1, aula: "Estratégias para captar novos clientes.md", titulo: "Estratégias de Captação de Clientes", motivo: "Apresenta múltiplas táticas além das redes sociais, reduzindo a dependência de um único canal de aquisição." },
+        { _id: "etapa-marketing-basico", fase: "estrategia-comercial", ordem: 2, aula: "Aula 03 - Marketing.md", titulo: "Fundamentos de Marketing para Salões", motivo: "Define posicionamento, público‑alvo e canais de comunicação para atrair clientes de forma consistente." },
+        { _id: "etapa-marketing-parte-1", fase: "estrategia-comercial", ordem: 3, aula: "Aula 21 - Marketing Parte 1.md", titulo: "Marketing Parte 1 – Comunicação e Relacionamento", motivo: "Ensina a criar mensagens que convertem e a manter relacionamento ativo com a base de clientes." },
+        { _id: "etapa-marketing-parte-2", fase: "estrategia-comercial", ordem: 4, aula: "Aula 22 - Marketing Parte 2.md", titulo: "Marketing Parte 2 – Estratégias no Instagram", motivo: "Aprofunda o uso do Instagram como ferramenta de captação, otimizando tempo e criatividade." },
+        { _id: "etapa-marketing-parte-3", fase: "estrategia-comercial", ordem: 5, aula: "Aula 23 - Marketing Parte 3.md", titulo: "Marketing Parte 3 – Endomarketing e Estratégias Offline", motivo: "Complementa o digital com ações internas e offline que aumentam a frequência e o ticket médio." },
+        { _id: "etapa-vendas-basico", fase: "estrategia-comercial", ordem: 6, aula: "Aula 01 - Vendas.md", titulo: "Fundamentos da Área Comercial", motivo: "Mostra como a venda é o motor do faturamento e introduz a mentalidade comercial para toda a equipe." },
+        { _id: "etapa-upsell-servicos", fase: "estrategia-comercial", ordem: 7, aula: "Aula 21 - Vendas Upsell de Serviços.md", titulo: "Upsell de Serviços", motivo: "Ensina a aumentar o ticket médio oferecendo serviços complementares no momento da marcação." },
+        { _id: "etapa-fechamento-vendas", fase: "estrategia-comercial", ordem: 8, aula: "Aula 22 - Vendas Fechamento de Vendas.md", titulo: "Fechamento de Vendas", motivo: "Capacita a recepcionista e a equipe a concluir a venda de forma eficaz, aumentando a taxa de conversão." },
+        { _id: "etapa-tecnica-vendas-1", fase: "estrategia-comercial", ordem: 9, aula: "Aula 24 - Técnica de vendas Parte 1.md", titulo: "Técnicas de Vendas – Parte 1", motivo: "Apresenta o processo de venda estruturado, essencial para padronizar a abordagem comercial." },
+        { _id: "etapa-tecnica-vendas-2", fase: "estrategia-comercial", ordem: 10, aula: "Aula 25 - Técnicas de Vendas Parte 2.md", titulo: "Técnicas de Vendas – Parte 2", motivo: "Aprofunda técnicas de persuasão e negociação para melhorar a taxa de fechamento." },
+        { _id: "etapa-tecnica-vendas-3", fase: "estrategia-comercial", ordem: 11, aula: "Aula 26 - Técnicas de Vendas Parte 3.md", titulo: "Técnicas de Vendas – Parte 3", motivo: "Trata da gestão emocional e da construção de relacionamento de longo prazo com o cliente." },
+        // Transformação do Salão Lucrativo - Fase: Operações e Ferramentas
+        { _id: "etapa-rotinas-administrativas", fase: "operacoes-ferramentas", ordem: 1, aula: "Aula 23 - Rotinas Administrativas.md", titulo: "Rotinas Administrativas do Salão", motivo: "Define processos claros para reduzir sobrecarga e permitir delegação eficaz das tarefas operacionais." },
+        { _id: "etapa-controle-estoque", fase: "operacoes-ferramentas", ordem: 2, aula: "Aula 15 - Controle de Estoque Parte 1.md", titulo: "Controle de Estoque – Parte 1", motivo: "Ensina a organizar insumos e produtos, evitando perdas e melhorando a margem de lucro." },
+        { _id: "etapa-ferramentas-suporte-1", fase: "operacoes-ferramentas", ordem: 3, aula: "Aula 8 - Ferramentas de Suporte I.md", titulo: "Ferramentas de Suporte – Parte I (Todoist)", motivo: "Apresenta uma ferramenta prática para gestão de tarefas e acompanhamento de processos." },
+        { _id: "etapa-ferramentas-suporte-2", fase: "operacoes-ferramentas", ordem: 4, aula: "Aula 9 - Ferramentas de Suporte II.md", titulo: "Ferramentas de Suporte – Parte II (Anotações e Organização)", motivo: "Complementa o uso de ferramentas simples para registrar demandas diárias da recepção." },
+        { _id: "etapa-checklist-atividades", fase: "operacoes-ferramentas", ordem: 5, aula: "Aula 5 - Check-list de atividades.md", titulo: "Checklist de Atividades Diárias, Semanais e Mensais", motivo: "Garante que nenhuma tarefa crítica seja esquecida, aumentando a consistência operacional." },
+        { _id: "etapa-fechamento-caixa", fase: "operacoes-ferramentas", ordem: 6, aula: "Aula 24 - Fechamento de Caixa.md", titulo: "Fechamento de Caixa e Controle Financeiro Diário", motivo: "Ensina a registrar entradas e saídas corretamente, facilitando a análise de resultados e a separação das finanças pessoais." },
+        // Transformação do Salão Lucrativo - Fase: Gestão de Pessoas e Cultura
+        { _id: "etapa-recrutamento-treinamento", fase: "gestao-pessoas-cultura", ordem: 1, aula: "Aula 3 - Recrutamento e treinamento.md", titulo: "Recrutamento e Treinamento de Colaboradores", motivo: "Fornece estratégias para atrair profissionais qualificados e prepará‑los para a cultura do salão." },
+        { _id: "etapa-plano-carreira-tsl", fase: "gestao-pessoas-cultura", ordem: 2, aula: "Aula 17 - Plano de Carreira.md", titulo: "Desenvolvimento de Plano de Carreira", motivo: "Cria caminhos de crescimento interno, reduz turnover e aumenta o engajamento da equipe." },
+        { _id: "etapa-gestao-pessoas-tsl", fase: "gestao-pessoas-cultura", ordem: 3, aula: "Aula 19 - Gestão de Pessoas.md", titulo: "Gestão de Pessoas e Alinhamento de Comissionamento", motivo: "Ensina a estruturar comissionamento justo e alinhado ao custo dos serviços, evitando desalinhamento." },
+        { _id: "etapa-treinamento-equipe", fase: "gestao-pessoas-cultura", ordem: 4, aula: "Aula 31 - Treinamento de Equipe.md", titulo: "Treinamento Contínuo da Equipe", motivo: "Desenvolve habilidades comerciais e operacionais, preparando a equipe para metas de crescimento." },
+        { _id: "etapa-reunioes-equipe", fase: "gestao-pessoas-cultura", ordem: 5, aula: "Aula 30 - Reuniões de Equipe.md", titulo: "Condução de Reuniões de Alinhamento", motivo: "Estabelece um ritmo de comunicação que reduz resistência a mudanças e mantém todos focados nos objetivos." },
+        { _id: "etapa-metas", fase: "gestao-pessoas-cultura", ordem: 6, aula: "Aula 27 - Metas.md", titulo: "Definição e Acompanhamento de Metas", motivo: "Cria metas claras e mensuráveis que direcionam a equipe para o aumento de faturamento." },
+        { _id: "etapa-indicadores-desempenho", fase: "gestao-pessoas-cultura", ordem: 7, aula: "Aula 28 - Indicadores de Desempenho.md", titulo: "Indicadores de Desempenho para Gestão Estratégica", motivo: "Ensina a monitorar KPIs críticos, permitindo ajustes rápidos para melhorar a lucratividade." },
+        // Transformação do Salão Lucrativo - Fase: Planejamento e Expansão
+        { _id: "etapa-canvas-negocio", fase: "planejamento-expansao", ordem: 1, aula: "Aula 2 - Canvas.md", titulo: "Canvas do Modelo de Negócio", motivo: "Ajuda a visualizar todos os componentes do salão, identificando oportunidades de melhoria e expansão." },
+        { _id: "etapa-planejamento-anual", fase: "planejamento-expansao", ordem: 2, aula: "Aula 32 - Planejamento Anual.md", titulo: "Planejamento Anual Estratégico", motivo: "Define um roadmap de 12 meses para alcançar a meta de R$250 mil de faturamento." },
+        { _id: "etapa-pilar-vendas", fase: "planejamento-expansao", ordem: 3, aula: "Aula 02 - Pilar de Vendas.md", titulo: "Pilar de Vendas – Estrutura de Metas e Bonificações", motivo: "Estabelece sistema de metas, bonificações e incentivos que cria cultura comercial." },
+        { _id: "etapa-legalizacao-empresa", fase: "planejamento-expansao", ordem: 4, aula: "Aula 8 - Legalização da Empresa.md", titulo: "Legalização e Regularização do Salão", motivo: "Garante que a expansão esteja em conformidade legal, evitando custos inesperados." },
+        { _id: "etapa-custo-montagem-salao", fase: "planejamento-expansao", ordem: 5, aula: "Aula 20 - Quanto custa montar um Salão.md", titulo: "Custo de Montagem e Expansão Física", motivo: "Fornece parâmetros financeiros para planejar a abertura de nova unidade ou reforma, alinhado ao capital de giro." }
     ],
     EtapaConnections: [
         // Business - fluxo sequencial entre etapas
@@ -9486,6 +9672,95 @@ let data: { [key: string]: any[] } = {
         { _id: "ec17", jornada: "leadership", from: "etapa-mediacao", to: "etapa-motivacao" },
         { _id: "ec18", jornada: "leadership", from: "etapa-motivacao", to: "etapa-delegacao" },
         { _id: "ec19", jornada: "leadership", from: "etapa-delegacao", to: "etapa-visao" },
+        {
+      "_id": "ec1",
+      "jornada": "jornada-gestao-salao-distancia",
+      "from": "etapa-1-desafios-e-prioridades-1",
+      "to": "etapa-1-desafios-e-prioridades-2"
+    },
+    {
+      "_id": "ec2",
+      "jornada": "jornada-gestao-salao-distancia",
+      "from": "etapa-1-desafios-e-prioridades-2",
+      "to": "etapa-2-legalidade-e-contabilidade-1"
+    },
+    {
+      "_id": "ec3",
+      "jornada": "jornada-gestao-salao-distancia",
+      "from": "etapa-2-legalidade-e-contabilidade-1",
+      "to": "etapa-2-legalidade-e-contabilidade-2"
+    },
+    {
+      "_id": "ec4",
+      "jornada": "jornada-gestao-salao-distancia",
+      "from": "etapa-2-legalidade-e-contabilidade-2",
+      "to": "etapa-3-financas-e-planejamento-1"
+    },
+    {
+      "_id": "ec5",
+      "jornada": "jornada-gestao-salao-distancia",
+      "from": "etapa-3-financas-e-planejamento-1",
+      "to": "etapa-3-financas-e-planejamento-2"
+    },
+    {
+      "_id": "ec6",
+      "jornada": "jornada-gestao-salao-distancia",
+      "from": "etapa-3-financas-e-planejamento-2",
+      "to": "etapa-4-marketing-digital-e-atendimento-1"
+    },
+    {
+      "_id": "ec7",
+      "jornada": "jornada-gestao-salao-distancia",
+      "from": "etapa-4-marketing-digital-e-atendimento-1",
+      "to": "etapa-4-marketing-digital-e-atendimento-2"
+    },
+    {
+      "_id": "ec8",
+      "jornada": "jornada-gestao-salao-distancia",
+      "from": "etapa-4-marketing-digital-e-atendimento-2",
+      "to": "etapa-5-equipe-e-gestao-remota-1"
+    },
+    {
+      "_id": "ec9",
+      "jornada": "jornada-gestao-salao-distancia",
+      "from": "etapa-5-equipe-e-gestao-remota-1",
+      "to": "etapa-5-equipe-e-gestao-remota-2"
+    },
+        // Transformação do Salão Lucrativo
+        { _id: "tsl-ec1", jornada: "transformacao-salao-lucrativo", from: "etapa-estrutura-financeira", to: "etapa-ponto-equilibrio" },
+        { _id: "tsl-ec2", jornada: "transformacao-salao-lucrativo", from: "etapa-ponto-equilibrio", to: "etapa-custo-produtos" },
+        { _id: "tsl-ec3", jornada: "transformacao-salao-lucrativo", from: "etapa-custo-produtos", to: "etapa-precificacao-parte-1" },
+        { _id: "tsl-ec4", jornada: "transformacao-salao-lucrativo", from: "etapa-precificacao-parte-1", to: "etapa-precificacao-parte-2" },
+        { _id: "tsl-ec5", jornada: "transformacao-salao-lucrativo", from: "etapa-precificacao-parte-2", to: "etapa-capital-giro" },
+        { _id: "tsl-ec6", jornada: "transformacao-salao-lucrativo", from: "etapa-capital-giro", to: "etapa-estrategias-captar-clientes" },
+        { _id: "tsl-ec7", jornada: "transformacao-salao-lucrativo", from: "etapa-estrategias-captar-clientes", to: "etapa-marketing-basico" },
+        { _id: "tsl-ec8", jornada: "transformacao-salao-lucrativo", from: "etapa-marketing-basico", to: "etapa-marketing-parte-1" },
+        { _id: "tsl-ec9", jornada: "transformacao-salao-lucrativo", from: "etapa-marketing-parte-1", to: "etapa-marketing-parte-2" },
+        { _id: "tsl-ec10", jornada: "transformacao-salao-lucrativo", from: "etapa-marketing-parte-2", to: "etapa-marketing-parte-3" },
+        { _id: "tsl-ec11", jornada: "transformacao-salao-lucrativo", from: "etapa-marketing-parte-3", to: "etapa-vendas-basico" },
+        { _id: "tsl-ec12", jornada: "transformacao-salao-lucrativo", from: "etapa-vendas-basico", to: "etapa-upsell-servicos" },
+        { _id: "tsl-ec13", jornada: "transformacao-salao-lucrativo", from: "etapa-upsell-servicos", to: "etapa-fechamento-vendas" },
+        { _id: "tsl-ec14", jornada: "transformacao-salao-lucrativo", from: "etapa-fechamento-vendas", to: "etapa-tecnica-vendas-1" },
+        { _id: "tsl-ec15", jornada: "transformacao-salao-lucrativo", from: "etapa-tecnica-vendas-1", to: "etapa-tecnica-vendas-2" },
+        { _id: "tsl-ec16", jornada: "transformacao-salao-lucrativo", from: "etapa-tecnica-vendas-2", to: "etapa-tecnica-vendas-3" },
+        { _id: "tsl-ec17", jornada: "transformacao-salao-lucrativo", from: "etapa-tecnica-vendas-3", to: "etapa-rotinas-administrativas" },
+        { _id: "tsl-ec18", jornada: "transformacao-salao-lucrativo", from: "etapa-rotinas-administrativas", to: "etapa-controle-estoque" },
+        { _id: "tsl-ec19", jornada: "transformacao-salao-lucrativo", from: "etapa-controle-estoque", to: "etapa-ferramentas-suporte-1" },
+        { _id: "tsl-ec20", jornada: "transformacao-salao-lucrativo", from: "etapa-ferramentas-suporte-1", to: "etapa-ferramentas-suporte-2" },
+        { _id: "tsl-ec21", jornada: "transformacao-salao-lucrativo", from: "etapa-ferramentas-suporte-2", to: "etapa-checklist-atividades" },
+        { _id: "tsl-ec22", jornada: "transformacao-salao-lucrativo", from: "etapa-checklist-atividades", to: "etapa-fechamento-caixa" },
+        { _id: "tsl-ec23", jornada: "transformacao-salao-lucrativo", from: "etapa-fechamento-caixa", to: "etapa-recrutamento-treinamento" },
+        { _id: "tsl-ec24", jornada: "transformacao-salao-lucrativo", from: "etapa-recrutamento-treinamento", to: "etapa-plano-carreira-tsl" },
+        { _id: "tsl-ec25", jornada: "transformacao-salao-lucrativo", from: "etapa-plano-carreira-tsl", to: "etapa-gestao-pessoas-tsl" },
+        { _id: "tsl-ec26", jornada: "transformacao-salao-lucrativo", from: "etapa-gestao-pessoas-tsl", to: "etapa-treinamento-equipe" },
+        { _id: "tsl-ec27", jornada: "transformacao-salao-lucrativo", from: "etapa-treinamento-equipe", to: "etapa-reunioes-equipe" },
+        { _id: "tsl-ec28", jornada: "transformacao-salao-lucrativo", from: "etapa-reunioes-equipe", to: "etapa-metas" },
+        { _id: "tsl-ec29", jornada: "transformacao-salao-lucrativo", from: "etapa-metas", to: "etapa-indicadores-desempenho" },
+        { _id: "tsl-ec30", jornada: "transformacao-salao-lucrativo", from: "etapa-indicadores-desempenho", to: "etapa-canvas-negocio" },
+        { _id: "tsl-ec31", jornada: "transformacao-salao-lucrativo", from: "etapa-canvas-negocio", to: "etapa-planejamento-anual" },
+        { _id: "tsl-ec32", jornada: "transformacao-salao-lucrativo", from: "etapa-planejamento-anual", to: "etapa-pilar-vendas" },
+        { _id: "tsl-ec33", jornada: "transformacao-salao-lucrativo", from: "etapa-pilar-vendas", to: "etapa-legalizacao-empresa" },
+        { _id: "tsl-ec34", jornada: "transformacao-salao-lucrativo", from: "etapa-legalizacao-empresa", to: "etapa-custo-montagem-salao" }
     ]
 };
 
