@@ -1,7 +1,11 @@
-import Z, { div, h1, h3, p } from "zeyo";
+import Z, { div } from "zeyo";
 import Option from "..";
 import App from "../../app";
-import button from "../../components/atoms/button";
+import Abas from "../../components/organisms/abas";
+import Aba from "../../components/organisms/abas/aba";
+import CRUD from "../../components/organisms/CRUD";
+import FormCreateUsuario from "../../features/usuario/form/create";
+import configuracaoUsuario from "../../features/usuario/ui/configuracao";
 
 export default class OptionAdminUsuarios extends Option {
     constructor(private app: App) {
@@ -9,25 +13,24 @@ export default class OptionAdminUsuarios extends Option {
     }
 
     component = Z("div").class("d-grid", "gap-g", "ac-start", "p-10").children(
-        h1("Gerenciar Usuários"),
-        div().class("d-grid", "gap-g").object(async container => {
-            const [usuarios] = await this.app.repository.findMany("Usuarios", {})
-            for (const usuario of usuarios) {
-                container.children(
-                    div().class("d-flex", "gap-g", "ai-center", "jc-between").children(
-                        div().children(
-                            h3(`${usuario.nome || ""} ${usuario.sobrenome || ""}`),
-                            p(usuario.email || ""),
-                        ),
-                        div().class("d-flex", "gap-m").children(
-                            button(usuario.role === "admin" ? "Admin" : "Usuário").style("primary"),
-                            button("Excluir").style("danger").click(() => {
-                                this.app.socket.emit("db/delete/Usuarios", { _id: usuario._id })
-                            }),
-                        )
-                    )
-                )
-            }
-        })
+        new Abas(this.app)
+            .push(new Aba("usuarios", "Usuários", "iconUsers",
+                div().class("d-grid", "gap-g", "p-10").object(o => {
+                    o.children(CRUD(this.app, "Usuarios", { create: "Criar Usuário" }, {
+                        create: new FormCreateUsuario(this.app),
+                        read: { role: "user" },
+                        update: (app, obj) => configuracaoUsuario(app, obj)
+                    }, { nome: "string", email: "string" }))
+                }), true
+            ))
+            .push(new Aba("administradores", "Administradores", "iconShield",
+                div().class("d-grid", "gap-g", "p-10").object(o => {
+                    o.children(CRUD(this.app, "Usuarios", { create: "Criar Administrador" }, {
+                        create: new FormCreateUsuario(this.app),
+                        read: { role: "admin" },
+                        update: (app, obj) => configuracaoUsuario(app, obj)
+                    }, { nome: "string", email: "string" }))
+                })
+            ))
     );
 }
