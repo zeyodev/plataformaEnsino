@@ -7,7 +7,7 @@ export default function Repository<Base extends ZeyoAppConstructor>(base: Base) 
     return class extends base {
         repository = new RepositoryMemory()
         setRepository(repository?: any) {
-            //this.repository = repository
+            if (repository) this.repository = repository
             return this
         }
     }

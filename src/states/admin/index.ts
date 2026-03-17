@@ -6,6 +6,7 @@ import OptionAdminJornadas from "../../options/admin-jornadas"
 import OptionAdminAulas from "../../options/admin-aulas"
 import OptionAdminUsuarios from "../../options/admin-usuarios"
 import OptionConfiguracoes from "../../options/configuracoes"
+import RepositorySocket from "../../repository/socket"
 
 export default class Admin extends State {
     name = "admin"
@@ -27,6 +28,7 @@ export default class Admin extends State {
             context.app.setSocket(accessToken)
             context.setOnconnect()
             await context.app.socket.waitSocket()
+            context.app.setRepository(new RepositorySocket(context.app.socket))
 
             this.painel.sideNav.setInfo([
                 new OptionAdminAulas(context.app),

@@ -3,7 +3,6 @@ import App from "../../../app";
 import button from "../../atoms/button";
 import Modal from "../../../states/Modal";
 import modal from "../../molecules/modal";
-import Form from "../../../form";
 import adapter, { Adapter } from "./adapter";
 
 export default (app: App,
@@ -25,7 +24,6 @@ export default (app: App,
 
     list = div().class("d-grid", "gap-m").object(async o => {
         app.repository.createTriggerTo(collection, (obj) => o.children(this.makeChild(obj)), "create")
-
         const [docs, err] = await app.repository.findMany(collection, actions.read ? actions.read : {})
         if (err) return
         docs.forEach(d => o.children(this.makeChild(d)))

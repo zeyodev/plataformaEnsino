@@ -157,7 +157,7 @@ io.on('connection', async (socket) => {
 
     socket.onAny(async (event, args) => {
         const [result, err] = await session.execute(event, args);
-        socket.emit(event, { data: result, error: err });
+        socket.emit(event, [result, err] );
     });
 
     socket.on('disconnect', () => {
