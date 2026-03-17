@@ -536,7 +536,7 @@ export interface IconMapping {
     iconZoomOut: string
 }
 
-const iconMapping: {[key: string]: typeof iconActivity} = {
+export const iconMapping: {[key: string]: typeof iconActivity} = {
     iconActivity,
     iconAirplay,
     iconAlertCircle,

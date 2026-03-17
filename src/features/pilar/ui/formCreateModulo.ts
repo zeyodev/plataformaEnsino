@@ -2,16 +2,13 @@ import App from "../../../app";
 import button from "../../../components/atoms/button";
 import Form from "../../../form";
 import FieldInput from "../../../form/fields/input";
-import FieldIcon from "../../../form/fields/icon";
 
-export default class FormCreatePilar extends Form {
-    constructor(private app: App) {
+export default class FormCreateModuloPilar extends Form {
+    constructor(private app: App, private pilarId: string) {
         super();
-        this.title.text("Criar Pilar")
+        this.title.text("Criar Módulo")
         this.body.children(
             new FieldInput("titulo", true).label("Título"),
-            new FieldInput("value", true).label("Valor (slug)"),
-            new FieldIcon("icon", true).label("Ícone"),
         )
         this.footer.children(
             button("Criar").set("type", "submit").style("primary"),
@@ -20,7 +17,7 @@ export default class FormCreatePilar extends Form {
 
     async onSubmit() {
         const data = this.getDataFromFields();
-        await this.app.repository.create("Pilares", data)
+        await this.app.repository.create("Modulos", { ...data, pilar: this.pilarId })
         this.triggerSubmit(data)
     }
 }

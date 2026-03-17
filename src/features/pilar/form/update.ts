@@ -2,6 +2,7 @@ import App from "../../../app";
 import button from "../../../components/atoms/button";
 import Form from "../../../form";
 import FieldInput from "../../../form/fields/input";
+import FieldIcon from "../../../form/fields/icon";
 
 export default class FormUpdatePilar extends Form {
     constructor(private app: App, private obj: any) {
@@ -10,7 +11,7 @@ export default class FormUpdatePilar extends Form {
         this.body.children(
             new FieldInput("titulo", true).label("Título").setValue(obj.titulo || ""),
             new FieldInput("value", true).label("Valor (slug)").setValue(obj.value || ""),
-            new FieldInput("icon", true).label("Ícone").setValue(obj.icon || ""),
+            new FieldIcon("icon", true).label("Ícone").setValue(obj.icon || ""),
         )
         this.footer.children(
             button("Salvar").set("type", "submit").style("primary"),

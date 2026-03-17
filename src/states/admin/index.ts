@@ -4,7 +4,6 @@ import Z from "zeyo"
 import painelNav, { PainelNav } from "../../components/templates/painelNav"
 import OptionAdminJornadas from "../../options/admin-jornadas"
 import OptionAdminAulas from "../../options/admin-aulas"
-import OptionAdminPilares from "../../options/admin-pilares"
 import OptionAdminUsuarios from "../../options/admin-usuarios"
 import OptionConfiguracoes from "../../options/configuracoes"
 
@@ -30,9 +29,8 @@ export default class Admin extends State {
             await context.app.socket.waitSocket()
 
             this.painel.sideNav.setInfo([
-                new OptionAdminJornadas(context.app),
                 new OptionAdminAulas(context.app),
-                new OptionAdminPilares(context.app),
+                new OptionAdminJornadas(context.app),
                 new OptionAdminUsuarios(context.app),
                 new OptionConfiguracoes(context.app),
             ], (option) => {
