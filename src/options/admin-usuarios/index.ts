@@ -1,4 +1,4 @@
-import Z, { div } from "zeyo";
+import Z from "zeyo";
 import Option from "..";
 import App from "../../app";
 import Abas from "../../components/organisms/abas";
@@ -16,22 +16,18 @@ export default class OptionAdminUsuarios extends Option {
     component = Z("div").class("d-grid", "gap-g", "ac-start", "p-10").children(
         new Abas(this.app)
             .push(new Aba("usuarios", "Usuários", "iconUsers",
-                div().class("d-grid", "gap-g", "p-10").object(o => {
-                    o.children(CRUD(this.app, "Usuarios", { create: "Criar Usuário" }, {
-                        create: new FormCreateUsuario(this.app),
-                        read: { role: "user" },
-                        update: (app, obj) => configuracaoUsuario(app, obj)
-                    }, usuarioComponent))
-                }), true
+                CRUD(this.app, "Usuarios", { create: "Criar Usuário" }, {
+                    create: new FormCreateUsuario(this.app),
+                    read: { role: "user" },
+                    update: (app, obj) => configuracaoUsuario(app, obj)
+                }, usuarioComponent), true
             ))
             .push(new Aba("administradores", "Administradores", "iconShield",
-                div().class("d-grid", "gap-g", "p-10").object(o => {
-                    o.children(CRUD(this.app, "Usuarios", { create: "Criar Administrador" }, {
-                        create: new FormCreateUsuario(this.app),
-                        read: { role: "admin" },
-                        update: (app, obj) => configuracaoUsuario(app, obj)
-                    }, usuarioComponent))
-                })
+                CRUD(this.app, "Usuarios", { create: "Criar Administrador" }, {
+                    create: new FormCreateUsuario(this.app),
+                    read: { role: "admin" },
+                    update: (app, obj) => configuracaoUsuario(app, obj)
+                }, usuarioComponent)
             ))
     );
 }

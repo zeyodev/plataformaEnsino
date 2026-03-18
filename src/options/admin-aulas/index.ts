@@ -1,4 +1,4 @@
-import Z, { div } from "zeyo";
+import Z from "zeyo";
 import Option from "..";
 import App from "../../app";
 import Abas from "../../components/organisms/abas";
@@ -20,20 +20,16 @@ export default class OptionAdminAulas extends Option {
     component = Z("div").class("d-grid", "gap-g", "ac-start", "p-10").children(
         new Abas(this.app)
             .push(new Aba("pilares", "Pilares", "iconLayers",
-                div().class("d-grid", "gap-g", "p-10").object(o => {
-                    o.children(CRUD(this.app, "Pilares", { create: "Criar Pilar" }, {
-                        create: new FormCreatePilar(this.app),
-                        update: (app, obj) => configuracaoPilar(app, obj)
-                    }, pilarComponent))
-                }), true
+                CRUD(this.app, "Pilares", { create: "Criar Pilar" }, {
+                    create: new FormCreatePilar(this.app),
+                    update: (app, obj) => configuracaoPilar(app, obj)
+                }, pilarComponent), true
             ))
             .push(new Aba("modulos", "Módulos", "iconBook",
-                div().class("d-grid", "gap-g", "p-10").object(o => {
-                    o.children(CRUD(this.app, "Modulos", { create: "Criar Módulo" }, {
-                        create: new FormCreateModulo(this.app),
-                        update: (app, obj) => configuracaoModulo(app, obj)
-                    }, moduloComponent))
-                })
+                CRUD(this.app, "Modulos", { create: "Criar Módulo" }, {
+                    create: new FormCreateModulo(this.app),
+                    update: (app, obj) => configuracaoModulo(app, obj)
+                }, moduloComponent)
             ))
             .push(new Aba("aulas", "Aulas", "iconPlay",
                 abasAulas(this.app)

@@ -11,13 +11,11 @@ import configuracaoAula from "./configuracao";
 import FormCreateCategoriaAula from "../../categoria-aula/form/create";
 
 function buildAulaCrud(app: App, categoria?: string) {
-    return div().class("d-grid", "gap-g", "p-10").object(o => {
-        o.children(CRUD(app, "Aulas", { create: "Criar Aula" }, {
-            create: new FormCreateAula(app, categoria),
-            read: categoria ? { categoria } : { categoria: { $exists: false } },
-            update: (a, obj) => configuracaoAula(a, obj)
-        }, aulaComponent))
-    })
+    return CRUD(app, "Aulas", { create: "Criar Aula" }, {
+        create: new FormCreateAula(app, categoria),
+        read: categoria ? { categoria } : { categoria: { $exists: false } },
+        update: (a, obj) => configuracaoAula(a, obj)
+    }, aulaComponent)
 }
 
 export default (app: App) => div().class("d-grid", "gap-g").object(o => {
