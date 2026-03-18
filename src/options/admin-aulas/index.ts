@@ -10,9 +10,7 @@ import pilarComponent from "../../features/pilar/ui/crudComponent";
 import FormCreateModulo from "../../features/modulo/form/create";
 import configuracaoModulo from "../../features/modulo/ui/configuracao";
 import moduloComponent from "../../features/modulo/ui/crudComponent";
-import FormCreateAula from "../../features/aula/form/create";
-import FormUpdateAula from "../../features/aula/form/update";
-import aulaComponent from "../../features/aula/ui/crudComponent";
+import abasAulas from "../../features/aula/ui/abasAulas";
 
 export default class OptionAdminAulas extends Option {
     constructor(private app: App) {
@@ -38,12 +36,7 @@ export default class OptionAdminAulas extends Option {
                 })
             ))
             .push(new Aba("aulas", "Aulas", "iconPlay",
-                div().class("d-grid", "gap-g", "p-10").object(o => {
-                    o.children(CRUD(this.app, "Aulas", { create: "Criar Aula" }, {
-                        create: new FormCreateAula(this.app),
-                        update: (app, obj) => new FormUpdateAula(app, obj)
-                    }, aulaComponent))
-                })
+                abasAulas(this.app)
             ))
     );
 }

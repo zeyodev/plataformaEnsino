@@ -265,6 +265,7 @@ import iconZap from "icons/src/business_and_online_icons/iconZap"
 import iconZapOff from "icons/src/business_and_online_icons/iconZapOff"
 import iconZoomIn from "icons/src/business_and_online_icons/iconZoomIn"
 import iconZoomOut from "icons/src/business_and_online_icons/iconZoomOut"
+import styles from "./styles.module.css"
 
 export interface IconMapping {
     iconActivity: string
@@ -808,5 +809,5 @@ export const iconMapping: {[key: string]: typeof iconActivity} = {
 export default (icon: keyof IconMapping) => {
     if(!iconMapping[icon])
         return iconActivity()
-    return iconMapping[icon]()
+    return iconMapping[icon]().class(styles.icon)
 }

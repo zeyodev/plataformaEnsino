@@ -32,7 +32,7 @@ export default class Admin extends State {
 
             this.painel.sideNav.setInfo([
                 new OptionAdminAulas(context.app),
-                new OptionAdminJornadas(context.app),
+                //new OptionAdminJornadas(context.app),
                 new OptionAdminUsuarios(context.app),
                 new OptionConfiguracoes(context.app),
             ], (option) => {
