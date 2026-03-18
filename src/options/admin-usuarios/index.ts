@@ -6,6 +6,7 @@ import Aba from "../../components/organisms/abas/aba";
 import CRUD from "../../components/organisms/CRUD";
 import FormCreateUsuario from "../../features/usuario/form/create";
 import configuracaoUsuario from "../../features/usuario/ui/configuracao";
+import usuarioComponent from "../../features/usuario/ui/crudComponent";
 
 export default class OptionAdminUsuarios extends Option {
     constructor(private app: App) {
@@ -20,7 +21,7 @@ export default class OptionAdminUsuarios extends Option {
                         create: new FormCreateUsuario(this.app),
                         read: { role: "user" },
                         update: (app, obj) => configuracaoUsuario(app, obj)
-                    }, { nome: "string", email: "string" }))
+                    }, usuarioComponent))
                 }), true
             ))
             .push(new Aba("administradores", "Administradores", "iconShield",
@@ -29,7 +30,7 @@ export default class OptionAdminUsuarios extends Option {
                         create: new FormCreateUsuario(this.app),
                         read: { role: "admin" },
                         update: (app, obj) => configuracaoUsuario(app, obj)
-                    }, { nome: "string", email: "string" }))
+                    }, usuarioComponent))
                 })
             ))
     );

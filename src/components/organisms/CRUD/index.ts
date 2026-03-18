@@ -3,7 +3,8 @@ import App from "../../../app";
 import button from "../../atoms/button";
 import Modal from "../../../states/Modal";
 import modal from "../../molecules/modal";
-import adapter, { Adapter } from "./adapter";
+
+export type CRUDComponent = Zeyo & { propermap: { [key: string]: (value: any) => void } }
 
 export default (app: App,
     collection: string,
@@ -15,7 +16,7 @@ export default (app: App,
         read?: any
         update: (app: App, obj: any) => Zeyo
     },
-    properMapping: Adapter
+    component: (app: App) => CRUDComponent
 ) => (new class extends Div {
     button = button(btnConfig.create).set("type", "button").click(async () => {
         app.context.setState(Modal("create", modal(app, actions.create)))
@@ -30,10 +31,24 @@ export default (app: App,
     })
 
     makeChild(obj: any) {
-        return adapter(app, obj, properMapping).setReact(collection).click(async () => {
+        const child = component(app)
+        for (const key in child.propermap) {
+            if (obj[key] !== undefined) child.propermap[key](obj[key])
+        }
+        app.repository.createTriggerTo(collection, (value, type) => {
+            const id = type === "update" ? value.id : value;
+            if (id != obj._id) return
+            if (type === "delete") return child.element.remove()
+            for (const key in value.value) {
+                if (Object.prototype.hasOwnProperty.call(child.propermap, key))
+                    child.propermap[key](value.value[key])
+            }
+        }, "update", "delete")
+        child.click(async () => {
             app.context.setState(Modal("update", modal(app, actions.update(app, obj))))
             app.context.handle()
         })
+        return child
     }
 }).class("d-grid", "gap-g", "ac-start").object(o => o.children(
     o.button,

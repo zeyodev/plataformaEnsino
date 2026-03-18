@@ -6,6 +6,7 @@ import CRUD from "../../../components/organisms/CRUD";
 import FormUpdateUsuario from "../form/update";
 import FormUpdateJornada from "../../jornada/form/update";
 import FormCreateJornadaUsuario from "./formCreateJornada";
+import jornadaComponent from "../../jornada/ui/crudComponent";
 import dossie from "./dossie";
 
 export default (app: App, obj: any) =>
@@ -21,7 +22,7 @@ export default (app: App, obj: any) =>
                     create: new FormCreateJornadaUsuario(app, obj._id),
                     read: { usuario: obj._id },
                     update: (a, j) => new FormUpdateJornada(a, j)
-                }, { titulo: "string", descricao: "string" }))
+                }, jornadaComponent))
             })
         ))
         .push(new Aba("dossie", "Dossiê", "iconFileText",

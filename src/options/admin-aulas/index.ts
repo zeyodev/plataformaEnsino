@@ -6,10 +6,13 @@ import Aba from "../../components/organisms/abas/aba";
 import CRUD from "../../components/organisms/CRUD";
 import FormCreatePilar from "../../features/pilar/form/create";
 import configuracaoPilar from "../../features/pilar/ui/configuracao";
+import pilarComponent from "../../features/pilar/ui/crudComponent";
 import FormCreateModulo from "../../features/modulo/form/create";
 import configuracaoModulo from "../../features/modulo/ui/configuracao";
+import moduloComponent from "../../features/modulo/ui/crudComponent";
 import FormCreateAula from "../../features/aula/form/create";
 import FormUpdateAula from "../../features/aula/form/update";
+import aulaComponent from "../../features/aula/ui/crudComponent";
 
 export default class OptionAdminAulas extends Option {
     constructor(private app: App) {
@@ -23,7 +26,7 @@ export default class OptionAdminAulas extends Option {
                     o.children(CRUD(this.app, "Pilares", { create: "Criar Pilar" }, {
                         create: new FormCreatePilar(this.app),
                         update: (app, obj) => configuracaoPilar(app, obj)
-                    }, { titulo: "string", value: "string" }))
+                    }, pilarComponent))
                 }), true
             ))
             .push(new Aba("modulos", "Módulos", "iconBook",
@@ -31,7 +34,7 @@ export default class OptionAdminAulas extends Option {
                     o.children(CRUD(this.app, "Modulos", { create: "Criar Módulo" }, {
                         create: new FormCreateModulo(this.app),
                         update: (app, obj) => configuracaoModulo(app, obj)
-                    }, { titulo: "string" }))
+                    }, moduloComponent))
                 })
             ))
             .push(new Aba("aulas", "Aulas", "iconPlay",
@@ -39,7 +42,7 @@ export default class OptionAdminAulas extends Option {
                     o.children(CRUD(this.app, "Aulas", { create: "Criar Aula" }, {
                         create: new FormCreateAula(this.app),
                         update: (app, obj) => new FormUpdateAula(app, obj)
-                    }, { title: "string", description: "string" }))
+                    }, aulaComponent))
                 })
             ))
     );

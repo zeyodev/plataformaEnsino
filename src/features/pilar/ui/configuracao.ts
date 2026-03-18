@@ -6,6 +6,7 @@ import CRUD from "../../../components/organisms/CRUD";
 import FormUpdatePilar from "../form/update";
 import FormCreateModuloPilar from "./formCreateModulo";
 import configuracaoModulo from "../../modulo/ui/configuracao";
+import moduloComponent from "../../modulo/ui/crudComponent";
 
 export default (app: App, obj: any) =>
     new Abas(app)
@@ -20,6 +21,6 @@ export default (app: App, obj: any) =>
                     create: new FormCreateModuloPilar(app, obj._id),
                     read: { pilar: obj._id },
                     update: (app, m) => configuracaoModulo(app, m)
-                }, { titulo: "string" }))
+                }, moduloComponent))
             })
         ))

@@ -6,6 +6,7 @@ import CRUD from "../../../components/organisms/CRUD";
 import FormUpdateModulo from "../form/update";
 import FormCreateAulaModulo from "./formCreateAula";
 import FormUpdateAula from "../../aula/form/update";
+import aulaComponent from "../../aula/ui/crudComponent";
 
 export default (app: App, obj: any) =>
     new Abas(app)
@@ -20,6 +21,6 @@ export default (app: App, obj: any) =>
                     create: new FormCreateAulaModulo(app, obj._id),
                     read: { modulo: obj._id },
                     update: (app, a) => new FormUpdateAula(app, a)
-                }, { title: "string", description: "string" }))
+                }, aulaComponent))
             })
         ))
