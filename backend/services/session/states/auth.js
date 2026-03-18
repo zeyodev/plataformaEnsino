@@ -1,5 +1,6 @@
 import DB from '../commands/db.js';
 import UploadVideoPanda from '../commands/upload-video-panda.js';
+import UploadMaterial from '../commands/upload-material.js';
 
 /**
  * Comandos disponíveis no estado autenticado (admin).
@@ -8,4 +9,5 @@ import UploadVideoPanda from '../commands/upload-video-panda.js';
 export const Auth = {
     'db': DB,
     'upload-video-panda': UploadVideoPanda,
+    'upload-material': UploadMaterial,
 };
