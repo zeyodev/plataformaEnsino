@@ -29,19 +29,17 @@ class OptionPilaresProduto extends Option {
         super(produtoOption._id, produtoOption.nome, produtoOption.icon, produtoOption._id)
         this.component = Z("div").class("gap-g", "ac-start").children(
             h1(produtoOption.nome),
-            new Abas(this.app).object(async objectAbas => {
-                let query: any = {}
-                if (this.pilarIds.length > 0) {
-                    query = { _id: this.pilarIds }
-                }
-                const [pilares] = await this.app.repository.findMany("Pilares", query)
-                for (const [i, pilar] of pilares.entries()) {
-                    objectAbas.push(new Aba(pilar.value, pilar.titulo, pilar.icon, div().object(async o => {
-                        const [component] = await this.app.repository.findOne("Componentes", { _id: "sdfwefsdfwe2" })
-                        o.children(...(await ComponenteEngine.execute(this.app, component, { pilar })))
-                    }), i === 0))
-                }
-            })
+            this.pilarIds.length > 0
+                ? new Abas(this.app).object(async objectAbas => {
+                    const [pilares] = await this.app.repository.findMany("Pilares", { _id: this.pilarIds })
+                    for (const [i, pilar] of pilares.entries()) {
+                        objectAbas.push(new Aba(pilar.value, pilar.titulo, pilar.icon, div().object(async o => {
+                            const [component] = await this.app.repository.findOne("Componentes", { _id: "sdfwefsdfwe2" })
+                            o.children(...(await ComponenteEngine.execute(this.app, component, { pilar })))
+                        }), i === 0))
+                    }
+                })
+                : div().children(Z("p").text("Nenhum pilar configurado para esta option."))
         )
     }
 }
@@ -53,29 +51,27 @@ class OptionJornadasProduto extends Option {
         super(produtoOption._id, produtoOption.nome, produtoOption.icon, produtoOption._id)
         this.component = Z("div").class("gap-g", "ac-start").children(
             h1(produtoOption.nome),
-            new Abas(this.app).object(async objectAbas => {
-                let query: any = {}
-                if (this.jornadaIds.length > 0) {
-                    query = { _id: this.jornadaIds }
-                }
-                const [jornadas] = await this.app.repository.findMany("Jornadas", query)
-                for (const [i, jornada] of jornadas.entries()) {
-                    objectAbas.push(new Aba(jornada._id, jornada.titulo, jornada.icon, div().object(async o => {
-                        const [fases] = await this.app.repository.findMany("Fases", { jornada: jornada._id })
-                        const [etapas] = await this.app.repository.findMany("Etapas", {})
-                        const [connections] = await this.app.repository.findMany("EtapaConnections", { jornada: jornada._id })
+            this.jornadaIds.length > 0
+                ? new Abas(this.app).object(async objectAbas => {
+                    const [jornadas] = await this.app.repository.findMany("Jornadas", { _id: this.jornadaIds })
+                    for (const [i, jornada] of jornadas.entries()) {
+                        objectAbas.push(new Aba(jornada._id, jornada.titulo, jornada.icon, div().object(async o => {
+                            const [fases] = await this.app.repository.findMany("Fases", { jornada: jornada._id })
+                            const [etapas] = await this.app.repository.findMany("Etapas", {})
+                            const [connections] = await this.app.repository.findMany("EtapaConnections", { jornada: jornada._id })
 
-                        const jornadaEtapas = etapas.filter((e: any) =>
-                            fases.some((f: any) => f._id === e.fase)
-                        )
+                            const jornadaEtapas = etapas.filter((e: any) =>
+                                fases.some((f: any) => f._id === e.fase)
+                            )
 
-                        const diagram = new RoadmapDiagram(this.app)
-                        diagram.setFases(fases, jornadaEtapas)
-                        diagram.setConnections(connections)
-                        o.children(diagram)
-                    }), i === 0))
-                }
-            })
+                            const diagram = new RoadmapDiagram(this.app)
+                            diagram.setFases(fases, jornadaEtapas)
+                            diagram.setConnections(connections)
+                            o.children(diagram)
+                        }), i === 0))
+                    }
+                })
+                : div().children(Z("p").text("Nenhuma jornada configurada para esta option."))
         )
     }
 }
@@ -87,19 +83,17 @@ class OptionEncontrosProduto extends Option {
         super(produtoOption._id, produtoOption.nome, produtoOption.icon, produtoOption._id)
         this.component = Z("div").class("gap-g", "ac-start").children(
             h1(produtoOption.nome),
-            new Abas(this.app).object(async objectAbas => {
-                let query: any = {}
-                if (this.encontroIds.length > 0) {
-                    query = { _id: this.encontroIds }
-                }
-                const [encontros] = await this.app.repository.findMany("CategoriasEncontros", query)
-                for (const [i, categoriasEncontros] of encontros.entries()) {
-                    objectAbas.push(new Aba(categoriasEncontros.value, categoriasEncontros.titulo, categoriasEncontros.icon, div().object(async o => {
-                        const [component] = await this.app.repository.findOne("Componentes", { _id: "sdfwefsdfwe3" })
-                        o.children(...(await ComponenteEngine.execute(this.app, component, { categoriasEncontros })))
-                    }), i === 0))
-                }
-            })
+            this.encontroIds.length > 0
+                ? new Abas(this.app).object(async objectAbas => {
+                    const [encontros] = await this.app.repository.findMany("CategoriasEncontros", { _id: this.encontroIds })
+                    for (const [i, categoriasEncontros] of encontros.entries()) {
+                        objectAbas.push(new Aba(categoriasEncontros.value, categoriasEncontros.titulo, categoriasEncontros.icon, div().object(async o => {
+                            const [component] = await this.app.repository.findOne("Componentes", { _id: "sdfwefsdfwe3" })
+                            o.children(...(await ComponenteEngine.execute(this.app, component, { categoriasEncontros })))
+                        }), i === 0))
+                    }
+                })
+                : div().children(Z("p").text("Nenhum encontro configurado para esta option."))
         )
     }
 }
