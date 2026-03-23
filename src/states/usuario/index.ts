@@ -49,6 +49,9 @@ export default class Usuario extends State {
                 console.log("Erro ao verificar admin:", err)
             }
 
+            // Usuário normal: usa RepositoryHTTP para buscar dados do servidor
+            context.app.setRepositoryHTTP()
+
             // Busca os produtos/ambientes que o usuário é membro
             const [membros] = await context.app.repository.findMany("Membros", { usuario: context.app.session.usuarioId })
 

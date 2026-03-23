@@ -28,7 +28,7 @@ export default class FieldSelectPertencimento extends Field {
         const [documentos] = await app.repository.findMany(colecao.nome, campo.query || {})
         console.log("Select Pertence Documentos", documentos)
         // TODO seria bom criar algum tipo de propriedade show para ser a propriedade que contem o valor param mostrar, dai poderia usar aqui em vez do nome
-        this.clear().options(...documentos.map(d => ({value: d._id, name: d.nome || d.data})))
+        this.clear().options(...documentos.map((d: any) => ({value: d._id, name: d.nome || d.data})))
         this.making = false
     }
 

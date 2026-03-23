@@ -10,6 +10,7 @@ import { Mongodb } from './backend/repository/mongodb.js';
 import RepositoryMongoDB from './backend/repository/mongodb.js';
 import createApiRoutes from './backend/routes/api.js';
 import Session from './backend/services/session/index.js';
+import MemoryCache from './backend/cache/index.js';
 
 const app = express();
 const server = http.createServer(app);
@@ -19,12 +20,16 @@ const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017';
 const mongo = new Mongodb(dbUrl);
 const repository = new RepositoryMongoDB(mongo);
 
+// --- Cache em memória para estrutura do produto ---
+const cache = new MemoryCache(repository, { ttl: 5 * 60 * 1000 });
+cache.warmup().catch(err => console.error('[Cache] Falha no warmup:', err));
+
 // --- Middleware ---
 app.use(express.json());
 app.use(express.static('./public'));
 
 // --- REST API para usuários normais ---
-app.use('/api', createApiRoutes(repository));
+app.use('/api', createApiRoutes(repository, cache));
 
 // --- Verificação de admin ---
 app.get('/admin/verify', (req, res) => {
@@ -42,7 +47,7 @@ app.get('/admin/verify', (req, res) => {
         if (notFound || !usuario) {
             return res.json({ isAdmin: false });
         }
-        res.json({ isAdmin: usuario.role === 'admin' });
+        res.json({ isAdmin: usuario.role === 'admin', usuario: { _id: usuario._id, role: usuario.role } });
     });
 });
 
