@@ -1,5 +1,6 @@
 import App from "../../../app";
 import button from "../../../components/atoms/button";
+import snackbar from "../../../components/atoms/snackbar";
 import Form from "../../../form";
 import FieldSelect from "../../../form/fields/select";
 
@@ -24,6 +25,7 @@ export default class FormCreateNodeAula extends Form {
     async onSubmit() {
         const data = this.getDataFromFields();
         await this.app.repository.create("NodeAulas", data)
+        snackbar.show("Vínculo criado com sucesso!", "success")
         this.triggerSubmit(data)
     }
 }

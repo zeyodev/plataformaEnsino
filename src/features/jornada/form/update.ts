@@ -1,5 +1,6 @@
 import App from "../../../app";
 import button from "../../../components/atoms/button";
+import snackbar from "../../../components/atoms/snackbar";
 import Form from "../../../form";
 import FieldInput from "../../../form/fields/input";
 import FieldSelect from "../../../form/fields/select";
@@ -35,6 +36,7 @@ export default class FormUpdateJornada extends Form {
     async onSubmit() {
         const data = this.getDataFromFields();
         await this.app.repository.update("Jornadas", this.obj._id, data)
+        snackbar.show("Jornada atualizada com sucesso!", "success")
         this.triggerSubmit(data)
     }
 }

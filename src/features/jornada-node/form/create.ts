@@ -1,5 +1,6 @@
 import App from "../../../app";
 import button from "../../../components/atoms/button";
+import snackbar from "../../../components/atoms/snackbar";
 import Form from "../../../form";
 import FieldInput from "../../../form/fields/input";
 import FieldSelect from "../../../form/fields/select";
@@ -30,6 +31,7 @@ export default class FormCreateJornadaNode extends Form {
         const data = this.getDataFromFields();
         data.tier = Number(data.tier)
         await this.app.repository.create("JornadaNodes", data)
+        snackbar.show("Nó criado com sucesso!", "success")
         this.triggerSubmit(data)
     }
 }

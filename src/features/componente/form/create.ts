@@ -1,5 +1,6 @@
 import App from "../../../app";
 import button from "../../../components/atoms/button";
+import snackbar from "../../../components/atoms/snackbar";
 import Form from "../../../form";
 import extra from "../../../form/fields/extra";
 import FieldInput from "../../../form/fields/input";
@@ -37,6 +38,7 @@ export default class FormCreateComponente extends Form {
         data.pertence = this.obj._id
         console.log(data)
         await this.app.repository.create(this.collection, data)
+        snackbar.show("Componente criado com sucesso!", "success")
         window.history.back();
     }
 }

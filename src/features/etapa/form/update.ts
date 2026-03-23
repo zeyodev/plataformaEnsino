@@ -1,5 +1,6 @@
 import App from "../../../app";
 import button from "../../../components/atoms/button";
+import snackbar from "../../../components/atoms/snackbar";
 import Form from "../../../form";
 import FieldInput from "../../../form/fields/input";
 import FieldSelect from "../../../form/fields/select";
@@ -38,6 +39,7 @@ export default class FormUpdateEtapa extends Form {
         const data = this.getDataFromFields();
         data.ordem = Number(data.ordem)
         await this.app.repository.update("Etapas", this.obj._id, data)
+        snackbar.show("Etapa atualizada com sucesso!", "success")
         this.triggerSubmit(data)
     }
 }

@@ -1,5 +1,6 @@
 import App from "../../../app";
 import button from "../../../components/atoms/button";
+import snackbar from "../../../components/atoms/snackbar";
 import Form from "../../../form";
 import FieldSelect from "../../../form/fields/select";
 
@@ -27,6 +28,7 @@ export default class FormCreateEtapaConnection extends Form {
     async onSubmit() {
         const data = this.getDataFromFields();
         await this.app.repository.create("EtapaConnections", data)
+        snackbar.show("Conexão criada com sucesso!", "success")
         this.triggerSubmit(data)
     }
 }

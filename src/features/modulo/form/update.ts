@@ -1,5 +1,6 @@
 import App from "../../../app";
 import button from "../../../components/atoms/button";
+import snackbar from "../../../components/atoms/snackbar";
 import Form from "../../../form";
 import FieldInput from "../../../form/fields/input";
 import FieldSelect from "../../../form/fields/select";
@@ -33,6 +34,7 @@ export default class FormUpdateModulo extends Form {
     async onSubmit() {
         const data = this.getDataFromFields();
         await this.app.repository.update("Modulos", this.obj._id, data)
+        snackbar.show("Módulo atualizado com sucesso!", "success")
         this.triggerSubmit(data)
     }
 }

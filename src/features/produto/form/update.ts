@@ -1,5 +1,6 @@
 import App from "../../../app";
 import button from "../../../components/atoms/button";
+import snackbar from "../../../components/atoms/snackbar";
 import Form from "../../../form";
 import FieldInput from "../../../form/fields/input";
 import FieldIcon from "../../../form/fields/icon";
@@ -25,6 +26,7 @@ export default class FormUpdateProduto extends Form {
     async onSubmit() {
         const data = this.getDataFromFields();
         await this.app.repository.update("Produtos", this.obj._id, data)
+        snackbar.show("Produto atualizado com sucesso!", "success")
         this.triggerSubmit(data)
     }
 }

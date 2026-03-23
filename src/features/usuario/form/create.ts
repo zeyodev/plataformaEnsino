@@ -1,5 +1,6 @@
 import App from "../../../app";
 import button from "../../../components/atoms/button";
+import snackbar from "../../../components/atoms/snackbar";
 import Form from "../../../form";
 import FieldInput from "../../../form/fields/input";
 
@@ -24,5 +25,6 @@ export default class FormCreateUsuario extends Form {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
         })
+        snackbar.show("Conta criada com sucesso!", "success")
     }
 }

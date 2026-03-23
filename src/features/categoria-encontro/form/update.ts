@@ -1,5 +1,6 @@
 import App from "../../../app";
 import button from "../../../components/atoms/button";
+import snackbar from "../../../components/atoms/snackbar";
 import Form from "../../../form";
 import FieldInput from "../../../form/fields/input";
 
@@ -24,6 +25,7 @@ export default class FormUpdateCategoriaEncontro extends Form {
     async onSubmit() {
         const data = this.getDataFromFields();
         await this.app.repository.update("CategoriasEncontros", this.obj._id, data)
+        snackbar.show("Categoria atualizada com sucesso!", "success")
         this.triggerSubmit(data)
     }
 }

@@ -1,5 +1,6 @@
 import App from "../../../app";
 import button from "../../../components/atoms/button";
+import snackbar from "../../../components/atoms/snackbar";
 import Form from "../../../form";
 import FieldInput from "../../../form/fields/input";
 
@@ -20,6 +21,7 @@ export default class FormCreateCategoriaEncontro extends Form {
     async onSubmit() {
         const data = this.getDataFromFields();
         await this.app.repository.create("CategoriasEncontros", data)
+        snackbar.show("Categoria criada com sucesso!", "success")
         this.triggerSubmit(data)
     }
 }

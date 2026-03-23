@@ -1,5 +1,6 @@
 import App from "../../../app";
 import button from "../../../components/atoms/button";
+import snackbar from "../../../components/atoms/snackbar";
 import Form from "../../../form";
 import FieldInput from "../../../form/fields/input";
 
@@ -22,6 +23,7 @@ export default class FormUpdateAdaptadorMapeamento extends Form {
     async onSubmit() {
         const data = this.getDataFromFields();
         await this.app.repository.update("AdaptadorMapeamento", this.obj._id, data)
+        snackbar.show("Mapeamento atualizado com sucesso!", "success")
         this.triggerSubmit(data)
     }
 }

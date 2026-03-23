@@ -1,5 +1,6 @@
 import App from "../../../app";
 import button from "../../../components/atoms/button";
+import snackbar from "../../../components/atoms/snackbar";
 import Form from "../../../form";
 import FieldInput from "../../../form/fields/input";
 import FieldSelect from "../../../form/fields/select";
@@ -35,6 +36,7 @@ export default class FormUpdateJornadaNode extends Form {
         const data = this.getDataFromFields();
         data.tier = Number(data.tier)
         await this.app.repository.update("JornadaNodes", this.obj._id, data)
+        snackbar.show("Nó atualizado com sucesso!", "success")
         this.triggerSubmit(data)
     }
 }

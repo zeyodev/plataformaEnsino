@@ -1,6 +1,7 @@
 import iconTrash from "icons/src/business_and_online_icons/iconTrash";
 import App from "../../../app";
 import button from "../../../components/atoms/button";
+import snackbar from "../../../components/atoms/snackbar";
 import Form from "../../../form";
 import FieldInput from "../../../form/fields/input";
 import FieldSelect from "../../../form/fields/select";
@@ -32,6 +33,7 @@ export default class FormUpdateComponente extends Form {
     async onSubmit() {
         const data = this.getDataFromFields();
         await this.app.repository.update(this.collection, this.obj._id, data)
+        snackbar.show("Componente atualizado com sucesso!", "success")
         window.history.back();
     }
 }

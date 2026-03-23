@@ -1,5 +1,6 @@
 import App from "../../../app";
 import button from "../../../components/atoms/button";
+import snackbar from "../../../components/atoms/snackbar";
 import Form from "../../../form";
 import FieldSelect from "../../../form/fields/select";
 
@@ -30,6 +31,7 @@ export default class FormUpdateModuloAula extends Form {
     async onSubmit() {
         const data = this.getDataFromFields();
         await this.app.repository.update("ModuloAulas", this.obj._id, data)
+        snackbar.show("Vínculo atualizado com sucesso!", "success")
         this.triggerSubmit(data)
     }
 }

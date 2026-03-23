@@ -1,5 +1,6 @@
 import App from "../../../app";
 import button from "../../../components/atoms/button";
+import snackbar from "../../../components/atoms/snackbar";
 import Form from "../../../form";
 import FieldSelect from "../../../form/fields/select";
 
@@ -24,6 +25,7 @@ export default class FormCreateMembro extends Form {
         const data = this.getDataFromFields();
         data.produto = this.produtoId
         await this.app.repository.create("Membros", data)
+        snackbar.show("Membro adicionado com sucesso!", "success")
         this.triggerSubmit(data)
     }
 }

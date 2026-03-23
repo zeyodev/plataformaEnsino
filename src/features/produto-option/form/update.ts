@@ -1,5 +1,6 @@
 import App from "../../../app";
 import button from "../../../components/atoms/button";
+import snackbar from "../../../components/atoms/snackbar";
 import Form from "../../../form";
 import FieldInput from "../../../form/fields/input";
 import FieldIcon from "../../../form/fields/icon";
@@ -33,6 +34,7 @@ export default class FormUpdateProdutoOption extends Form {
         const data = this.getDataFromFields();
         data.ordem = Number(data.ordem) || 0
         await this.app.repository.update("ProdutoOptions", this.obj._id, data)
+        snackbar.show("Option atualizada com sucesso!", "success")
         this.triggerSubmit(data)
     }
 }

@@ -1,5 +1,6 @@
 import App from "../../../app";
 import button from "../../../components/atoms/button";
+import snackbar from "../../../components/atoms/snackbar";
 import Form from "../../../form";
 import FieldInput from "../../../form/fields/input";
 
@@ -22,6 +23,7 @@ export default class FormCreateAula extends Form {
         data.playable = true
         if (this.categoria) data.categoria = this.categoria
         await this.app.repository.create("Aulas", data)
+        snackbar.show("Aula criada com sucesso!", "success")
         this.triggerSubmit(data)
     }
 }

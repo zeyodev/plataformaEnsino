@@ -1,5 +1,6 @@
 import App from "../../../app";
 import button from "../../../components/atoms/button";
+import snackbar from "../../../components/atoms/snackbar";
 import Form from "../../../form";
 import FieldSelect from "../../../form/fields/select";
 
@@ -24,6 +25,7 @@ export default class FormCreateAssinatura extends Form {
         const data = this.getDataFromFields();
         data.usuario = this.usuarioId
         await this.app.repository.create("Assinaturas", data)
+        snackbar.show("Assinatura adicionada com sucesso!", "success")
         this.triggerSubmit(data)
     }
 }

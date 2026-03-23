@@ -1,5 +1,6 @@
 import App from "../../../app";
 import button from "../../../components/atoms/button";
+import snackbar from "../../../components/atoms/snackbar";
 import Form from "../../../form";
 import FieldInput from "../../../form/fields/input";
 import FieldSelect from "../../../form/fields/select";
@@ -30,6 +31,7 @@ export default class FormCreateFase extends Form {
         const data = this.getDataFromFields();
         data.ordem = Number(data.ordem)
         await this.app.repository.create("Fases", data)
+        snackbar.show("Fase criada com sucesso!", "success")
         this.triggerSubmit(data)
     }
 }

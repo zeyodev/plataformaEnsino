@@ -1,5 +1,6 @@
 import App from "../../../app";
 import button from "../../../components/atoms/button";
+import snackbar from "../../../components/atoms/snackbar";
 import Form from "../../../form";
 import FieldSelect from "../../../form/fields/select";
 
@@ -34,6 +35,7 @@ export default class FormUpdateEtapaConnection extends Form {
     async onSubmit() {
         const data = this.getDataFromFields();
         await this.app.repository.update("EtapaConnections", this.obj._id, data)
+        snackbar.show("Conexão atualizada com sucesso!", "success")
         this.triggerSubmit(data)
     }
 }

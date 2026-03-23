@@ -1,5 +1,6 @@
 import App from "../../../app";
 import button from "../../../components/atoms/button";
+import snackbar from "../../../components/atoms/snackbar";
 import Form from "../../../form";
 import FieldInput from "../../../form/fields/input";
 import FieldIcon from "../../../form/fields/icon";
@@ -30,6 +31,7 @@ export default class FormCreateProdutoOption extends Form {
         data.ordem = Number(data.ordem) || 0
         data.config = {}
         await this.app.repository.create("ProdutoOptions", data)
+        snackbar.show("Option criada com sucesso!", "success")
         this.triggerSubmit(data)
     }
 }

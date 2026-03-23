@@ -1,5 +1,6 @@
 import App from "../../../app";
 import button from "../../../components/atoms/button";
+import snackbar from "../../../components/atoms/snackbar";
 import Form from "../../../form";
 import FieldInput from "../../../form/fields/input";
 import FieldSelect from "../../../form/fields/select";
@@ -30,6 +31,7 @@ export default class FormCreateJornada extends Form {
     async onSubmit() {
         const data = this.getDataFromFields();
         await this.app.repository.create("Jornadas", data)
+        snackbar.show("Jornada criada com sucesso!", "success")
         this.triggerSubmit(data)
     }
 }

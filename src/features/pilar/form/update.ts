@@ -1,5 +1,6 @@
 import App from "../../../app";
 import button from "../../../components/atoms/button";
+import snackbar from "../../../components/atoms/snackbar";
 import Form from "../../../form";
 import FieldInput from "../../../form/fields/input";
 import FieldIcon from "../../../form/fields/icon";
@@ -25,6 +26,7 @@ export default class FormUpdatePilar extends Form {
     async onSubmit() {
         const data = this.getDataFromFields();
         await this.app.repository.update("Pilares", this.obj._id, data)
+        snackbar.show("Pilar atualizado com sucesso!", "success")
         this.triggerSubmit(data)
     }
 }
