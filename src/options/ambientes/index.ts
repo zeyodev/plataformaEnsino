@@ -21,7 +21,7 @@ export default class OptionAmbientes extends Option {
         div().class("d-grid", "gap-m").object(async container => {
             const accessToken = this.app.getAccessToken()
             // Busca membros do usuário atual
-            const [membros] = await this.app.repository.findMany("Membros", { usuario: (this.app.session as any).usuarioId })
+            const [membros] = await this.app.repository.findMany("Assinaturas", { usuario: (this.app.session as any).usuarioId })
             for (const membro of membros) {
                 const [produto] = await this.app.repository.findOne("Produtos", { _id: membro.produto })
                 if (!produto) continue

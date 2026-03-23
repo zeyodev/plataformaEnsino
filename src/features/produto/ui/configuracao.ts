@@ -20,7 +20,7 @@ export default (app: App, obj: any) =>
             }, produtoOptionComponent)
         ))
         .push(new Aba("membros", "Membros", "iconUsers",
-            CRUD(app, "Membros", { create: "Adicionar Membro" }, {
+            CRUD(app, "Assinaturas", { create: "Adicionar Membro" }, {
                 create: new FormCreateMembro(app, obj._id),
                 read: { produto: obj._id },
                 update: (app, m) => new FormCreateMembro(app, obj._id)

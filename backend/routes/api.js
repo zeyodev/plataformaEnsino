@@ -10,7 +10,7 @@ const COLLECTIONS = [
     'Aulas', 'Pilares', 'Modulos', 'ModuloAulas',
     'CategoriasEncontros', 'Componentes', 'AdaptadorMapeamento',
     'JornadaNodes', 'NodeAulas', 'Usuarios',
-    'Membros', 'Produtos', 'ProdutoOptions', 'Mostradores'
+    'Membros', 'Assinaturas', 'Produtos', 'ProdutoOptions', 'Mostradores'
 ];
 
 /**

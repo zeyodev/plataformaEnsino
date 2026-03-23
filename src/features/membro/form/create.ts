@@ -24,7 +24,7 @@ export default class FormCreateMembro extends Form {
     async onSubmit() {
         const data = this.getDataFromFields();
         data.produto = this.produtoId
-        await this.app.repository.create("Membros", data)
+        await this.app.repository.create("Assinaturas", data)
         snackbar.show("Membro adicionado com sucesso!", "success")
         this.triggerSubmit(data)
     }

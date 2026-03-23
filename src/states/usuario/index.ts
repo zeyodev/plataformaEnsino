@@ -53,7 +53,7 @@ export default class Usuario extends State {
             context.app.setRepositoryHTTP()
 
             // Busca os produtos/ambientes que o usuário é membro
-            const [membros] = await context.app.repository.findMany("Membros", { usuario: context.app.session.usuarioId })
+            const [membros] = await context.app.repository.findMany("Assinaturas", { usuario: context.app.session.usuarioId })
 
             // Se o usuário possui somente um produto, redireciona direto
             if (membros.length === 1) {
