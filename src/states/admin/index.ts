@@ -5,6 +5,7 @@ import painelNav, { PainelNav } from "../../components/templates/painelNav"
 import OptionAdminJornadas from "../../options/admin-jornadas"
 import OptionAdminAulas from "../../options/admin-aulas"
 import OptionAdminUsuarios from "../../options/admin-usuarios"
+import OptionAdminProdutos from "../../options/admin-produtos"
 import OptionConfiguracoes from "../../options/configuracoes"
 import RepositorySocket from "../../repository/socket"
 
@@ -31,8 +32,8 @@ export default class Admin extends State {
             context.app.setRepository(new RepositorySocket(context.app.socket))
 
             this.painel.sideNav.setInfo([
+                new OptionAdminProdutos(context.app),
                 new OptionAdminAulas(context.app),
-                //new OptionAdminJornadas(context.app),
                 new OptionAdminUsuarios(context.app),
                 new OptionConfiguracoes(context.app),
             ], (option) => {

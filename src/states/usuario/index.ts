@@ -1,21 +1,18 @@
 declare const process: { env: { [key: string]: string } }
 import State from ".."
 import Context from "../context"
-import Z, { div, h2 } from "zeyo"
+import Z from "zeyo"
 import painelNav, { PainelNav } from "../../components/templates/painelNav"
-import OptionJornadas from "../../options/jornadas"
-import OptionPilares from "../../options/pilares"
-import Aula from "../aula"
 import Admin from "../admin"
-import OptionEncontros from "../../options/encontros"
+import Produto from "../produto"
+import OptionAmbientes from "../../options/ambientes"
 import OptionConfiguracoes from "../../options/configuracoes"
+import Aula from "../aula"
 
 export default class Usuario extends State {
     name = "u"
     children: { [key: string]: new () => State } = {}
-    options = {
-        /* organizacoes: OptionOrganizacoes, */
-    }
+    options = {}
     painel: PainelNav = ({} as any)
     title = Z("h1")
 
@@ -36,7 +33,13 @@ export default class Usuario extends State {
                 const res = await fetch(`${serverUrl}/admin/verify`, {
                     headers: { 'Authorization': `Bearer ${accessToken}` }
                 })
-                const { isAdmin } = await res.json()
+                const { isAdmin, usuario } = await res.json()
+
+                // Guarda o id do usuario na sessão
+                if (usuario?._id) {
+                    context.app.session.usuarioId = usuario._id
+                }
+
                 if (isAdmin) {
                     context.setState(new Admin())
                     context.handle()
@@ -46,10 +49,28 @@ export default class Usuario extends State {
                 console.log("Erro ao verificar admin:", err)
             }
 
+            // Busca os produtos/ambientes que o usuário é membro
+            const [membros] = await context.app.repository.findMany("Membros", { usuario: context.app.session.usuarioId })
+
+            // Se o usuário possui somente um produto, redireciona direto
+            if (membros.length === 1) {
+                const [produto] = await context.app.repository.findOne("Produtos", { _id: membros[0].produto })
+                if (produto) {
+                    context.setState(new Produto(produto))
+                    context.handle()
+                    return
+                }
+            }
+
+            // Caso contrário, mostra lista de ambientes + configurações
+            const optionAmbientes = new OptionAmbientes(context.app)
+            optionAmbientes.setOnSelect((produto: any) => {
+                context.setState(new Produto(produto))
+                context.handle()
+            })
+
             this.painel.sideNav.setInfo([
-                new OptionJornadas(context.app),
-                new OptionPilares(context.app),
-                new OptionEncontros(context.app),
+                optionAmbientes,
                 new OptionConfiguracoes(context.app),
             ], (option) => {
                 this.painel.subhandle(option)
@@ -58,7 +79,6 @@ export default class Usuario extends State {
     }
 
     commands = {
-
         "assistir": async (context: Context, aula: any) => {
             console.log("abrindo aula", aula)
             context.setState(new Aula(aula)).handle()

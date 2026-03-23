@@ -1,35 +1,29 @@
 import App from "../../../app";
 import button from "../../../components/atoms/button";
 import Form from "../../../form";
-import FieldInput from "../../../form/fields/input";
 import FieldSelect from "../../../form/fields/select";
 
-export default class FormCreateJornada extends Form {
-    constructor(private app: App) {
+export default class FormCreateAssinatura extends Form {
+    constructor(private app: App, private usuarioId: string) {
         super();
-        this.title.text("Criar Jornada")
+        this.title.text("Adicionar Assinatura")
         const selectProduto = new FieldSelect("produto", true).label("Produto");
         (async () => {
             const [produtos] = await app.repository.findMany("Produtos", {})
             selectProduto.options(
-                { value: "", name: "-- Nenhum --" },
                 ...produtos.map((p: any) => ({ value: p._id, name: p.titulo }))
             )
         })()
-        this.body.children(
-            new FieldInput("titulo", true).label("Título"),
-            new FieldInput("descricao", true).label("Descrição"),
-            new FieldInput("icon", true).label("Ícone"),
-            selectProduto,
-        )
+        this.body.children(selectProduto)
         this.footer.children(
-            button("Criar").set("type", "submit").style("primary"),
+            button("Adicionar").set("type", "submit").style("primary"),
         )
     }
 
     async onSubmit() {
         const data = this.getDataFromFields();
-        await this.app.repository.create("Jornadas", data)
+        data.usuario = this.usuarioId
+        await this.app.repository.create("Assinaturas", data)
         this.triggerSubmit(data)
     }
 }

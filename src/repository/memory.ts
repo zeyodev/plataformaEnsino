@@ -9761,7 +9761,10 @@ let data: { [key: string]: any[] } = {
         { _id: "tsl-ec32", jornada: "transformacao-salao-lucrativo", from: "etapa-planejamento-anual", to: "etapa-pilar-vendas" },
         { _id: "tsl-ec33", jornada: "transformacao-salao-lucrativo", from: "etapa-pilar-vendas", to: "etapa-legalizacao-empresa" },
         { _id: "tsl-ec34", jornada: "transformacao-salao-lucrativo", from: "etapa-legalizacao-empresa", to: "etapa-custo-montagem-salao" }
-    ]
+    ],
+    Produtos: [] as any[],
+    ProdutoOptions: [] as any[],
+    Membros: [] as any[],
 };
 
 
@@ -9860,7 +9863,10 @@ export default class RepositoryMemory extends Trigger implements Repository {
 
     check(item: any, query: any) {
         for (const key in query) {
-            if (!item || item[key] !== query[key]) return false
+            if (!item) return false
+            if (Array.isArray(query[key])) {
+                if (!query[key].includes(item[key])) return false
+            } else if (item[key] !== query[key]) return false
         }
         return true
     }

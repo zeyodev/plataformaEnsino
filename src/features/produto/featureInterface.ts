@@ -1,6 +1,5 @@
-export default interface Jornada {
+export default interface Produto {
     _id: string
-    produto: string
     titulo: string
     descricao: string
     icon: string
