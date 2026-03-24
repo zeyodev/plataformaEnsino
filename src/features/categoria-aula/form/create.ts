@@ -11,8 +11,7 @@ export default class FormCreateCategoriaAula extends Form {
         this.title.text("Criar Categoria de Aula")
         this.body.children(
             new FieldInput("titulo", true).label("Título"),
-            new FieldInput("value", true).label("Valor (slug)"),
-            new FieldIcon("icon", true).label("Ícone"),
+            new FieldIcon("icon", true).label("Ícone").setValue("iconFolder"),
         )
         this.footer.children(
             button("Criar").set("type", "submit").style("primary"),
@@ -21,6 +20,7 @@ export default class FormCreateCategoriaAula extends Form {
 
     async onSubmit() {
         const data = this.getDataFromFields();
+        data.value = data.titulo.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, "-");
         await this.app.repository.create("CategoriasAulas", data)
         snackbar.show("Categoria criada com sucesso!", "success")
         this.triggerSubmit(data)

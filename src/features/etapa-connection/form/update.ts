@@ -1,3 +1,4 @@
+import iconTrash from "icons/src/business_and_online_icons/iconTrash";
 import App from "../../../app";
 import button from "../../../components/atoms/button";
 import snackbar from "../../../components/atoms/snackbar";
@@ -8,6 +9,11 @@ export default class FormUpdateEtapaConnection extends Form {
     constructor(private app: App, private obj: any) {
         super();
         this.title.text("Editar Conexão de Etapa")
+        this.header.children(
+            button().style("no-bg").style("no-p").set("type", "button").icon(iconTrash()).click(() => this.app.repository.delete("EtapaConnections", obj._id).then(() => {
+                this.triggerSubmit()
+            }))
+        )
         const selectJornada = new FieldSelect("jornada", true).label("Jornada");
         const selectFrom = new FieldSelect("from", true).label("De (Etapa)");
         const selectTo = new FieldSelect("to", true).label("Para (Etapa)");
@@ -25,10 +31,6 @@ export default class FormUpdateEtapaConnection extends Form {
         this.body.children(selectJornada, selectFrom, selectTo)
         this.footer.children(
             button("Salvar").set("type", "submit").style("primary"),
-            button("Excluir").style("danger").click(async () => {
-                await this.app.repository.delete("EtapaConnections", obj._id)
-                this.triggerSubmit()
-            }),
         )
     }
 

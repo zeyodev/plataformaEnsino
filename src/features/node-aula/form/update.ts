@@ -1,3 +1,4 @@
+import iconTrash from "icons/src/business_and_online_icons/iconTrash";
 import App from "../../../app";
 import button from "../../../components/atoms/button";
 import snackbar from "../../../components/atoms/snackbar";
@@ -8,6 +9,11 @@ export default class FormUpdateNodeAula extends Form {
     constructor(private app: App, private obj: any) {
         super();
         this.title.text("Editar Vínculo Nó-Aula")
+        this.header.children(
+            button().style("no-bg").style("no-p").set("type", "button").icon(iconTrash()).click(() => this.app.repository.delete("NodeAulas", obj._id).then(() => {
+                this.triggerSubmit()
+            }))
+        )
         const selectNode = new FieldSelect("node", true).label("Nó da Jornada");
         const selectAula = new FieldSelect("aula", true).label("Aula");
         (async () => {
@@ -21,10 +27,6 @@ export default class FormUpdateNodeAula extends Form {
         this.body.children(selectNode, selectAula)
         this.footer.children(
             button("Salvar").set("type", "submit").style("primary"),
-            button("Excluir").style("danger").click(async () => {
-                await this.app.repository.delete("NodeAulas", obj._id)
-                this.triggerSubmit()
-            }),
         )
     }
 

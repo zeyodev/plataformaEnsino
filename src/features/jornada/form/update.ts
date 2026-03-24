@@ -1,3 +1,4 @@
+import iconTrash from "icons/src/business_and_online_icons/iconTrash";
 import App from "../../../app";
 import button from "../../../components/atoms/button";
 import snackbar from "../../../components/atoms/snackbar";
@@ -9,6 +10,11 @@ export default class FormUpdateJornada extends Form {
     constructor(private app: App, private obj: any) {
         super();
         this.title.text("Editar Jornada")
+        this.header.children(
+            button().style("no-bg").style("no-p").set("type", "button").icon(iconTrash()).click(() => this.app.repository.delete("Jornadas", obj._id).then(() => {
+                this.triggerSubmit()
+            }))
+        )
         const selectProduto = new FieldSelect("produto", true).label("Produto");
         (async () => {
             const [produtos] = await app.repository.findMany("Produtos", {})
@@ -26,10 +32,6 @@ export default class FormUpdateJornada extends Form {
         )
         this.footer.children(
             button("Salvar").set("type", "submit").style("primary"),
-            button("Excluir").style("danger").click(async () => {
-                await this.app.repository.delete("Jornadas", obj._id)
-                this.triggerSubmit()
-            }),
         )
     }
 

@@ -8,7 +8,7 @@ declare const process: { env: { [key: string]: string } }
 
 export default function RepositoryPlugin<Base extends ZeyoAppConstructor>(base: Base) {
     return class extends base {
-        repository: any = new RepositoryMemory()
+        repository: Repository = new RepositoryMemory()
         repositoryHTTP: RepositoryHTTP | null = null
 
         setRepository(repository?: any) {
