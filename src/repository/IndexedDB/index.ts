@@ -38,16 +38,19 @@ export default class RepositoryIndexedDB extends Create(Find(Method)) implements
     }
 
     async update(collection: string, id: string, value: any, origin?: string): Promise<[any, boolean]> {
-        //this.fireTrigger(collection, { id, value }, "update", origin)
-        if(collection !== "_Logs")
-            await super.update(collection, id, value)
-        console.log(id)
         const [update] = await this.findOne(collection, { _id: id })
         const store = this.idb.db.transaction(collection, "readwrite").objectStore(collection);
         Object.assign(update, value);
-        console.log('update', update)
-        store.put(update)
-        console.log(await this.findOne(collection, { _id: id }))
+        for (const key in update) {
+            if (update[key] === null || update[key] === undefined) delete update[key]
+        }
+        await new Promise<void>((resolve, reject) => {
+            const request = store.put(update);
+            request.onsuccess = () => resolve();
+            request.onerror = () => reject(request.error);
+        });
+        if(collection !== "_Logs")
+            await super.update(collection, id, value)
         return [update, false]
     }
     updateQuery(collection: string, query: any, value: any): Promise<[any, boolean]> {
@@ -69,10 +72,13 @@ export default class RepositoryIndexedDB extends Create(Find(Method)) implements
 
     async delete(collection: string, id: string, origin?: string): Promise<[any, boolean]> {
         await this.waitDB("delete")
-        //this.fireTrigger(collection, id, "delete", origin)
-        await super.delete(collection, id)
         const store = this.idb.db.transaction(collection, "readwrite").objectStore(collection);
-        store.delete(id);
+        await new Promise<void>((resolve, reject) => {
+            const request = store.delete(id);
+            request.onsuccess = () => resolve();
+            request.onerror = () => reject(request.error);
+        });
+        await super.delete(collection, id)
         return [null, false]
     }
     deleteUsecase(collection: string, query: any): Promise<[any, boolean]> {

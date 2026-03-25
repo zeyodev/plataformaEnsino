@@ -5,7 +5,7 @@ import Form from "../../../form";
 import FieldInput from "../../../form/fields/input";
 
 export default class FormCreateAula extends Form {
-    constructor(private app: App, private categoria?: string) {
+    constructor(private app: App, private pastaId?: string) {
         super();
         this.title.text("Criar Aula")
         this.body.children(
@@ -21,7 +21,7 @@ export default class FormCreateAula extends Form {
         const data = this.getDataFromFields();
         data.status = "CONVERTED"
         data.playable = true
-        if (this.categoria) data.categoria = this.categoria
+        if (this.pastaId) data.pastaId = this.pastaId
         await this.app.repository.create("Aulas", data)
         snackbar.show("Aula criada com sucesso!", "success")
         this.triggerSubmit(data)

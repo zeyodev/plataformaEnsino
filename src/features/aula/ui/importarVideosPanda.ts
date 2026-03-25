@@ -73,7 +73,7 @@ function videoCard(video: any, onSelect: (video: any) => void) {
     }}
 }
 
-export default (app: App, categoria?: string) => {
+export default (app: App, pastaId?: string) => {
     const container = div().class("d-grid", "gap-g")
     const listContainer = div().class("d-grid", "gap-m")
     const paginationContainer = div().class("d-flex", "gap-m").object(o => {
@@ -178,7 +178,7 @@ export default (app: App, categoria?: string) => {
 
     selectAllBtn.click(toggleSelectAll)
 
-    async function loadPage(page: number) {
+    async function loadPage(page: number): Promise<any> {
         statusText.text("Carregando vídeos...")
         listContainer.HTML("")
         currentCards = []
@@ -274,7 +274,7 @@ export default (app: App, categoria?: string) => {
                 thumbnail: video.thumbnail || "",
                 length: video.length || 0,
             }
-            if (categoria) data.categoria = categoria
+            if (pastaId) data.pastaId = pastaId
 
             await app.repository.create("Aulas", data)
             count++
