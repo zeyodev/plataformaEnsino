@@ -22,10 +22,10 @@ _O que já está funcional no código._
 - [x] Chatbot de IA com streaming e ações pré-definidas (`aiChat/`).
 - [x] Transcrição automática de aulas via Socket.io (`gerar-transcricao`).
 - [x] CRUD básico de Produtos, Assinaturas e Membros.
-- [~] Dossiê do Aluno (abas Anotações + Eventos, sem timeline completa).
-- [~] Dashboard com Roadmap visual (sem métricas de progresso).
-- [~] Encontros ao vivo (estrutura de abas, sem integração Meet).
-- [~] Controle de acesso (Assinaturas existem, sem bloqueio efetivo por permissão).
+- [x] Dossiê do Aluno (abas Anotações + Eventos com CRUD funcional + Timeline cronológica).
+- [x] Dashboard com Roadmap visual (com barra de progresso por etapa e resumo geral de conclusão).
+- [x] Encontros ao vivo (estrutura de abas + listagem de encontros com botão "Entrar na Aula" via meet_link manual).
+- [x] Controle de acesso (Assinaturas com campo `status` e bloqueio efetivo para assinaturas inativas/suspensas).
 
 ---
 
@@ -33,28 +33,63 @@ _O que já está funcional no código._
 _Prioridade MÁXIMA — sem isso não há fluxo de entrada de alunos em produção._
 _Ref. briefing: §12, §13, §14_
 
-#### 1.1 Checkout próprio com PagarMe/Stone
+#### 1.1 Checkout Builder — Composição de pagamento misto
+- [ ] Interface onde o consultor/admin monta o checkout do cliente, distribuindo o valor total entre múltiplos métodos de pagamento.
+  - Ex: Total R$19.000 → R$1.000 no PIX + R$5.000 no Boleto + R$13.000 em 18x no Crédito.
+- [ ] Componente `CheckoutBuilder/` com:
+  - Campo de valor total do produto.
+  - Botão "+ Adicionar método de pagamento" (PIX, Boleto, Crédito).
+  - Para cada método adicionado: campo de valor parcial + opções específicas (parcelas no crédito, vencimento no boleto).
+  - Validação em tempo real: soma dos valores parciais deve bater com o total.
+  - Preview resumido do plano de pagamento antes de gerar o link.
+- [ ] Backend: rota `POST /api/checkout/build` — recebe array de splits de pagamento, gera link único de checkout.
+- [ ] Backend: lógica de transação composta no PagarMe/Stone (uma order com múltiplos payments).
+- [ ] Collection: `CheckoutLinks` (id, produto, splits[], cupom, valor_total, criado_por, link, status, validade).
+
+#### 1.2 Formulário de Cadastro estilo Typeform
+- [ ] Fluxo step-by-step fullscreen (uma pergunta por tela, transição suave com animação).
+- [ ] Campos na sequência:
+  1. Nome completo
+  2. Email
+  3. Telefone
+  4. CNPJ
+  5. Endereço (logradouro + número + complemento)
+  6. CEP (com auto-preenchimento de cidade/estado via API ViaCEP)
+  7. Cidade
+  8. Estado
+  9. País
+- [ ] Componente `TypeformCheckout/` com:
+  - Navegação por teclado (Enter avança, seta volta).
+  - Barra de progresso no topo.
+  - Validação inline por campo (máscara de CNPJ, validação de email, CEP).
+  - Animação de slide entre perguntas.
+  - Tela final de resumo antes de prosseguir ao pagamento.
+- [ ] Integração com CEP: ao digitar CEP, preencher cidade/estado/país automaticamente.
+- [ ] Fluxo completo: Link do Checkout → Formulário Typeform → Resumo do Pagamento → Confirmação.
+- [ ] Collections: expandir `Clientes` (nome, email, telefone, cnpj, endereco, cep, cidade, estado, pais).
+
+#### 1.3 Checkout próprio com PagarMe/Stone
 - [ ] Backend: wrapper SDK PagarMe — criação de transação, suporte a cartão/boleto/PIX.
-- [ ] Backend: rota `POST /api/checkout` (dados do cliente + produto + forma de pagamento).
+- [ ] Backend: rota `POST /api/checkout` (dados do cliente + produto + splits de pagamento).
 - [ ] Backend: rota `POST /api/webhooks/pagarme` para confirmação de pagamento.
 - [ ] Backend: suporte a cupons de desconto e valores variáveis.
-- [ ] Frontend: State `Checkout` — página pública com formulário e identidade visual Duo Academy.
+- [ ] Frontend: State `Checkout` — página pública com identidade visual Duo Academy, integrada ao formulário Typeform (1.2) e ao builder (1.1).
 - [ ] Collections: `Pagamentos`, `Cupons`.
 
-#### 1.2 Fluxo pós-pagamento automático
+#### 1.4 Fluxo pós-pagamento automático
 - [ ] Webhook cria `Usuario` automaticamente (se não existe).
 - [ ] Webhook cria `Assinatura` vinculando usuário ao produto pago.
 - [ ] Disparo de email de boas-vindas com credenciais.
 - [ ] Evento Socket.io `usuario:novo` para notificar admin.
 - [ ] Expandir interface `Assinatura` com campos: `status`, `dataInicio`, `dataFim`, `pagamento`.
 
-#### 1.3 Contrato/Termo de adesão digital
+#### 1.5 Contrato/Termo de adesão digital
 - [ ] Tela pós-checkout que exibe termo de adesão simplificado.
 - [ ] Coleta de CPF como assinatura digital.
 - [ ] Collection: `Contratos` (usuario, cpf, data_aceite, texto_contrato).
 - [ ] Fluxo: pagamento → cadastro → exibição do termo → acesso liberado.
 
-#### 1.4 Controle de acesso efetivo por permissão
+#### 1.6 Controle de acesso efetivo por permissão
 - [ ] Verificar `status` da Assinatura antes de liberar conteúdo no State `Usuario`.
 - [ ] Campo `nivelAcesso` em `ProdutoOption` para filtrar por nível do usuário.
 - [ ] Lógica de bloqueio: mentorias e acessos filtrados por nível (conforme briefing §10).
@@ -229,9 +264,11 @@ _Foco: Estabilidade, testes e deploy._
 
 | Collection | Fase | Campos Principais |
 |---|---|---|
-| `Pagamentos` | 1.1 | usuario, produto, valor, status, metodo, gateway_id |
-| `Cupons` | 1.1 | codigo, percentual, ativo, validade |
-| `Contratos` | 1.3 | usuario, cpf, data_aceite, texto_contrato |
+| `CheckoutLinks` | 1.1 | produto, splits[], cupom, valor_total, criado_por, link, status, validade |
+| `Clientes` | 1.2 | nome, email, telefone, cnpj, endereco, cep, cidade, estado, pais |
+| `Pagamentos` | 1.3 | usuario, produto, valor, status, metodo, gateway_id |
+| `Cupons` | 1.3 | codigo, percentual, ativo, validade |
+| `Contratos` | 1.5 | usuario, cpf, data_aceite, texto_contrato |
 | `Onboardings` | 2.3 | usuario, produto, status, data_realizacao |
 | `DRE_Resultados` | 2.4 | usuario, dados_financeiros, indicadores |
 | `Precificacao_Resultados` | 2.4 | usuario, custos, margens, tabela_precos |

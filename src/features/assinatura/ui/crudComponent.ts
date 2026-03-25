@@ -11,6 +11,13 @@ export default (app: App): CRUDComponent => (new class extends Card {
                 if (produto) this.nome.text(produto.titulo || v)
             })()
         },
+        "status": (v: any) => {
+            const label = v || "ativa"
+            this.statusEl.text(label.charAt(0).toUpperCase() + label.slice(1))
+            this.statusEl.element.className = ""
+            this.statusEl.class(label === "ativa" ? "tag-success" : label === "suspensa" ? "tag-warning" : "tag-danger")
+        },
     }
     nome = span()
-}).object(o => o.children(o.nome)).class("d-flex", "gap-m") as CRUDComponent
+    statusEl = span().class("tag-success").text("Ativa")
+}).object(o => o.children(o.nome, o.statusEl)).class("d-flex", "gap-m", "ai-center") as CRUDComponent

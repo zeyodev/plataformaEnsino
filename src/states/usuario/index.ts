@@ -54,10 +54,20 @@ export default class Usuario extends State {
 
             // Busca os produtos/ambientes que o usuário é membro
             const [membros] = await context.app.repository.findMany("Assinaturas", { usuario: context.app.session.usuarioId })
+            const ativos = membros.filter((m: any) => !m.status || m.status === "ativa")
+
+            // Se não há assinaturas ativas, bloqueia acesso
+            if (ativos.length === 0) {
+                this.painel.subhandle({ component: Z("div").class("d-grid", "gap-m", "p-g").children(
+                    Z("h2").text("Acesso não disponível"),
+                    Z("p").text("Você não possui nenhuma assinatura ativa. Entre em contato com o suporte.")
+                ), title: "Sem acesso" } as any)
+                return
+            }
 
             // Se o usuário possui somente um produto, redireciona direto
-            if (membros.length === 1) {
-                const [produto] = await context.app.repository.findOne("Produtos", { _id: membros[0].produto })
+            if (ativos.length === 1) {
+                const [produto] = await context.app.repository.findOne("Produtos", { _id: ativos[0].produto })
                 if (produto) {
                     context.setState(new Produto(produto))
                     context.handle()

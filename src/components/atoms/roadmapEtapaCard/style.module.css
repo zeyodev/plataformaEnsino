@@ -92,3 +92,35 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+.progressBar {
+    width: 100%;
+    height: 4px;
+    background: var(--neutral-200);
+    border-radius: 2px;
+    margin-top: 0.5rem;
+    overflow: hidden;
+}
+
+.progressFill {
+    height: 100%;
+    background: var(--primary-500);
+    border-radius: 2px;
+    transition: width 0.4s ease;
+}
+
+.completed {
+    border-color: var(--success, #22c55e) !important;
+}
+
+.completed .progressFill {
+    background: var(--success, #22c55e);
+}
+
+.badgeConcluida {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--success, #22c55e);
+    margin-top: 0.25rem;
+    text-align: right;
+}

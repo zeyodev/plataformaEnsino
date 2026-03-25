@@ -15,7 +15,13 @@ export default class FormCreateAssinatura extends Form {
                 ...produtos.map((p: any) => ({ value: p._id, name: p.titulo }))
             )
         })()
-        this.body.children(selectProduto)
+        const selectStatus = new FieldSelect("status", true).label("Status")
+        selectStatus.options(
+            { value: "ativa", name: "Ativa" },
+            { value: "inativa", name: "Inativa" },
+            { value: "suspensa", name: "Suspensa" },
+        )
+        this.body.children(selectProduto, selectStatus)
         this.footer.children(
             button("Adicionar").set("type", "submit").style("primary"),
         )

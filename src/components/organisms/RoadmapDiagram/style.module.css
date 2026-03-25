@@ -118,6 +118,17 @@
     filter: drop-shadow(0 0 5px var(--primary-400));
 }
 
+.progressSummary {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-400);
+    text-align: center;
+    padding: 0.5rem 1rem;
+    background: var(--background-100);
+    border: 1px solid var(--neutral-300);
+    border-radius: 0.5rem;
+}
+
 @keyframes dashMove {
     from { stroke-dashoffset: 1000; }
     to { stroke-dashoffset: 0; }

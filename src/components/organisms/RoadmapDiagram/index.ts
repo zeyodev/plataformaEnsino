@@ -54,6 +54,9 @@ export default class RoadmapDiagram extends Div {
     private resizeObserver: ResizeObserver | null = null
     private etapaFaseMap: Map<string, string> = new Map()
     private faseEtapaOrder: Map<string, string[]> = new Map()
+    private progressTotal = 0
+    private progressCompleted = 0
+    private progressElement: HTMLElement = document.createElement("span")
 
     constructor(private app: App) {
         super()
@@ -66,6 +69,14 @@ export default class RoadmapDiagram extends Div {
 
     setFases(fases: FaseData[], etapas: EtapaData[]) {
         const sortedFases = [...fases].sort((a, b) => a.ordem - b.ordem)
+
+        // Progress summary
+        const summaryEl = span().class(style.progressSummary)
+        this.progressTotal = etapas.length
+        this.progressCompleted = 0
+        this.progressElement = summaryEl.element as HTMLElement
+        this.updateProgressSummary()
+        this.nodesContainer.children(summaryEl)
 
         for (const fase of sortedFases) {
             const faseEtapas = etapas
@@ -121,7 +132,20 @@ export default class RoadmapDiagram extends Div {
         const [aula] = await this.app.repository.findOne("Aulas", { _id: aulaId })
         if (aula) {
             card.setAula(aula)
+            const [conclusao] = await this.app.repository.findOne("AulaConclusoes", { aulaId })
+            if (conclusao) {
+                card.setProgress(conclusao.progresso || 0, conclusao.concluida || false)
+                if (conclusao.concluida) {
+                    this.progressCompleted++
+                    this.updateProgressSummary()
+                }
+            }
         }
+    }
+
+    private updateProgressSummary() {
+        const pct = this.progressTotal > 0 ? Math.round((this.progressCompleted / this.progressTotal) * 100) : 0
+        this.progressElement.textContent = `${this.progressCompleted}/${this.progressTotal} etapas concluídas (${pct}%)`
     }
 
     setConnections(connections: EtapaConnectionData[]) {

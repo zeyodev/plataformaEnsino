@@ -22,7 +22,8 @@ export default class OptionAmbientes extends Option {
             const accessToken = this.app.getAccessToken()
             // Busca membros do usuário atual
             const [membros] = await this.app.repository.findMany("Assinaturas", { usuario: (this.app.session as any).usuarioId })
-            for (const membro of membros) {
+            const ativos = membros.filter((m: any) => !m.status || m.status === "ativa")
+            for (const membro of ativos) {
                 const [produto] = await this.app.repository.findOne("Produtos", { _id: membro.produto })
                 if (!produto) continue
                 const card = new Card().class("d-flex", "gap-g", "ai-center", "pointer").object(c => {
@@ -37,7 +38,7 @@ export default class OptionAmbientes extends Option {
                 })
                 container.children(card)
             }
-            if (membros.length === 0) {
+            if (ativos.length === 0) {
                 container.children(p("Você não está inscrito em nenhum ambiente."))
             }
         })
