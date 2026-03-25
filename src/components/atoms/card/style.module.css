@@ -1,17 +1,22 @@
 .card {
-    background-color: var(--background);
+    background-color: var(--surface-container-high);
     padding: 1rem;
-    border-radius: 1rem;
+    border-radius: 0.75rem;
     flex-shrink: 0;
+    color: var(--on-surface);
+    transition: background-color 0.2s ease;
 }
+
 .card.no-bg {
     background: none;
 }
+
 .card.accent {
-    background-color: var(--accent);
+    background: var(--gold-gradient);
+    color: var(--on-primary);
 }
 
 .card.inverted {
-    background-color: var(--text);
-    color: var(--background);
+    background-color: var(--surface-container-lowest);
+    color: var(--on-surface);
 }

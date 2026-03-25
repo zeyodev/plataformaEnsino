@@ -3,6 +3,6 @@
     height: 100%;
     width: 100%;
     z-index: 999;
-    background-color: var(--WDS-background-elevated-wash-inset);
+    background-color: var(--surface-container);
     top: 0;
 }

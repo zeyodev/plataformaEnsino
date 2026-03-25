@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,300;0,400;0,700;1,400&amp;family=Manrope:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-primary-fixed": "#241a00",
+              "tertiary-container": "#97b0ff",
+              "tertiary": "#bfcdff",
+              "surface-dim": "#131313",
+              "surface": "#131313",
+              "on-error-container": "#ffdad6",
+              "secondary-fixed": "#ffdcc2",
+              "inverse-primary": "#735c00",
+              "surface-container": "#201f1f",
+              "inverse-surface": "#e5e2e1",
+              "on-background": "#e5e2e1",
+              "primary": "#f2ca50",
+              "primary-fixed-dim": "#e9c349",
+              "on-tertiary": "#082b72",
+              "on-error": "#690005",
+              "surface-bright": "#393939",
+              "primary-fixed": "#ffe088",
+              "on-tertiary-fixed-variant": "#27438a",
+              "secondary-container": "#7a4100",
+              "secondary-fixed-dim": "#ffb77b",
+              "surface-container-highest": "#353534",
+              "outline": "#99907c",
+              "on-secondary-container": "#ffb270",
+              "secondary": "#ffb77b",
+              "on-primary-fixed-variant": "#574500",
+              "error": "#ffb4ab",
+              "on-surface-variant": "#d0c5af",
+              "surface-container-low": "#1c1b1b",
+              "tertiary-fixed-dim": "#b4c5ff",
+              "background": "#131313",
+              "surface-tint": "#e9c349",
+              "surface-container-high": "#2a2a2a",
+              "surface-variant": "#353534",
+              "on-tertiary-container": "#254188",
+              "on-tertiary-fixed": "#00174b",
+              "on-surface": "#e5e2e1",
+              "error-container": "#93000a",
+              "on-primary": "#3c2f00",
+              "outline-variant": "#4d4635",
+              "primary-container": "#d4af37",
+              "tertiary-fixed": "#dbe1ff",
+              "surface-container-lowest": "#0e0e0e",
+              "on-secondary-fixed-variant": "#6d3a00",
+              "on-secondary": "#4d2700",
+              "inverse-on-surface": "#313030",
+              "on-primary-container": "#554300",
+              "on-secondary-fixed": "#2e1500"
+            },
+            fontFamily: {
+              "headline": ["Noto Serif"],
+              "body": ["Manrope"],
+              "label": ["Manrope"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+      }
+      .bg-gold-gradient {
+        background: linear-gradient(135deg, #f2ca50 0%, #d4af37 100%);
+      }
+      .text-shadow-premium {
+        text-shadow: 0 4px 12px rgba(0,0,0,0.5);
+      }
+      ::-webkit-scrollbar { width: 6px; }
+      ::-webkit-scrollbar-track { background: #131313; }
+      ::-webkit-scrollbar-thumb { background: #353534; border-radius: 10px; }
+      ::-webkit-scrollbar-thumb:hover { background: #4d4635; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary/30 antialiased">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full w-72 z-50 bg-[#1C1B1B] flex flex-col py-10 shadow-[20px_0px_40px_rgba(0,0,0,0.4)]">
+<div class="px-8">
+<h1 class="font-headline text-2xl text-primary mb-1 tracking-tight">Salão Milionário</h1>
+<p class="font-label text-[10px] uppercase tracking-[0.2em] text-outline mb-12">Digital Atelier Excellence</p>
+</div>
+<nav class="flex-1 space-y-2">
+<!-- Active Tab: Overview (Closest match for Dashboard/Journey) -->
+<a class="flex items-center gap-4 text-primary bg-surface-container-high border-r-2 border-primary py-4 px-8 transition-all duration-300" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="font-label text-xs font-medium tracking-[0.05rem] uppercase">Overview</span>
+</a>
+<a class="flex items-center gap-4 text-outline hover:bg-surface-container-high/50 hover:text-on-surface py-4 px-8 transition-all duration-200 hover:translate-x-1" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-label text-xs font-medium tracking-[0.05rem] uppercase">Finance</span>
+</a>
+<a class="flex items-center gap-4 text-outline hover:bg-surface-container-high/50 hover:text-on-surface py-4 px-8 transition-all duration-200 hover:translate-x-1" href="#">
+<span class="material-symbols-outlined">trending_up</span>
+<span class="font-label text-xs font-medium tracking-[0.05rem] uppercase">Commercial</span>
+</a>
+<a class="flex items-center gap-4 text-outline hover:bg-surface-container-high/50 hover:text-on-surface py-4 px-8 transition-all duration-200 hover:translate-x-1" href="#">
+<span class="material-symbols-outlined">groups</span>
+<span class="font-label text-xs font-medium tracking-[0.05rem] uppercase">Leadership</span>
+</a>
+<a class="flex items-center gap-4 text-outline hover:bg-surface-container-high/50 hover:text-on-surface py-4 px-8 transition-all duration-200 hover:translate-x-1" href="#">
+<span class="material-symbols-outlined">concierge</span>
+<span class="font-label text-xs font-medium tracking-[0.05rem] uppercase">Reception</span>
+</a>
+</nav>
+<div class="px-8 mt-auto pt-8">
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/10 mb-8 relative overflow-hidden group">
+<div class="relative z-10">
+<p class="font-headline text-lg text-primary leading-tight mb-1">5-Week Journey</p>
+<p class="font-label text-[10px] text-outline uppercase tracking-wider mb-4">Mastery Program</p>
+<button class="w-full bg-gold-gradient text-on-primary-fixed font-bold py-3 px-4 rounded-lg text-xs uppercase tracking-widest active:scale-95 transition-transform">
+                        Start Daily Lesson
+                    </button>
+</div>
+<div class="absolute -right-4 -bottom-4 opacity-10 group-hover:scale-110 transition-transform duration-700">
+<span class="material-symbols-outlined text-7xl text-primary">auto_awesome</span>
+</div>
+</div>
+<div class="space-y-4">
+<a class="flex items-center gap-3 text-outline hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-xl">settings</span>
+<span class="text-xs font-medium uppercase tracking-wider">Settings</span>
+</a>
+<a class="flex items-center gap-3 text-outline hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-xl">help_outline</span>
+<span class="text-xs font-medium uppercase tracking-wider">Support</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- TopAppBar -->
+<header class="fixed top-0 right-0 w-[calc(100%-280px)] h-16 z-40 bg-[#131313]/80 backdrop-blur-md flex items-center justify-between px-12">
+<div class="flex items-center gap-8 w-1/3">
+<div class="relative w-full max-w-xs">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-sm">search</span>
+<input class="bg-surface-container-highest border-none text-xs rounded-full py-2 pl-10 pr-4 w-full focus:ring-1 focus:ring-primary/50 text-on-surface placeholder:text-outline/50" placeholder="Search insights..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<button class="flex items-center gap-2 text-primary font-label text-[10px] uppercase tracking-[0.15em] hover:text-on-surface transition-colors cursor-pointer active:scale-95">
+<span class="material-symbols-outlined text-lg">support_agent</span>
+                AI Assistant
+            </button>
+<div class="h-4 w-[1px] bg-outline-variant/30"></div>
+<div class="flex items-center gap-4 text-outline">
+<button class="material-symbols-outlined cursor-pointer hover:text-primary transition-colors">notifications</button>
+<div class="flex items-center gap-3 cursor-pointer group">
+<div class="text-right hidden xl:block">
+<p class="text-[10px] font-bold text-on-surface uppercase tracking-tighter">Adriano Silva</p>
+<p class="text-[8px] text-outline uppercase tracking-widest">Premium Partner</p>
+</div>
+<span class="material-symbols-outlined text-2xl group-hover:text-primary transition-colors">account_circle</span>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-72 pt-16 min-h-screen bg-surface">
+<div class="max-w-7xl mx-auto px-12 py-12 space-y-16">
+<!-- Hero Section: Progress -->
+<section class="relative h-[400px] rounded-full overflow-hidden flex items-end p-12">
+<img class="absolute inset-0 w-full h-full object-cover grayscale-[0.4] opacity-40" data-alt="luxury hair salon interior with elegant gold detailing, marble surfaces and warm sophisticated lighting atmosphere" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCfneJvxJ5d-8LXCHjzWkyU5n5JzToLoMiNIYbMj5esH0KvV3XnOM9CUO1vNAt5LL_z_n6Kfl8xPTgHWE_w8hY7M5tcFc9SmPqPCTLJyvfRmw8faQApPUuCHyGsDFuzuPPOTvfrSbNKXxO2DDQIzerjcGKv4cQpCwG8nLDunI9I8pLhhbg_TD8iP2g8f9uQ-ZXdVuDEWox40NJeqHwHLhoqavUGs0zpwoqVKSJuzfG1h4-04uj0sgDPV6lBrzH9jkUGQvKw32DMrFA"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface via-surface/60 to-transparent"></div>
+<div class="relative z-10 w-full grid grid-cols-12 gap-8 items-end">
+<div class="col-span-8">
+<span class="font-label text-xs font-bold uppercase tracking-[0.3em] text-primary mb-4 block">Jornada de 5 Semanas</span>
+<h2 class="font-headline text-8xl text-on-surface font-light tracking-tighter mb-4">60% <span class="text-4xl text-outline tracking-normal font-normal">Concluído</span></h2>
+<p class="font-body text-on-surface-variant text-lg max-w-md leading-relaxed">Faltam apenas 2 semanas para você dominar o mercado e elevar seu negócio ao patamar de luxo.</p>
+</div>
+<div class="col-span-4 pb-4">
+<div class="space-y-3">
+<div class="flex justify-between font-label text-[10px] uppercase tracking-widest text-outline">
+<span>Progresso Atual</span>
+<span>Semana 3 de 5</span>
+</div>
+<div class="h-1.5 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-gold-gradient w-[60%] shadow-[0_0_15px_rgba(242,202,80,0.4)]"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Active Week & Strategic Roadmap Grid -->
+<div class="grid grid-cols-12 gap-12">
+<!-- Left: Active Card -->
+<div class="col-span-5">
+<div class="sticky top-28">
+<p class="font-label text-[10px] uppercase tracking-[0.2em] text-outline mb-6">Módulo em Destaque</p>
+<div class="bg-surface-container-high rounded-full overflow-hidden group shadow-2xl">
+<div class="aspect-[4/5] relative">
+<img class="w-full h-full object-cover opacity-50 group-hover:scale-105 transition-transform duration-1000" data-alt="close-up of golden beauty tools and high-end cosmetics on a dark reflective surface with dramatic editorial lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1yvJaFUa7t0jAu13R_Rl65Pouizp6OZIJDIHeFVWoy6Nb0e-OjftopPicefTk30R3DHQmDkG2TaDQ0DrXSOjnT0u4Q6-REzWRxI1w5GBhRUWgDyD-qtPX1Gdto5oQ6lHZEHQosF6btIR4FGeQ64ftBqjODWU3y6ZlY35emRJOqZ9VeJrrP7F0gaKhQVuXIoapbY10BSZfp7VOKBKQiBCqd8fb0rM8tMxtgkQyk1PpAD_iN_AIqI9FEnlQ45AmnAM7VwEkAJVtUR4"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-high via-surface-container-high/20 to-transparent"></div>
+<div class="absolute inset-0 p-10 flex flex-col justify-end">
+<span class="inline-block px-3 py-1 bg-primary/10 border border-primary/20 text-primary font-label text-[10px] uppercase tracking-widest mb-4 w-fit">Em Curso</span>
+<h3 class="font-headline text-4xl text-on-surface mb-4 leading-tight">Semana 3:<br/>Escala e Lucratividade</h3>
+<p class="text-on-surface-variant font-body text-sm mb-8 leading-relaxed">Domine as métricas que separam os salões comuns das marcas de alto luxo.</p>
+<button class="bg-primary text-on-primary font-bold py-4 px-8 rounded-lg flex items-center justify-center gap-3 active:scale-95 transition-all shadow-lg shadow-primary/10">
+<span class="material-symbols-outlined">play_circle</span>
+<span class="text-xs uppercase tracking-widest">Continuar Aula</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right: Strategic Roadmap -->
+<div class="col-span-7 space-y-12">
+<div>
+<h2 class="font-headline text-3xl text-on-surface mb-2">Cronograma Estratégico</h2>
+<div class="h-1 w-12 bg-primary mb-8"></div>
+</div>
+<div class="space-y-4">
+<!-- Completed Weeks -->
+<div class="bg-surface-container-low p-8 rounded-xl flex items-center justify-between group hover:bg-surface-container transition-colors border border-transparent hover:border-outline-variant/10">
+<div class="flex items-center gap-6">
+<div class="w-12 h-12 rounded-full border border-primary/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div>
+<p class="font-label text-[10px] uppercase tracking-widest text-outline">Semana 1</p>
+<h4 class="font-headline text-xl text-on-surface-variant">Mentalidade de Dono &amp; Branding</h4>
+</div>
+</div>
+<span class="font-label text-[10px] uppercase tracking-[0.2em] text-primary/60">CONCLUÍDO</span>
+</div>
+<div class="bg-surface-container-low p-8 rounded-xl flex items-center justify-between group hover:bg-surface-container transition-colors border border-transparent hover:border-outline-variant/10">
+<div class="flex items-center gap-6">
+<div class="w-12 h-12 rounded-full border border-primary/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div>
+<p class="font-label text-[10px] uppercase tracking-widest text-outline">Semana 2</p>
+<h4 class="font-headline text-xl text-on-surface-variant">Experiência do Cliente de Luxo</h4>
+</div>
+</div>
+<span class="font-label text-[10px] uppercase tracking-[0.2em] text-primary/60">CONCLUÍDO</span>
+</div>
+<!-- Active Week (Expanded) -->
+<div class="bg-surface-container-high p-10 rounded-xl border border-primary/20 shadow-xl relative overflow-hidden">
+<div class="flex items-center justify-between mb-8 relative z-10">
+<div class="flex items-center gap-6">
+<div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary ring-4 ring-primary/5">
+<span class="material-symbols-outlined">pending</span>
+</div>
+<div>
+<p class="font-label text-[10px] uppercase tracking-widest text-primary">Semana 3</p>
+<h4 class="font-headline text-2xl text-on-surface">Escala e Lucratividade</h4>
+</div>
+</div>
+<span class="font-label text-[10px] uppercase tracking-[0.2em] text-primary px-3 py-1 bg-primary/10 rounded-full">Em Curso</span>
+</div>
+<div class="space-y-1 relative z-10">
+<!-- Lessons -->
+<div class="flex items-center justify-between p-4 bg-surface-container-lowest/50 rounded-lg group">
+<div class="flex items-center gap-4">
+<span class="text-[10px] font-bold text-primary w-6">01</span>
+<span class="text-sm font-medium text-on-surface-variant">KPIs: Os números que não mentem</span>
+</div>
+<span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+</div>
+<div class="flex items-center justify-between p-4 bg-surface-container-highest rounded-lg border-l-2 border-primary">
+<div class="flex items-center gap-4">
+<span class="text-[10px] font-bold text-primary w-6">02</span>
+<span class="text-sm font-bold text-on-surface">Precificação Premium: O Poder do Posicionamento</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-label text-[10px] text-primary uppercase tracking-tighter">Assistindo agora</span>
+<span class="text-[10px] text-outline">14min restando</span>
+</div>
+</div>
+<div class="flex items-center justify-between p-4 opacity-40 grayscale">
+<div class="flex items-center gap-4">
+<span class="text-[10px] font-bold text-outline w-6">03</span>
+<span class="text-sm font-medium text-outline">Gestão de Fluxo de Caixa para Salões</span>
+</div>
+<span class="material-symbols-outlined text-lg">lock</span>
+</div>
+</div>
+<!-- Design Element -->
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-3xl -mr-16 -mt-16"></div>
+</div>
+<!-- Locked Weeks -->
+<div class="bg-surface-container-low/50 p-8 rounded-xl flex items-center justify-between group opacity-60">
+<div class="flex items-center gap-6">
+<div class="w-12 h-12 rounded-full border border-outline-variant/30 flex items-center justify-center text-outline">
+<span class="material-symbols-outlined">lock</span>
+</div>
+<div>
+<p class="font-label text-[10px] uppercase tracking-widest text-outline">Semana 4</p>
+<h4 class="font-headline text-xl text-outline">Liderança e Equipe de Alta Performance</h4>
+</div>
+</div>
+<span class="font-label text-[10px] uppercase tracking-[0.1em] text-outline italic">LIBERADO EM 4 DIAS</span>
+</div>
+<div class="bg-surface-container-low/50 p-8 rounded-xl flex items-center justify-between group opacity-60">
+<div class="flex items-center gap-6">
+<div class="w-12 h-12 rounded-full border border-outline-variant/30 flex items-center justify-center text-outline">
+<span class="material-symbols-outlined">lock</span>
+</div>
+<div>
+<p class="font-label text-[10px] uppercase tracking-widest text-outline">Semana 5</p>
+<h4 class="font-headline text-xl text-outline">O Império: Marketing &amp; Expansão</h4>
+</div>
+</div>
+<span class="font-label text-[10px] uppercase tracking-[0.1em] text-outline italic">CONCLUA A SEMANA 4 PRIMEIRO</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom CTA Section -->
+<section class="bg-surface-container-lowest border border-outline-variant/10 rounded-full p-12 flex items-center justify-between overflow-hidden relative">
+<div class="relative z-10 max-w-2xl">
+<h3 class="font-headline text-4xl mb-4 leading-tight">Deseja uma consultoria personalizada sobre seus KPIs?</h3>
+<p class="font-body text-on-surface-variant text-base leading-relaxed">Nossos especialistas estão prontos para analisar sua estrutura de custos e sugerir ajustes para margens de lucro superiores a 30%.</p>
+</div>
+<button class="relative z-10 px-10 py-5 border border-primary text-primary font-bold uppercase tracking-[0.2em] text-[10px] hover:bg-primary hover:text-on-primary transition-all duration-300">
+                    Agendar Consultoria
+                </button>
+<div class="absolute inset-0 opacity-10">
+<img class="w-full h-full object-cover" data-alt="abstract architectural forms with soft curves and golden highlights in a dark space, symbolizing premium business structures" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBN-R8iGdApXGRSoNLkj6-UxQiEWoMlFw0eVAkyA2tFEAPKs7MwHn_d7vjEmdgj6tiOln-DlLJPrG8bbnWV5DPyrhMb2hQCTZOhTkGXUUSWozt_a1yaJegiM_OBtV3oVgy1aODGvld8z4TCBzt6VYcsJkBqgX_1O6dc9Ub6d4uLBOMPtuw6QAaLSwPLczsD5jXaUxDYN_HS6t7b-6TkhzRQmtnyGc-UrRcdWt3LPVUXkCHommXgiUQNU8_Z3Fm1iSgeREgTTnZ2U0I"/>
+</div>
+</section>
+</div>
+<!-- Footer Footer -->
+<footer class="max-w-7xl mx-auto px-12 py-12 border-t border-outline-variant/10">
+<div class="flex justify-between items-center opacity-40 hover:opacity-100 transition-opacity">
+<p class="font-label text-[10px] uppercase tracking-widest">© 2024 Salão Milionário. Todos os direitos reservados.</p>
+<div class="flex gap-8">
+<a class="font-label text-[10px] uppercase tracking-widest hover:text-primary transition-colors" href="#">Políticas</a>
+<a class="font-label text-[10px] uppercase tracking-widest hover:text-primary transition-colors" href="#">Termos</a>
+<a class="font-label text-[10px] uppercase tracking-widest hover:text-primary transition-colors" href="#">Privacidade</a>
+</div>
+</div>
+</footer>
+</main>
+</body></html>

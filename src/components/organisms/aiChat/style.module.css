@@ -5,6 +5,8 @@
     max-height: 80vh;
     width: 90vw;
     max-width: 600px;
+    background-color: var(--surface-container);
+    color: var(--on-surface);
 }
 
 .header {
@@ -12,12 +14,14 @@
     align-items: center;
     justify-content: space-between;
     padding: 1rem;
-    border-bottom: 1px solid var(--background-200);
+    background-color: var(--surface-container-low);
 }
 
 .header h3 {
     margin: 0;
     font-size: 1rem;
+    font-family: var(--font-headline);
+    color: var(--on-surface);
 }
 
 .messages {
@@ -37,14 +41,14 @@
 }
 
 .message.user {
-    background-color: var(--primary);
-    color: white;
+    background: var(--gold-gradient);
+    color: var(--on-primary);
     align-self: flex-end;
 }
 
 .message.ai {
-    background-color: var(--background-200);
-    color: var(--text);
+    background-color: var(--surface-container-high);
+    color: var(--on-surface);
     align-self: flex-start;
 }
 
@@ -53,12 +57,12 @@
     gap: 0.5rem;
     padding: 0.75rem 1rem;
     overflow-x: auto;
-    border-bottom: 1px solid var(--background-200);
+    background-color: var(--surface-container-low);
 }
 
 .action-btn {
-    background-color: var(--background-200);
-    color: var(--text);
+    background-color: var(--surface-container-high);
+    color: var(--on-surface);
     border: none;
     border-radius: 1rem;
     padding: 0.4rem 0.8rem;
@@ -66,17 +70,19 @@
     cursor: pointer;
     white-space: nowrap;
     transition: background-color 0.2s;
+    font-family: var(--font-label);
 }
 
 .action-btn:hover {
-    background-color: var(--accent);
+    background-color: var(--surface-container-highest);
+    color: var(--primary);
 }
 
 .input-area {
     display: flex;
     gap: 0.5rem;
     padding: 0.75rem 1rem;
-    border-top: 1px solid var(--background-200);
+    background-color: var(--surface-container-low);
     align-items: center;
 }
 
@@ -84,20 +90,22 @@
     flex: 1;
     border: none;
     outline: none;
-    background: var(--background-200);
-    color: var(--text);
+    background: var(--surface-container-highest);
+    color: var(--on-surface);
     padding: 0.6rem 1rem;
     border-radius: 1rem;
     font-size: 0.9rem;
+    font-family: var(--font-body);
 }
 
 .input-area input::placeholder {
-    color: var(--text-400);
+    color: var(--outline);
+    opacity: 0.5;
 }
 
 .send-btn {
-    background: var(--primary);
-    color: white;
+    background: var(--gold-gradient);
+    color: var(--on-primary);
     border: none;
     border-radius: 50%;
     width: 36px;
@@ -107,6 +115,11 @@
     justify-content: center;
     cursor: pointer;
     flex-shrink: 0;
+    transition: box-shadow 0.2s ease;
+}
+
+.send-btn:hover {
+    box-shadow: 0 0 15px rgba(242, 202, 80, 0.4);
 }
 
 .send-btn svg {
@@ -119,6 +132,7 @@
 .message.ai h4 {
     margin: 0.5rem 0 0.25rem;
     line-height: 1.3;
+    font-family: var(--font-headline);
 }
 
 .message.ai h2 { font-size: 1.05rem; }
@@ -140,7 +154,7 @@
 }
 
 .message.ai pre {
-    background: rgba(0, 0, 0, 0.15);
+    background: var(--surface-container-lowest);
     border-radius: 0.5rem;
     padding: 0.5rem 0.75rem;
     overflow-x: auto;
@@ -154,7 +168,7 @@
 }
 
 .message.ai :not(pre) > code {
-    background: rgba(0, 0, 0, 0.1);
+    background: var(--surface-container-lowest);
     padding: 0.1rem 0.3rem;
     border-radius: 0.25rem;
 }
@@ -177,7 +191,8 @@
 
 .message.ai hr {
     border: none;
-    border-top: 1px solid var(--text-400);
+    border-top: 1px solid var(--outline-variant);
+    opacity: 0.2;
     margin: 0.5rem 0;
 }
 
@@ -189,13 +204,14 @@
     gap: 0.5rem;
     padding: 2rem;
     text-align: center;
-    color: var(--text-400);
+    color: var(--outline);
     flex: 1;
 }
 
 .welcome h3 {
-    color: var(--text);
+    color: var(--on-surface);
     margin: 0;
+    font-family: var(--font-headline);
 }
 
 .welcome p {

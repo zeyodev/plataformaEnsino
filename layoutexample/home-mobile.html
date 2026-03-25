@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700;900&amp;family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "outline": "#99907c",
+                        "on-secondary-fixed": "#2e1500",
+                        "inverse-on-surface": "#313030",
+                        "surface-container-lowest": "#0e0e0e",
+                        "secondary": "#ffb77b",
+                        "surface-variant": "#353534",
+                        "on-tertiary-fixed": "#00174b",
+                        "surface-bright": "#393939",
+                        "on-secondary-fixed-variant": "#6d3a00",
+                        "on-primary": "#3c2f00",
+                        "tertiary-fixed-dim": "#b4c5ff",
+                        "primary-fixed-dim": "#e9c349",
+                        "on-error": "#690005",
+                        "outline-variant": "#4d4635",
+                        "on-primary-fixed-variant": "#574500",
+                        "error": "#ffb4ab",
+                        "on-tertiary": "#082b72",
+                        "on-tertiary-container": "#254188",
+                        "on-secondary-container": "#ffb270",
+                        "background": "#131313",
+                        "surface-container-low": "#1c1b1b",
+                        "tertiary-fixed": "#dbe1ff",
+                        "on-background": "#e5e2e1",
+                        "on-primary-fixed": "#241a00",
+                        "secondary-fixed": "#ffdcc2",
+                        "primary-fixed": "#ffe088",
+                        "surface-tint": "#e9c349",
+                        "surface-container": "#201f1f",
+                        "surface-dim": "#131313",
+                        "error-container": "#93000a",
+                        "on-tertiary-fixed-variant": "#27438a",
+                        "on-surface-variant": "#d0c5af",
+                        "on-secondary": "#4d2700",
+                        "surface-container-high": "#2a2a2a",
+                        "secondary-container": "#7a4100",
+                        "inverse-primary": "#735c00",
+                        "surface-container-highest": "#353534",
+                        "secondary-fixed-dim": "#ffb77b",
+                        "on-surface": "#e5e2e1",
+                        "on-error-container": "#ffdad6",
+                        "tertiary-container": "#97b0ff",
+                        "tertiary": "#bfcdff",
+                        "on-primary-container": "#554300",
+                        "primary-container": "#d4af37",
+                        "surface": "#131313",
+                        "inverse-surface": "#e5e2e1",
+                        "primary": "#f2ca50"
+                    },
+                    fontFamily: {
+                        "headline": ["Noto Serif"],
+                        "body": ["Manrope"],
+                        "label": ["Manrope"]
+                    },
+                    borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .bg-glass {
+            background: rgba(19, 19, 19, 0.8);
+            backdrop-filter: blur(12px);
+        }
+        .gold-gradient {
+            background: linear-gradient(135deg, #f2ca50 0%, #d4af37 100%);
+        }
+        ::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body antialiased">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full flex justify-between items-center px-6 py-5 bg-[#131313]/80 backdrop-blur-md z-50 shadow-[0px_20px_40px_rgba(0,0,0,0.4)]">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#D4AF37]" data-icon="menu">menu</span>
+<h1 class="text-xl font-['Noto_Serif'] font-black tracking-[0.15em] text-[#D4AF37] uppercase">SALÃO MILIONÁRIO</h1>
+</div>
+<button class="bg-primary-container/10 px-3 py-1.5 rounded-full border border-primary-container/20 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">bolt</span>
+<span class="text-[10px] font-label font-bold tracking-widest text-primary uppercase">IA ASSISTANT</span>
+</button>
+</header>
+<main class="pt-24 pb-32 px-6">
+<!-- Personalized Greeting -->
+<section class="mb-8">
+<div class="flex justify-between items-end">
+<div>
+<p class="text-xs font-label uppercase tracking-[0.2rem] text-outline mb-1">BEM-VINDA,</p>
+<h2 class="text-3xl font-headline font-bold text-on-surface leading-tight">Master Artist!</h2>
+</div>
+<div class="h-12 w-12 rounded-full overflow-hidden border-2 border-primary-container/30">
+<img alt="Profile" data-alt="Sophisticated portrait of a professional woman in a high-end salon environment, soft studio lighting, professional aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDWU097ivqPMAQwnv3z2kAhAISmwgxmDlcq95x7vYOVXW7OlR26DkfIhmWSDfVaSJLNTQ0pA_F5t8Hn17VO3nV4RpwycvwFl-oOKUfpbNVQx2iTe9SjFt3DbSlsUY5geZJAPNkLWPGgiz_R7zBC6aJPlpdyGN6wGMKH3wFL3mc0qMfg94jvJJSwjVySq42sYUEPNfNJqcPKOh0npEKX21_Jn2Jgl6LpZrSlqV98WyVB-x9HNXT5nzAgAVzq7kifm4KxuEk6RfzP_g"/>
+</div>
+</div>
+<!-- Search Bar -->
+<div class="mt-6 relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline/50">search</span>
+<input class="w-full bg-surface-container-highest border-none rounded-xl py-4 pl-12 pr-4 text-sm focus:ring-1 focus:ring-primary/30 placeholder:text-outline/40" placeholder="Buscar mentorias, aulas ou ferramentas..." type="text"/>
+</div>
+</section>
+<!-- Journey Hero -->
+<section class="mb-10 relative overflow-hidden rounded-2xl bg-surface-container-low p-6">
+<div class="absolute top-0 right-0 -mr-8 -mt-8 w-40 h-40 bg-primary/5 rounded-full blur-3xl"></div>
+<div class="relative z-10">
+<div class="flex items-center gap-2 mb-4">
+<span class="px-2 py-0.5 rounded bg-primary/10 text-[10px] font-bold text-primary tracking-tighter">EM CURSO</span>
+<span class="text-xs font-label text-outline uppercase tracking-wider">Jornada de 5 Semanas</span>
+</div>
+<h3 class="text-2xl font-headline font-bold mb-2">Semana 3: Escala e Lucratividade</h3>
+<p class="text-sm text-on-surface-variant/80 mb-6 leading-relaxed max-w-[80%]">Domine os indicadores que transformam sua agenda em um império financeiro.</p>
+<div class="mb-6">
+<div class="flex justify-between items-end mb-2">
+<span class="text-xs font-bold text-primary">60% Concluído</span>
+<span class="text-[10px] text-outline uppercase">3 de 5 Módulos</span>
+</div>
+<div class="h-1.5 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full shadow-[0_0_8px_rgba(242,202,80,0.5)]" style="width: 60%"></div>
+</div>
+</div>
+<button class="w-full gold-gradient py-4 rounded-xl text-on-primary font-bold text-sm tracking-wide flex items-center justify-center gap-2 shadow-lg shadow-primary/10 active:scale-95 transition-transform">
+                    CONTINUAR AULA
+                    <span class="material-symbols-outlined text-base">play_arrow</span>
+</button>
+</div>
+</section>
+<!-- Gamification Bento -->
+<section class="grid grid-cols-2 gap-4 mb-10">
+<div class="col-span-2 bg-surface-container p-5 rounded-2xl border-l-4 border-primary/40 flex items-center justify-between">
+<div>
+<h4 class="text-xs font-label text-outline uppercase tracking-widest mb-1">Dossiê do Aluno</h4>
+<p class="text-lg font-headline font-bold">Nível 12: Visionária</p>
+</div>
+<span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings: 'FILL' 1;">military_tech</span>
+</div>
+<div class="bg-surface-container-low p-5 rounded-2xl flex flex-col justify-between aspect-square">
+<span class="material-symbols-outlined text-secondary text-2xl">trophy</span>
+<div>
+<h4 class="text-[10px] font-label text-outline uppercase tracking-widest mb-1">Ranking</h4>
+<p class="text-xl font-headline font-bold">Top 5%</p>
+</div>
+</div>
+<div class="bg-surface-container-low p-5 rounded-2xl flex flex-col justify-between aspect-square">
+<span class="material-symbols-outlined text-tertiary text-2xl">analytics</span>
+<div>
+<h4 class="text-[10px] font-label text-outline uppercase tracking-widest mb-1">Engajamento</h4>
+<p class="text-xl font-headline font-bold">88%</p>
+</div>
+</div>
+</section>
+<!-- Live Classes -->
+<section class="mb-10">
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-xl font-headline font-bold">Aulas ao Vivo</h3>
+<span class="text-xs font-label text-primary uppercase tracking-widest font-bold">Ver Calendário</span>
+</div>
+<div class="space-y-4">
+<div class="bg-surface-container-high/50 p-4 rounded-xl flex items-center gap-4">
+<div class="h-12 w-12 rounded-lg bg-surface-container-highest flex flex-col items-center justify-center border border-outline-variant/20">
+<span class="text-[10px] text-outline font-bold">JUN</span>
+<span class="text-lg font-headline font-bold leading-none">15</span>
+</div>
+<div class="flex-1">
+<h5 class="text-sm font-bold leading-tight">Mentoria em Grupo: Gestão de Equipes</h5>
+<p class="text-xs text-outline">Hoje às 19:30 • Via Zoom</p>
+</div>
+<button class="bg-primary/10 text-primary p-2 rounded-lg">
+<span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">notifications_active</span>
+</button>
+</div>
+<div class="bg-surface-container-high/50 p-4 rounded-xl flex items-center gap-4 opacity-70">
+<div class="h-12 w-12 rounded-lg bg-surface-container-highest flex flex-col items-center justify-center border border-outline-variant/20">
+<span class="text-[10px] text-outline font-bold">JUN</span>
+<span class="text-lg font-headline font-bold leading-none">18</span>
+</div>
+<div class="flex-1">
+<h5 class="text-sm font-bold leading-tight">Workshop: Marketing de Luxo</h5>
+<p class="text-xs text-outline">Sexta às 20:00 • Via Youtube</p>
+</div>
+<button class="bg-surface-container-highest text-outline p-2 rounded-lg border border-outline/10">
+<span class="material-symbols-outlined text-xl">notifications</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Extra Modules Carousel -->
+<section class="mb-6">
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-xl font-headline font-bold">Módulos Extras</h3>
+<span class="text-xs font-label text-outline uppercase tracking-widest">Explorar Tudo</span>
+</div>
+<div class="flex gap-4 overflow-x-auto pb-4 -mx-6 px-6">
+<!-- Course Card 1 -->
+<div class="flex-shrink-0 w-64">
+<div class="relative h-40 rounded-xl overflow-hidden mb-3">
+<img alt="Recepção Lucrativa" class="w-full h-full object-cover" data-alt="Luxurious hair salon reception desk with gold accents, minimal flowers, and a high-end atmosphere" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7fDLDVHcGRojF2jQjgEzqstXRbZ5SLCnbd9FxfpNZnfYZ-6D-khiuu5AdRURZeYJbAVCS6uva8mPh31PXd9PWObyVvg1aoo6kBXvoYS2Y_nRPGBGRgJqlTqQJv0YgClhJlJYA99754I1oP8viOpGGQ4wRoaFzgUaDY42YHywq1NwldzZzxvnUQRVXHfqjbXKGLrxqsP8Gvn3SeAm_hWsVeIw018ckPWqrGRuhxN6nSka5PV6rRMXCx80de2FWoyeDKx_08rkqbr8"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background to-transparent opacity-60"></div>
+<span class="absolute bottom-3 left-3 px-2 py-1 bg-background/80 backdrop-blur-md rounded text-[10px] font-bold text-primary">RECEPÇÃO</span>
+</div>
+<h4 class="font-bold text-sm mb-1">Recepção Lucrativa</h4>
+<div class="flex items-center justify-between">
+<span class="text-xs text-outline">12 Aulas</span>
+<span class="text-sm font-headline font-bold text-primary">R$ 497</span>
+</div>
+</div>
+<!-- Course Card 2 -->
+<div class="flex-shrink-0 w-64">
+<div class="relative h-40 rounded-xl overflow-hidden mb-3">
+<img alt="Finanças Master" class="w-full h-full object-cover" data-alt="Clean overhead shot of a premium black notebook, gold pen, and financial charts on a dark marble desk" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDDqXLLdZP7WAJWTiKHL7kiN_ZsLh_j8Am--2paVBhW5eM0uRalXF1AFsEzcpTs5ZcM0haI9Z3Xo7or9KjCxVknO4fzlr4MtoQbNeJBzua_B7SedjZTFfZ5EaNJsnmp1iJ9xRs7Tbpi2z38cSAeE0u4xiUXfV41OduoAEB7nG0wtU7-w31BqV_SXXBqNbiLRom17WxSl16ehiOc0pQ3lItT-bNC-sOFYhinjQFE3YoHkHw84UOHPDuolGsYda4PzZ1UZqFovN0tXTM"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background to-transparent opacity-60"></div>
+<span class="absolute bottom-3 left-3 px-2 py-1 bg-background/80 backdrop-blur-md rounded text-[10px] font-bold text-primary">FINANCEIRO</span>
+</div>
+<h4 class="font-bold text-sm mb-1">Finanças Master</h4>
+<div class="flex items-center justify-between">
+<span class="text-xs text-outline">18 Aulas</span>
+<span class="text-sm font-headline font-bold text-primary">R$ 897</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full flex justify-around items-center px-4 py-3 bg-[#131313]/90 backdrop-blur-xl z-50 border-t border-outline-variant/10">
+<div class="flex flex-col items-center gap-1 text-[#D4AF37] font-bold">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">grid_view</span>
+<span class="text-[10px] font-label uppercase tracking-tighter">Gestão</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-[#99907C]">
+<span class="material-symbols-outlined text-2xl">payments</span>
+<span class="text-[10px] font-label uppercase tracking-tighter">Financeiro</span>
+</div>
+<div class="flex flex-col items-center -mt-8">
+<div class="h-14 w-14 gold-gradient rounded-full flex items-center justify-center shadow-lg shadow-primary/20 border-4 border-background">
+<span class="material-symbols-outlined text-on-primary text-3xl">play_circle</span>
+</div>
+</div>
+<div class="flex flex-col items-center gap-1 text-[#99907C]">
+<span class="material-symbols-outlined text-2xl">groups</span>
+<span class="text-[10px] font-label uppercase tracking-tighter">Liderança</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-[#99907C]">
+<span class="material-symbols-outlined text-2xl">concierge</span>
+<span class="text-[10px] font-label uppercase tracking-tighter">Recepção</span>
+</div>
+</nav>
+<!-- Floating AI Widget -->
+<div class="fixed right-6 bottom-24 z-40">
+<div class="relative">
+<div class="absolute inset-0 bg-primary/20 rounded-full animate-ping"></div>
+<button class="relative h-14 w-14 bg-surface-container-highest rounded-full flex items-center justify-center border border-primary/30 shadow-2xl backdrop-blur-md">
+<span class="material-symbols-outlined text-primary text-2xl">auto_awesome</span>
+</button>
+</div>
+</div>
+</body></html>

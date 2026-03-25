@@ -8,12 +8,14 @@
     font-size: 0.9rem;
     font-weight: 600;
     margin-right: 8px;
+    color: var(--on-surface);
+    font-family: var(--font-label);
 }
 
 .rating_star {
     cursor: pointer;
     transition: transform 0.15s ease, color 0.15s ease;
-    color: rgba(255, 255, 255, 0.3);
+    color: var(--surface-container-highest);
     display: flex;
     align-items: center;
 }
@@ -21,7 +23,7 @@
 .rating_star svg {
     width: 24px;
     height: 24px;
-    fill: rgb(227 227 227);
+    fill: var(--surface-container-highest);
 }
 
 .rating_star:hover {
@@ -29,16 +31,16 @@
 }
 
 .rating_star_active {
-    color: #f5c518;
+    color: var(--primary);
 }
 
 .rating_star_active svg {
-    fill: #f5c518;
-    stroke: #f5c518;
+    fill: var(--primary);
+    stroke: var(--primary);
 }
 
 .rating_info {
     font-size: 0.8rem;
-    color: var(--text-secondary);
+    color: var(--outline);
     margin-left: 8px;
 }

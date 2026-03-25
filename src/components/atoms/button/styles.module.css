@@ -1,23 +1,32 @@
 .button {
-    background-color: var(--accent);
-    /* color: var(--text); */
+    background-color: var(--surface-container-high);
+    color: var(--on-surface);
     border: none;
-    border-radius: 1rem;
+    border-radius: 0.75rem;
     cursor: pointer;
     padding: 1rem 2rem;
     font-size: 1rem;
+    font-family: var(--font-label);
+    transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
+.button:hover { opacity: 0.85; }
+.button:active { transform: scale(0.97); }
+
 .button.accent {
-    background-color: var(--accent);
-    color: var(--accent-900);
+    background: var(--gold-gradient);
+    color: var(--on-primary);
     font-weight: bold;
 }
 
 .button.no-bg {
     background: none;
     font-weight: bold;
-    color: var(--text);
+    color: var(--on-surface);
+}
+
+.button.no-bg:hover {
+    color: var(--primary);
 }
 
 .button.no-p {
@@ -32,24 +41,37 @@
     width: 100%;
     padding: 0.9rem 1.5rem;
     font-size: 1rem;
-    border-radius: 10px;
+    border-radius: 0.75rem;
     font-weight: 600;
-    background: linear-gradient(135deg, var(--accent), var(--secondary));
+    background: var(--gold-gradient);
     border: none;
-    color: rgb(255, 255, 255);
+    color: var(--on-primary);
     cursor: pointer;
-    transition: opacity 0.2s;
-    opacity: 1;
+    transition: opacity 0.2s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.05rem;
 }
 
 .button.primary:hover {
-    opacity: 0.85;
+    opacity: 0.9;
+    box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2);
+}
+
+.button.primary:active {
+    transform: scale(0.97);
 }
 
 .button.secondary {
-    background-color: var(--secondary);
-    color: var(--secondary-50);
+    background-color: transparent;
+    color: var(--primary);
     font-weight: bold;
+    border: 1px solid rgba(153, 144, 124, 0.3);
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.button.secondary:hover {
+    border-color: rgba(242, 202, 80, 0.5);
+    background-color: rgba(242, 202, 80, 0.05);
 }
 
 .button.p-p {
@@ -66,7 +88,7 @@
 
 .button.icon {
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     gap: .5rem;
 }
 
@@ -78,4 +100,5 @@
 .button.icon svg {
     width: 20px;
     height: 20px;
+    fill: currentColor;
 }

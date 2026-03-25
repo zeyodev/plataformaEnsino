@@ -2,12 +2,13 @@
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    background-color: var(--surface);
+    color: var(--on-surface);
 }
 
 .App_mainLayout {
     display: grid;
     grid-template-columns: 1fr 400px;
-    /* Video Area | Recommendations */
     gap: 24px;
     padding: 24px 24px;
     width: calc(100% - 48px);
@@ -37,22 +38,26 @@
     align-items: center;
     gap: 6px;
     padding: 6px 12px;
-    border-radius: 8px;
+    border-radius: 0.5rem;
     transition: background-color 0.2s;
     cursor: pointer;
+    color: var(--on-surface);
+    background: transparent;
 }
 
 .Aula_optionBtn:hover {
-    background-color: var(--secondary, rgba(255,255,255,0.1));
+    background-color: var(--surface-container-high);
 }
 
 .Aula_optionBtn--active {
-    background-color: var(--secondary, rgba(255,255,255,0.1));
+    background-color: var(--surface-container-high);
+    color: var(--primary);
 }
 
 .Aula_optionBtn svg {
     width: 20px;
     height: 20px;
+    fill: currentColor;
 }
 
 .Aula_contentArea {

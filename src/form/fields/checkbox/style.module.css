@@ -1,11 +1,19 @@
 .label {
     padding: 1rem;
-    background-color: var(--background);
-    border-radius: 1rem;
+    background-color: var(--surface-container-high);
+    border-radius: 0.75rem;
+    color: var(--on-surface);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.label:hover {
+    background-color: var(--surface-container-highest);
 }
 
 .label:has(> input:checked) {
-    background-color: var(--accent);
+    background: var(--gold-gradient);
+    color: var(--on-primary);
 }
 
 .label > span {

@@ -2,24 +2,26 @@
     position: fixed;
     inset: 0;
     z-index: 1000;
-    background: var(--bg-primary, #fff);
+    background: var(--surface);
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    color: var(--on-surface);
 }
 
 .progressBar {
     height: 4px;
-    background: var(--neutral-200, #e5e7eb);
+    background: var(--surface-container-highest);
     width: 100%;
     flex-shrink: 0;
 }
 
 .progressFill {
     height: 100%;
-    background: var(--primary-500, #6366f1);
+    background: var(--gold-gradient);
     transition: width 0.4s ease;
     border-radius: 0 2px 2px 0;
+    box-shadow: 0 0 10px rgba(242, 202, 80, 0.3);
 }
 
 .stepsContainer {
@@ -65,12 +67,13 @@
 .stepLabel {
     font-size: 1.5rem;
     font-weight: 600;
-    color: var(--text-primary, #111);
+    color: var(--on-surface);
+    font-family: var(--font-headline);
 }
 
 .stepHint {
     font-size: 0.9rem;
-    color: var(--neutral-500, #6b7280);
+    color: var(--outline);
 }
 
 .navigation {
@@ -79,11 +82,13 @@
     align-items: center;
     padding: 1rem 2rem;
     flex-shrink: 0;
+    background-color: var(--surface-container-low);
 }
 
 .stepCounter {
     font-size: 0.85rem;
-    color: var(--neutral-500, #6b7280);
+    color: var(--outline);
+    font-family: var(--font-label);
 }
 
 .navButtons {
@@ -92,7 +97,7 @@
 }
 
 .errorMsg {
-    color: var(--danger-500, #ef4444);
+    color: var(--error);
     font-size: 0.85rem;
     min-height: 1.2em;
 }

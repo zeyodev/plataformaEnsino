@@ -1,11 +1,12 @@
 section.chat-container {
     position: fixed;
     z-index: 110;
-    background-color: var(--background-color);
+    background-color: var(--surface);
     width: 100dvw;
     height: 100dvh;
     align-content: center;
     animation: mostrar .5s;
+    color: var(--on-surface);
 }
 
 @keyframes mostrar {
@@ -24,6 +25,7 @@ section.chat-container>h1 {
     font-size: 2.5rem;
     display: grid;
     align-content: center;
+    font-family: var(--font-headline);
 }
 
 section.chat-container>div {
@@ -36,7 +38,7 @@ section.chat-container>div {
 }
 
 .chat {
-    color: var(--text-color);
+    color: var(--on-surface);
     column-gap: 1em;
     --col-width: 4;
     --col-start: 3;
@@ -63,9 +65,10 @@ section.chat-container>div {
 .chat form button {
     padding: .7em;
     border: none;
-    border-radius: .5em;
+    border-radius: 0.5rem;
     font-size: 1.125rem;
-    background-color: #ddd;
+    background-color: var(--surface-container-highest);
+    color: var(--on-surface);
 }
 
 .chat__body>* {
@@ -79,19 +82,18 @@ section.chat-container>div {
     overflow: hidden;
     overflow-y: auto;
     align-content: start;
-    background: var(--clr-neutral-400);
+    background: var(--surface-container-low);
     padding: 1rem;
-    border-radius: .5rem;
+    border-radius: 0.75rem;
     height: 80%;
 }
 
-/* .chat__body .bot { */
 .chat__body .foreign {
     position: relative;
-    background: #EDEDED;
+    background: var(--surface-container-high);
     padding: .7em;
-    border-radius: .5em;
-    color: var(--clr-neutral-color);
+    border-radius: 0.75rem;
+    color: var(--on-surface);
     width: fit-content;
     animation: cQkD5j0htjkGgjo9U2aZ 700ms;
     --fromside: -30px;
@@ -114,7 +116,7 @@ section.chat-container>div {
     display: inline-block !important;
     width: 0;
     height: 0;
-    border-bottom: 8px solid #EDEDED;
+    border-bottom: 8px solid var(--surface-container-high);
     border-left: 8px solid transparent;
     vertical-align: middle;
     position: absolute;
@@ -130,21 +132,21 @@ section.chat-container>div {
 
 .chat__body .user>* {
     width: fit-content;
-    background: #ff8078;
+    background: var(--gold-gradient);
     padding: .7em;
-    border-radius: .5em;
-    color: #3b2729;
+    border-radius: 0.75rem;
+    color: var(--on-primary);
     animation: entrada 700ms;
     --fromside: 30px;
 }
 
 .chat__body .margin-change {
     margin-top: .8rem;
-    border-radius: 0 .5rem .5rem .5rem;
+    border-radius: 0 0.75rem 0.75rem 0.75rem;
 }
 
 .user.margin-change>* {
-    border-radius: .5rem 0 .5rem .5rem;
+    border-radius: 0.75rem 0 0.75rem 0.75rem;
 }
 
 .user.margin-change>*::before {
@@ -152,7 +154,7 @@ section.chat-container>div {
     display: inline-block !important;
     width: 0;
     height: 0;
-    border-left: 8px solid #ff8078;
+    border-left: 8px solid var(--primary);
     border-bottom: 8px solid transparent;
     vertical-align: middle;
     position: absolute;
@@ -165,7 +167,7 @@ section.chat-container>div {
     display: inline-block !important;
     width: 0;
     height: 0;
-    border-right: 8px solid var(--clr-neutral-100);
+    border-right: 8px solid var(--surface-container-high);
     border-bottom: 8px solid transparent;
     vertical-align: middle;
     position: absolute;
@@ -176,22 +178,23 @@ section.chat-container>div {
 .chat__body h1.bot {
     background: none;
     padding: 0;
-    color: #57423F;
+    color: var(--on-surface);
     margin-top: .5rem;
+    font-family: var(--font-headline);
 }
 
 .chat__body button.bot,
 .chat form input[type="submit"],
 .chat form button {
     cursor: pointer;
-    background: var(--color-tertiary);
+    background: var(--gold-gradient);
     border: none;
     font-size: 1.125rem;
-    color: #f4f4f4;
+    color: var(--on-primary);
 }
 
 .chat__body button.bot.selected {
-    background: var(--color-tertiary-900);
+    background: var(--primary-container);
 }
 
 @keyframes entrada {
@@ -205,16 +208,3 @@ section.chat-container>div {
         opacity: 1;
     }
 }
-
-/* 
-@keyframes entrada {
-    0% {
-        transform: translate(0, 30px);
-        opacity: 0;
-    }
-
-    100% {
-        transform: translate(0, 0);
-        opacity: 1;
-    }
-} */

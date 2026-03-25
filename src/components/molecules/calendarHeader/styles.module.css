@@ -10,9 +10,16 @@
   border: none;
   cursor: pointer;
   font-size: 1.2em;
+  color: var(--on-surface);
+}
+
+.header button:hover {
+  color: var(--primary);
 }
 
 .header span {
   font-size: 1.2em;
   font-weight: bold;
+  color: var(--on-surface);
+  font-family: var(--font-headline);
 }

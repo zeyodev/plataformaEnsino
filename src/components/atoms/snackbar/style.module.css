@@ -6,10 +6,11 @@
     z-index: 2000;
     padding: 1rem 1.5rem;
     border-radius: 0.75rem;
-    color: var(--text);
-    background-color: var(--background-200);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    color: var(--on-surface);
+    background-color: var(--surface-container-highest);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
     font-size: 0.95rem;
+    font-family: var(--font-body);
     opacity: 0;
     transition: opacity 0.3s ease, transform 0.3s ease;
     pointer-events: none;
@@ -24,13 +25,13 @@
 }
 
 .snackbar.success {
-    background-color: var(--accent);
-    color: var(--accent-900);
+    background: var(--gold-gradient);
+    color: var(--on-primary);
     font-weight: bold;
 }
 
 .snackbar.error {
-    background-color: #e74c3c;
-    color: #fff;
+    background-color: var(--error-container);
+    color: var(--on-error-container);
     font-weight: bold;
 }

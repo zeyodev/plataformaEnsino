@@ -2,29 +2,36 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    background-color: var(--background-100);
-    border-radius: 0.5rem;
-    padding: 0.4rem 0.8rem;
+    background-color: var(--surface-container-highest);
+    border-radius: 2rem;
+    padding: 0.5rem 1rem;
     flex: 1;
     max-width: 400px;
+    transition: box-shadow 0.2s ease;
+}
+
+.search:focus-within {
+    box-shadow: 0 0 0 1px rgba(242, 202, 80, 0.5);
 }
 
 .search svg {
     width: 18px;
     height: 18px;
     flex-shrink: 0;
-    color: var(--text-400);
+    color: var(--outline);
 }
 
 .search input {
     border: none;
     outline: none;
     background: transparent;
-    color: var(--text);
+    color: var(--on-surface);
     font-size: 0.9rem;
+    font-family: var(--font-body);
     width: 100%;
 }
 
 .search input::placeholder {
-    color: var(--text-400);
+    color: var(--outline);
+    opacity: 0.5;
 }

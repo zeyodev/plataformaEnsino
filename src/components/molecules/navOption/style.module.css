@@ -1,17 +1,26 @@
 .nav-option {
     --icon-size: 20px;
     padding: .7rem;
-    border-radius: .5rem;
-    align-items: flex-end;
+    border-radius: 0.5rem;
+    align-items: center;
+    color: var(--outline);
+    transition: all 0.2s ease;
+    text-decoration: none;
+    font-family: var(--font-label);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05rem;
 }
 
 .nav-option:hover {
-    background: var(--background-200);
+    background: var(--surface-container-high);
+    color: var(--on-surface);
 }
 
 .nav-option.selected {
-    background: var(--background);
-    color: var(--text);
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--primary);
+    border-right: 2px solid var(--primary);
 }
 
 .nav-option i {
@@ -21,4 +30,5 @@
 .nav-option i>svg {
     width: var(--icon-size);
     height: var(--icon-size);
+    fill: currentColor;
 }

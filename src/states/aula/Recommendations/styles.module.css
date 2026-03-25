@@ -18,24 +18,25 @@
 }
 
 .Recommendations_chip {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: var(--surface-container-high);
     border: none;
-    color: var(--text-primary);
+    color: var(--on-surface);
     padding: 6px 12px;
-    border-radius: 8px;
+    border-radius: 0.5rem;
     font-size: 0.9rem;
+    font-family: var(--font-label);
     white-space: nowrap;
     cursor: pointer;
     transition: background 0.2s;
 }
 
 .Recommendations_chip:hover {
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: var(--surface-container-highest);
 }
 
 .Recommendations_chip.active {
-    background-color: var(--text-primary);
-    color: black;
+    background: var(--gold-gradient);
+    color: var(--on-primary);
 }
 
 @media (max-width: 1000px) {

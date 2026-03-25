@@ -2,13 +2,21 @@
     display: flex;
     gap: .5rem;
     padding: .5rem;
-    border-radius: .5rem;
-    background-color: var(--background-default-active);
+    border-radius: 0.5rem;
+    background-color: var(--surface-container-high);
     cursor: pointer;
+    transition: background-color 0.2s ease;
+    color: var(--on-surface);
+}
+
+.chat:hover {
+    background-color: var(--surface-container-highest);
 }
 
 .image {
     width: 50px;
     height: 50px;
     border-radius: 50%;
+    border: 2px solid var(--outline-variant);
+    opacity: 0.2;
 }

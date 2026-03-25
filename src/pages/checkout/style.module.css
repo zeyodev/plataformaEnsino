@@ -3,7 +3,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: var(--bg-primary, #f9fafb);
+    background: var(--surface);
+    color: var(--on-surface);
     padding: 2rem;
 }
 
@@ -15,28 +16,31 @@
 .header h1 {
     font-size: 1.8rem;
     margin-bottom: 0.5rem;
+    font-family: var(--font-headline);
+    color: var(--on-surface);
 }
 
 .header p {
-    color: var(--neutral-500);
+    color: var(--outline);
     font-size: 1rem;
 }
 
 .card {
-    background: var(--bg-secondary, #fff);
+    background: var(--surface-container-high);
     border-radius: 0.75rem;
     padding: 2rem;
     width: 100%;
     max-width: 560px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
 }
 
 .valorTotal {
     font-size: 2rem;
     font-weight: 700;
-    color: var(--primary-500);
+    color: var(--primary);
     text-align: center;
     margin: 1rem 0;
+    font-family: var(--font-headline);
 }
 
 .splitsList {
@@ -49,7 +53,7 @@
     display: flex;
     justify-content: space-between;
     padding: 0.75rem;
-    background: var(--neutral-50, #f3f4f6);
+    background: var(--surface-container-low);
     border-radius: 0.375rem;
     font-size: 0.9rem;
 }
@@ -84,11 +88,11 @@
 .loading {
     text-align: center;
     padding: 3rem;
-    color: var(--neutral-500);
+    color: var(--outline);
 }
 
 .error {
-    color: var(--danger-500);
+    color: var(--error);
     text-align: center;
     padding: 1rem;
 }

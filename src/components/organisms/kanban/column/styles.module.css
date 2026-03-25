@@ -4,17 +4,23 @@
     gap: 1rem;
     width: 18vw;
     padding: 1rem;
-    border-radius: .5rem;
+    border-radius: 0.75rem;
+    background-color: var(--surface-container-low);
 }
 
 .column:nth-child(odd) {
-  background-color: var(--navbar-item-active-background);
+  background-color: var(--surface-container);
 }
 
 .column > header {
     display: flex;
     gap: .5rem;
     align-items: center;
+    color: var(--on-surface);
+    font-family: var(--font-label);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05rem;
 }
 
 .column > div {

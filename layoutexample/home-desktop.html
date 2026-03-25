@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Salão Milionário | The Digital Atelier</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;0,900;1,400&amp;family=Manrope:wght@300;400;600;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "secondary-fixed-dim": "#ffb77b",
+              "surface-tint": "#e9c349",
+              "surface-dim": "#131313",
+              "primary-container": "#d4af37",
+              "on-tertiary-fixed-variant": "#27438a",
+              "surface-variant": "#353534",
+              "on-error-container": "#ffdad6",
+              "inverse-primary": "#735c00",
+              "tertiary-fixed-dim": "#b4c5ff",
+              "surface-container-high": "#2a2a2a",
+              "on-secondary-fixed": "#2e1500",
+              "on-tertiary": "#082b72",
+              "on-secondary-container": "#ffb270",
+              "on-primary-container": "#554300",
+              "on-secondary": "#4d2700",
+              "secondary-fixed": "#ffdcc2",
+              "outline": "#99907c",
+              "on-primary": "#3c2f00",
+              "on-primary-fixed": "#241a00",
+              "inverse-on-surface": "#313030",
+              "tertiary": "#bfcdff",
+              "secondary-container": "#7a4100",
+              "on-primary-fixed-variant": "#574500",
+              "surface": "#131313",
+              "surface-container-low": "#1c1b1b",
+              "surface-container-highest": "#353534",
+              "secondary": "#ffb77b",
+              "primary": "#f2ca50",
+              "on-background": "#e5e2e1",
+              "outline-variant": "#4d4635",
+              "on-surface-variant": "#d0c5af",
+              "on-surface": "#e5e2e1",
+              "on-secondary-fixed-variant": "#6d3a00",
+              "on-error": "#690005",
+              "error": "#ffb4ab",
+              "surface-container": "#201f1f",
+              "primary-fixed": "#ffe088",
+              "surface-bright": "#393939",
+              "background": "#131313",
+              "tertiary-fixed": "#dbe1ff",
+              "surface-container-lowest": "#0e0e0e",
+              "error-container": "#93000a",
+              "inverse-surface": "#e5e2e1",
+              "tertiary-container": "#97b0ff",
+              "primary-fixed-dim": "#e9c349",
+              "on-tertiary-fixed": "#00174b",
+              "on-tertiary-container": "#254188"
+            },
+            fontFamily: {
+              "headline": ["Noto Serif"],
+              "body": ["Manrope"],
+              "label": ["Manrope"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+      }
+      .glass-effect {
+        background: rgba(19, 19, 19, 0.8);
+        backdrop-filter: blur(20px);
+      }
+      .gold-gradient {
+        background: linear-gradient(135deg, #f2ca50 0%, #d4af37 100%);
+      }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary-container/30">
+<!-- SideNavBar -->
+<aside class="bg-[#1C1B1B] dark:bg-[#1C1B1B] h-screen w-64 fixed left-0 top-0 overflow-y-auto flex flex-col h-full py-8 px-4 shadow-[20px_0px_40px_rgba(0,0,0,0.4)] z-50">
+<div class="mb-12 px-2">
+<h1 class="font-['Noto_Serif'] italic text-xl text-[#D4AF37]">Salão Milionário</h1>
+<p class="font-['Manrope'] tracking-wider uppercase text-[10px] font-bold text-[#99907C] mt-1">The Digital Atelier</p>
+</div>
+<nav class="flex-grow space-y-2">
+<p class="font-['Manrope'] tracking-wider uppercase text-[10px] font-bold text-[#99907C] mb-4 px-2 opacity-50">Navegação Principal</p>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-[#F2CA50] border-r-2 border-[#F2CA50] bg-white/5 transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+<span class="font-['Manrope'] tracking-wider uppercase text-[10px] font-bold">Financeiro</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-[#99907C] opacity-60 hover:bg-[#2A2A2A] hover:text-[#E5E2E1] transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="trending_up">trending_up</span>
+<span class="font-['Manrope'] tracking-wider uppercase text-[10px] font-bold">Comercial</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-[#99907C] opacity-60 hover:bg-[#2A2A2A] hover:text-[#E5E2E1] transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="groups">groups</span>
+<span class="font-['Manrope'] tracking-wider uppercase text-[10px] font-bold">Liderança</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-[#99907C] opacity-60 hover:bg-[#2A2A2A] hover:text-[#E5E2E1] transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="concierge">concierge</span>
+<span class="font-['Manrope'] tracking-wider uppercase text-[10px] font-bold">Recepção</span>
+</a>
+<div class="pt-8">
+<p class="font-['Manrope'] tracking-wider uppercase text-[10px] font-bold text-[#99907C] mb-4 px-2 opacity-50">Ferramentas de Gestão</p>
+<a class="flex items-center gap-3 px-4 py-2 text-[#99907C] opacity-80 hover:text-[#F2CA50] transition-colors" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="calculate">calculate</span>
+<span class="text-xs font-semibold">Calculadora de Markup</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-[#99907C] opacity-80 hover:text-[#F2CA50] transition-colors" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="inventory">inventory</span>
+<span class="text-xs font-semibold">Controle de Estoque IA</span>
+</a>
+</div>
+</nav>
+<div class="mt-auto border-t border-outline-variant/10 pt-6 space-y-2">
+<button class="w-full gold-gradient text-on-primary py-3 rounded-xl font-bold text-[10px] tracking-widest uppercase flex items-center justify-center gap-2 mb-6 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-lg" data-icon="auto_awesome" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+                IA Assistant
+            </button>
+<a class="flex items-center gap-3 px-4 py-2 text-[#99907C] opacity-60 hover:text-[#E5E2E1] transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-['Manrope'] tracking-wider uppercase text-[10px] font-bold">Configurações</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-[#99907C] opacity-60 hover:text-[#E5E2E1] transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="font-['Manrope'] tracking-wider uppercase text-[10px] font-bold">Sair</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-64 min-h-screen">
+<!-- TopAppBar -->
+<header class="fixed top-0 right-0 w-[calc(100%-16rem)] h-20 z-40 bg-[#131313]/80 backdrop-blur-md flex justify-between items-center px-12">
+<div class="flex flex-col">
+<h2 class="font-headline font-black text-primary text-lg tracking-tighter">Salão Milionário</h2>
+<span class="text-[10px] font-label font-bold text-outline uppercase tracking-widest opacity-60">The Digital Atelier</span>
+</div>
+<div class="flex items-center gap-8">
+<div class="relative hidden lg:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-lg" data-icon="search">search</span>
+<input class="bg-surface-container-highest border-none rounded-full pl-10 pr-6 py-2 text-sm w-64 focus:ring-1 focus:ring-primary/50 transition-all placeholder:text-outline/50" placeholder="Buscar módulos ou ferramentas..." type="text"/>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-on-surface hover:opacity-80 transition-opacity relative">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-secondary rounded-full border border-surface"></span>
+</button>
+<div class="flex items-center gap-3 pl-4 border-l border-outline-variant/20">
+<div class="text-right">
+<p class="text-xs font-bold text-on-surface">Master Artist</p>
+<p class="text-[10px] text-primary font-bold tracking-tighter uppercase">Nível 12</p>
+</div>
+<img alt="User Profile Avatar" class="w-10 h-10 rounded-full object-cover border-2 border-primary-container/30" data-alt="portrait of a confident successful woman entrepreneur with styled hair and professional attire in a warm lit studio" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD6nGiL-L_cit0A_fJZrDlxuFExp26KTQBrl2kVif2gDotKfKgJcPIvZvDjOFjlgSFqEsM9UTGUv4NWxyf48_2_fM8SDnta7zt9aw2kQNDxv5xtGhFtPWwSLFuqhIHuWLMfKtKKmzBRG0GSUXlD56pzMo7ympN73wqVxvdAK7XCJ-bY0kXLmiIYRYTprzUenBhW1OvFZ5uWuqFE7mIoLqeUz_ogsEF_9wyXVxZrOfOPoblKrG1waoCtSs26zA6syhWXQ2ypYgLBPzE"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Page Canvas -->
+<div class="pt-32 pb-20 px-12 max-w-7xl mx-auto">
+<!-- Welcome Header -->
+<section class="mb-12">
+<h3 class="font-headline text-4xl text-on-surface mb-2">Bem-vinda, <span class="italic text-primary">Master Artist!</span></h3>
+<p class="text-outline font-body text-sm max-w-md leading-relaxed">Seu atelier digital está pronto. Você percorreu 60% da jornada até a maestria absoluta.</p>
+</section>
+<!-- Grid Layout (Asymmetric) -->
+<div class="grid grid-cols-12 gap-8 items-start">
+<!-- Hero Section (Jornada) - Large Span -->
+<div class="col-span-12 lg:col-span-8 group">
+<div class="relative overflow-hidden rounded-xl bg-surface-container-low aspect-[21/9] flex items-end p-10 transition-transform duration-500 hover:scale-[1.01]">
+<div class="absolute inset-0 z-0">
+<img alt="luxury hair salon interior with elegant gold fixtures and marble surfaces in moody cinematic lighting" class="w-full h-full object-cover opacity-40 mix-blend-luminosity group-hover:scale-105 transition-transform duration-700" data-alt="luxury hair salon interior with elegant gold fixtures and marble surfaces in moody cinematic lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUPM8n2wGR10foXcJhnIpaAQMiotbQhy0-PxsMxCVDpJTCR-GMwMqc29tdXTL1yVCuzpEfi5DYZkv3XsgfWd2Ag8MOzCPQzgar3TzLrX6QN0a7pPfB8ab-S6GEwPhKN1QO_KozThl7bxp43EQMTLIAHJxK6_QQuG1h2rZnbF0eYgYlILAvBqxm2xh_8jsOpybgmG9NX4Va2dKmAfArwV7g5pvjyR_5P_bW-YGa4MUl5rd8J419hUfyb1FiZxvdktevEWa-LJS5Kc8"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface via-surface/40 to-transparent"></div>
+</div>
+<div class="relative z-10 w-full">
+<div class="flex justify-between items-end mb-6">
+<div>
+<span class="text-[10px] font-label font-extrabold text-primary uppercase tracking-[0.2em] mb-3 block">Jornada de 5 Semanas</span>
+<h4 class="font-headline text-3xl text-on-surface max-w-sm leading-tight">Semana 3: Escala e Lucratividade</h4>
+</div>
+<div class="text-right">
+<span class="font-headline text-4xl text-primary leading-none">60%</span>
+<p class="text-[10px] font-label font-bold text-outline uppercase tracking-wider">Concluído</p>
+</div>
+</div>
+<div class="w-full bg-surface-container-highest h-1 rounded-full mb-8 overflow-hidden">
+<div class="h-full gold-gradient rounded-full shadow-[0_0_15px_rgba(242,202,80,0.4)]" style="width: 60%"></div>
+</div>
+<button class="gold-gradient text-on-primary px-8 py-3 rounded-lg font-bold text-xs tracking-widest uppercase flex items-center gap-3 hover:shadow-[0_10px_20px_rgba(212,175,55,0.2)] transition-all">
+                                Continuar Aula
+                                <span class="material-symbols-outlined text-sm" data-icon="play_arrow" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Metrics Section (Recessed style) -->
+<div class="col-span-12 lg:col-span-4 space-y-6">
+<!-- Card: Dossie -->
+<div class="bg-surface-container-high p-6 rounded-xl border-l-4 border-primary">
+<div class="flex justify-between items-start mb-4">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="verified_user" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+<span class="text-[10px] font-label font-bold text-outline uppercase">Status: Ativo</span>
+</div>
+<h5 class="font-label font-extrabold text-on-surface text-sm mb-1">Dossiê do Aluno</h5>
+<p class="font-headline text-xl text-primary italic">Nível 12: Visionária</p>
+</div>
+<!-- Card: Ranking -->
+<div class="bg-surface-container-high p-6 rounded-xl hover:bg-[#2A2A2A] transition-colors">
+<p class="text-[10px] font-label font-bold text-outline uppercase tracking-widest mb-2">Performance Global</p>
+<div class="flex items-baseline gap-2">
+<span class="font-headline text-3xl text-on-surface">Top 5%</span>
+<span class="text-secondary text-xs font-bold">+0.8% esta semana</span>
+</div>
+<p class="text-xs text-outline mt-2 leading-relaxed">Você está entre os 50 salões mais eficientes da rede.</p>
+</div>
+<!-- Card: Engagement -->
+<div class="bg-surface-container-high p-6 rounded-xl flex items-center justify-between">
+<div>
+<p class="text-[10px] font-label font-bold text-outline uppercase tracking-widest mb-1">Engajamento</p>
+<span class="font-headline text-3xl text-on-surface">88%</span>
+</div>
+<div class="w-16 h-16 rounded-full border-4 border-surface-container-highest flex items-center justify-center relative">
+<svg class="absolute inset-0 -rotate-90" viewbox="0 0 100 100">
+<circle cx="50" cy="50" fill="transparent" r="46" stroke="#F2CA50" stroke-dasharray="289" stroke-dashoffset="34.68" stroke-width="8"></circle>
+</svg>
+<span class="material-symbols-outlined text-primary text-xl" data-icon="bolt" style="font-variation-settings: 'FILL' 1;">bolt</span>
+</div>
+</div>
+</div>
+<!-- Live Sessions Section (Asymmetric list) -->
+<div class="col-span-12 lg:col-span-7 mt-8">
+<div class="flex justify-between items-end mb-8">
+<div>
+<h4 class="font-headline text-2xl text-on-surface">Sessões ao Vivo</h4>
+<p class="text-xs text-outline font-bold uppercase tracking-widest">Próximas Mentorias</p>
+</div>
+<button class="text-primary text-[10px] font-bold uppercase tracking-widest hover:underline">Ver Calendário Completo</button>
+</div>
+<div class="space-y-4">
+<!-- Session 1 -->
+<div class="group flex items-center gap-6 p-6 rounded-xl bg-surface-container-low hover:bg-surface-container-high transition-all duration-300">
+<div class="flex flex-col items-center justify-center bg-surface-container-highest w-16 h-16 rounded-lg text-primary">
+<span class="text-xl font-black font-headline">15</span>
+<span class="text-[10px] font-bold uppercase">JUN</span>
+</div>
+<div class="flex-grow">
+<h6 class="font-label font-bold text-on-surface group-hover:text-primary transition-colors">Mentoria em Grupo: Gestão de Equipes</h6>
+<p class="text-xs text-outline flex items-center gap-2 mt-1">
+<span class="material-symbols-outlined text-sm" data-icon="schedule">schedule</span>
+                                    19:00 - 21:00 (Brasília)
+                                </p>
+</div>
+<button class="border border-outline-variant/30 text-on-surface px-5 py-2 rounded-lg text-[10px] font-bold uppercase tracking-widest hover:border-primary/50 hover:bg-primary/5 transition-all active:scale-95">
+                                Confirmar Presença
+                            </button>
+</div>
+<!-- Session 2 -->
+<div class="group flex items-center gap-6 p-6 rounded-xl bg-surface-container-low hover:bg-surface-container-high transition-all duration-300">
+<div class="flex flex-col items-center justify-center bg-surface-container-highest w-16 h-16 rounded-lg text-outline group-hover:text-primary">
+<span class="text-xl font-black font-headline">22</span>
+<span class="text-[10px] font-bold uppercase">JUN</span>
+</div>
+<div class="flex-grow">
+<h6 class="font-label font-bold text-on-surface group-hover:text-primary transition-colors">Masterclass: Marketing de Luxo no Instagram</h6>
+<p class="text-xs text-outline flex items-center gap-2 mt-1">
+<span class="material-symbols-outlined text-sm" data-icon="schedule">schedule</span>
+                                    20:00 - 22:00 (Brasília)
+                                </p>
+</div>
+<button class="bg-surface-container-highest text-on-surface/50 p-2 rounded-lg hover:text-primary transition-all active:scale-95">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Extra Modules (Visual Carousel/Cards) -->
+<div class="col-span-12 lg:col-span-5 mt-8">
+<h4 class="font-headline text-2xl text-on-surface mb-8">Recomendado para você</h4>
+<div class="space-y-6">
+<!-- Module Card 1 -->
+<div class="flex gap-4 p-4 bg-surface-container-lowest rounded-xl group cursor-pointer hover:bg-surface-container-low transition-colors">
+<div class="w-32 h-24 rounded-lg overflow-hidden flex-shrink-0">
+<img alt="reception desk in a luxury salon with minimalist decor" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="reception desk in a luxury salon with minimalist decor and soft ambient lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVXsTXlApZlBRxN4kQG0GSbLUSzRUSCJkY3sVVZSttk6t_ERk4YrDv6VT9eOZPxro6nZKrgxrQV6dEW3xfFe8z3xjimPOJsJapGPEowOT9h4sqzrnZ_h7eDvG8zIv7cTUKtN_Mq0YjS3-akJ-2j8-_mgB_mp0cAW5OefHK_z2qNKIfq02yXoM2Xi8ojnGF2mwJYyzILUHvIpam9-1tuXcRPoxHihVUHZlQXauzyOpoMzH1vmSuPoazj19QHAg7B5xQ_7CX6YamyQc"/>
+</div>
+<div>
+<span class="text-[9px] font-bold text-secondary uppercase tracking-widest">Acesso Imediato</span>
+<h6 class="font-label font-bold text-on-surface text-sm mt-1 mb-2">Recepção Lucrativa: A Primeira Impressão</h6>
+<div class="flex items-center gap-3">
+<span class="text-[10px] text-outline">12 Aulas</span>
+<span class="text-primary font-black text-xs">R$ 497,00</span>
+</div>
+</div>
+</div>
+<!-- Module Card 2 -->
+<div class="flex gap-4 p-4 bg-surface-container-lowest rounded-xl group cursor-pointer hover:bg-surface-container-low transition-colors">
+<div class="w-32 h-24 rounded-lg overflow-hidden flex-shrink-0">
+<img alt="close up of premium business papers and fountain pen on dark marble desk" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="close up of premium business papers and fountain pen on dark marble desk with soft dramatic side lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTQXA1OLWZj6txZpHJwoLZX6vFGItIFatjJt6e6ZYitpTuxpQi20qmw1NbXtHTrqZOlf8Mj9xYbZ1_kADXQIB3zProY94YpiBsE3Fjvkq8eh3HJlIdx82ozQUkguDvnVWt46c2Wzpmd1VGWYNfUydOhdZPAyPcUV4B-0YjGbkChIThfyzVF7ZAQWc4qw8Nz5pwwTP4_MTrm7le2rCvd7jU9Yl2A6q-ANgj2vlzN5Kr2yRNk61Kxijs1SG2GOymwI4aPY24BoYwMNM"/>
+</div>
+<div>
+<span class="text-[9px] font-bold text-secondary uppercase tracking-widest">Mastery Series</span>
+<h6 class="font-label font-bold text-on-surface text-sm mt-1 mb-2">Finanças Master: Fluxo de Caixa Real</h6>
+<div class="flex items-center gap-3">
+<span class="text-[10px] text-outline">18 Aulas</span>
+<span class="text-primary font-black text-xs">R$ 897,00</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Contextual FAB (Suppressed on dashboard but present here for key action as per requirement check) -->
+<button class="fixed bottom-10 right-10 w-16 h-16 gold-gradient rounded-full shadow-[0_10px_40px_rgba(242,202,80,0.4)] flex items-center justify-center text-on-primary hover:scale-110 active:scale-95 transition-all z-50">
+<span class="material-symbols-outlined text-3xl" data-icon="support_agent">support_agent</span>
+</button>
+</body></html>

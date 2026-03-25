@@ -1,6 +1,6 @@
 .layout {
-    background-color: var(--background-100);
-    color: var(--text);
+    background-color: var(--surface);
+    color: var(--on-surface);
     height: 100vh;
     height: 100svh;
     position: relative;

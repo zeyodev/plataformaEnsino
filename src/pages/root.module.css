@@ -1,5 +1,6 @@
 .hello-world {
-    background-color: var(--screen-background) !important;
+    background-color: var(--surface) !important;
+    color: var(--on-surface);
     min-height: 100vh;
     min-height: 100svh;
 }

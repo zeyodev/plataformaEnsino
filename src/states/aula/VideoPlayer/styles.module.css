@@ -6,11 +6,11 @@
 .VideoPlayer_wrapper {
     width: 100%;
     aspect-ratio: 16/9;
-    background-color: black;
-    border-radius: 12px;
+    background-color: var(--surface-container-lowest);
+    border-radius: 0.75rem;
     overflow: hidden;
     position: relative;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
 }
 
 .VideoPlayer_video {
@@ -28,6 +28,8 @@
     font-weight: 700;
     margin-bottom: 8px;
     line-height: 1.4;
+    font-family: var(--font-headline);
+    color: var(--on-surface);
 }
 
 .VideoPlayer_metaRow {
@@ -48,35 +50,41 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background-color: #555;
+    background-color: var(--surface-container-highest);
     object-fit: cover;
+    border: 2px solid rgba(212, 175, 55, 0.3);
 }
 
 .VideoPlayer_channelText h3 {
     font-size: 1rem;
     font-weight: 600;
     margin-bottom: 2px;
+    color: var(--on-surface);
 }
 
 .VideoPlayer_channelText span {
     font-size: 0.8rem;
-    color: var(--text-secondary);
+    color: var(--outline);
 }
 
 .VideoPlayer_subscribeBtn {
-    background-color: var(--text-primary);
-    color: black;
+    background: var(--gold-gradient);
+    color: var(--on-primary);
     border: none;
     padding: 10px 16px;
-    border-radius: 18px;
+    border-radius: 0.75rem;
     font-weight: 600;
     cursor: pointer;
     margin-left: 12px;
-    transition: background 0.2s;
+    transition: opacity 0.2s, box-shadow 0.2s;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.05rem;
 }
 
 .VideoPlayer_subscribeBtn:hover {
-    background-color: #d9d9d9;
+    opacity: 0.9;
+    box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2);
 }
 
 .VideoPlayer_actions {
@@ -85,11 +93,11 @@
 }
 
 .VideoPlayer_actionBtn {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: var(--surface-container-high);
     border: none;
-    color: var(--text-primary);
+    color: var(--on-surface);
     padding: 8px 16px;
-    border-radius: 18px;
+    border-radius: 0.75rem;
     display: flex;
     align-items: center;
     gap: 6px;
@@ -99,13 +107,13 @@
 }
 
 .VideoPlayer_actionBtn:hover {
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: var(--surface-container-highest);
 }
 
 .VideoPlayer_progressBar {
     width: 100%;
     height: 6px;
-    background-color: rgba(255, 255, 255, 0.15);
+    background-color: var(--surface-container-highest);
     border-radius: 3px;
     margin-top: 12px;
     overflow: hidden;
@@ -114,22 +122,23 @@
 .VideoPlayer_progressFill {
     height: 100%;
     width: 0%;
-    background-color: #4caf50;
+    background: var(--gold-gradient);
     border-radius: 3px;
     transition: width 0.3s ease;
+    box-shadow: 0 0 10px rgba(242, 202, 80, 0.3);
 }
 
 .VideoPlayer_progressLabel {
     display: block;
     font-size: 0.8rem;
-    color: var(--text-secondary);
+    color: var(--outline);
     margin-top: 4px;
 }
 
 .VideoPlayer_completionBadge {
     display: none;
-    background-color: #4caf50;
-    color: white;
+    background: var(--gold-gradient);
+    color: var(--on-primary);
     font-size: 0.8rem;
     font-weight: 600;
     padding: 4px 12px;
@@ -138,17 +147,18 @@
 }
 
 .VideoPlayer_descriptionBox {
-    background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
+    background-color: var(--surface-container-high);
+    border-radius: 0.75rem;
     padding: 12px;
     margin-top: 16px;
     font-size: 0.9rem;
     line-height: 1.4;
     cursor: pointer;
+    transition: background-color 0.2s;
 }
 
 .VideoPlayer_descriptionBox:hover {
-    background-color: rgba(255, 255, 255, 0.15);
+    background-color: var(--surface-container-highest);
 }
 
 .VideoPlayer_descriptionBox strong {

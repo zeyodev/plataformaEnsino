@@ -8,10 +8,10 @@
 }
 
 .ballon {
-    background-color: var(--clr-primary-600);
-    color: var(--clr-primary-color);
+    background-color: var(--surface-container-high);
+    color: var(--on-surface);
     padding: 1rem;
-    border-radius: 1rem;
+    border-radius: 0.75rem;
     display: grid;
     gap: 1rem;
     grid-row-start: 1;
@@ -25,9 +25,9 @@
     border: none;
     padding: .8em;
     font-size: 1em;
-    border-radius: .5em;
-    background-color: var(--clr-accent-400);
-    color: var(--clr-accent-color);
+    border-radius: 0.75rem;
+    background: var(--gold-gradient);
+    color: var(--on-primary);
     width: calc(100% - 2rem);
     margin: auto;
 }
@@ -43,8 +43,8 @@
     display: grid;
     gap: .3rem;
     padding: .5rem;
-    background: var(--clr-primary-500);
-    border-radius: .5rem;
+    background: var(--surface-container-low);
+    border-radius: 0.5rem;
     width: min-content;
 }
 
@@ -52,7 +52,7 @@
     height: min(30vw, 120px);
     width: min(30vw, 120px);
     object-fit: cover;
-    border-radius: .5rem;
+    border-radius: 0.5rem;
 }
 
 .itemCarrinho>div {
@@ -66,4 +66,5 @@
     line-clamp: 1;
     -webkit-box-orient: vertical;
     word-wrap: anywhere;
+    color: var(--on-surface);
 }

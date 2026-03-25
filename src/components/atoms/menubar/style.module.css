@@ -8,10 +8,10 @@
 .bar3 {
   width: 30px;
   height: 3px;
-  background-color: var(--text);
+  background-color: var(--on-surface);
   margin: 8px 0;
   transition: 0.4s;
-  border-radius: .2rem;
+  border-radius: 0.125rem;
 }
 
 .change .bar1 {
