@@ -3,4 +3,7 @@ export default interface Assinatura {
     usuario: string
     produto: string
     status: "ativa" | "inativa" | "suspensa"
+    dataInicio?: string
+    dataFim?: string
+    pagamento?: string
 }

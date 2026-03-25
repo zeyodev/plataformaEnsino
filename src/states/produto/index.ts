@@ -31,7 +31,14 @@ export default class Produto extends State {
             // Ordena por ordem
             produtoOptions.sort((a: any, b: any) => (a.ordem || 0) - (b.ordem || 0))
 
-            const options = produtoOptions.map((po: any) => createOptionFromDB(context.app, po))
+            // Determina nível de acesso do usuário pela assinatura ativa
+            const assinaturas = context.app.session.assinaturas || []
+            const assinatura = assinaturas.find((a: any) => a.produto === this.produto._id)
+            const userNivel = assinatura?.nivelAcesso || 0
+
+            const options = produtoOptions
+                .filter((po: any) => !po.nivelAcesso || userNivel >= po.nivelAcesso)
+                .map((po: any) => createOptionFromDB(context.app, po))
             options.push(new OptionConfiguracoes(context.app))
 
             this.painel.sideNav.setInfo(options, (option) => {

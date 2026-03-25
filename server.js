@@ -11,6 +11,9 @@ import RepositoryMongoDB from './backend/repository/mongodb.js';
 import createApiRoutes from './backend/routes/api.js';
 import Session from './backend/services/session/index.js';
 import MemoryCache from './backend/cache/index.js';
+import createCheckoutRoutes from './backend/routes/checkout.js';
+import createPublicRoutes from './backend/routes/public.js';
+import createWebhookRoutes from './backend/routes/webhook.js';
 
 const app = express();
 const server = http.createServer(app);
@@ -24,9 +27,41 @@ const repository = new RepositoryMongoDB(mongo);
 const cache = new MemoryCache(repository, { ttl: 5 * 60 * 1000 });
 cache.warmup().catch(err => console.error('[Cache] Falha no warmup:', err));
 
+// --- Helpers LGPD ---
+const pepper = process.env.PEPPER || '';
+
+function hashPII(value) {
+    return crypto.createHmac('sha256', pepper).update(value).digest('hex');
+}
+
+async function hashSenha(senha) {
+    const peppered = senha + pepper;
+    return argon2.hash(peppered, { type: argon2.argon2id });
+}
+
+async function verificarSenha(hash, senha) {
+    const peppered = senha + pepper;
+    return argon2.verify(hash, peppered);
+}
+
+// --- Socket.io (apenas para admin) ---
+const io = new Server(server, {
+    cors: { origin: '*' },
+    maxHttpBufferSize: 1e8,
+});
+
+// --- Webhook PagarMe (raw body, antes do express.json) ---
+app.use('/api/webhooks', express.raw({ type: '*/*' }), createWebhookRoutes(repository, io, hashPII, hashSenha));
+
 // --- Middleware ---
 app.use(express.json());
 app.use(express.static('./public'));
+
+// --- Rotas de checkout (admin) ---
+app.use('/api/checkout', createCheckoutRoutes(repository));
+
+// --- Rotas públicas (sem autenticação) ---
+app.use('/api/public', createPublicRoutes(repository));
 
 // --- REST API para usuários normais ---
 app.use('/api', createApiRoutes(repository, cache));
@@ -50,23 +85,6 @@ app.get('/admin/verify', (req, res) => {
         res.json({ isAdmin: usuario.role === 'admin', usuario: { _id: usuario._id, role: usuario.role } });
     });
 });
-
-// --- Helpers LGPD ---
-const pepper = process.env.PEPPER || '';
-
-function hashPII(value) {
-    return crypto.createHmac('sha256', pepper).update(value).digest('hex');
-}
-
-async function hashSenha(senha) {
-    const peppered = senha + pepper;
-    return argon2.hash(peppered, { type: argon2.argon2id });
-}
-
-async function verificarSenha(hash, senha) {
-    const peppered = senha + pepper;
-    return argon2.verify(hash, peppered);
-}
 
 // --- Registro de usuário ---
 app.post('/registrar', async (req, res) => {
@@ -128,12 +146,7 @@ app.use('/', (req, res) => {
     res.sendFile(`${__dirname}/public/index.html`);
 });
 
-// --- Socket.io (apenas para admin) ---
-const io = new Server(server, {
-    cors: { origin: '*' },
-    maxHttpBufferSize: 1e8,
-});
-
+// --- Socket.io middleware e handlers ---
 io.use(async (socket, next) => {
     const accessToken = socket.handshake.auth.accessToken;
     if (!accessToken) {

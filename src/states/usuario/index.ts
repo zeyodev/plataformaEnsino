@@ -54,7 +54,14 @@ export default class Usuario extends State {
 
             // Busca os produtos/ambientes que o usuário é membro
             const [membros] = await context.app.repository.findMany("Assinaturas", { usuario: context.app.session.usuarioId })
-            const ativos = membros.filter((m: any) => !m.status || m.status === "ativa")
+            const agora = new Date().toISOString()
+            const ativos = membros.filter((m: any) => {
+                if (m.status && m.status !== "ativa") return false
+                if (m.dataFim && m.dataFim < agora) return false
+                return true
+            })
+            // Guarda assinaturas ativas na sessão para uso posterior
+            context.app.session.assinaturas = ativos
 
             // Se não há assinaturas ativas, bloqueia acesso
             if (ativos.length === 0) {

@@ -2,6 +2,7 @@ import App from "../../../app";
 import button from "../../../components/atoms/button";
 import snackbar from "../../../components/atoms/snackbar";
 import Form from "../../../form";
+import FieldInput from "../../../form/fields/input";
 import FieldSelect from "../../../form/fields/select";
 
 export default class FormCreateAssinatura extends Form {
@@ -21,7 +22,9 @@ export default class FormCreateAssinatura extends Form {
             { value: "inativa", name: "Inativa" },
             { value: "suspensa", name: "Suspensa" },
         )
-        this.body.children(selectProduto, selectStatus)
+        const dataInicio = new FieldInput("dataInicio", true).label("Data Início").setType("date")
+        const dataFim = new FieldInput("dataFim", false).label("Data Fim (opcional)").setType("date")
+        this.body.children(selectProduto, selectStatus, dataInicio, dataFim)
         this.footer.children(
             button("Adicionar").set("type", "submit").style("primary"),
         )

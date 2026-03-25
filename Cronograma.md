@@ -34,21 +34,21 @@ _Prioridade MÁXIMA — sem isso não há fluxo de entrada de alunos em produç�
 _Ref. briefing: §12, §13, §14_
 
 #### 1.1 Checkout Builder — Composição de pagamento misto
-- [ ] Interface onde o consultor/admin monta o checkout do cliente, distribuindo o valor total entre múltiplos métodos de pagamento.
+- [x] Interface onde o consultor/admin monta o checkout do cliente, distribuindo o valor total entre múltiplos métodos de pagamento.
   - Ex: Total R$19.000 → R$1.000 no PIX + R$5.000 no Boleto + R$13.000 em 18x no Crédito.
-- [ ] Componente `CheckoutBuilder/` com:
+- [x] Componente `CheckoutBuilder/` com:
   - Campo de valor total do produto.
   - Botão "+ Adicionar método de pagamento" (PIX, Boleto, Crédito).
   - Para cada método adicionado: campo de valor parcial + opções específicas (parcelas no crédito, vencimento no boleto).
   - Validação em tempo real: soma dos valores parciais deve bater com o total.
   - Preview resumido do plano de pagamento antes de gerar o link.
-- [ ] Backend: rota `POST /api/checkout/build` — recebe array de splits de pagamento, gera link único de checkout.
-- [ ] Backend: lógica de transação composta no PagarMe/Stone (uma order com múltiplos payments).
-- [ ] Collection: `CheckoutLinks` (id, produto, splits[], cupom, valor_total, criado_por, link, status, validade).
+- [x] Backend: rota `POST /api/checkout/build` — recebe array de splits de pagamento, gera link único de checkout.
+- [x] Backend: lógica de transação composta no PagarMe/Stone (uma order com múltiplos payments).
+- [x] Collection: `CheckoutLinks` (id, produto, splits[], cupom, valor_total, criado_por, link, status, validade).
 
 #### 1.2 Formulário de Cadastro estilo Typeform
-- [ ] Fluxo step-by-step fullscreen (uma pergunta por tela, transição suave com animação).
-- [ ] Campos na sequência:
+- [x] Fluxo step-by-step fullscreen (uma pergunta por tela, transição suave com animação).
+- [x] Campos na sequência:
   1. Nome completo
   2. Email
   3. Telefone
@@ -58,42 +58,42 @@ _Ref. briefing: §12, §13, §14_
   7. Cidade
   8. Estado
   9. País
-- [ ] Componente `TypeformCheckout/` com:
+- [x] Componente `TypeformCheckout/` com:
   - Navegação por teclado (Enter avança, seta volta).
   - Barra de progresso no topo.
   - Validação inline por campo (máscara de CNPJ, validação de email, CEP).
   - Animação de slide entre perguntas.
   - Tela final de resumo antes de prosseguir ao pagamento.
-- [ ] Integração com CEP: ao digitar CEP, preencher cidade/estado/país automaticamente.
-- [ ] Fluxo completo: Link do Checkout → Formulário Typeform → Resumo do Pagamento → Confirmação.
-- [ ] Collections: expandir `Clientes` (nome, email, telefone, cnpj, endereco, cep, cidade, estado, pais).
+- [x] Integração com CEP: ao digitar CEP, preencher cidade/estado/país automaticamente.
+- [x] Fluxo completo: Link do Checkout → Formulário Typeform → Resumo do Pagamento → Confirmação.
+- [x] Collections: expandir `Clientes` (nome, email, telefone, cnpj, endereco, cep, cidade, estado, pais).
 
 #### 1.3 Checkout próprio com PagarMe/Stone
-- [ ] Backend: wrapper SDK PagarMe — criação de transação, suporte a cartão/boleto/PIX.
-- [ ] Backend: rota `POST /api/checkout` (dados do cliente + produto + splits de pagamento).
-- [ ] Backend: rota `POST /api/webhooks/pagarme` para confirmação de pagamento.
-- [ ] Backend: suporte a cupons de desconto e valores variáveis.
-- [ ] Frontend: State `Checkout` — página pública com identidade visual Duo Academy, integrada ao formulário Typeform (1.2) e ao builder (1.1).
-- [ ] Collections: `Pagamentos`, `Cupons`.
+- [x] Backend: wrapper SDK PagarMe — criação de transação, suporte a cartão/boleto/PIX.
+- [x] Backend: rota `POST /api/checkout` (dados do cliente + produto + splits de pagamento).
+- [x] Backend: rota `POST /api/webhooks/pagarme` para confirmação de pagamento.
+- [x] Backend: suporte a cupons de desconto e valores variáveis.
+- [x] Frontend: State `Checkout` — página pública com identidade visual Duo Academy, integrada ao formulário Typeform (1.2) e ao builder (1.1).
+- [x] Collections: `Pagamentos`, `Cupons`.
 
 #### 1.4 Fluxo pós-pagamento automático
-- [ ] Webhook cria `Usuario` automaticamente (se não existe).
-- [ ] Webhook cria `Assinatura` vinculando usuário ao produto pago.
-- [ ] Disparo de email de boas-vindas com credenciais.
-- [ ] Evento Socket.io `usuario:novo` para notificar admin.
-- [ ] Expandir interface `Assinatura` com campos: `status`, `dataInicio`, `dataFim`, `pagamento`.
+- [x] Webhook cria `Usuario` automaticamente (se não existe).
+- [x] Webhook cria `Assinatura` vinculando usuário ao produto pago.
+- [x] Disparo de email de boas-vindas com credenciais.
+- [x] Evento Socket.io `usuario:novo` para notificar admin.
+- [x] Expandir interface `Assinatura` com campos: `status`, `dataInicio`, `dataFim`, `pagamento`.
 
 #### 1.5 Contrato/Termo de adesão digital
-- [ ] Tela pós-checkout que exibe termo de adesão simplificado.
-- [ ] Coleta de CPF como assinatura digital.
-- [ ] Collection: `Contratos` (usuario, cpf, data_aceite, texto_contrato).
-- [ ] Fluxo: pagamento → cadastro → exibição do termo → acesso liberado.
+- [x] Tela pós-checkout que exibe termo de adesão simplificado.
+- [x] Coleta de CPF como assinatura digital.
+- [x] Collection: `Contratos` (usuario, cpf, data_aceite, texto_contrato).
+- [x] Fluxo: pagamento → cadastro → exibição do termo → acesso liberado.
 
 #### 1.6 Controle de acesso efetivo por permissão
-- [ ] Verificar `status` da Assinatura antes de liberar conteúdo no State `Usuario`.
-- [ ] Campo `nivelAcesso` em `ProdutoOption` para filtrar por nível do usuário.
-- [ ] Lógica de bloqueio: mentorias e acessos filtrados por nível (conforme briefing §10).
-- [ ] Cursos "ilha" (ex: Recepção Lucrativa) como produto separado com acesso independente.
+- [x] Verificar `status` da Assinatura antes de liberar conteúdo no State `Usuario`.
+- [x] Campo `nivelAcesso` em `ProdutoOption` para filtrar por nível do usuário.
+- [x] Lógica de bloqueio: mentorias e acessos filtrados por nível (conforme briefing §10).
+- [x] Cursos "ilha" (ex: Recepção Lucrativa) como produto separado com acesso independente.
 
 ---
 

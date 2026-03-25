@@ -9,7 +9,10 @@ export default class FieldInputMask extends Field {
         whatsapp: { mask: "(99) 9999-9999" },
         sms: { mask: "+99 (99) 9 9999-9999" },
         code: { mask: "9-9-9-9" },
-        cpf: { mask: "999.999.999-99" }
+        cpf: { mask: "999.999.999-99" },
+        cnpj: { mask: "99.999.999/9999-99" },
+        cep: { mask: "99999-999" },
+        telefone: { mask: "(99) 99999-9999" },
     };
     constructor(key: string, toData?: boolean) {
         super(key, toData === true)

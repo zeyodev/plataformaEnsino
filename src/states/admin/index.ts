@@ -7,6 +7,8 @@ import OptionAdminAulas from "../../options/admin-aulas"
 import OptionAdminUsuarios from "../../options/admin-usuarios"
 import OptionAdminProdutos from "../../options/admin-produtos"
 import OptionConfiguracoes from "../../options/configuracoes"
+import OptionAdminCheckout from "../../options/admin-checkout"
+import OptionAdminCupons from "../../options/admin-cupons"
 import RepositorySocket from "../../repository/socket"
 
 export default class Admin extends State {
@@ -35,6 +37,8 @@ export default class Admin extends State {
                 new OptionAdminProdutos(context.app),
                 new OptionAdminAulas(context.app),
                 new OptionAdminUsuarios(context.app),
+                new OptionAdminCheckout(context.app),
+                new OptionAdminCupons(context.app),
                 new OptionConfiguracoes(context.app),
             ], (option) => {
                 this.painel.subhandle(option)

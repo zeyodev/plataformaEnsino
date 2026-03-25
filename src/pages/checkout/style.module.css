@@ -1,0 +1,94 @@
+.container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: var(--bg-primary, #f9fafb);
+    padding: 2rem;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.header h1 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.header p {
+    color: var(--neutral-500);
+    font-size: 1rem;
+}
+
+.card {
+    background: var(--bg-secondary, #fff);
+    border-radius: 0.75rem;
+    padding: 2rem;
+    width: 100%;
+    max-width: 560px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+.valorTotal {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-500);
+    text-align: center;
+    margin: 1rem 0;
+}
+
+.splitsList {
+    display: grid;
+    gap: 0.5rem;
+    margin: 1rem 0;
+}
+
+.splitItem {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.75rem;
+    background: var(--neutral-50, #f3f4f6);
+    border-radius: 0.375rem;
+    font-size: 0.9rem;
+}
+
+.paymentForm {
+    display: grid;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.cupomRow {
+    display: flex;
+    gap: 0.5rem;
+    align-items: end;
+}
+
+.pixContainer {
+    text-align: center;
+    padding: 1.5rem;
+}
+
+.pixContainer img {
+    max-width: 200px;
+    margin: 1rem auto;
+}
+
+.boletoContainer {
+    text-align: center;
+    padding: 1.5rem;
+}
+
+.loading {
+    text-align: center;
+    padding: 3rem;
+    color: var(--neutral-500);
+}
+
+.error {
+    color: var(--danger-500);
+    text-align: center;
+    padding: 1rem;
+}

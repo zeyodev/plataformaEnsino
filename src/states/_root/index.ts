@@ -2,10 +2,11 @@ import State from ".."
 import Context from "../context"
 import Usuario from "../usuario"
 import Admin from "../admin"
+import Checkout from "../checkout"
 import Login from "../../pages/login"
 
 export default class Root extends State {
-    children = { "u": Usuario, "admin": Admin }
+    children = { "u": Usuario, "admin": Admin, "checkout": Checkout }
     name = "root"
     page = Login
     
