@@ -1,9 +1,9 @@
 import Z, { ZeyoAs } from "zeyo"
 import Field from "../field"
-import icons, { iconMapping, IconMapping } from "../../../components/atoms/icons"
+import { getIcon, getAllIconNames } from "../../../icons/lucideCatalog"
 import style from "./style.module.css"
 
-const iconKeys = Object.keys(iconMapping)
+const iconKeys = getAllIconNames()
 
 export default class FieldIcon extends Field {
     private value: string = ""
@@ -28,7 +28,7 @@ export default class FieldIcon extends Field {
 
     private renderIcons() {
         for (const name of iconKeys) {
-            const item = Z("div").class(style.item).children(icons(name as keyof IconMapping))
+            const item = Z("div").class(style.item).children(getIcon(name))
             item.element.title = name
             item.element.onclick = () => this.select(name)
             this.items.set(name, item)
@@ -51,7 +51,7 @@ export default class FieldIcon extends Field {
         this.value = name
         const current = this.items.get(name)
         if (current) current.element.classList.add(style.selected)
-        this.preview.HTML("").children(icons(name as keyof IconMapping), Z("span").text(name))
+        this.preview.HTML("").children(getIcon(name), Z("span").text(name))
     }
 
     getValue(): string {

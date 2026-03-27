@@ -32,7 +32,6 @@
 .item svg {
     width: 1.5rem;
     height: 1.5rem;
-    fill: currentColor;
 }
 
 .search {
@@ -63,5 +62,4 @@
 .preview svg {
     width: 1.5rem;
     height: 1.5rem;
-    fill: currentColor;
 }

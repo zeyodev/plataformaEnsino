@@ -47,13 +47,13 @@ const timeline = (app: App, usuarioId: string) =>
 
 export default (app: App, obj: any) =>
     new Abas(app)
-        .push(new Aba("anotacoes", "Anotações", "iconEdit",
-            CRUD(app, "Anotacoes", { create: "Nova Anotação" }, {
+.push(new Aba("timeline", "Timeline", "iconClock", timeline(app, obj._id), true))
+.push(new Aba("anotacoes", "Anotações", "iconEdit",
+    CRUD(app, "Anotacoes", { create: "Nova Anotação" }, {
                 create: new FormCreateAnotacao(app, obj._id),
                 read: { usuario: obj._id },
                 update: (a, o) => new FormCreateAnotacao(a, obj._id)
             }, anotacaoComponent),
-            true
         ))
         .push(new Aba("eventos", "Eventos", "iconCalendar",
             CRUD(app, "Eventos", { create: "Registrar Evento" }, {
@@ -62,4 +62,3 @@ export default (app: App, obj: any) =>
                 update: (a, o) => new FormCreateEvento(a, obj._id)
             }, eventoComponent)
         ))
-        .push(new Aba("timeline", "Timeline", "iconClock", timeline(app, obj._id)))

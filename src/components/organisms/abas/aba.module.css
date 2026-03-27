@@ -45,7 +45,6 @@
 .abas .aba i>svg {
     width: var(--icon-size);
     height: var(--icon-size);
-    fill: currentColor;
 }
 
 .aba.selected {

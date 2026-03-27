@@ -2,7 +2,7 @@ import Z, { A, div, ZeyoAs } from "zeyo";
 import App from "../../../app";
 import style from "./style.module.css";
 import Option from "../../../options";
-import iconCheck from "icons/src/business_and_online_icons/iconCheck";
+import iconCheck from "lucideIcons/iconCheck";
 import icons from "../../atoms/icons";
 
 export default class NavOption extends A {
@@ -17,9 +17,7 @@ export default class NavOption extends A {
                 this.span.text(option.title || (option as any).nome),
             ).class("d-flex", "w-100", "jc-between"),
         ).click(() => {
-            if (!this.edit)
-                cb(this)
-            this.edit = this.edit ? false : true
+            cb(this)
         })
     }
 

@@ -1,4 +1,4 @@
-import iconTrash from "icons/src/business_and_online_icons/iconTrash";
+import iconTrash from "lucideIcons/iconTrash";
 import App from "../../../app";
 import button from "../../../components/atoms/button";
 import snackbar from "../../../components/atoms/snackbar";

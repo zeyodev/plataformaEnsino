@@ -3,7 +3,7 @@ import Context from "../context"
 import Z, { div } from "zeyo"
 import painelNav, { PainelNav } from "../../components/templates/painelNav"
 import button from "../../components/atoms/button"
-import iconArrowLeft from "icons/src/business_and_online_icons/iconArrowLeft"
+import iconArrowLeft from "lucideIcons/iconArrowLeft"
 import OptionPlayer from "../../options/player"
 import OptionArquivos from "../../options/arquivos"
 

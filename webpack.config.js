@@ -45,6 +45,9 @@ export default {
     },
     resolve: {
         extensions: ['.ts', '.js'],
+        alias: {
+            'lucideIcons': path.resolve(__dirname, 'src/lucideIcons'),
+        },
     },
     plugins: [new DefinePlugin({
         'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),

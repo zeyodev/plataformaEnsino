@@ -30,5 +30,4 @@
 .nav-option i>svg {
     width: var(--icon-size);
     height: var(--icon-size);
-    fill: currentColor;
 }

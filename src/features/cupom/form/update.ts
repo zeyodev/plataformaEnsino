@@ -4,7 +4,7 @@ import snackbar from "../../../components/atoms/snackbar"
 import Form from "../../../form"
 import FieldInput from "../../../form/fields/input"
 import FieldSelect from "../../../form/fields/select"
-import { iconTrash } from "icons"
+import iconTrash from "lucideIcons/iconTrash"
 
 export default class FormUpdateCupom extends Form {
     constructor(private app: App, private obj: any) {

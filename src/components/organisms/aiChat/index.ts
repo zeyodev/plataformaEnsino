@@ -1,7 +1,7 @@
 import Z, { Div, div, h3, p, button as btn } from "zeyo";
 import style from "./style.module.css";
-import iconSend from "icons/src/business_and_online_icons/iconSend";
-import iconMessageCircle from "icons/src/business_and_online_icons/iconMessageCircle";
+import iconSend from "lucideIcons/iconSend";
+import iconMessageCircle from "lucideIcons/iconMessageCircle";
 import App from "../../../app";
 import { renderMarkdown } from "./markdown";
 

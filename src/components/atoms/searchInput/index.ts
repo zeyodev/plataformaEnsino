@@ -1,6 +1,6 @@
 import Z, { Div } from "zeyo";
 import style from "./style.module.css";
-import iconSearch from "icons/src/business_and_online_icons/iconSearch";
+import iconSearch from "lucideIcons/iconSearch";
 import App from "../../../app";
 import Modal from "../../../states/Modal";
 import modal from "../../molecules/modal";

@@ -9,7 +9,9 @@ import Logo from "../../atoms/logo";
  * Componente da barra lateral de ferramentas
  */
 export default class SideNav extends Div {
-    constructor(private app: App, private backoption?: boolean) {
+    private optionsContainer = div().class("d-grid", "gap-m");
+
+    constructor(private app: App, backoption?: boolean) {
         super();
         this.class("d-grid", "gap-m", style.navigation)
         this.children(new Logo())
@@ -20,14 +22,15 @@ export default class SideNav extends Div {
                 constructor() { super("voltar", "Voltar", "iconArrowLeft", "voltar") }
             }), () => { window.history.back() }),
         )
+        this.children(this.optionsContainer)
     }
 
     setInfo(options: Option[], cb: (option: Option) => void, selected?: number) {
-        this.children(
+        this.optionsContainer.children(
             ...options.map((option) => {
                 return new NavOption(this.app, option, (opt) => {
                     cb(opt.option);
-                    this.object(o => {
+                    this.optionsContainer.object(o => {
                         (o.childList as NavOption[]).forEach(i => {
                             if (i.option.path === option.path)
                                 i.selected();
@@ -41,7 +44,7 @@ export default class SideNav extends Div {
         );
         if (selected === undefined) return this;
 
-        const option = (this.childList as NavOption[])[this.backoption ? selected + 2 :selected + 1];
+        const option = (this.optionsContainer.childList as NavOption[])[selected];
         option.selected();
         cb(option.option);
 

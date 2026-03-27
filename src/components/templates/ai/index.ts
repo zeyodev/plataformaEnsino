@@ -2,7 +2,7 @@ import Z, { div, Div, p, P, ZeyoAs } from "zeyo";
 import App from "../../../app";
 import flexColumnsOverflow from "../../molecules/flexColumnsOverflow";
 import button from "../../atoms/button";
-import iconPlus from "icons/src/business_and_online_icons/iconPlus";
+import iconPlus from "lucideIcons/iconPlus";
 import modal from "../../molecules/modal";
 import Modal from "../../../states/Modal";
 

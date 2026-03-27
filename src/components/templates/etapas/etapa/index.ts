@@ -2,7 +2,7 @@ import { div, Div, h3, header } from "zeyo";
 import style from "./style.module.css";
 import App from "../../../../app";
 import button from "../../../atoms/button";
-import iconPlus from "icons/src/business_and_online_icons/iconPlus";
+import iconPlus from "lucideIcons/iconPlus";
 import cardTitleDescription from "../../../molecules/cardTitleDescription";
 import Modal from "../../../../states/Modal";
 import modal from "../../../molecules/modal";

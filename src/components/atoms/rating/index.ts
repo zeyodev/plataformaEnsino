@@ -1,5 +1,5 @@
 import { Div, div, span } from "zeyo";
-import iconStar from "icons/src/business_and_online_icons/iconStar";
+import iconStar from "lucideIcons/iconStar";
 import styles from "./styles.module.css";
 
 export default () => (new class extends Div {
