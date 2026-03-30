@@ -11,6 +11,7 @@ const COLLECTIONS = [
     'CategoriasEncontros', 'Componentes', 'AdaptadorMapeamento',
     'JornadaNodes', 'NodeAulas', 'Usuarios',
     'Membros', 'Assinaturas', 'Produtos', 'ProdutoOptions', 'Mostradores',
+    'ProdutoOptionPilares', 'ProdutoOptionJornadas', 'ProdutoOptionEncontros',
     'CheckoutLinks', 'Clientes', 'Pagamentos', 'Cupons', 'Contratos',
     'Encontros', 'Anotacoes', 'Eventos',
 ];

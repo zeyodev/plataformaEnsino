@@ -1,4 +1,4 @@
-import RepositoryMemory from "../repository/dontread"
+import RepositoryMemory from "../repository/estatico"
 import { ZeyoAppConstructor } from "./lib"
 
 export default function RepositoryMem<Base extends ZeyoAppConstructor>(base: Base) {

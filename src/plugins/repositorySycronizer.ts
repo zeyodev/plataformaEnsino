@@ -1,4 +1,4 @@
-import RepositoryMemory from "../repository/dontread"
+import RepositoryMemory from "../repository/estatico"
 import { RepositorySynchronizer } from "../repository/sync"
 import { ZeyoAppConstructor } from "./lib"
 

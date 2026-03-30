@@ -1,7 +1,7 @@
 import Repository from "../repository"
 import RepositoryIndexedDB from "../repository/IndexedDB"
 import RepositoryHTTP from "../repository/http"
-import RepositoryMemory from "../repository/dontread"
+import RepositoryMemory from "../repository/estatico"
 import { ZeyoAppConstructor } from "./lib"
 
 declare const process: { env: { [key: string]: string } }

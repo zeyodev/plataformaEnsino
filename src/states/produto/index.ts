@@ -3,7 +3,7 @@ import Context from "../context"
 import Z from "zeyo"
 import painelNav, { PainelNav } from "../../components/templates/painelNav"
 import OptionConfiguracoes from "../../options/configuracoes"
-import { createOptionFromDB } from "../../options/produto-option-factory"
+import { createOptionFromDB } from "../../options/produto-option"
 import Aula from "../aula"
 
 export default class Produto extends State {
