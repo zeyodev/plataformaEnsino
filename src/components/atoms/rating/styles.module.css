@@ -2,6 +2,7 @@
     display: flex;
     align-items: center;
     gap: 4px;
+    justify-content: flex-end;
 }
 
 .rating_label {

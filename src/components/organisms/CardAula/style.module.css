@@ -5,6 +5,7 @@
 
 .aula {
     align-content: start;
+    width: min-content;
 }
 
 .aula img {
@@ -24,6 +25,13 @@
     padding: 2px 6px;
     border-radius: 4px;
     margin: 4px;
+}
+
+.aula h4 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .badge {

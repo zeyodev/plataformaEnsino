@@ -2,6 +2,7 @@ import { button, div, h1, h3, video, img, p, span, Div } from "zeyo";
 import Hls from "hls.js";
 import App from "../../../app";
 import Rating from "../../../components/atoms/rating";
+import SecaoComentarios from "../../../features/comentario/ui/secaoComentarios";
 import style from "./styles.module.css";
 
 const COMPLETION_THRESHOLD = 0.9;
@@ -36,6 +37,8 @@ export default (app: App) => (new class extends Div {
     private hls: Hls | null = null
     private completed = false
     private lastSavedTime = 0
+
+    secaoComentarios = SecaoComentarios(app)
 
     ratingComponent = Rating().onRatingChange(async (rating) => {
         const [existing] = await app.repository.findOne("AulaAvaliacoes", { aulaId: this.aulaId })
@@ -85,6 +88,7 @@ export default (app: App) => (new class extends Div {
         const [avaliacao] = await app.repository.findOne("AulaAvaliacoes", { aulaId })
         if (avaliacao && avaliacao._id) this.ratingComponent.setRating(avaliacao.rating)
         await this.loadProgress(aulaId)
+        this.secaoComentarios.loadComentarios(aulaId)
     }
 
     // 3. Controle de progresso e conclusão
@@ -184,16 +188,17 @@ export default (app: App) => (new class extends Div {
                 o.subscribeBtn
             ) */
         ),
+        o.ratingComponent,
         o.progressBar.children(
             o.progressFill
         ),
         o.progressLabel,
         o.completionBadge,
-        o.ratingComponent,
         o.descBox.children(
             o.viewsInfo,
             o.descText
-        )
+        ),
+        o.secaoComentarios
     )
 ));
 

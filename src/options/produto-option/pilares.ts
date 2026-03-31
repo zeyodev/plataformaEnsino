@@ -21,15 +21,14 @@ export default class OptionPilaresProduto extends Option {
                     objectAbas.element.replaceWith(div().children(p("Nenhum pilar configurado para esta option.")).element)
                     return
                 }
-                // TODO aqui vai ter que implementar uma forma de fazer para pegar o array de ids em uma coleção
-                const [pilares] = await this.app.repository.findMany("Pilares", { _id: pilarIds })
+                const [pilares] = await this.app.repository.findMany("Pilares", { _id: { $in: pilarIds } })
                 for (const [i, pilar] of pilares.entries()) {
                     objectAbas.push(new Aba(pilar.value, pilar.titulo, pilar.icon, div().object(async o => {
                         const [modulos] = await this.app.repository.findMany("Modulos", { pilar: pilar._id })
                         for (const modulo of modulos) {
                             const [aulaLinks] = await this.app.repository.findMany("ModuloAulas", { modulo: modulo._id })
                             const aulaIds = aulaLinks.map((l: any) => l.aula)
-                            const [aulas] = await this.app.repository.findMany("Aulas", { _id: aulaIds })
+                            const [aulas] = await this.app.repository.findMany("Aulas", { _id: { $in: aulaIds } })
                             o.children(
                                 ListaComTitulo(this.app).object(lista => {
                                     lista.setModulo(modulo)
