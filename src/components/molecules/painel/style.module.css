@@ -45,12 +45,21 @@
     gap: var(--gap-size);
 }
 
+/* Sidebar colapsada: ocupa 1 coluna com ícones centralizados */
 .menu .navigation {
     grid-area: 1/1/span 1/span 1;
-    transition: .2s;
-    padding: 1em;
+    transition: grid-area 0.2s;
+    height: 100%;
 }
 
+/* Sidebar expandida: ocupa todas as colunas do menu */
+.layout.open .menu .navigation {
+    grid-area: var(--grid-area-side-bar);
+}
+
+/* ─── Estado colapsado ─── */
+
+/* Centraliza ícones dos nav-options */
 .menu .navigation a {
     justify-content: center;
     color: var(--outline);
@@ -58,26 +67,49 @@
     transition: color 0.2s ease;
 }
 
-.menu .navigation a:hover {
-    color: var(--on-surface);
-}
-
+/* Oculta o texto dos nav-options */
 .menu .navigation a > div {
     display: none;
 }
 
-.layout.open .menu .navigation {
-    grid-area: var(--grid-area-side-bar);
-    padding: 1em;
+/* Centraliza cabeçalho e itens do rodapé */
+.menu .navigation [data-nav-header] {
+    justify-content: center;
 }
+
+.menu .navigation [data-footer-item] {
+    justify-content: center;
+}
+
+/* Oculta elementos apenas visíveis quando expandido */
+.menu .navigation [data-expanded-only] {
+    display: none;
+}
+
+/* ─── Estado expandido ─── */
 
 .layout.open .menu .navigation a > div {
     display: inherit;
 }
 
 .layout.open .menu .navigation a {
-    justify-content: left;
+    justify-content: flex-start;
 }
+
+.layout.open .menu .navigation [data-nav-header] {
+    justify-content: flex-start;
+}
+
+.layout.open .menu .navigation [data-footer-item] {
+    justify-content: flex-start;
+    gap: 0.75rem;
+}
+
+.layout.open .menu .navigation [data-expanded-only] {
+    display: flex;
+}
+
+/* ─── Navegação com back ─── */
 
 .navigation .back {
     display: flex;
@@ -119,6 +151,8 @@
 .menu .icon {
     grid-area: 1/2;
 }
+
+/* ─── Área de conteúdo principal ─── */
 
 .main {
     transition: all .5s;

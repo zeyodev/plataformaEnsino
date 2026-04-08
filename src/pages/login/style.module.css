@@ -1,15 +1,219 @@
+/* ============================================================
+   Login — Duo Academy
+   Os tokens de superfície já refletem a paleta navy/violeta.
+   Este arquivo adiciona apenas os valores específicos do
+   painel de marca que vão além do design system global.
+   ============================================================ */
+
 .layout {
-    background-color: var(--surface);
-    color: var(--on-surface);
+    display: flex;
     height: 100vh;
     height: 100svh;
+    color: var(--text);
+}
+
+/* ── Painel esquerdo — marca ─────────────────────────────── */
+
+.brandPanel {
+    flex: 1;
+    /* Mais escuro que --surface para criar contraste máximo */
+    background-color: #050412;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 3rem;
     position: relative;
+    overflow: hidden;
+}
+
+/* Glow magenta — topo direito (espelha o "O" do logo) */
+.brandPanel::before {
+    content: '';
+    position: absolute;
+    top: -20%;
+    right: -15%;
+    width: 65%;
+    height: 65%;
+    background: radial-gradient(circle, rgba(192, 38, 211, 0.2) 0%, transparent 65%);
+    pointer-events: none;
+}
+
+/* Glow violeta — base esquerda (espelha o "D" do logo) */
+.brandPanel::after {
+    content: '';
+    position: absolute;
+    bottom: -15%;
+    left: -10%;
+    width: 55%;
+    height: 55%;
+    background: radial-gradient(circle, rgba(109, 40, 217, 0.14) 0%, transparent 65%);
+    pointer-events: none;
+}
+
+.brandHeader {
+    z-index: 1;
+}
+
+.brandLogo {
+    height: 48px;
+    width: auto;
+    object-fit: contain;
+    border-radius: 0.375rem;
+}
+
+.brandContent {
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+    z-index: 1;
+}
+
+/* Label editorial — DESIGN.md: Label-SM uppercase */
+.eyebrow {
+    font-family: var(--font-label);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--primary-fixed);   /* #c4b5fd — lilás claro */
+}
+
+/* Headline em Noto Serif — DESIGN.md: Display & Headlines */
+.headline {
+    font-family: var(--font-headline);
+    font-size: clamp(2.75rem, 5vw, 3.75rem);
+    font-weight: 700;
+    line-height: 1.1;
+    white-space: pre-line;
+    /* Gradiente da identidade Duo Academy */
+    background: var(--brand-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.description {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.75;
+    color: var(--outline);      /* #6b61a0 — roxo muted */
+    max-width: 400px;
+}
+
+.brandFooter {
+    color: var(--outline-variant);  /* #3b3468 */
+    font-size: 0.78rem;
+    font-family: var(--font-label);
+    z-index: 1;
+}
+
+/* ── Painel direito — formulário ─────────────────────────── */
+
+.formPanel {
+    flex: 1;
+    background-color: var(--background);
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 2rem;
+    overflow: auto;
 }
 
-.layout > div {
-    position: absolute;
-    width: min(80vw, 500px);
+.formContainer {
+    width: 100%;
+    max-width: 420px;
+    display: grid;
+    gap: 1.75rem;
+}
+
+/* Logo textual no painel de formulário */
+.formLogo {
+    display: flex;
+    align-items: baseline;
+    gap: 0.35rem;
+}
+
+/* "Duo" — Noto Serif com gradiente da marca */
+.formLogoDuo {
+    font-family: var(--font-headline);
+    font-size: 1.6rem;
+    font-weight: 700;
+    background: var(--brand-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* "ACADEMY" — label editorial espaçado */
+.formLogoAcademy {
+    font-family: var(--font-label);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-400);    /* #6b61a0 */
+}
+
+/* Divider — sem borda, shift tonal (DESIGN.md) */
+.dividerRow {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.divider {
+    flex: 1;
+    height: 1px;
+    background-color: var(--background-200);
+}
+
+.dividerText {
+    font-size: 0.8rem;
+    color: var(--text-400);
+    font-family: var(--font-label);
+}
+
+/* Ghost border com cor da marca — DESIGN.md: "Ghost Border" */
+.googleBtn {
+    width: 100%;
+    text-align: center;
+    display: flex !important;
+    justify-content: center;
+    box-shadow: inset 0 0 0 1px rgba(167, 139, 250, 0.25);
+}
+
+/* ── Responsivo ──────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+    .layout {
+        flex-direction: column;
+    }
+
+    .brandPanel {
+        padding: 2rem 2rem 1.5rem;
+        flex: none;
+    }
+
+    .brandContent {
+        gap: 1rem;
+    }
+
+    .headline {
+        font-size: 2.25rem;
+    }
+
+    .description {
+        display: none;
+    }
+
+    .brandFooter {
+        display: none;
+    }
+
+    .formPanel {
+        flex: 1;
+        padding: 1.5rem;
+        align-items: flex-start;
+        padding-top: 2rem;
+    }
 }

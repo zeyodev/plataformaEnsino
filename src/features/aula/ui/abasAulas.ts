@@ -9,40 +9,119 @@ import button from "../../../components/atoms/button";
 import snackbar from "../../../components/atoms/snackbar";
 import icon from "../../../components/atoms/icons";
 
-function pastaCard(pasta: any) {
-    const card = div().class("d-flex", "gap-m", "ai-center")
-    card.element.style.cssText = "padding: 1rem; background: var(--background); border-radius: 1rem; cursor: pointer; transition: opacity .2s;"
-    card.element.onmouseenter = () => card.element.style.opacity = "0.8"
-    card.element.onmouseleave = () => card.element.style.opacity = "1"
+type SelectedItem = { id: string; tipo: "pasta" | "aula" }
+
+function sectionHeader(titulo: string, count: number) {
+    const wrapper = div().class("d-flex", "gap-m", "ai-center")
+    wrapper.element.style.marginBottom = ".25rem"
+
+    const label = span().text(titulo)
+    label.element.style.cssText = "font-weight:600; font-size:.85rem; color:var(--on-surface-variant); text-transform:uppercase; letter-spacing:.05rem;"
+
+    const badge = span().text(String(count))
+    badge.element.style.cssText = "font-size:.75rem; font-weight:600; color:var(--on-surface-variant); background:var(--surface-container-highest); padding:2px 8px; border-radius:10px;"
+
+    wrapper.children(label, badge)
+    return wrapper
+}
+
+function pastaCard(
+    pasta: any,
+    modoSelecao: boolean,
+    selected: Set<SelectedItem>,
+    onToggle: () => void
+) {
+    const card = div().class("card", "d-grid", "gap-m")
+    card.element.style.cssText = "cursor:pointer; border:2px solid transparent; transition:background-color .15s, border-color .15s;"
 
     const icone = div()
     icone.element.innerHTML = icon("iconFolder").element.innerHTML
-    icone.element.style.cssText = "flex-shrink: 0; width: 24px; height: 24px; opacity: .7;"
+    icone.element.style.cssText = "width:44px; height:44px; color:var(--primary);"
 
+    const info = div().class("d-grid", "gap-p")
     const titulo = span().text(pasta.titulo || "Sem nome")
-    titulo.element.style.fontWeight = "500"
+    titulo.element.style.cssText = "font-weight:600; font-size:.95rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;"
+    const tipo = span().text("Pasta")
+    tipo.element.style.cssText = "font-size:.75rem; color:var(--on-surface-variant);"
+    info.children(titulo, tipo)
 
-    card.children(icone, titulo)
+    card.element.onmouseenter = () => card.element.style.backgroundColor = "var(--surface-container-highest)"
+    card.element.onmouseleave = () => card.element.style.backgroundColor = ""
+
+    if (modoSelecao) {
+        const cb = document.createElement("input")
+        cb.type = "checkbox"
+        cb.style.cssText = "width:16px; height:16px; cursor:pointer; flex-shrink:0; pointer-events:none; position:absolute; top:.75rem; right:.75rem;"
+        card.element.style.position = "relative"
+        card.element.appendChild(cb)
+
+        const item: SelectedItem = { id: pasta._id, tipo: "pasta" }
+        card.click(() => {
+            const found = [...selected].find(s => s.id === item.id)
+            if (found) {
+                selected.delete(found)
+                cb.checked = false
+                card.element.style.borderColor = "transparent"
+            } else {
+                selected.add(item)
+                cb.checked = true
+                card.element.style.borderColor = "var(--primary)"
+            }
+            onToggle()
+        })
+    }
+
+    card.children(icone, info)
     return card
 }
 
-function aulaCard(aula: any) {
+function aulaCard(
+    aula: any,
+    modoSelecao: boolean,
+    selected: Set<SelectedItem>,
+    onToggle: () => void
+) {
     const card = div().class("d-flex", "gap-m", "ai-center")
-    card.element.style.cssText = "padding: 1rem; background: var(--background); border-radius: 1rem; cursor: pointer; transition: opacity .2s;"
-    card.element.onmouseenter = () => card.element.style.opacity = "0.8"
-    card.element.onmouseleave = () => card.element.style.opacity = "1"
+    card.element.style.cssText = "padding:.75rem 1rem; border-radius:.75rem; border:2px solid transparent; cursor:pointer; transition:background-color .15s, border-color .15s;"
 
     const icone = div()
     icone.element.innerHTML = icon("iconVideo").element.innerHTML
-    icone.element.style.cssText = "flex-shrink: 0; width: 24px; height: 24px; opacity: .7;"
+    icone.element.style.cssText = "flex-shrink:0; width:36px; height:36px; color:var(--on-surface-variant);"
 
-    const info = div().class("d-grid", "gap-s")
+    const info = div().class("d-grid", "gap-p")
+    info.element.style.cssText = "flex:1; min-width:0;"
     const titulo = span().text(aula.title || "Sem título")
     titulo.element.style.fontWeight = "500"
     const desc = span().text(aula.description || "")
-    desc.element.style.cssText = "font-size: .85rem; opacity: .6;"
-
+    desc.element.style.cssText = "font-size:.82rem; color:var(--on-surface-variant); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;"
     info.children(titulo, desc)
+
+    card.element.onmouseenter = () => card.element.style.backgroundColor = "var(--surface-container-high)"
+    card.element.onmouseleave = () => card.element.style.backgroundColor = ""
+
+    if (modoSelecao) {
+        const cb = document.createElement("input")
+        cb.type = "checkbox"
+        cb.style.cssText = "width:16px; height:16px; cursor:pointer; flex-shrink:0; pointer-events:none;"
+
+        const item: SelectedItem = { id: aula._id, tipo: "aula" }
+        card.click(() => {
+            const found = [...selected].find(s => s.id === item.id)
+            if (found) {
+                selected.delete(found)
+                cb.checked = false
+                card.element.style.borderColor = "transparent"
+            } else {
+                selected.add(item)
+                cb.checked = true
+                card.element.style.borderColor = "var(--primary)"
+            }
+            onToggle()
+        })
+
+        card.element.prepend(cb)
+    }
+
     card.children(icone, info)
     return card
 }
@@ -101,14 +180,22 @@ class FormCreatePasta {
 
 export default (app: App) => {
     const container = div().class("d-grid", "gap-g")
-    const breadcrumb = div().class("d-flex", "gap-s", "ai-center")
-    breadcrumb.element.style.cssText = "flex-wrap: wrap; font-size: .9rem;"
-    const toolbar = div().class("d-flex", "gap-m", "ai-center")
-    const lista = div().class("d-grid", "gap-m")
+
+    // Toolbar: breadcrumb (esquerda) + botões (direita)
+    const toolbar = div().class("d-flex", "jc-between", "ai-center", "gap-m", "w-100")
+    const leftSide = div().class("d-flex", "gap-p", "ai-center")
+    leftSide.element.style.cssText = "flex-wrap:wrap; font-size:.9rem; flex:1; min-width:0;"
+    const rightSide = div().class("d-flex", "gap-m", "ai-center")
+
+    const breadcrumb = div().class("d-flex", "gap-p", "ai-center")
+    breadcrumb.element.style.flexWrap = "wrap"
+
+    const lista = div().class("d-grid", "gap-g")
     const importarContainer = div()
     importarContainer.element.style.display = "none"
 
     let pastaAtual: string | undefined = undefined
+    let modoSelecao = false
     const pilhaPastas: { id?: string, titulo: string }[] = [{ titulo: "Aulas" }]
 
     function renderBreadcrumb() {
@@ -119,7 +206,7 @@ export default (app: App) => {
 
             const link = span().text(item.titulo)
             if (!isLast) {
-                link.element.style.cssText = "cursor: pointer; color: var(--accent); text-decoration: underline;"
+                link.element.style.cssText = "cursor: pointer; color: var(--primary); text-decoration: underline;"
                 const targetIndex = i
                 link.click(() => {
                     pilhaPastas.length = targetIndex + 1
@@ -127,7 +214,7 @@ export default (app: App) => {
                     carregarConteudo()
                 })
             } else {
-                link.element.style.cssText = "font-weight: 600;"
+                link.element.style.fontWeight = "600"
             }
             breadcrumb.children(link)
             if (!isLast) {
@@ -161,29 +248,60 @@ export default (app: App) => {
             app.repository.findMany("Aulas", queryAulas)
         ])
 
-        if (!errP && pastas.length > 0) {
+        const temPastas = !errP && pastas && pastas.length > 0
+        const temAulas = !errA && aulas && aulas.length > 0
+
+        if (temPastas) {
+            const secao = div().class("d-grid", "gap-m")
+            secao.children(sectionHeader("Pastas", pastas.length))
+
+            const grid = div()
+            grid.element.style.cssText = "display:grid; grid-template-columns:repeat(auto-fill, minmax(180px,1fr)); gap:1em;"
+
             for (const pasta of pastas) {
-                const card = pastaCard(pasta)
-                card.click(() => navegarPasta(pasta))
-                lista.children(card)
+                const card = pastaCard(pasta, modoSelecao, selected, atualizarContador)
+                if (!modoSelecao) {
+                    card.click(() => navegarPasta(pasta))
+                }
+                grid.children(card)
             }
+
+            secao.children(grid)
+            lista.children(secao)
         }
 
-        if (!errA && aulas.length > 0) {
+        if (temAulas) {
+            const secao = div().class("d-grid", "gap-m")
+            secao.children(sectionHeader("Aulas", aulas.length))
+
+            const listaAulas = div().class("d-grid", "gap-p")
             for (const aula of aulas) {
-                const card = aulaCard(aula)
-                card.click(() => {
-                    app.context.setState(Modal("update-aula", modal(app, configuracaoAula(app, aula))))
-                    app.context.handle()
-                })
-                lista.children(card)
+                const card = aulaCard(aula, modoSelecao, selected, atualizarContador)
+                if (!modoSelecao) {
+                    card.click(() => {
+                        app.context.setState(Modal("update-aula", modal(app, configuracaoAula(app, aula))))
+                        app.context.handle()
+                    })
+                }
+                listaAulas.children(card)
             }
+
+            secao.children(listaAulas)
+            lista.children(secao)
         }
 
-        if ((!pastas || pastas.length === 0) && (!aulas || aulas.length === 0)) {
-            const vazio = div()
-            vazio.element.style.cssText = "text-align: center; padding: 2rem; opacity: .5;"
-            vazio.text("Esta pasta está vazia")
+        if (!temPastas && !temAulas) {
+            const vazio = div().class("d-grid", "jc-center", "ac-center")
+            vazio.element.style.cssText = "padding:3rem 1rem; text-align:center;"
+
+            const iconeVazio = div()
+            iconeVazio.element.innerHTML = icon("iconFolderOpen").element.innerHTML
+            iconeVazio.element.style.cssText = "width:48px; height:48px; opacity:.4; margin:0 auto;"
+
+            const texto = span().text("Esta pasta está vazia")
+            texto.element.style.cssText = "font-size:.95rem; color:var(--on-surface-variant); display:block; margin-top:.75rem;"
+
+            vazio.children(iconeVazio, texto)
             lista.children(vazio)
         }
     }
@@ -193,7 +311,7 @@ export default (app: App) => {
     app.repository.createTriggerTo("Aulas", () => carregarConteudo(), "create", "update", "delete")
 
     // Botões
-    const btnCriarPasta = button("Nova Pasta").style("no-bg").style("p-s")
+    const btnCriarPasta = button("+ Nova Pasta").style("no-bg").style("p-s")
     btnCriarPasta.click(() => {
         const form = new FormCreatePasta(app, pastaAtual)
         const wrapper = div()
@@ -202,7 +320,7 @@ export default (app: App) => {
         app.context.handle()
     })
 
-    const btnCriarAula = button("Nova Aula").style("no-bg").style("p-s")
+    const btnCriarAula = button("+ Nova Aula").style("accent").style("p-s")
     btnCriarAula.click(() => {
         const form = new FormCreateAula(app, pastaAtual)
         form.setSubmitTrigger(() => window.history.back())
@@ -210,7 +328,7 @@ export default (app: App) => {
         app.context.handle()
     })
 
-    const btnImportarPanda = button("Importar Panda").style("no-bg").style("p-s")
+    const btnImportarPanda = button("Importar").style("no-bg").style("p-s")
     let importarCarregado = false
     btnImportarPanda.click(() => {
         const visivel = importarContainer.element.style.display !== "none"
@@ -225,10 +343,8 @@ export default (app: App) => {
         }
     })
 
-    // Botão mover (seleção)
-    const selected = new Set<{ id: string, tipo: "pasta" | "aula" }>()
-    const listaSelecao = div().class("d-grid", "gap-m")
-    listaSelecao.element.style.display = "none"
+    // Seleção
+    const selected = new Set<SelectedItem>()
     const barraAcoes = div().class("d-flex", "gap-m", "ai-center")
     barraAcoes.element.style.display = "none"
 
@@ -236,7 +352,7 @@ export default (app: App) => {
     const btnCancelar = button("Cancelar").style("no-bg").style("p-s")
     btnCancelar.element.style.display = "none"
     const contadorSelecao = span()
-    contadorSelecao.element.style.cssText = "font-size: .9rem; color: var(--text); opacity: .7;"
+    contadorSelecao.element.style.cssText = "font-size:.9rem; color:var(--on-surface-variant);"
 
     function atualizarContador() {
         contadorSelecao.text(selected.size > 0 ? `${selected.size} selecionado(s)` : "")
@@ -277,17 +393,16 @@ export default (app: App) => {
         titulo.style.margin = "0"
         wrapper.element.appendChild(titulo)
 
-        const listaPastas = div().class("d-grid", "gap-s")
+        const listaPastas = div().class("d-grid", "gap-p")
         wrapper.children(listaPastas)
 
-        // Opção Raiz
         const optRaiz = div().class("d-flex", "gap-m", "ai-center")
-        optRaiz.element.style.cssText = "padding: .75rem 1rem; background: var(--background); border-radius: .75rem; cursor: pointer; border: 1px solid transparent; transition: border-color .2s;"
-        optRaiz.element.onmouseenter = () => optRaiz.element.style.borderColor = "var(--accent)"
+        optRaiz.element.style.cssText = "padding:.75rem 1rem; background:var(--surface-container-high); border-radius:.75rem; cursor:pointer; border:1px solid transparent; transition:border-color .2s;"
+        optRaiz.element.onmouseenter = () => optRaiz.element.style.borderColor = "var(--primary)"
         optRaiz.element.onmouseleave = () => optRaiz.element.style.borderColor = "transparent"
         const iconeRaiz = div()
         iconeRaiz.element.innerHTML = icon("iconInbox").element.innerHTML
-        iconeRaiz.element.style.cssText = "flex-shrink: 0; width: 20px; height: 20px; opacity: .7;"
+        iconeRaiz.element.style.cssText = "flex-shrink:0; width:20px; height:20px; opacity:.7;"
         optRaiz.children(iconeRaiz, span().text("/ Raiz"))
         optRaiz.click(() => {
             window.history.back()
@@ -331,12 +446,12 @@ export default (app: App) => {
 
                 const path = buildPath(pasta)
                 const opt = div().class("d-flex", "gap-m", "ai-center")
-                opt.element.style.cssText = "padding: .75rem 1rem; background: var(--background); border-radius: .75rem; cursor: pointer; border: 1px solid transparent; transition: border-color .2s;"
-                opt.element.onmouseenter = () => opt.element.style.borderColor = "var(--accent)"
+                opt.element.style.cssText = "padding:.75rem 1rem; background:var(--surface-container-high); border-radius:.75rem; cursor:pointer; border:1px solid transparent; transition:border-color .2s;"
+                opt.element.onmouseenter = () => opt.element.style.borderColor = "var(--primary)"
                 opt.element.onmouseleave = () => opt.element.style.borderColor = "transparent"
                 const iconeP = div()
                 iconeP.element.innerHTML = icon("iconFolder").element.innerHTML
-                iconeP.element.style.cssText = "flex-shrink: 0; width: 20px; height: 20px; opacity: .7;"
+                iconeP.element.style.cssText = "flex-shrink:0; width:20px; height:20px; opacity:.7;"
                 opt.children(iconeP, span().text(path))
                 opt.click(() => {
                     window.history.back()
@@ -352,95 +467,36 @@ export default (app: App) => {
 
     const btnMover = button("Mover para...").style("accent").style("p-s")
     btnMover.click(abrirModalMover)
-
     barraAcoes.children(btnMover)
 
-    async function entrarSelecao() {
-        lista.element.style.display = "none"
+    function entrarSelecao() {
+        modoSelecao = true
+        selected.clear()
+        atualizarContador()
         btnSelecionar.element.style.display = "none"
         btnCancelar.element.style.display = ""
         barraAcoes.element.style.display = ""
-        listaSelecao.element.style.display = ""
-        selected.clear()
-        atualizarContador()
-        listaSelecao.HTML("")
-        const queryPastas = pastaAtual
-            ? { pastaId: pastaAtual }
-            : { pastaId: { $exists: false } }
-        const queryAulas = pastaAtual
-            ? { pastaId: pastaAtual }
-            : { pastaId: { $exists: false } }
-
-        const [[pastas, errP], [aulas, errA]] = await Promise.all([
-            app.repository.findMany("Pastas", queryPastas),
-            app.repository.findMany("Aulas", queryAulas)
-        ])
-
-        if (!errP) {
-            for (const pasta of pastas) {
-                listaSelecao.children(buildSelecaoCard(pasta._id, pasta.titulo || "Sem nome", "pasta"))
-            }
-        }
-        if (!errA) {
-            for (const aula of aulas) {
-                listaSelecao.children(buildSelecaoCard(aula._id, aula.title || "Sem título", "aula"))
-            }
-        }
-    }
-
-    function buildSelecaoCard(id: string, titulo: string, tipo: "pasta" | "aula") {
-        const card = div().class("d-flex", "gap-m", "ai-center")
-        card.element.style.cssText = "padding: 1rem; background: var(--background); border-radius: 1rem; cursor: pointer; border: 2px solid transparent; transition: border-color .2s;"
-
-        const cb = document.createElement("input")
-        cb.type = "checkbox"
-        cb.style.cssText = "width: 18px; height: 18px; cursor: pointer; flex-shrink: 0;"
-
-        const label = span().text(`${tipo === "pasta" ? "📁" : "🎬"} ${titulo}`)
-
-        card.element.prepend(cb)
-        card.children(label)
-
-        const item = { id, tipo }
-
-        card.click((_o, e) => {
-            if ((e.target as HTMLElement).tagName === "INPUT") return
-            cb.checked = !cb.checked
-            toggleItem(item, cb.checked, card)
-        })
-        cb.addEventListener("change", () => toggleItem(item, cb.checked, card))
-
-        return card
-    }
-
-    function toggleItem(item: { id: string, tipo: "pasta" | "aula" }, checked: boolean, card: ReturnType<typeof div>) {
-        if (checked) {
-            selected.add(item)
-            card.element.style.borderColor = "var(--accent)"
-        } else {
-            selected.delete(item)
-            card.element.style.borderColor = "transparent"
-        }
-        atualizarContador()
+        carregarConteudo()
     }
 
     function sairSelecao() {
-        lista.element.style.display = ""
+        modoSelecao = false
+        selected.clear()
+        atualizarContador()
         btnSelecionar.element.style.display = ""
         btnCancelar.element.style.display = "none"
         barraAcoes.element.style.display = "none"
-        listaSelecao.element.style.display = "none"
-        selected.clear()
-        atualizarContador()
         carregarConteudo()
     }
 
     btnSelecionar.click(entrarSelecao)
     btnCancelar.click(sairSelecao)
 
-    toolbar.children(btnCriarPasta, btnCriarAula, btnImportarPanda, btnSelecionar, btnCancelar, contadorSelecao)
+    leftSide.children(breadcrumb)
+    rightSide.children(btnCriarPasta, btnCriarAula, btnImportarPanda, btnSelecionar, btnCancelar, contadorSelecao)
+    toolbar.children(leftSide, rightSide)
 
-    container.children(breadcrumb, toolbar, barraAcoes, lista, listaSelecao, importarContainer)
+    container.children(toolbar, barraAcoes, lista, importarContainer)
 
     carregarConteudo()
 

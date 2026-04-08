@@ -20,7 +20,7 @@
 
 /* === Selection === */
 ::selection {
-    background: rgba(212, 175, 55, 0.3);
+    background: rgba(167, 139, 250, 0.3);
     color: var(--on-surface);
 }
 
@@ -120,7 +120,7 @@ select {
 
 input:focus,
 select:focus {
-    box-shadow: 0 0 0 1px rgba(242, 202, 80, 0.5);
+    box-shadow: 0 0 0 1px rgba(167, 139, 250, 0.5);
 }
 
 input::placeholder,
@@ -189,7 +189,7 @@ main {
     padding: 15px;
     background: var(--gold-gradient);
     color: var(--on-primary);
-    box-shadow: 0 10px 40px rgba(242, 202, 80, 0.4);
+    box-shadow: 0 10px 40px rgba(167, 139, 250, 0.4);
 }
 
 @media (max-width: 992px) {

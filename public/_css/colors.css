@@ -1,150 +1,153 @@
 /* ============================================
    Design System: "The Digital Atelier"
-   Salão Milionário — Dark Mode Luxury Palette
+   Duo Academy — Dark Mode Palette
+   Navy · Violet · Magenta
    ============================================ */
 
 :root {
   /* === Fonts === */
   --font-headline: 'Noto Serif', serif;
-  --font-body: 'Manrope', sans-serif;
-  --font-label: 'Manrope', sans-serif;
+  --font-display:  'Noto Serif', serif;
+  --font-body:     'Manrope', sans-serif;
+  --font-label:    'Manrope', sans-serif;
 
-  /* === Surface Hierarchy (Dark Architecture) === */
-  --surface: #131313;
-  --surface-dim: #131313;
-  --surface-bright: #393939;
-  --surface-container-lowest: #0e0e0e;
-  --surface-container-low: #1c1b1b;
-  --surface-container: #201f1f;
-  --surface-container-high: #2a2a2a;
-  --surface-container-highest: #353534;
-  --surface-variant: #353534;
-  --surface-tint: #e9c349;
+  /* === Surface Hierarchy (Dark Navy Architecture) === */
+  --surface:                   #09071a;
+  --surface-dim:               #09071a;
+  --surface-bright:            #2d2a4a;
+  --surface-container-lowest:  #050412;
+  --surface-container-low:     #100e28;
+  --surface-container:         #161338;
+  --surface-container-high:    #1e1a42;
+  --surface-container-highest: #27244e;
+  --surface-variant:           #27244e;
+  --surface-tint:              #a78bfa;
 
-  /* === Primary (Gold) === */
-  --primary: #F2CA50;
-  --primary-container: #D4AF37;
-  --primary-fixed: #ffe088;
-  --primary-fixed-dim: #e9c349;
-  --on-primary: #3c2f00;
-  --on-primary-container: #554300;
-  --on-primary-fixed: #241a00;
-  --on-primary-fixed-variant: #574500;
-  --inverse-primary: #735c00;
+  /* === Primary (Violet) === */
+  --primary:                #a78bfa;
+  --primary-container:      #7c3aed;
+  --primary-fixed:          #c4b5fd;
+  --primary-fixed-dim:      #8b5cf6;
+  --on-primary:             #1e0a4a;
+  --on-primary-container:   #ede9fe;
+  --on-primary-fixed:       #0d0520;
+  --on-primary-fixed-variant: #2e1065;
+  --inverse-primary:        #5b21b6;
 
-  /* === Secondary (Copper) === */
-  --secondary: #FFB77B;
-  --secondary-container: #7a4100;
-  --secondary-fixed: #ffdcc2;
-  --secondary-fixed-dim: #ffb77b;
-  --on-secondary: #4d2700;
-  --on-secondary-container: #ffb270;
-  --on-secondary-fixed: #2e1500;
-  --on-secondary-fixed-variant: #6d3a00;
+  /* === Secondary (Magenta) === */
+  --secondary:                #f0abfc;
+  --secondary-container:      #86198f;
+  --secondary-fixed:          #fae8ff;
+  --secondary-fixed-dim:      #e879f9;
+  --on-secondary:             #4a044e;
+  --on-secondary-container:   #fae8ff;
+  --on-secondary-fixed:       #2d0030;
+  --on-secondary-fixed-variant: #701a75;
 
-  /* === Tertiary (Blue accent) === */
-  --tertiary: #bfcdff;
-  --tertiary-container: #97b0ff;
-  --tertiary-fixed: #dbe1ff;
-  --tertiary-fixed-dim: #b4c5ff;
-  --on-tertiary: #082b72;
-  --on-tertiary-container: #254188;
-  --on-tertiary-fixed: #00174b;
-  --on-tertiary-fixed-variant: #27438a;
+  /* === Tertiary (Indigo) === */
+  --tertiary:                 #a5b4fc;
+  --tertiary-container:       #4338ca;
+  --tertiary-fixed:           #e0e7ff;
+  --tertiary-fixed-dim:       #818cf8;
+  --on-tertiary:              #1e1b4b;
+  --on-tertiary-container:    #e0e7ff;
+  --on-tertiary-fixed:        #0f0e26;
+  --on-tertiary-fixed-variant: #312e81;
 
   /* === Error === */
-  --error: #ffb4ab;
-  --error-container: #93000a;
-  --on-error: #690005;
+  --error:              #ffb4ab;
+  --error-container:    #93000a;
+  --on-error:           #690005;
   --on-error-container: #ffdad6;
 
   /* === Text / On-Surface === */
-  --on-surface: #E5E2E1;
-  --on-surface-variant: #d0c5af;
-  --on-background: #E5E2E1;
-  --background: #131313;
-  --outline: #99907C;
-  --outline-variant: #4d4635;
-  --inverse-surface: #e5e2e1;
-  --inverse-on-surface: #313030;
+  --on-surface:         #e8e5ff;
+  --on-surface-variant: #c5bdef;
+  --on-background:      #e8e5ff;
+  --background:         #09071a;
+  --outline:            #6b61a0;
+  --outline-variant:    #3b3468;
+  --inverse-surface:    #e8e5ff;
+  --inverse-on-surface: #09071a;
 
-  /* === Signature Gradient === */
-  --gold-gradient: linear-gradient(135deg, #F2CA50 0%, #D4AF37 100%);
+  /* === Signature Gradient — Duo Academy violet → magenta === */
+  --gold-gradient: linear-gradient(135deg, #6d28d9 0%, #a855f7 50%, #c026d3 100%);
+  --brand-gradient: linear-gradient(135deg, #6d28d9 0%, #a855f7 50%, #c026d3 100%);
 
   /* === Legacy Compatibility Aliases === */
-  --text: #E5E2E1;
-  --text-50: #0e0e0e;
-  --text-100: #131313;
-  --text-200: #1c1b1b;
-  --text-300: #201f1f;
-  --text-400: #99907C;
-  --text-500: #99907C;
-  --text-600: #d0c5af;
-  --text-700: #d0c5af;
-  --text-800: #E5E2E1;
-  --text-900: #E5E2E1;
-  --text-950: #E5E2E1;
+  --text:     #e8e5ff;
+  --text-50:  #050412;
+  --text-100: #09071a;
+  --text-200: #100e28;
+  --text-300: #161338;
+  --text-400: #6b61a0;
+  --text-500: #6b61a0;
+  --text-600: #c5bdef;
+  --text-700: #c5bdef;
+  --text-800: #e8e5ff;
+  --text-900: #e8e5ff;
+  --text-950: #e8e5ff;
 
-  --background-50: #0e0e0e;
-  --background-100: #1c1b1b;
-  --background-200: #2a2a2a;
-  --background-300: #353534;
-  --background-400: #4d4635;
-  --background-500: #99907C;
-  --background-600: #99907C;
-  --background-700: #d0c5af;
-  --background-800: #E5E2E1;
-  --background-900: #E5E2E1;
-  --background-950: #E5E2E1;
+  --background-50:  #050412;
+  --background-100: #100e28;
+  --background-200: #1e1a42;
+  --background-300: #27244e;
+  --background-400: #3b3468;
+  --background-500: #6b61a0;
+  --background-600: #6b61a0;
+  --background-700: #c5bdef;
+  --background-800: #e8e5ff;
+  --background-900: #e8e5ff;
+  --background-950: #e8e5ff;
 
-  --accent: #F2CA50;
-  --accent-50: #3c2f00;
-  --accent-100: #554300;
-  --accent-200: #574500;
-  --accent-300: #735c00;
-  --accent-400: #e9c349;
-  --accent-500: #F2CA50;
-  --accent-600: #F2CA50;
-  --accent-700: #ffe088;
-  --accent-800: #ffe088;
-  --accent-900: #3c2f00;
-  --accent-950: #241a00;
+  --accent:     #a78bfa;
+  --accent-50:  #1e0a4a;
+  --accent-100: #2e1065;
+  --accent-200: #2e1065;
+  --accent-300: #5b21b6;
+  --accent-400: #8b5cf6;
+  --accent-500: #a78bfa;
+  --accent-600: #a78bfa;
+  --accent-700: #c4b5fd;
+  --accent-800: #c4b5fd;
+  --accent-900: #1e0a4a;
+  --accent-950: #0d0520;
 
-  --secondary-50: #2e1500;
-  --secondary-100: #4d2700;
-  --secondary-200: #6d3a00;
-  --secondary-300: #7a4100;
-  --secondary-400: #ffb270;
-  --secondary-500: #FFB77B;
-  --secondary-600: #FFB77B;
-  --secondary-700: #ffdcc2;
-  --secondary-800: #ffdcc2;
-  --secondary-900: #ffdcc2;
-  --secondary-950: #ffdcc2;
+  --secondary-50:  #2d0030;
+  --secondary-100: #4a044e;
+  --secondary-200: #701a75;
+  --secondary-300: #86198f;
+  --secondary-400: #e879f9;
+  --secondary-500: #f0abfc;
+  --secondary-600: #f0abfc;
+  --secondary-700: #fae8ff;
+  --secondary-800: #fae8ff;
+  --secondary-900: #fae8ff;
+  --secondary-950: #fae8ff;
 
-  --primary-50: #241a00;
-  --primary-100: #3c2f00;
-  --primary-200: #554300;
-  --primary-300: #574500;
-  --primary-400: #735c00;
-  --primary-500: #e9c349;
-  --primary-600: #F2CA50;
-  --primary-700: #F2CA50;
-  --primary-800: #ffe088;
-  --primary-900: #ffe088;
-  --primary-950: #ffe088;
+  --primary-50:  #0d0520;
+  --primary-100: #1e0a4a;
+  --primary-200: #2e1065;
+  --primary-300: #2e1065;
+  --primary-400: #5b21b6;
+  --primary-500: #8b5cf6;
+  --primary-600: #a78bfa;
+  --primary-700: #a78bfa;
+  --primary-800: #c4b5fd;
+  --primary-900: #c4b5fd;
+  --primary-950: #c4b5fd;
 
-  /* Neutral (mapped to surfaces) */
-  --neutral: #201f1f;
-  --neutral-50: #0e0e0e;
-  --neutral-100: #131313;
-  --neutral-200: #1c1b1b;
-  --neutral-300: #201f1f;
-  --neutral-400: #2a2a2a;
-  --neutral-500: #353534;
-  --neutral-600: #4d4635;
-  --neutral-700: #99907C;
-  --neutral-800: #d0c5af;
-  --neutral-900: #E5E2E1;
-  --neutral-950: #E5E2E1;
+  /* Neutral (mapped to navy surfaces) */
+  --neutral:     #161338;
+  --neutral-50:  #050412;
+  --neutral-100: #09071a;
+  --neutral-200: #100e28;
+  --neutral-300: #161338;
+  --neutral-400: #1e1a42;
+  --neutral-500: #27244e;
+  --neutral-600: #3b3468;
+  --neutral-700: #6b61a0;
+  --neutral-800: #c5bdef;
+  --neutral-900: #e8e5ff;
+  --neutral-950: #e8e5ff;
 }

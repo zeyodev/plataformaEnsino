@@ -54,7 +54,7 @@
 
 .button.primary:hover {
     opacity: 0.9;
-    box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2);
+    box-shadow: 0 10px 20px rgba(167, 139, 250, 0.2);
 }
 
 .button.primary:active {
@@ -65,13 +65,13 @@
     background-color: transparent;
     color: var(--primary);
     font-weight: bold;
-    border: 1px solid rgba(153, 144, 124, 0.3);
+    border: 1px solid rgba(107, 97, 160, 0.3);
     transition: border-color 0.2s ease, background-color 0.2s ease;
 }
 
 .button.secondary:hover {
-    border-color: rgba(242, 202, 80, 0.5);
-    background-color: rgba(242, 202, 80, 0.05);
+    border-color: rgba(167, 139, 250, 0.5);
+    background-color: rgba(167, 139, 250, 0.05);
 }
 
 .button.p-p {

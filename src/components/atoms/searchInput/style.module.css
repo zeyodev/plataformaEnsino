@@ -11,7 +11,7 @@
 }
 
 .search:focus-within {
-    box-shadow: 0 0 0 1px rgba(242, 202, 80, 0.5);
+    box-shadow: 0 0 0 1px rgba(167, 139, 250, 0.5);
 }
 
 .search svg {

@@ -1,10 +1,10 @@
 .nav-option {
     --icon-size: 20px;
-    padding: .7rem;
+    padding: 0.6rem 0.75rem;
     border-radius: 0.5rem;
     align-items: center;
     color: var(--outline);
-    transition: all 0.2s ease;
+    transition: background 0.2s ease, color 0.2s ease;
     text-decoration: none;
     font-family: var(--font-label);
     font-size: 0.75rem;
@@ -18,16 +18,16 @@
 }
 
 .nav-option.selected {
-    background: rgba(255, 255, 255, 0.05);
+    background: var(--surface-container-high);
     color: var(--primary);
-    border-right: 2px solid var(--primary);
 }
 
 .nav-option i {
     height: var(--icon-size);
+    flex-shrink: 0;
 }
 
-.nav-option i>svg {
+.nav-option i > svg {
     width: var(--icon-size);
     height: var(--icon-size);
 }
