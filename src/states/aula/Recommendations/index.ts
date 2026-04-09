@@ -22,8 +22,8 @@ export default (app: App) => (new class extends Div {
     }
 
     // Cria um VideoCard utilizando a nova interface de classe
-    private createVideo(props: any) {
-        return VideoCard(app).object(card => card.setData(props));
+    private createVideo(aula: any) {
+        return VideoCard(app).object(card => card.setAula(aula));
     }
 
     setVideos(...child: Array<IZeyo<keyof HTMLElementTagNameMap> | string>) {

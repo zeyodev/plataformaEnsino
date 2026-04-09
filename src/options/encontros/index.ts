@@ -3,7 +3,6 @@ import Option from "..";
 import App from "../../app";
 import Abas from "../../components/organisms/abas";
 import Aba from "../../components/organisms/abas/aba";
-import ComponenteEngine from "../../features/componente/engine";
 import Card from "../../components/atoms/card";
 
 export default class OptionEncontros extends Option {
@@ -49,17 +48,12 @@ export default class OptionEncontros extends Option {
             const [categorias] = await this.app.repository.findMany("CategoriasEncontros", {})
             for (const [i, categoria] of categorias.entries()) {
                 objectAbas.push(new Aba(categoria.value, categoria.titulo, categoria.icon, div().class("d-grid", "gap-m").object(async o => {
-                    const [component] = await this.app.repository.findOne("Componentes", { _id: "sdfwefsdfwe3" })
-                    if (component) {
-                        o.children(...(await ComponenteEngine.execute(this.app, component, { categoriasEncontros: categoria })))
-                    }
-
                     // Listar encontros da categoria
                     const [encontros] = await this.app.repository.findMany("Encontros", { categoriaEncontro: categoria._id })
                     for (const encontro of encontros) {
                         o.children(this.renderEncontroCard(encontro))
                     }
-                    if (encontros.length === 0 && !component) {
+                    if (encontros.length === 0) {
                         o.children(p("Nenhum encontro agendado."))
                     }
                 }), i === 0))

@@ -50,7 +50,8 @@ export default class Aula extends State {
 
     commands = {
         "assistir": async (context: Context, aula: any) => {
-            console.log("abrindo aula", aula)
+            context.backState()
+            context.setState(new Aula(aula)).handle()
         }
     }
 

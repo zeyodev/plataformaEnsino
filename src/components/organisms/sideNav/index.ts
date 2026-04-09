@@ -11,6 +11,7 @@ import icons from "../../atoms/icons";
  */
 export default class SideNav extends Div {
     private optionsContainer = div().class(style.navItems);
+    private backOptionOffset = 0;
 
     constructor(private app: App, backoption?: boolean) {
         super();
@@ -25,13 +26,15 @@ export default class SideNav extends Div {
             ),
         );
 
-        if (backoption)
+        if (backoption) {
             this.optionsContainer.children(
                 new NavOption(this.app, (new class extends Option {
                     component = div()
                     constructor() { super("voltar", "Voltar", "iconArrowLeft", "voltar") }
                 }), () => { window.history.back() }),
             )
+            this.backOptionOffset = 1;
+        }
 
         // Rodapé: configurações + ajuda
         const footer = div().class(style.navFooter).children(
@@ -66,7 +69,7 @@ export default class SideNav extends Div {
         );
         if (selected === undefined) return this;
 
-        const option = (this.optionsContainer.childList as NavOption[])[selected];
+        const option = (this.optionsContainer.childList as NavOption[])[selected + this.backOptionOffset];
         option.selected();
         cb(option.option);
 

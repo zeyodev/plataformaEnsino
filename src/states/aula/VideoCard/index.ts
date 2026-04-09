@@ -12,17 +12,23 @@ export default (app: App) => (new class extends Div {
 
     info = div().class(styles.VideoCard_info)
     titulo = h3().class(styles.VideoCard_title)
-    channel = span().class(styles.VideoCard_meta)
-    stats = span().class(styles.VideoCard_meta)
-
-    // 2. Estado interno para propriedades combinadas
-    private _views: string = "";
-    private _time: string = "";
 
     aula: any
     setAula(aula: any) {
-        this.aula = aula
-        if (aula?._id) this.checkConclusao(aula._id)
+        const aulaId = aula?.aula || aula?._id
+        this.aula = aulaId ? { ...aula, _id: aulaId } : aula
+        if (aula?.thumbnail) this.thumbImg.attribute("src", aula.thumbnail)
+        if (aula?.title) this.titulo.text(aula.title)
+        if (aula?.length) this.duration.text(this.formatarTempo(aula.length))
+        if (aulaId) this.checkConclusao(aulaId)
+    }
+
+    private formatarTempo(segundos: number): string {
+        const h = Math.floor(segundos / 3600)
+        const m = Math.floor((segundos % 3600) / 60)
+        const s = Math.floor(segundos % 60)
+        const pad = (n: number) => String(n).padStart(2, "0")
+        return h > 0 ? `${h}:${pad(m)}:${pad(s)}` : `${m}:${pad(s)}`
     }
 
     private async checkConclusao(aulaId: string) {
@@ -31,50 +37,9 @@ export default (app: App) => (new class extends Div {
             (this.badge.element as HTMLElement).style.display = "inline-block"
         }
     }
-    
-    // 3. Método Genérico para definir texto
-    setText(key: string, value: string) {
-        (this as any)[key].text(value);
-    }
 
-    // 4. Setters usando bind para reutilizar setText
-    setDuration = this.setText.bind(this, "duration")
-    setTitulo = this.setText.bind(this, "titulo")
-    setChannel = this.setText.bind(this, "channel")
-
-    // 5. Setters com lógicas específicas
-    
-    // Define a imagem (lógica de atributo src)
     setImg(thumb: string) {
         this.thumbImg.attribute("src", thumb);
-    }
-
-    // Define as visualizações (atualiza estado + stats combinados)
-    setViews(value: string) {
-        this._views = value;
-        this.updateStats();
-    }
-
-    // Define o tempo (atualiza estado + stats combinados)
-    setTime(value: string) {
-        this._time = value;
-        this.updateStats();
-    }
-
-    // Atualiza o texto combinado de estatísticas
-    private updateStats() {
-        this.stats.text(`${this._views} • ${this._time}`);
-    }
-
-    // Preenchimento em lote
-    setData(props: any) {
-        this.setImg(props.imageSeed);
-        this.setDuration(props.duration);
-        this.setTitulo(props.title);
-        this.setChannel(props.channel);
-        this.setViews(props.views);
-        this.setTime(props.time);
-        return this
     }
 
 }).class(styles.VideoCard_container).object(o => o.children(
@@ -85,7 +50,5 @@ export default (app: App) => (new class extends Div {
     ),
     o.info.children(
         o.titulo,
-        o.channel,
-        o.stats
     )
-));
+)).click((o) => app.context.action("assistir", o.aula));

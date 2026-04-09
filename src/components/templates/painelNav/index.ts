@@ -20,15 +20,32 @@ const painelNav = (app: App, backoption?: boolean) => (new class PainelNav exten
             option.component.class("state-component")
         )
     }
+
+    setInfo(options: Option[], cb: (option: Option) => void, selected?: number) {
+        this.sideNav.setInfo(options, (opt) => {
+            this.element.classList.remove(this.style.open)
+            cb(opt)
+        }, selected)
+        return this
+    }
 }).object(o => {
+    const mb = menubar()
+    const overlay = Z("div").class(o.style.overlay)
+
+    overlay.click(() => {
+        o.element.classList.remove(o.style.open)
+        mb.toggle()
+    })
+
     o.children(
+        overlay,
         Z("div").class(o.style.menu).children(
             o.sideNav = new SideNav(app, backoption).class(o.style.navigation),
         ),
         Z("div").class(o.style.main).object(main => {
             main.children(
                 o.toolbar.class("d-flex", "gap-g", "p-10", "ai-center").children(
-                    menubar().click((m) => {
+                    mb.click((m) => {
                         o.element.classList.toggle(o.style.open)
                         m.toggle()
                     }),

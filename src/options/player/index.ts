@@ -3,7 +3,7 @@ import Option from "..";
 import App from "../../app";
 import VideoPlayer from "../../states/aula/VideoPlayer";
 import Recommendations from "../../states/aula/Recommendations";
-import ComponenteEngine from "../../features/componente/engine";
+import VideoCard from "../../states/aula/VideoCard";
 import cssStyles from "../../states/aula/styles.module.css";
 
 const styles = {
@@ -23,15 +23,18 @@ export default class OptionPlayer extends Option {
                 o.loadRating(this.aula._id)
             }),
             Recommendations(this.app).object(async o => {
-                o.children(...(await ComponenteEngine.execute(this.app, {
-                    type: "adaptador",
-                    component: "VideoCard",
-                    map: "aosdfjw2d",
-                    documents: { type: "repository", method: "findManyToMany", params: ["ModuloAulas/aula:Aulas", { modulo: "$modulo" }] },
-                }, {modulo: this.aula.modulo})))
+                let moduloId = this.aula.modulo
+                if (!moduloId) {
+                    const [moduloAula] = await this.app.repository.findOne("ModuloAulas", { aula: this.aula._id })
+                    moduloId = moduloAula?.modulo
+                }
+                if (!moduloId) return
 
-                const [modulo] = await this.app.repository.findOne("Modulos", {_id: this.aula.modulo})
-                o.setChip(modulo.titulo)
+                const [aulas] = await (this.app.repository as any).findManyToMany("ModuloAulas/aula:Aulas", { modulo: moduloId })
+                o.children(...aulas.map((aula: any) => VideoCard(this.app).object(o => o.setAula(aula))))
+
+                const [modulo] = await this.app.repository.findOne("Modulos", {_id: moduloId})
+                if (modulo) o.setChip(modulo.titulo)
             })
         )
     );
